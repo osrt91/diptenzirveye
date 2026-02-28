@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI Araçları Seçim Rehberi — DiptenZirveye</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@500;600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,400&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{--o50:#fff7ed;--o100:#ffedd5;--o200:#fed7aa;--o300:#fdba74;--o400:#fb923c;--o500:#f97316;--o600:#ea6c00;--o700:#c05500;--a400:#fbbf24;--a500:#f59e0b;--bk:#0d0d0d;--g900:#1a1a1a;--g800:#2a2520;--g600:#4a4540;--g400:#9a9590;--g200:#e8e2da;--g100:#f5f0eb;--wh:#fdfaf7;--ok:#22c55e;--grad:linear-gradient(135deg,var(--o500),var(--a400))}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'DM Sans',sans-serif;font-size:12.5pt;line-height:1.82;color:var(--bk);background:var(--wh)}
+h1,h2,h3,h4{font-family:'Syne',sans-serif;letter-spacing:-.02em;color:var(--bk)}
+h2{font-size:19pt;font-weight:700;margin:44px 0 16px;line-height:1.25}
+h3{font-size:14pt;font-weight:600;margin:30px 0 12px}
+p{margin-bottom:13px}strong{font-weight:600}
+.page{max-width:760px;margin:0 auto;padding:48px 64px;position:relative}
+.cover{min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;background:var(--bk);color:var(--wh);text-align:center;position:relative;overflow:hidden;page-break-after:always;padding:60px 48px}
+.cover-top-bar{position:absolute;top:0;left:0;right:0;height:4px;background:var(--grad)}
+.cover-bg{position:absolute;inset:0;opacity:.06;pointer-events:none}
+.cover-logo{font-family:'Syne';font-size:13pt;font-weight:700;letter-spacing:.08em;margin-bottom:72px;z-index:1;position:relative}.cover-logo .d{color:var(--wh)}.cover-logo .z{color:var(--o500)}
+.cover-series{font-family:'DM Mono';font-size:8.5pt;letter-spacing:.2em;text-transform:uppercase;color:var(--o500);margin-bottom:20px;z-index:1;position:relative}
+.cover-title{font-family:'Syne';font-size:38pt;font-weight:800;line-height:1.08;letter-spacing:-.03em;z-index:1;position:relative;margin-bottom:14px}
+.cover-title span{background:var(--grad);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.cover-sub{font-size:14pt;font-weight:300;color:var(--g400);z-index:1;position:relative;margin-bottom:48px}
+.cover-line{width:80px;height:3px;background:var(--grad);border-radius:2px;margin:0 auto 48px;z-index:1;position:relative}
+.cover-quote{font-style:italic;font-size:11.5pt;color:var(--g400);max-width:460px;line-height:1.7;z-index:1;position:relative;margin-bottom:72px}
+.cover-badge{display:inline-flex;align-items:center;gap:16px;padding:8px 24px;border:1px solid rgba(249,115,22,.4);border-radius:24px;font-family:'DM Mono';font-size:8pt;letter-spacing:.06em;color:var(--o400);z-index:1;position:relative}
+.cover-badge .dot{width:4px;height:4px;border-radius:50%;background:var(--o500)}
+.cover-year{font-family:'DM Mono';font-size:7.5pt;color:var(--g600);margin-top:36px;letter-spacing:.12em;z-index:1;position:relative}
+.copy-page{page-break-after:always;min-height:70vh;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;padding:80px 48px}.copy-page p{font-size:9pt;color:var(--g600);line-height:2.2}
+.copy-logo{font-family:'Syne';font-weight:700;font-size:14pt;margin-bottom:48px}.copy-logo .d{color:var(--bk)}.copy-logo .z{color:var(--o500)}
+.toc{page-break-after:always;padding:72px 64px;max-width:760px;margin:0 auto}
+.toc-item{display:flex;align-items:baseline;padding:14px 0;border-bottom:1px solid var(--g200)}.toc-num{font-family:'DM Mono';font-size:10pt;color:var(--o500);min-width:36px;font-weight:500}.toc-title{flex:1;font-size:12.5pt;font-weight:500}.toc-sub{font-size:9pt;color:var(--g400);font-style:italic}
+.ch-open{page-break-before:always;margin-bottom:36px}.ch-open-bg{background:var(--bk);color:var(--wh);padding:56px 64px 44px;position:relative;overflow:hidden;max-width:760px;margin:0 auto}.ch-open-bg .pattern{position:absolute;right:-40px;top:-40px;opacity:.04}
+.ch-num{font-family:'DM Mono';font-size:9pt;letter-spacing:.2em;text-transform:uppercase;color:var(--o500);margin-bottom:12px;position:relative;z-index:1}
+.ch-title{font-family:'Syne';font-size:28pt;font-weight:800;line-height:1.12;letter-spacing:-.02em;position:relative;z-index:1;margin-bottom:10px}
+.ch-sub{font-size:10.5pt;font-weight:300;color:var(--g400);font-style:italic;position:relative;z-index:1}
+.ch-line{width:60px;height:3px;background:var(--grad);border-radius:2px;margin-top:24px;position:relative;z-index:1}
+.ch-xp{display:inline-flex;align-items:center;gap:6px;padding:5px 14px;border:1px solid rgba(249,115,22,.3);border-radius:16px;font-family:'DM Mono';font-size:7.5pt;color:var(--o400);letter-spacing:.06em;margin-top:20px;position:relative;z-index:1}
+.pg-head{display:flex;justify-content:space-between;align-items:center;padding:14px 0 20px;border-bottom:1px solid var(--g200);margin-bottom:28px;font-family:'DM Mono';font-size:7pt;letter-spacing:.12em;text-transform:uppercase;color:var(--g400)}.pg-head .brand{color:var(--o500)}
+table{width:100%;border-collapse:collapse;margin:22px 0;font-size:11pt}
+thead th{background:var(--g100);font-family:'Syne';font-weight:600;font-size:9.5pt;text-align:left;padding:11px 16px;border-bottom:2px solid var(--o500);color:var(--g800);text-transform:uppercase;letter-spacing:.04em}
+tbody td{padding:11px 16px;border-bottom:1px solid var(--g200);vertical-align:top}
+tbody tr:nth-child(even){background:rgba(245,240,235,.5)}
+.panel-task{background:var(--o50);border:1px solid var(--o200);border-radius:12px;padding:24px 28px;margin:28px 0;position:relative;overflow:hidden}.panel-task::before{content:'';position:absolute;left:0;top:0;bottom:0;width:4px;background:var(--grad);border-radius:12px 0 0 12px}
+.panel-task-head{display:flex;align-items:center;gap:8px;font-family:'DM Mono';font-size:7.5pt;letter-spacing:.14em;text-transform:uppercase;color:var(--o600);margin-bottom:12px;font-weight:500}
+.panel-task p{font-size:11.5pt;margin-bottom:8px}
+.takeaway{background:var(--g100);border-radius:12px;padding:24px 28px;margin:28px 0}
+.takeaway-head{font-family:'Syne';font-weight:700;font-size:10pt;color:var(--o600);margin-bottom:12px;display:flex;align-items:center;gap:8px}
+.takeaway ol{padding-left:20px}.takeaway li{margin-bottom:8px;font-size:11.5pt}
+.story-box{background:var(--bk);color:var(--wh);border-radius:12px;padding:28px 32px;margin:28px 0;position:relative;overflow:hidden}.story-box strong{color:var(--o400)}.story-box p{margin-bottom:10px;position:relative;z-index:1}
+.tool-card{border:1px solid var(--g200);border-radius:12px;padding:20px 24px;margin:16px 0;background:var(--wh);transition:border-color .2s}.tool-card:hover{border-color:var(--o300)}
+.tool-card h4{font-size:13pt;margin-bottom:6px;display:flex;align-items:center;gap:8px}
+.tool-card .tag{display:inline-block;padding:2px 10px;border-radius:10px;font-family:'DM Mono';font-size:7pt;letter-spacing:.06em;text-transform:uppercase}
+.tag-free{background:#dcfce7;color:#166534}.tag-paid{background:var(--o50);color:var(--o700)}.tag-freemium{background:#fef3c7;color:#92400e}
+.stat-card{display:flex;flex-direction:column;align-items:center;justify-content:center;background:var(--grad);color:var(--wh);border-radius:12px;padding:18px 12px;text-align:center;flex:1;min-width:0}
+.stat-card .num{font-family:'Syne';font-size:24pt;font-weight:800;line-height:1}.stat-card .label{font-family:'DM Mono';font-size:6.5pt;letter-spacing:.08em;text-transform:uppercase;margin-top:6px;opacity:.85;line-height:1.4}
+.stat-row{display:flex;gap:10px;margin:24px 0}
+blockquote{border-left:3px solid var(--o500);padding:14px 24px;margin:22px 0;background:var(--o50);border-radius:0 10px 10px 0;font-style:italic;color:var(--g800)}
+ul,ol{padding-left:22px;margin-bottom:14px}li{margin-bottom:6px}
+.footer{background:var(--bk);color:var(--g600);text-align:center;padding:48px 24px;font-family:'DM Mono';font-size:7.5pt;letter-spacing:.08em}
+.footer .logo{font-family:'Syne';font-size:14pt;font-weight:700;margin-bottom:16px}.footer .logo .d{color:var(--wh)}.footer .logo .z{color:var(--o500)}
+@media print{body{font-size:10.5pt}.page{padding:0;max-width:100%}.cover{min-height:auto;padding:100px 60px}.panel-task,.takeaway,.story-box,.tool-card{break-inside:avoid}h2,h3{break-after:avoid}}
+@page{size:A4;margin:2cm}
+</style>
+</head>
+<body>
+
+<!-- KAPAK -->
+<div class="cover">
+  <div class="cover-top-bar"></div>
+  <svg class="cover-bg" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg"><defs><pattern id="grid" width="60" height="60" patternUnits="userSpaceOnUse"><path d="M 60 0 L 0 0 0 60" fill="none" stroke="#f97316" stroke-width=".5"/></pattern></defs><rect width="100%" height="100%" fill="url(#grid)" opacity=".3"/></svg>
+  <div class="cover-logo"><span class="d">Dipten</span><span class="z">Zirveye</span></div>
+  <div class="cover-series">AI Ustalık Serisi · Kitap 03</div>
+  <div class="cover-title">AI ARAÇLARI<br><span>SEÇİM REHBERİ</span></div>
+  <div class="cover-sub">2026'da Gerçekten İşe Yarayan 50 Araç</div>
+  <div class="cover-line"></div>
+  <div class="cover-quote">"300 araç var. Senin işine yarayan 50'si bu kitapta."</div>
+  <div class="cover-badge"><span>500 XP</span><span class="dot"></span><span>5 Bölüm</span><span class="dot"></span><span>3 Saat</span></div>
+  <div class="cover-year">V1.0 · 2026</div>
+</div>
+
+<!-- TELİF -->
+<div class="copy-page">
+  <div class="copy-logo"><span class="d">Dipten</span><span class="z">Zirveye</span></div>
+  <p><strong style="font-size:12pt;color:var(--bk)">AI ARAÇLARI SEÇİM REHBERİ</strong></p>
+  <p>2026'da Gerçekten İşe Yarayan 50 Araç</p>
+  <p style="margin-top:16px">DİPTENZİRVEYE AI Ustalık Serisi · Kitap 03</p>
+  <p>Versiyon 1.0 · 2026</p>
+  <div style="width:40px;height:2px;background:var(--grad);border-radius:1px;margin:28px auto"></div>
+  <p style="font-size:8pt;margin-top:20px">© 2026 DİPTENZİRVEYE · Tüm hakları saklıdır.</p>
+  <p style="font-size:7.5pt;color:var(--g400);margin-top:28px;max-width:420px">Araç özellikleri ve fiyatlandırma yayın tarihi (2026) itibarıyla günceldir. Fiyatlar ve özellikler değişebilir.</p>
+</div>
+
+<!-- İÇİNDEKİLER -->
+<div class="page toc" style="padding-top:72px">
+  <h2 style="font-size:22pt;font-weight:800;margin-bottom:8px">İçindekiler</h2>
+  <div style="width:40px;height:3px;background:var(--grad);border-radius:2px;margin-bottom:36px"></div>
+  <div class="toc-item"><span class="toc-num">01</span><span class="toc-title">Araç Seçim Kriteri — 5 Adımlı Değerlendirme</span></div>
+  <div class="toc-item"><span class="toc-num">02</span><span class="toc-title">Kategori Haritası — AI Ekosisteminin Tam Haritası</span></div>
+  <div class="toc-item"><span class="toc-num">03</span><span class="toc-title">Her Kategoride Top 5 + Karşılaştırma</span></div>
+  <div class="toc-item"><span class="toc-num">04</span><span class="toc-title">Kişisel AI Stack Kurma</span></div>
+  <div class="toc-item"><span class="toc-num">05</span><span class="toc-title">Araçları Birleştirme Workflow</span></div>
+  <div class="toc-item" style="border-bottom:none"><span class="toc-num"></span><span class="toc-title toc-sub">Sonuç · Kaynak Listesi</span></div>
+</div>
+
+<!-- BÖLÜM 1 -->
+<div class="ch-open"><div class="ch-open-bg">
+  <div class="ch-num">Bölüm 01</div>
+  <div class="ch-title">Araç Seçim Kriteri</div>
+  <div class="ch-sub">Bir AI aracını nasıl değerlendirirsin? 5 adımlı matris</div>
+  <div class="ch-line"></div>
+  <div class="ch-xp"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#f97316" stroke-width="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>80 XP</div>
+</div></div>
+
+<div class="page">
+  <div class="pg-head"><span>Bölüm 01 · Araç Seçim Kriteri</span><span class="brand">DiptenZirveye</span></div>
+
+  <p>Piyasada yüzlerce AI aracı var. Her gün yenileri çıkıyor. Bu kaos içinde doğru aracı seçmek zor. Ama şu 5 kriteri kullanırsan, her aracı 5 dakikada değerlendirebilirsin.</p>
+
+  <h2>5 Adımlı Değerlendirme Matrisi</h2>
+
+  <table>
+    <thead><tr><th>#</th><th>Kriter</th><th>Soru</th><th>Puan (1-5)</th></tr></thead>
+    <tbody>
+      <tr><td><strong>1</strong></td><td>Fiyat/Performans</td><td>Ücretsiz planı yeterli mi? Premium fiyatı değer mi?</td><td>💰</td></tr>
+      <tr><td><strong>2</strong></td><td>Öğrenme Eğrisi</td><td>10 dakikada temel işlevi öğrenebiliyor musun?</td><td>📚</td></tr>
+      <tr><td><strong>3</strong></td><td>Entegrasyon</td><td>Mevcut araçlarınla (Google, Notion, Zapier) çalışıyor mu?</td><td>🔗</td></tr>
+      <tr><td><strong>4</strong></td><td>Türkçe Destek</td><td>Türkçe giriş/çıkış kalitesi nasıl?</td><td>🇹🇷</td></tr>
+      <tr><td><strong>5</strong></td><td>Güncellik</td><td>Aktif geliştiriliyor mu? Son güncelleme ne zaman?</td><td>🔄</td></tr>
+    </tbody>
+  </table>
+
+  <blockquote><strong>Altın Kural:</strong> Bir aracın toplam puanı 15/25'in altındaysa — bırak. 20/25 üzeriyse — hemen dene. 15-20 arasıysa — ihtiyacına göre karar ver.</blockquote>
+
+  <div class="panel-task">
+    <div class="panel-task-head"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--o600)" stroke-width="2" stroke-linecap="round"><rect x="3" y="3" width="18" height="18" rx="2"/><line x1="3" y1="9" x2="21" y2="9"/><line x1="9" y1="21" x2="9" y2="9"/></svg>Panel Görevi</div>
+    <p><strong>"Okudum"</strong> → <strong>15 XP</strong>. Değerlendirme matrisini 3 farklı araç için doldur → <strong>+35 XP</strong>.</p>
+  </div>
+</div>
+
+<!-- BÖLÜM 2 -->
+<div class="ch-open"><div class="ch-open-bg">
+  <div class="ch-num">Bölüm 02</div>
+  <div class="ch-title">Kategori Haritası</div>
+  <div class="ch-sub">AI araç ekosisteminin 10 kategorisi</div>
+  <div class="ch-line"></div>
+  <div class="ch-xp"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#f97316" stroke-width="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>100 XP</div>
+</div></div>
+
+<div class="page">
+  <div class="pg-head"><span>Bölüm 02 · Kategori Haritası</span><span class="brand">DiptenZirveye</span></div>
+
+  <p>AI araç ekosistemi 10 ana kategoriye ayrılır. Her kategori farklı bir iş ihtiyacına hizmet eder.</p>
+
+  <div class="stat-row">
+    <div class="stat-card"><div class="num">10</div><div class="label">Kategori</div></div>
+    <div class="stat-card"><div class="num">50</div><div class="label">Seçilmiş Araç</div></div>
+    <div class="stat-card"><div class="num">300+</div><div class="label">İncelenen Araç</div></div>
+  </div>
+
+  <table>
+    <thead><tr><th>Kategori</th><th>Ne Yapar</th><th>Araç Sayısı</th></tr></thead>
+    <tbody>
+      <tr><td><strong>Metin / Yazarlık</strong></td><td>Blog, e-posta, reklam metni, çeviri</td><td>5</td></tr>
+      <tr><td><strong>Görsel / Tasarım</strong></td><td>Görsel üretimi, düzenleme, logo, mockup</td><td>5</td></tr>
+      <tr><td><strong>Video / Animasyon</strong></td><td>Video üretimi, düzenleme, avatar, altyazı</td><td>5</td></tr>
+      <tr><td><strong>Ses / Müzik</strong></td><td>Ses klonlama, müzik üretimi, transkript</td><td>5</td></tr>
+      <tr><td><strong>Kod / Geliştirme</strong></td><td>Kod yazma, debug, web sitesi, uygulama</td><td>5</td></tr>
+      <tr><td><strong>Araştırma / Analiz</strong></td><td>Web araştırma, veri analizi, raporlama</td><td>5</td></tr>
+      <tr><td><strong>Pazarlama / SEO</strong></td><td>SEO optimizasyonu, sosyal medya, reklam</td><td>5</td></tr>
+      <tr><td><strong>Otomasyon</strong></td><td>İş akışı otomasyonu, bot, entegrasyon</td><td>5</td></tr>
+      <tr><td><strong>Üretkenlik</strong></td><td>Proje yönetimi, not alma, planlama</td><td>5</td></tr>
+      <tr><td><strong>E-ticaret</strong></td><td>Ürün açıklaması, fotoğraf, mağaza yönetimi</td><td>5</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<!-- BÖLÜM 3 -->
+<div class="ch-open"><div class="ch-open-bg">
+  <div class="ch-num">Bölüm 03</div>
+  <div class="ch-title">Her Kategoride<br>Top 5 Araç</div>
+  <div class="ch-sub">50 araç, detaylı inceleme ve karşılaştırma</div>
+  <div class="ch-line"></div>
+  <div class="ch-xp"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#f97316" stroke-width="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>120 XP</div>
+</div></div>
+
+<div class="page">
+  <div class="pg-head"><span>Bölüm 03 · Top 5 Araçlar</span><span class="brand">DiptenZirveye</span></div>
+
+  <h2>Kategori 1: Metin / Yazarlık</h2>
+
+  <div class="tool-card">
+    <h4>ChatGPT <span class="tag tag-freemium">Freemium</span></h4>
+    <p><strong>En iyi:</strong> Genel metin üretimi, yaratıcı yazarlık, beyin fırtınası.<br><strong>Fiyat:</strong> Ücretsiz / Plus $20/ay.<br><strong>Türkçe:</strong> İyi. <strong>Puan: 22/25</strong></p>
+  </div>
+  <div class="tool-card">
+    <h4>Claude <span class="tag tag-freemium">Freemium</span></h4>
+    <p><strong>En iyi:</strong> Uzun metin, analiz, tutarlı çıktı.<br><strong>Fiyat:</strong> Ücretsiz / Pro $20/ay.<br><strong>Türkçe:</strong> Çok iyi. <strong>Puan: 23/25</strong></p>
+  </div>
+  <div class="tool-card">
+    <h4>Jasper <span class="tag tag-paid">Ücretli</span></h4>
+    <p><strong>En iyi:</strong> Pazarlama metni, marka sesi tutarlılığı.<br><strong>Fiyat:</strong> $39/ay'dan başlıyor.<br><strong>Türkçe:</strong> Orta. <strong>Puan: 18/25</strong></p>
+  </div>
+  <div class="tool-card">
+    <h4>Copy.ai <span class="tag tag-freemium">Freemium</span></h4>
+    <p><strong>En iyi:</strong> Kısa form içerik, sosyal medya metinleri.<br><strong>Fiyat:</strong> Ücretsiz plan mevcut / Pro $36/ay.<br><strong>Türkçe:</strong> Orta. <strong>Puan: 17/25</strong></p>
+  </div>
+  <div class="tool-card">
+    <h4>DeepL Write <span class="tag tag-freemium">Freemium</span></h4>
+    <p><strong>En iyi:</strong> Çeviri ve metin iyileştirme.<br><strong>Fiyat:</strong> Ücretsiz / Pro €7.49/ay.<br><strong>Türkçe:</strong> Mükemmel (çeviri). <strong>Puan: 20/25</strong></p>
+  </div>
+
+  <h2>Kategori 2: Görsel / Tasarım</h2>
+
+  <div class="tool-card">
+    <h4>Midjourney <span class="tag tag-paid">Ücretli</span></h4>
+    <p><strong>En iyi:</strong> Sanatsal görsel üretimi, poster, kapak.<br><strong>Fiyat:</strong> $10/ay'dan başlıyor.<br><strong>Puan: 24/25</strong></p>
+  </div>
+  <div class="tool-card">
+    <h4>DALL-E 3 (ChatGPT) <span class="tag tag-freemium">Freemium</span></h4>
+    <p><strong>En iyi:</strong> Hızlı görsel üretimi, metin entegrasyonu.<br><strong>Fiyat:</strong> ChatGPT Plus ile dahil.<br><strong>Puan: 21/25</strong></p>
+  </div>
+  <div class="tool-card">
+    <h4>Canva AI <span class="tag tag-freemium">Freemium</span></h4>
+    <p><strong>En iyi:</strong> Sosyal medya görseli, sunum, poster.<br><strong>Fiyat:</strong> Ücretsiz / Pro ~200 TL/ay.<br><strong>Türkçe:</strong> Tam destek. <strong>Puan: 22/25</strong></p>
+  </div>
+  <div class="tool-card">
+    <h4>Adobe Firefly <span class="tag tag-freemium">Freemium</span></h4>
+    <p><strong>En iyi:</strong> Fotoğraf düzenleme, arka plan değiştirme.<br><strong>Fiyat:</strong> Adobe planı ile dahil.<br><strong>Puan: 20/25</strong></p>
+  </div>
+  <div class="tool-card">
+    <h4>Leonardo.ai <span class="tag tag-freemium">Freemium</span></h4>
+    <p><strong>En iyi:</strong> Oyun/ürün görseli, tutarlı karakter üretimi.<br><strong>Fiyat:</strong> Ücretsiz plan mevcut / $10/ay.<br><strong>Puan: 19/25</strong></p>
+  </div>
+
+  <p style="color:var(--g400);font-size:10pt;text-align:center;margin-top:24px"><em>Kitapta 10 kategorinin tamamı (50 araç) detaylı inceleme ve karşılaştırma tablolarıyla yer almaktadır: Video (Runway, Synthesia, HeyGen, Pika, CapCut AI), Ses (ElevenLabs, Murf, Suno, Otter.ai, Descript), Kod (Cursor AI, GitHub Copilot, Replit, v0, Bolt), Araştırma (Perplexity, Gemini, Elicit, Consensus, SciSpace), Pazarlama (Surfer SEO, Semrush AI, Buffer AI, Hootsuite AI, AdCreative.ai), Otomasyon (Zapier, Make, n8n, Bardeen, ActivePieces), Üretkenlik (Notion AI, Motion, Otter.ai, Mem, Taskade), E-ticaret (Shopify Magic, AutoDS, Flair AI, Photoroom, Describely).</em></p>
+
+  <div class="panel-task">
+    <div class="panel-task-head"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--o600)" stroke-width="2" stroke-linecap="round"><rect x="3" y="3" width="18" height="18" rx="2"/><line x1="3" y1="9" x2="21" y2="9"/><line x1="9" y1="21" x2="9" y2="9"/></svg>Panel Görevi</div>
+    <p><strong>"Okudum"</strong> → <strong>15 XP</strong>. 3 farklı kategoride araç test et → <strong>+50 XP</strong>. Karşılaştırma tablosu → <strong>+30 XP</strong>.</p>
+  </div>
+</div>
+
+<!-- BÖLÜM 4 -->
+<div class="ch-open"><div class="ch-open-bg">
+  <div class="ch-num">Bölüm 04</div>
+  <div class="ch-title">Kişisel AI Stack<br>Kurma</div>
+  <div class="ch-sub">Sektör ve iş modeline göre kendi araç setini oluştur</div>
+  <div class="ch-line"></div>
+  <div class="ch-xp"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#f97316" stroke-width="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>100 XP</div>
+</div></div>
+
+<div class="page">
+  <div class="pg-head"><span>Bölüm 04 · Kişisel AI Stack</span><span class="brand">DiptenZirveye</span></div>
+
+  <p>"Stack" = senin kişisel araç setinin. Herkesin stack'i farklı — çünkü herkesin işi farklı. Aşağıda 3 farklı profil için hazır stack önerileri var.</p>
+
+  <h3>Stack 1: Solo Girişimci (Sıfır/Düşük Bütçe)</h3>
+  <div class="story-box">
+    <p><strong>Metin:</strong> ChatGPT Free + Claude Free</p>
+    <p><strong>Görsel:</strong> Canva Free + DALL-E (ChatGPT ile)</p>
+    <p><strong>Araştırma:</strong> Gemini Free + Perplexity Free</p>
+    <p><strong>Otomasyon:</strong> Zapier Free (5 zap)</p>
+    <p><strong>Üretkenlik:</strong> Notion Free</p>
+    <p style="margin-bottom:0"><strong>Aylık maliyet: 0 TL</strong></p>
+  </div>
+
+  <h3>Stack 2: İçerik Üreticisi (Orta Bütçe)</h3>
+  <div class="story-box">
+    <p><strong>Metin:</strong> ChatGPT Plus + Claude Pro</p>
+    <p><strong>Görsel:</strong> Midjourney + Canva Pro</p>
+    <p><strong>Video:</strong> CapCut AI + Synthesia</p>
+    <p><strong>SEO:</strong> Surfer SEO</p>
+    <p><strong>Otomasyon:</strong> Zapier Starter</p>
+    <p style="margin-bottom:0"><strong>Aylık maliyet: ~$100-150 (~3.500-5.000 TL)</strong></p>
+  </div>
+
+  <h3>Stack 3: Ajans / Ekip (Yüksek Bütçe)</h3>
+  <div class="story-box">
+    <p><strong>Metin:</strong> ChatGPT Team + Claude Team + Jasper</p>
+    <p><strong>Görsel:</strong> Midjourney + Adobe Firefly</p>
+    <p><strong>Video:</strong> Runway + Synthesia Pro</p>
+    <p><strong>Kod:</strong> Cursor AI + GitHub Copilot</p>
+    <p><strong>Otomasyon:</strong> Make Pro + n8n</p>
+    <p style="margin-bottom:0"><strong>Aylık maliyet: ~$300-500 (~10.000-17.000 TL)</strong></p>
+  </div>
+
+  <div class="panel-task">
+    <div class="panel-task-head"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--o600)" stroke-width="2" stroke-linecap="round"><rect x="3" y="3" width="18" height="18" rx="2"/><line x1="3" y1="9" x2="21" y2="9"/><line x1="9" y1="21" x2="9" y2="9"/></svg>Panel Görevi</div>
+    <p><strong>"Okudum"</strong> → <strong>15 XP</strong>. Kendi kişisel AI stack'ini tasarla ve panele yükle → <strong>+45 XP</strong>.</p>
+  </div>
+</div>
+
+<!-- BÖLÜM 5 -->
+<div class="ch-open"><div class="ch-open-bg">
+  <div class="ch-num">Bölüm 05</div>
+  <div class="ch-title">Araçları Birleştirme<br>Workflow</div>
+  <div class="ch-sub">Birden fazla AI aracını tek akışta kullanma sanatı</div>
+  <div class="ch-line"></div>
+  <div class="ch-xp"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#f97316" stroke-width="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>100 XP</div>
+</div></div>
+
+<div class="page">
+  <div class="pg-head"><span>Bölüm 05 · Workflow</span><span class="brand">DiptenZirveye</span></div>
+
+  <p>Tek başına güçlü olan araçlar, birleştirildiğinde daha güçlü. "Araç orkestrasyonu" = birden fazla AI aracını tek bir iş akışında kullanmak.</p>
+
+  <h2>Workflow 1: Blog Yazısı Üretim Hattı</h2>
+  <div class="story-box">
+    <p><strong>Adım 1:</strong> Gemini ile konu araştırması yap (güncel veri, trendler)</p>
+    <p><strong>Adım 2:</strong> ChatGPT ile yazı taslağını oluştur (RGBFK çerçevesiyle)</p>
+    <p><strong>Adım 3:</strong> Surfer SEO ile SEO optimizasyonu yap</p>
+    <p><strong>Adım 4:</strong> Canva AI ile öne çıkan görsel ve infografik oluştur</p>
+    <p><strong>Adım 5:</strong> WordPress'e yayınla (Zapier ile otomatik)</p>
+    <p style="margin-bottom:0"><strong>Toplam süre: ~45 dk (eskiden 4+ saat)</strong></p>
+  </div>
+
+  <h2>Workflow 2: Sosyal Medya İçerik Makinesi</h2>
+  <div class="story-box">
+    <p><strong>Adım 1:</strong> Claude ile 1 haftalık içerik planı oluştur</p>
+    <p><strong>Adım 2:</strong> ChatGPT ile her gönderi metnini yaz</p>
+    <p><strong>Adım 3:</strong> Midjourney ile görselleri üret</p>
+    <p><strong>Adım 4:</strong> CapCut AI ile Reels düzenle</p>
+    <p><strong>Adım 5:</strong> Buffer ile zamanla ve yayınla</p>
+    <p style="margin-bottom:0"><strong>1 haftalık içerik: ~2 saat (eskiden 10+ saat)</strong></p>
+  </div>
+
+  <h2>Workflow 3: Müşteri Onboarding Otomasyonu</h2>
+  <div class="story-box">
+    <p><strong>Tetikleyici:</strong> Yeni müşteri kaydoldu (form doldurdu)</p>
+    <p><strong>Adım 1:</strong> Zapier tetikler → müşteri bilgilerini CRM'e ekler</p>
+    <p><strong>Adım 2:</strong> ChatGPT API ile kişiselleştirilmiş hoş geldin e-postası üretir</p>
+    <p><strong>Adım 3:</strong> E-posta otomatik gönderilir</p>
+    <p><strong>Adım 4:</strong> 3 gün sonra takip e-postası (otomatik)</p>
+    <p style="margin-bottom:0"><strong>İnsan müdahalesi: 0 · Tüm süreç otomatik</strong></p>
+  </div>
+
+  <div class="takeaway">
+    <div class="takeaway-head"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--o600)" stroke-width="2" stroke-linecap="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>Bu Kitaptan Çıkarımlar</div>
+    <ol>
+      <li><strong>5 adımlı değerlendirme matrisi</strong> ile her aracı hızla değerlendir.</li>
+      <li><strong>10 kategoride 50 araç</strong> — senin işine yarayan 5-10 tanesini seç.</li>
+      <li><strong>Kişisel AI stack'ini kur</strong> — bütçene ve iş modeline uygun.</li>
+      <li><strong>Workflow'larla araçları birleştir</strong> — tek başına güçlü, birlikte dev.</li>
+    </ol>
+  </div>
+
+  <div class="panel-task">
+    <div class="panel-task-head"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--o600)" stroke-width="2" stroke-linecap="round"><rect x="3" y="3" width="18" height="18" rx="2"/><line x1="3" y1="9" x2="21" y2="9"/><line x1="9" y1="21" x2="9" y2="9"/></svg>Panel Görevi</div>
+    <p><strong>"Okudum"</strong> → <strong>15 XP</strong>. İlk workflow'unu oluştur (ekran görüntüsü ile) → <strong>+40 XP</strong>.</p>
+  </div>
+
+  <!-- SONUÇ -->
+  <div style="background:var(--bk);border-radius:12px;text-align:center;padding:32px;margin:28px 0">
+    <p style="font-family:'Syne';font-size:16pt;font-weight:700;margin-bottom:8px;color:var(--wh)">Toplam XP: <span style="color:var(--o500)">500</span></p>
+    <p style="color:var(--g400);margin-bottom:16px;font-size:11pt">Rozet: "Araç Seçici" · +100 XP bonus · +30 DZ Coin</p>
+    <p style="font-size:13pt;font-weight:500;color:var(--wh);margin-bottom:0">Sonraki Kitap → <strong style="color:var(--o400)">Ertelemeden Çıkış Sistemi</strong></p>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<div class="footer">
+  <div class="logo"><span class="d">Dipten</span><span class="z">Zirveye</span></div>
+  <p style="color:var(--g400);font-size:9pt;font-family:'DM Sans',sans-serif;font-style:italic;letter-spacing:.02em">Dönüşüm sessiz başlar. <span style="color:var(--o500)">Ama sonuçları gürültülüdür.</span></p>
+</div>
+
+</body>
+</html>

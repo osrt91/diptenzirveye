@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI ile İlk Gelirim — DiptenZirveye</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@500;600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,400&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{--o50:#fff7ed;--o100:#ffedd5;--o200:#fed7aa;--o400:#fb923c;--o500:#f97316;--o600:#ea6c00;--o700:#c05500;--a400:#fbbf24;--bk:#0d0d0d;--g900:#1a1a1a;--g600:#4a4540;--g400:#9a9590;--g200:#e8e2da;--g100:#f5f0eb;--wh:#fdfaf7;--ok:#22c55e;--grad:linear-gradient(135deg,var(--o500),var(--a400))}
+*{margin:0;padding:0;box-sizing:border-box}body{font-family:'DM Sans',sans-serif;font-size:12.5pt;line-height:1.82;color:var(--bk);background:var(--wh)}h1,h2,h3,h4{font-family:'Syne',sans-serif;letter-spacing:-.02em;color:var(--bk)}h2{font-size:19pt;font-weight:700;margin:44px 0 16px;line-height:1.25}h3{font-size:14pt;font-weight:600;margin:30px 0 12px}p{margin-bottom:13px}strong{font-weight:600}.page{max-width:760px;margin:0 auto;padding:48px 64px}
+.cover{min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;background:var(--bk);color:var(--wh);text-align:center;position:relative;overflow:hidden;page-break-after:always;padding:60px 48px}.cover-top-bar{position:absolute;top:0;left:0;right:0;height:4px;background:var(--grad)}.cover-bg{position:absolute;inset:0;opacity:.06;pointer-events:none}.cover-logo{font-family:'Syne';font-size:13pt;font-weight:700;letter-spacing:.08em;margin-bottom:72px;z-index:1;position:relative}.cover-logo .d{color:var(--wh)}.cover-logo .z{color:var(--o500)}.cover-series{font-family:'DM Mono';font-size:8.5pt;letter-spacing:.2em;text-transform:uppercase;color:var(--o500);margin-bottom:20px;z-index:1;position:relative}.cover-title{font-family:'Syne';font-size:40pt;font-weight:800;line-height:1.08;letter-spacing:-.03em;z-index:1;position:relative;margin-bottom:14px}.cover-title span{background:var(--grad);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}.cover-sub{font-size:13pt;font-weight:300;color:var(--g400);z-index:1;position:relative;margin-bottom:48px}.cover-line{width:80px;height:3px;background:var(--grad);border-radius:2px;margin:0 auto 48px;z-index:1;position:relative}.cover-quote{font-style:italic;font-size:11.5pt;color:var(--g400);max-width:480px;line-height:1.7;z-index:1;position:relative;margin-bottom:72px}.cover-badge{display:inline-flex;align-items:center;gap:16px;padding:8px 24px;border:1px solid rgba(249,115,22,.4);border-radius:24px;font-family:'DM Mono';font-size:8pt;letter-spacing:.06em;color:var(--o400);z-index:1;position:relative}.cover-badge .dot{width:4px;height:4px;border-radius:50%;background:var(--o500)}.cover-year{font-family:'DM Mono';font-size:7.5pt;color:var(--g600);margin-top:36px;letter-spacing:.12em;z-index:1;position:relative}
+.copy-page{page-break-after:always;min-height:70vh;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;padding:80px 48px}.copy-page p{font-size:9pt;color:var(--g600);line-height:2.2}.copy-logo{font-family:'Syne';font-weight:700;font-size:14pt;margin-bottom:48px}.copy-logo .d{color:var(--bk)}.copy-logo .z{color:var(--o500)}
+.toc{page-break-after:always;padding:72px 64px;max-width:760px;margin:0 auto}.toc-item{display:flex;align-items:baseline;padding:14px 0;border-bottom:1px solid var(--g200)}.toc-num{font-family:'DM Mono';font-size:10pt;color:var(--o500);min-width:36px;font-weight:500}.toc-title{flex:1;font-size:12.5pt;font-weight:500}.toc-sub{font-size:9pt;color:var(--g400);font-style:italic}
+.ch-open{page-break-before:always;margin-bottom:36px}.ch-open-bg{background:var(--bk);color:var(--wh);padding:56px 64px 44px;position:relative;overflow:hidden;max-width:760px;margin:0 auto}.ch-num{font-family:'DM Mono';font-size:9pt;letter-spacing:.2em;text-transform:uppercase;color:var(--o500);margin-bottom:12px;position:relative;z-index:1}.ch-title{font-family:'Syne';font-size:28pt;font-weight:800;line-height:1.12;letter-spacing:-.02em;position:relative;z-index:1;margin-bottom:10px}.ch-sub{font-size:10.5pt;font-weight:300;color:var(--g400);font-style:italic;position:relative;z-index:1}.ch-line{width:60px;height:3px;background:var(--grad);border-radius:2px;margin-top:24px;position:relative;z-index:1}.ch-xp{display:inline-flex;align-items:center;gap:6px;padding:5px 14px;border:1px solid rgba(249,115,22,.3);border-radius:16px;font-family:'DM Mono';font-size:7.5pt;color:var(--o400);letter-spacing:.06em;margin-top:20px;position:relative;z-index:1}
+.pg-head{display:flex;justify-content:space-between;align-items:center;padding:14px 0 20px;border-bottom:1px solid var(--g200);margin-bottom:28px;font-family:'DM Mono';font-size:7pt;letter-spacing:.12em;text-transform:uppercase;color:var(--g400)}.pg-head .brand{color:var(--o500)}
+table{width:100%;border-collapse:collapse;margin:22px 0;font-size:11pt}thead th{background:var(--g100);font-family:'Syne';font-weight:600;font-size:9.5pt;text-align:left;padding:11px 16px;border-bottom:2px solid var(--o500);text-transform:uppercase;letter-spacing:.04em}tbody td{padding:11px 16px;border-bottom:1px solid var(--g200);vertical-align:top}tbody tr:nth-child(even){background:rgba(245,240,235,.5)}
+.panel-task{background:var(--o50);border:1px solid var(--o200);border-radius:12px;padding:24px 28px;margin:28px 0;position:relative;overflow:hidden}.panel-task::before{content:'';position:absolute;left:0;top:0;bottom:0;width:4px;background:var(--grad)}.panel-task-head{font-family:'DM Mono';font-size:7.5pt;letter-spacing:.14em;text-transform:uppercase;color:var(--o600);margin-bottom:12px;font-weight:500}.panel-task p{font-size:11.5pt;margin-bottom:8px}
+.takeaway{background:var(--g100);border-radius:12px;padding:24px 28px;margin:28px 0}.takeaway-head{font-family:'Syne';font-weight:700;font-size:10pt;color:var(--o600);margin-bottom:12px}.takeaway ol{padding-left:20px}.takeaway li{margin-bottom:8px;font-size:11.5pt}
+.story-box{background:var(--bk);color:var(--wh);border-radius:12px;padding:28px 32px;margin:28px 0}.story-box strong{color:var(--o400)}.story-box p{margin-bottom:10px}
+.stat-card{display:flex;flex-direction:column;align-items:center;justify-content:center;background:var(--grad);color:var(--wh);border-radius:12px;padding:18px 12px;text-align:center;flex:1;min-width:0}.stat-card .num{font-family:'Syne';font-size:24pt;font-weight:800;line-height:1}.stat-card .label{font-family:'DM Mono';font-size:6.5pt;letter-spacing:.08em;text-transform:uppercase;margin-top:6px;opacity:.85;line-height:1.4}.stat-row{display:flex;gap:10px;margin:24px 0}
+blockquote{border-left:3px solid var(--o500);padding:14px 24px;margin:22px 0;background:var(--o50);border-radius:0 10px 10px 0;font-style:italic}
+ul,ol{padding-left:22px;margin-bottom:14px}li{margin-bottom:6px}
+.model-card{border:2px solid var(--o200);border-radius:12px;padding:24px 28px;margin:20px 0;background:var(--wh)}.model-card h3{margin-top:0}
+.footer{background:var(--bk);color:var(--g600);text-align:center;padding:48px 24px;font-family:'DM Mono';font-size:7.5pt;letter-spacing:.08em}.footer .logo{font-family:'Syne';font-size:14pt;font-weight:700;margin-bottom:16px}.footer .logo .d{color:var(--wh)}.footer .logo .z{color:var(--o500)}
+@media print{body{font-size:10.5pt}.page{padding:0;max-width:100%}.cover{min-height:auto;padding:100px 60px}.panel-task,.takeaway,.story-box,.model-card{break-inside:avoid}h2,h3{break-after:avoid}}@page{size:A4;margin:2cm}
+</style>
+</head>
+<body>
+
+<!-- KAPAK -->
+<div class="cover">
+  <div class="cover-top-bar"></div>
+  <svg class="cover-bg" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg"><defs><pattern id="grid" width="60" height="60" patternUnits="userSpaceOnUse"><path d="M 60 0 L 0 0 0 60" fill="none" stroke="#f97316" stroke-width=".5"/></pattern></defs><rect width="100%" height="100%" fill="url(#grid)" opacity=".3"/></svg>
+  <div class="cover-logo"><span class="d">Dipten</span><span class="z">Zirveye</span></div>
+  <div class="cover-series">AI Ustalık Serisi · Kitap 05</div>
+  <div class="cover-title">AI İLE<br><span>İLK GELİRİM</span></div>
+  <div class="cover-sub">Sıfırdan 6 Haneli Gelire Giden 5 İş Modeli</div>
+  <div class="cover-line"></div>
+  <div class="cover-quote">"AI bilen herkes para kazanabilir. Sistemi kuran sürdürür."</div>
+  <div class="cover-badge"><span>500 XP</span><span class="dot"></span><span>7 Bölüm</span><span class="dot"></span><span>5 Saat</span></div>
+  <div class="cover-year">V1.0 · 2026</div>
+</div>
+
+<!-- TELİF -->
+<div class="copy-page">
+  <div class="copy-logo"><span class="d">Dipten</span><span class="z">Zirveye</span></div>
+  <p><strong style="font-size:12pt;color:var(--bk)">AI İLE İLK GELİRİM</strong></p>
+  <p>Sıfırdan 6 Haneli Gelire Giden 5 İş Modeli</p>
+  <p style="margin-top:16px">DİPTENZİRVEYE AI Ustalık Serisi · Kitap 05</p>
+  <p>Versiyon 1.0 · 2026</p>
+  <div style="width:40px;height:2px;background:var(--grad);border-radius:1px;margin:28px auto"></div>
+  <p style="font-size:8pt;margin-top:20px">© 2026 DİPTENZİRVEYE · Tüm hakları saklıdır.</p>
+</div>
+
+<!-- İÇİNDEKİLER -->
+<div class="page toc" style="padding-top:72px">
+  <h2 style="font-size:22pt;font-weight:800;margin-bottom:8px">İçindekiler</h2>
+  <div style="width:40px;height:3px;background:var(--grad);border-radius:2px;margin-bottom:36px"></div>
+  <div class="toc-item"><span class="toc-num">01</span><span class="toc-title">Doğru İş Modelini Seçmek</span></div>
+  <div class="toc-item"><span class="toc-num">02</span><span class="toc-title">Niş Bulma Sistemi</span></div>
+  <div class="toc-item"><span class="toc-num">03</span><span class="toc-title">Dijital Ürün Oluşturma</span></div>
+  <div class="toc-item"><span class="toc-num">04</span><span class="toc-title">Instagram ile Satış Sistemi</span></div>
+  <div class="toc-item"><span class="toc-num">05</span><span class="toc-title">AI Danışmanlığı</span></div>
+  <div class="toc-item"><span class="toc-num">06</span><span class="toc-title">İlk 7 Gün Eylem Planı</span></div>
+  <div class="toc-item" style="border-bottom:none"><span class="toc-num">07</span><span class="toc-title">Ölçekleme Yol Haritası</span></div>
+</div>
+
+<!-- BÖLÜM 1 -->
+<div class="ch-open"><div class="ch-open-bg">
+  <div class="ch-num">Bölüm 01</div><div class="ch-title">Doğru İş Modelini<br>Seçmek</div>
+  <div class="ch-sub">5 AI destekli iş modeli — hangisi sana uygun?</div><div class="ch-line"></div>
+  <div class="ch-xp"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#f97316" stroke-width="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>60 XP</div>
+</div></div>
+
+<div class="page">
+  <div class="pg-head"><span>Bölüm 01 · Doğru İş Modelini Seçmek</span><span class="brand">DiptenZirveye</span></div>
+
+  <p>AI ile para kazanmanın onlarca yolu var. Ama senin için doğru olan sadece birkaç tanesi. Bu bölümde 5 iş modelini analiz edeceğiz — her birinin risk/getiri profili, başlangıç maliyeti ve senin için uygunluğu.</p>
+
+  <h2>5 AI Destekli İş Modeli</h2>
+
+  <div class="model-card">
+    <h3 style="color:var(--o500)">Model 1: Freelance AI Hizmet Satışı</h3>
+    <p><strong>Ne:</strong> AI araçlarıyla metin yazarlığı, görsel tasarım, sosyal medya yönetimi, otomasyon kurulumu gibi hizmetleri freelance olarak sat.</p>
+    <table>
+      <tbody>
+        <tr><td><strong>Başlangıç Maliyeti</strong></td><td>0-500 TL</td></tr>
+        <tr><td><strong>İlk Gelire Kadar Süre</strong></td><td>1-4 hafta</td></tr>
+        <tr><td><strong>Aylık Gelir Potansiyeli</strong></td><td>5.000-25.000 TL</td></tr>
+        <tr><td><strong>Risk Seviyesi</strong></td><td style="color:var(--ok)">Düşük</td></tr>
+        <tr><td><strong>En Uygun Profil</strong></td><td>Hizmet odaklı, müşteri ilişkisi güçlü</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="model-card">
+    <h3 style="color:var(--o500)">Model 2: Dijital Ürün Satışı</h3>
+    <p><strong>Ne:</strong> AI ile e-kitap, online kurs, şablon paketi, prompt koleksiyonu oluştur ve sat. Bir kez üret, sürekli sat.</p>
+    <table>
+      <tbody>
+        <tr><td><strong>Başlangıç Maliyeti</strong></td><td>0-2.000 TL</td></tr>
+        <tr><td><strong>İlk Gelire Kadar Süre</strong></td><td>2-8 hafta</td></tr>
+        <tr><td><strong>Aylık Gelir Potansiyeli</strong></td><td>3.000-50.000 TL</td></tr>
+        <tr><td><strong>Risk Seviyesi</strong></td><td style="color:var(--a400)">Orta</td></tr>
+        <tr><td><strong>En Uygun Profil</strong></td><td>İçerik üretmeyi seven, belirli bir konuda bilgili</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="model-card">
+    <h3 style="color:var(--o500)">Model 3: AI Danışmanlığı</h3>
+    <p><strong>Ne:</strong> İşletmelere AI araçlarını nasıl kullanacaklarını öğret. "AI bilmeyen işletmelere AI sat."</p>
+    <table>
+      <tbody>
+        <tr><td><strong>Başlangıç Maliyeti</strong></td><td>0-1.000 TL</td></tr>
+        <tr><td><strong>İlk Gelire Kadar Süre</strong></td><td>2-6 hafta</td></tr>
+        <tr><td><strong>Aylık Gelir Potansiyeli</strong></td><td>10.000-75.000 TL</td></tr>
+        <tr><td><strong>Risk Seviyesi</strong></td><td style="color:var(--ok)">Düşük-Orta</td></tr>
+        <tr><td><strong>En Uygun Profil</strong></td><td>İletişim becerileri güçlü, B2B deneyimi olan</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="model-card">
+    <h3 style="color:var(--o500)">Model 4: AI ile İçerik Ajansı</h3>
+    <p><strong>Ne:</strong> "Bir kişilik ajans" — AI araçlarıyla içerik üretim hizmeti sun. Blog, sosyal medya, video, e-posta.</p>
+    <table>
+      <tbody>
+        <tr><td><strong>Başlangıç Maliyeti</strong></td><td>1.000-5.000 TL</td></tr>
+        <tr><td><strong>İlk Gelire Kadar Süre</strong></td><td>4-12 hafta</td></tr>
+        <tr><td><strong>Aylık Gelir Potansiyeli</strong></td><td>20.000-100.000 TL</td></tr>
+        <tr><td><strong>Risk Seviyesi</strong></td><td style="color:var(--a400)">Orta</td></tr>
+        <tr><td><strong>En Uygun Profil</strong></td><td>Pazarlama bilgisi olan, çok yönlü</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="model-card">
+    <h3 style="color:var(--o500)">Model 5: Otomasyon Hizmeti</h3>
+    <p><strong>Ne:</strong> İşletmelerin rutin süreçlerini Zapier, Make, n8n + AI ile otomatize et.</p>
+    <table>
+      <tbody>
+        <tr><td><strong>Başlangıç Maliyeti</strong></td><td>500-3.000 TL</td></tr>
+        <tr><td><strong>İlk Gelire Kadar Süre</strong></td><td>4-8 hafta</td></tr>
+        <tr><td><strong>Aylık Gelir Potansiyeli</strong></td><td>15.000-75.000 TL</td></tr>
+        <tr><td><strong>Risk Seviyesi</strong></td><td style="color:var(--a400)">Orta</td></tr>
+        <tr><td><strong>En Uygun Profil</strong></td><td>Teknik meraklı, süreç odaklı</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="panel-task">
+    <div class="panel-task-head">Panel Görevi</div>
+    <p><strong>"Okudum"</strong> → <strong>10 XP</strong>. İş Modeli Uyumluluk Testi → <strong>+30 XP</strong>.</p>
+  </div>
+</div>
+
+<!-- BÖLÜM 2 -->
+<div class="ch-open"><div class="ch-open-bg">
+  <div class="ch-num">Bölüm 02</div><div class="ch-title">Niş Bulma Sistemi</div>
+  <div class="ch-sub">Karlı niş bulmanın 4 adımlı sistemi</div><div class="ch-line"></div>
+  <div class="ch-xp"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#f97316" stroke-width="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>70 XP</div>
+</div></div>
+
+<div class="page">
+  <div class="pg-head"><span>Bölüm 02 · Niş Bulma</span><span class="brand">DiptenZirveye</span></div>
+
+  <p>"Herkese hizmet eden, kimseye hizmet edemez." Doğru nişi bulmak, başarının %80'i.</p>
+
+  <h2>4 Adımlı Niş Bulma</h2>
+
+  <table>
+    <thead><tr><th>Adım</th><th>Soru</th><th>Araç</th></tr></thead>
+    <tbody>
+      <tr><td><strong>1. Talep Analizi</strong></td><td>İnsanlar ne arıyor? Hangi sorunlar çözülmemiş?</td><td>Google Trends, Perplexity, Reddit</td></tr>
+      <tr><td><strong>2. Rekabet Haritası</strong></td><td>Bu alanda kim var? Kaliteleri nasıl? Boşluk nerede?</td><td>Gemini araştırma, Semrush</td></tr>
+      <tr><td><strong>3. Güç-İlgi Kesişimi</strong></td><td>Sen neyden anlıyorsun + neyi yapmaktan keyif alıyorsun?</td><td>Kişisel değerlendirme formu</td></tr>
+      <tr><td><strong>4. AI ile Validasyon</strong></td><td>Bu niş gerçekten karlı mı? ChatGPT'ye doğrulat.</td><td>ChatGPT + Claude analiz</td></tr>
+    </tbody>
+  </table>
+
+  <h2>Validasyon Promptu</h2>
+  <div class="story-box">
+    <p><strong>ChatGPT'ye sor:</strong></p>
+    <p>"Türkiye'de [NİŞ] alanında dijital ürün/hizmet satmanın karlılığını analiz et. Şunları değerlendir: 1) Hedef kitle büyüklüğü, 2) Ortalama ödeme isteği, 3) Mevcut rekabet yoğunluğu, 4) Büyüme trendi, 5) Senin önerinin: bu nişe girmeli miyim?"</p>
+    <p style="margin-bottom:0">Bu tek prompt bile seni saatlerce sürecek araştırmadan kurtarır.</p>
+  </div>
+
+  <div class="panel-task">
+    <div class="panel-task-head">Panel Görevi</div>
+    <p><strong>"Okudum"</strong> → <strong>10 XP</strong>. Niş Analizi Raporu → <strong>+40 XP</strong>.</p>
+  </div>
+</div>
+
+<!-- BÖLÜM 3-7 özet -->
+<div class="ch-open"><div class="ch-open-bg">
+  <div class="ch-num">Bölüm 03</div><div class="ch-title">Dijital Ürün<br>Oluşturma</div>
+  <div class="ch-sub">AI ile e-kitap, kurs, şablon paketi — 7 günde MVP</div><div class="ch-line"></div>
+</div></div>
+
+<div class="page">
+  <div class="pg-head"><span>Bölüm 03 · Dijital Ürün Oluşturma</span><span class="brand">DiptenZirveye</span></div>
+
+  <p>Dijital ürünün en büyük avantajı: <strong>bir kez üret, sınırsız sat.</strong> AI bu süreci dramatik hızlandırıyor.</p>
+
+  <h2>7 Günde MVP Ürün</h2>
+  <table>
+    <thead><tr><th>Gün</th><th>Görev</th><th>AI Aracı</th></tr></thead>
+    <tbody>
+      <tr><td><strong>1</strong></td><td>Ürün konusunu ve hedef kitleyi belirle</td><td>ChatGPT + Perplexity</td></tr>
+      <tr><td><strong>2</strong></td><td>İçerik iskeletini oluştur (10-15 bölüm)</td><td>Claude</td></tr>
+      <tr><td><strong>3-4</strong></td><td>İçeriği yaz (AI destekli, kendi sesinde düzenle)</td><td>ChatGPT + Claude</td></tr>
+      <tr><td><strong>5</strong></td><td>Görsel tasarım ve kapak (Canva AI)</td><td>Canva AI + Midjourney</td></tr>
+      <tr><td><strong>6</strong></td><td>Satış sayfası oluştur</td><td>ChatGPT (metin) + Carrd/Gumroad</td></tr>
+      <tr><td><strong>7</strong></td><td>Lansman! İlk paylaşımlar ve satış</td><td>Buffer (zamanlama)</td></tr>
+    </tbody>
+  </table>
+
+  <h2>Fiyatlandırma Stratejisi</h2>
+  <table>
+    <thead><tr><th>Ürün Tipi</th><th>Fiyat Aralığı</th><th>Hedef</th></tr></thead>
+    <tbody>
+      <tr><td>E-kitap (30-50 sayfa)</td><td>49-149 TL</td><td>Giriş ürünü, güven oluşturma</td></tr>
+      <tr><td>Şablon/Prompt Paketi</td><td>99-299 TL</td><td>Pratik değer, anında kullanım</td></tr>
+      <tr><td>Mini Kurs (1-3 saat)</td><td>199-499 TL</td><td>Derinlemesine öğretim</td></tr>
+      <tr><td>Kapsamlı Kurs (5+ saat)</td><td>499-1.999 TL</td><td>Dönüşüm vaadi</td></tr>
+      <tr><td>Coaching/Mentörlük</td><td>999-4.999 TL/ay</td><td>Premium, sınırlı kontenjan</td></tr>
+    </tbody>
+  </table>
+
+  <div class="panel-task">
+    <div class="panel-task-head">Panel Görevi</div>
+    <p><strong>"Okudum"</strong> → <strong>10 XP</strong>. İlk Dijital Ürün MVP'si → <strong>+60 XP</strong>.</p>
+  </div>
+</div>
+
+<!-- BÖLÜM 4-5 -->
+<div class="ch-open"><div class="ch-open-bg">
+  <div class="ch-num">Bölüm 04</div><div class="ch-title">Instagram ile<br>Satış Sistemi</div>
+  <div class="ch-sub">Organik büyüme, Reels stratejisi, DM satış akışı</div><div class="ch-line"></div>
+</div></div>
+
+<div class="page">
+  <div class="pg-head"><span>Bölüm 04 · Instagram Satış</span><span class="brand">DiptenZirveye</span></div>
+
+  <p>Instagram, Türkiye'de en güçlü satış kanallarından biri. AI ile içerik üret, organik büyü, DM'den sat.</p>
+
+  <h2>30 Günlük Instagram Büyüme Planı</h2>
+  <table>
+    <thead><tr><th>Hafta</th><th>Odak</th><th>Hedef</th></tr></thead>
+    <tbody>
+      <tr><td><strong>1</strong></td><td>Profil optimizasyonu + 7 gönderi</td><td>Temel kurulum</td></tr>
+      <tr><td><strong>2</strong></td><td>Günlük 1 Reel + 3 hikaye</td><td>Algoritma'ya giriş</td></tr>
+      <tr><td><strong>3</strong></td><td>Carousel eğitim içerikleri + etkileşim</td><td>Otorite inşası</td></tr>
+      <tr><td><strong>4</strong></td><td>İlk ürün tanıtımı + DM satış</td><td>İlk satış!</td></tr>
+    </tbody>
+  </table>
+
+  <h2>Reel Hook Formülü</h2>
+  <blockquote>İlk 3 saniye her şeyi belirler. Hook formülü: <strong>"[ŞOK EDİCİ İDDİA] + [3 saniye bekleme] + [Açıklama]"</strong><br><br>Örnek: "AI ile ayda 20.000 TL kazanıyorum. (3 sn) İşte nasıl..."</blockquote>
+
+  <div class="panel-task">
+    <div class="panel-task-head">Panel Görevi</div>
+    <p><strong>"Okudum"</strong> → <strong>10 XP</strong>. Instagram İçerik Planı (2 hafta) → <strong>+35 XP</strong>.</p>
+  </div>
+</div>
+
+<!-- BÖLÜM 6 -->
+<div class="ch-open"><div class="ch-open-bg">
+  <div class="ch-num">Bölüm 06</div><div class="ch-title">İlk 7 Gün<br>Eylem Planı</div>
+  <div class="ch-sub">Seçtiğin iş modeliyle ilk haftanı planla</div><div class="ch-line"></div>
+</div></div>
+
+<div class="page">
+  <div class="pg-head"><span>Bölüm 06 · İlk 7 Gün</span><span class="brand">DiptenZirveye</span></div>
+
+  <table>
+    <thead><tr><th>Gün</th><th>Görev</th><th>Çıktı</th></tr></thead>
+    <tbody>
+      <tr><td><strong>1</strong></td><td>İş modelini seç, nişi belirle</td><td>1 sayfa iş planı taslağı</td></tr>
+      <tr><td><strong>2</strong></td><td>Niş validasyonu yap (AI ile)</td><td>Niş analiz raporu</td></tr>
+      <tr><td><strong>3</strong></td><td>İlk ürünü/hizmeti tanımla</td><td>Ürün/hizmet açıklaması</td></tr>
+      <tr><td><strong>4</strong></td><td>Satış sayfası / portföy oluştur</td><td>Canlı satış sayfası</td></tr>
+      <tr><td><strong>5</strong></td><td>İçerik üret (3 gönderi + 1 Reel)</td><td>Yayınlanmış içerikler</td></tr>
+      <tr><td><strong>6</strong></td><td>İlk 10 potansiyel müşteriye ulaş</td><td>10 DM/e-posta gönderildi</td></tr>
+      <tr><td><strong>7</strong></td><td>İlk satışı/müşteriyi kapat</td><td>İlk gelir!</td></tr>
+    </tbody>
+  </table>
+
+  <div class="stat-row">
+    <div class="stat-card"><div class="num">7</div><div class="label">Gün</div></div>
+    <div class="stat-card"><div class="num">1</div><div class="label">İlk Satış</div></div>
+    <div class="stat-card"><div class="num">250</div><div class="label">XP</div></div>
+  </div>
+
+  <div class="panel-task">
+    <div class="panel-task-head">Panel Görevi</div>
+    <p>7 Gün Eylem Planı Tamamlama → <strong>+50 XP streak</strong>. İlk Satış/Müşteri → <strong>+60 XP</strong>.</p>
+  </div>
+
+  <!-- SONUÇ -->
+  <div style="background:var(--bk);border-radius:12px;text-align:center;padding:32px;margin:28px 0">
+    <p style="font-family:'Syne';font-size:16pt;font-weight:700;margin-bottom:8px;color:var(--wh)">Toplam XP: <span style="color:var(--o500)">500</span></p>
+    <p style="color:var(--g400);margin-bottom:16px;font-size:11pt">Rozet: "İlk Gelir" · +250 XP bonus · +100 DZ Coin</p>
+    <p style="font-size:13pt;font-weight:500;color:var(--wh);margin-bottom:0">Sonraki Kitap → <strong style="color:var(--o400)">AI ile İçerik İmparatorluğu</strong></p>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<div class="footer">
+  <div class="logo"><span class="d">Dipten</span><span class="z">Zirveye</span></div>
+  <p style="color:var(--g400);font-size:9pt;font-family:'DM Sans',sans-serif;font-style:italic;letter-spacing:.02em">Dönüşüm sessiz başlar. <span style="color:var(--o500)">Ama sonuçları gürültülüdür.</span></p>
+</div>
+
+</body>
+</html>

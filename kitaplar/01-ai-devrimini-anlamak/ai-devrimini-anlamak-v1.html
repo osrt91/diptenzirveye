@@ -1,0 +1,760 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI Devrimini Anlamak — DİPTENZİRVEYE</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@500;600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,400&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --o50:#fff7ed; --o100:#ffedd5; --o200:#fed7aa; --o300:#fdba74;
+  --o400:#fb923c; --o500:#f97316; --o600:#ea6c00; --o700:#c05500;
+  --a400:#fbbf24; --a500:#f59e0b;
+  --bk:#0d0d0d; --g900:#1a1a1a; --g800:#2a2520; --g600:#4a4540;
+  --g400:#9a9590; --g200:#e8e2da; --g100:#f5f0eb; --wh:#fdfaf7;
+  --ok:#22c55e; --warn:#fbbf24; --err:#ef4444;
+  --grad: linear-gradient(135deg, var(--o500), var(--a400));
+}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'DM Sans',sans-serif;font-size:12.5pt;line-height:1.82;color:var(--bk);background:var(--wh)}
+h1,h2,h3,h4{font-family:'Syne',sans-serif;letter-spacing:-.02em;color:var(--bk)}
+h2{font-size:19pt;font-weight:700;margin:44px 0 16px;line-height:1.25}
+h3{font-size:14pt;font-weight:600;margin:30px 0 12px}
+p{margin-bottom:13px}
+strong{font-weight:600}
+a{color:var(--o500);text-decoration:none}
+
+.page{max-width:760px;margin:0 auto;padding:48px 64px;position:relative}
+
+/* ============ COVER ============ */
+.cover{
+  min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;
+  background:var(--bk);color:var(--wh);text-align:center;position:relative;overflow:hidden;
+  page-break-after:always;padding:60px 48px;
+}
+.cover-bg{position:absolute;inset:0;opacity:.06;pointer-events:none}
+.cover-top-bar{position:absolute;top:0;left:0;right:0;height:4px;background:var(--grad)}
+.cover-logo{font-family:'Syne';font-size:13pt;font-weight:700;letter-spacing:.08em;margin-bottom:72px;position:relative;z-index:1}
+.cover-logo .d{color:var(--wh)}.cover-logo .z{color:var(--o500)}.cover-logo .tm{font-size:7pt;vertical-align:super;color:var(--g400);margin-left:1px}
+.cover-series{font-family:'DM Mono';font-size:8.5pt;letter-spacing:.2em;text-transform:uppercase;color:var(--o500);margin-bottom:20px;z-index:1;position:relative}
+.cover-title{font-family:'Syne';font-size:42pt;font-weight:800;line-height:1.08;letter-spacing:-.03em;z-index:1;position:relative;margin-bottom:14px}
+.cover-title span{background:var(--grad);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.cover-sub{font-size:14pt;font-weight:300;color:var(--g400);z-index:1;position:relative;margin-bottom:48px}
+.cover-line{width:80px;height:3px;background:var(--grad);border-radius:2px;margin:0 auto 48px;z-index:1;position:relative}
+.cover-quote{font-style:italic;font-size:11.5pt;color:var(--g400);max-width:460px;line-height:1.7;z-index:1;position:relative;margin-bottom:72px}
+.cover-badge{display:inline-flex;align-items:center;gap:16px;padding:8px 24px;border:1px solid rgba(249,115,22,.4);border-radius:24px;font-family:'DM Mono';font-size:8pt;letter-spacing:.06em;color:var(--o400);z-index:1;position:relative}
+.cover-badge .dot{width:4px;height:4px;border-radius:50%;background:var(--o500)}
+.cover-year{font-family:'DM Mono';font-size:7.5pt;color:var(--g600);margin-top:36px;letter-spacing:.12em;z-index:1;position:relative}
+
+/* ============ COPYRIGHT ============ */
+.copy-page{page-break-after:always;min-height:80vh;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;padding:80px 48px}
+.copy-page p{font-size:9pt;color:var(--g600);line-height:2.2}
+.copy-logo{font-family:'Syne';font-weight:700;font-size:14pt;margin-bottom:48px}
+.copy-logo .d{color:var(--bk)}.copy-logo .z{color:var(--o500)}
+
+/* ============ TOC ============ */
+.toc{page-break-after:always;padding:72px 64px;max-width:760px;margin:0 auto}
+.toc h2{font-size:22pt;margin-bottom:40px;font-weight:800}
+.toc-item{display:flex;align-items:baseline;padding:14px 0;border-bottom:1px solid var(--g200);transition:all .2s}
+.toc-num{font-family:'DM Mono';font-size:10pt;color:var(--o500);min-width:36px;font-weight:500}
+.toc-title{flex:1;font-size:12.5pt;font-weight:500}
+.toc-sub{font-size:9pt;color:var(--g400);font-style:italic}
+
+/* ============ CHAPTER OPENER ============ */
+.ch-open{page-break-before:always;position:relative;padding:0;margin-bottom:36px}
+.ch-open-bg{background:var(--bk);color:var(--wh);padding:56px 64px 44px;position:relative;overflow:hidden;max-width:760px;margin:0 auto}
+.ch-open-bg .pattern{position:absolute;right:-40px;top:-40px;opacity:.04}
+.ch-num{font-family:'DM Mono';font-size:9pt;letter-spacing:.2em;text-transform:uppercase;color:var(--o500);margin-bottom:12px;position:relative;z-index:1}
+.ch-title{font-family:'Syne';font-size:30pt;font-weight:800;line-height:1.12;letter-spacing:-.02em;position:relative;z-index:1;margin-bottom:10px}
+.ch-sub{font-size:10.5pt;font-weight:300;color:var(--g400);font-style:italic;position:relative;z-index:1}
+.ch-line{width:60px;height:3px;background:var(--grad);border-radius:2px;margin-top:24px;position:relative;z-index:1}
+.ch-xp{display:inline-flex;align-items:center;gap:6px;padding:5px 14px;border:1px solid rgba(249,115,22,.3);border-radius:16px;font-family:'DM Mono';font-size:7.5pt;color:var(--o400);letter-spacing:.06em;margin-top:20px;position:relative;z-index:1}
+
+/* ============ PAGE HEADER ============ */
+.pg-head{display:flex;justify-content:space-between;align-items:center;padding:14px 0 20px;border-bottom:1px solid var(--g200);margin-bottom:28px;font-family:'DM Mono';font-size:7pt;letter-spacing:.12em;text-transform:uppercase;color:var(--g400)}
+.pg-head .brand{color:var(--o500)}
+
+/* ============ TABLES ============ */
+table{width:100%;border-collapse:collapse;margin:22px 0;font-size:11pt}
+thead th{background:var(--g100);font-family:'Syne';font-weight:600;font-size:9.5pt;text-align:left;padding:11px 16px;border-bottom:2px solid var(--o500);color:var(--g800);text-transform:uppercase;letter-spacing:.04em}
+tbody td{padding:11px 16px;border-bottom:1px solid var(--g200);vertical-align:top}
+tbody tr:nth-child(even){background:rgba(245,240,235,.5)}
+
+/* ============ CALLOUT BOXES ============ */
+.panel-task{
+  background:var(--o50);border:1px solid var(--o200);border-radius:12px;padding:24px 28px;margin:28px 0;
+  position:relative;overflow:hidden
+}
+.panel-task::before{content:'';position:absolute;left:0;top:0;bottom:0;width:4px;background:var(--grad);border-radius:12px 0 0 12px}
+.panel-task-head{display:flex;align-items:center;gap:8px;font-family:'DM Mono';font-size:7.5pt;letter-spacing:.14em;text-transform:uppercase;color:var(--o600);margin-bottom:12px;font-weight:500}
+.panel-task p{font-size:11.5pt;margin-bottom:8px}
+
+.takeaway{background:var(--g100);border-radius:12px;padding:24px 28px;margin:28px 0}
+.takeaway-head{font-family:'Syne';font-weight:700;font-size:10pt;color:var(--o600);margin-bottom:12px;display:flex;align-items:center;gap:8px}
+.takeaway ol{padding-left:20px}.takeaway li{margin-bottom:8px;font-size:11.5pt}
+
+.story-box{
+  background:var(--bk);color:var(--wh);border-radius:12px;padding:28px 32px;margin:28px 0;
+  position:relative;overflow:hidden
+}
+.story-box::after{content:'';position:absolute;right:0;top:0;width:120px;height:100%;background:linear-gradient(90deg,transparent,rgba(249,115,22,.04));pointer-events:none}
+.story-box strong{color:var(--o400)}
+.story-box p{margin-bottom:10px;position:relative;z-index:1}
+
+.stat-card{
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  background:var(--grad);color:var(--wh);border-radius:12px;padding:18px 12px;text-align:center;
+  flex:1;min-width:0
+}
+.stat-card .num{font-family:'Syne';font-size:24pt;font-weight:800;line-height:1}
+.stat-card .label{font-family:'DM Mono';font-size:6.5pt;letter-spacing:.08em;text-transform:uppercase;margin-top:6px;opacity:.85;line-height:1.4}
+
+.stat-row{display:flex;gap:10px;margin:24px 0}
+
+blockquote{
+  border-left:3px solid var(--o500);padding:14px 24px;margin:22px 0;
+  background:var(--o50);border-radius:0 10px 10px 0;font-style:italic;color:var(--g800)
+}
+
+ul,ol{padding-left:22px;margin-bottom:14px}
+li{margin-bottom:6px}
+
+.divider{border:none;height:1px;background:var(--g200);margin:36px 0}
+
+/* ============ SVG ICONS ============ */
+.icon{display:inline-block;vertical-align:middle}
+
+/* ============ FOOTER ============ */
+.footer{
+  background:var(--bk);color:var(--g600);text-align:center;padding:48px 24px;
+  font-family:'DM Mono';font-size:7.5pt;letter-spacing:.08em
+}
+.footer .logo{font-family:'Syne';font-size:14pt;font-weight:700;margin-bottom:16px}
+.footer .logo .d{color:var(--wh)}.footer .logo .z{color:var(--o500)}
+.footer p{margin-bottom:6px}
+
+/* ============ PREVIEW BADGE ============ */
+.preview-end{
+  page-break-before:always;text-align:center;padding:100px 48px;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:70vh
+}
+.preview-end .tag{font-family:'DM Mono';font-size:8pt;letter-spacing:.16em;text-transform:uppercase;color:var(--o500);margin-bottom:24px}
+
+/* ============ PRINT ============ */
+@media print{
+  body{font-size:10pt}
+  .page{padding:0;max-width:100%}
+  .cover{min-height:auto;padding:100px 60px}
+  .ch-open-bg{padding:48px 0}
+  .panel-task,.takeaway,.story-box{break-inside:avoid}
+  h2,h3{break-after:avoid}
+  .stat-row{break-inside:avoid}
+}
+@page{size:A4;margin:2cm}
+</style>
+</head>
+<body>
+
+<!-- ══════════════════════════════════════════════════════════════════ -->
+<!-- KAPAK -->
+<!-- ══════════════════════════════════════════════════════════════════ -->
+<div class="cover">
+  <div class="cover-top-bar"></div>
+
+  <!-- Background Pattern SVG -->
+  <svg class="cover-bg" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
+    <defs>
+      <pattern id="grid" width="60" height="60" patternUnits="userSpaceOnUse">
+        <path d="M 60 0 L 0 0 0 60" fill="none" stroke="#f97316" stroke-width=".5"/>
+      </pattern>
+    </defs>
+    <rect width="100%" height="100%" fill="url(#grid)" opacity=".3"/>
+  </svg>
+
+  <div class="cover-logo"><span class="d">Dipten</span><span class="z">Zirveye</span></div>
+
+  <div class="cover-series">AI Ustalık Serisi · Kitap 01</div>
+
+  <div class="cover-title">AI DEVRİMİNİ<br><span>ANLAMAK</span></div>
+
+  <div class="cover-sub">Girişimciler İçin Yapay Zeka Temelleri</div>
+
+  <div class="cover-line"></div>
+
+  <div class="cover-quote">"Bu kitabı bitirdiğinde, yapay zekanın ne olduğunu değil<br>— senin için ne yapabileceğini anlarsın."</div>
+
+  <div class="cover-badge">
+    <span>500 XP</span><span class="dot"></span>
+    <span>5 Bölüm</span><span class="dot"></span>
+    <span>2,5 Saat</span>
+  </div>
+
+  <div class="cover-year">V1.0 · 2026</div>
+</div>
+
+<!-- ══════════════════════════════════════════════════════════════════ -->
+<!-- TELİF -->
+<!-- ══════════════════════════════════════════════════════════════════ -->
+<div class="copy-page">
+  <div class="copy-logo"><span class="d">Dipten</span><span class="z">Zirveye</span></div>
+  <p><strong style="font-size:12pt;color:var(--bk)">AI DEVRİMİNİ ANLAMAK</strong></p>
+  <p>Girişimciler İçin Yapay Zeka Temelleri</p>
+  <p style="margin-top:16px">DİPTENZİRVEYE AI Ustalık Serisi · Kitap 01</p>
+  <p>Versiyon 1.0 · Şubat 2026</p>
+  <div style="width:40px;height:2px;background:var(--grad);border-radius:1px;margin:28px auto"></div>
+  <p style="font-size:8pt;margin-top:20px">Bu eser DİPTENZİRVEYE markası altında yayımlanmıştır.<br>Tüm hakları saklıdır. © 2026 DİPTENZİRVEYE</p>
+  <p style="font-size:7.5pt;color:var(--g400);margin-top:28px;max-width:420px">Model özellikleri ve performans verileri yayın tarihi (2026) itibarıyla günceldir. En güncel bilgiler için ilgili platformların resmi sayfalarını kontrol ediniz.</p>
+</div>
+
+<!-- ══════════════════════════════════════════════════════════════════ -->
+<!-- İÇİNDEKİLER -->
+<!-- ══════════════════════════════════════════════════════════════════ -->
+<div class="page toc" style="padding-top:72px">
+  <h2 style="font-size:22pt;font-weight:800;margin-bottom:8px">İçindekiler</h2>
+  <div style="width:40px;height:3px;background:var(--grad);border-radius:2px;margin-bottom:36px"></div>
+
+  <div class="toc-item"><span class="toc-num"></span><span class="toc-title toc-sub">Önsöz — Neden Bu Kitap?</span></div>
+  <div class="toc-item"><span class="toc-num">01</span><span class="toc-title">Neden Şimdi?</span></div>
+  <div class="toc-item"><span class="toc-num">02</span><span class="toc-title">AI Nedir, Ne Değildir</span></div>
+  <div class="toc-item"><span class="toc-num">03</span><span class="toc-title">Türkiye'de Girişimcinin AI Konumu</span></div>
+  <div class="toc-item"><span class="toc-num">04</span><span class="toc-title">Hangi Modeli Ne Zaman Kullanırsın</span></div>
+  <div class="toc-item"><span class="toc-num">05</span><span class="toc-title">İlk 7 Günün Görev Listesi</span></div>
+  <div class="toc-item"><span class="toc-num"></span><span class="toc-title toc-sub">Sonuç — Buradan Sonrası</span></div>
+  <div class="toc-item"><span class="toc-num"></span><span class="toc-title toc-sub">Terim Sözlüğü · Kaynak & İleri Okuma</span></div>
+  <div class="toc-item" style="border-bottom:none"><span class="toc-num"></span><span class="toc-title toc-sub">Panel Entegrasyonu</span></div>
+</div>
+
+<!-- ══════════════════════════════════════════════════════════════════ -->
+<!-- ÖNSÖZ -->
+<!-- ══════════════════════════════════════════════════════════════════ -->
+<div class="page">
+  <div class="ch-open">
+    <div class="ch-open-bg">
+      <svg class="pattern" width="300" height="300" viewBox="0 0 300 300" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="150" cy="150" r="140" fill="none" stroke="#f97316" stroke-width="1"/>
+        <circle cx="150" cy="150" r="100" fill="none" stroke="#f97316" stroke-width=".5"/>
+        <circle cx="150" cy="150" r="60" fill="none" stroke="#f97316" stroke-width=".3"/>
+      </svg>
+      <div class="ch-num">Önsöz</div>
+      <div class="ch-title">Neden Bu Kitap?</div>
+      <div class="ch-line"></div>
+    </div>
+  </div>
+
+  <p>Yapay zeka hakkında binlerce kitap, yüz binlerce makale, milyonlarca tweet yazıldı. Peki neden bir tane daha?</p>
+  <p>Çünkü bu kitap farklı bir soruyla başlıyor. Biz "AI nedir?" diye sormuyoruz. Biz şunu soruyoruz: <strong>"AI senin için ne yapabilir?"</strong></p>
+  <p>Bu ince ama kritik bir fark.</p>
+  <p>Akademik bir AI kitabı sana transformer mimarisinin matematiksel altyapısını öğretir. Bir teknoloji blogu son çıkan modellerin karşılaştırma tablosunu verir. Bir YouTube videosu "ChatGPT ile 10 dakikada blog yazısı yaz" der.</p>
+  <p>Ama hiçbiri sana şunu söylemez: Sen, şu an Türkiye'de, kendi durumunla, kendi bütçenle, kendi hedeflerinle — bu teknolojiden nasıl somut fayda sağlarsın?</p>
+  <p><strong>İşte bu kitap tam olarak bunu yapıyor.</strong></p>
+
+  <p>DİPTENZİRVEYE serisi 10 kitaptan oluşuyor. Bu ilk kitap, tüm serinin temeli. Bu kitapta 5 şey yapacaksın:</p>
+
+  <ol>
+    <li>AI devriminin neden <em>şimdi</em> olduğunu anlayacaksın</li>
+    <li>AI'ın gerçekte ne olduğunu — ve ne <em>olmadığını</em> — kavrayacaksın</li>
+    <li>Türkiye'deki girişimcinin bu devrimdeki konumunu göreceksin</li>
+    <li>ChatGPT, Claude, Gemini gibi modelleri tanıyıp hangisini ne için kullanacağını bileceksin</li>
+    <li>İlk 7 gününü planlayıp harekete geçeceksin</li>
+  </ol>
+
+  <p>Her bölümde bilgi var — ama daha önemlisi, her bölümde bir <strong>uygulama</strong> var. Çünkü bizim felsefemiz basit: okuduğunu uygulamadıysan, okumadın sayılır.</p>
+  <p>Paneline gir. Bölümü oku. Çalışma kağıdını doldur. XP'ni kazan. Bir sonraki bölüme geç.</p>
+  <p>Hazırsan başlayalım.</p>
+  <p style="font-style:italic;color:var(--g600);margin-top:24px">DİPTENZİRVEYE Ekibi</p>
+</div>
+
+<!-- ══════════════════════════════════════════════════════════════════ -->
+<!-- BÖLÜM 1 -->
+<!-- ══════════════════════════════════════════════════════════════════ -->
+<div class="ch-open">
+  <div class="ch-open-bg">
+    <!-- Decorative SVG: Neural Network Pattern -->
+    <svg class="pattern" width="320" height="320" viewBox="0 0 320 320" xmlns="http://www.w3.org/2000/svg">
+      <g stroke="#f97316" fill="none" stroke-width=".6">
+        <circle cx="160" cy="60" r="12"/><circle cx="80" cy="160" r="12"/><circle cx="240" cy="160" r="12"/>
+        <circle cx="120" cy="260" r="12"/><circle cx="200" cy="260" r="12"/>
+        <line x1="160" y1="72" x2="80" y2="148"/><line x1="160" y1="72" x2="240" y2="148"/>
+        <line x1="80" y1="172" x2="120" y2="248"/><line x1="80" y1="172" x2="200" y2="248"/>
+        <line x1="240" y1="172" x2="120" y2="248"/><line x1="240" y1="172" x2="200" y2="248"/>
+      </g>
+      <g fill="#f97316" opacity=".15">
+        <circle cx="160" cy="60" r="5"/><circle cx="80" cy="160" r="5"/><circle cx="240" cy="160" r="5"/>
+        <circle cx="120" cy="260" r="5"/><circle cx="200" cy="260" r="5"/>
+      </g>
+    </svg>
+    <div class="ch-num">Bölüm 01</div>
+    <div class="ch-title">Neden Şimdi?</div>
+    <div class="ch-sub">AI devriminin zamanlaması, kaçırma maliyeti ve yakalama fırsatı</div>
+    <div class="ch-line"></div>
+    <div class="ch-xp">
+      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#f97316" stroke-width="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+      80 XP · Okuma + Uygulama
+    </div>
+  </div>
+</div>
+
+<div class="page">
+  <div class="pg-head"><span>Bölüm 01 · Neden Şimdi?</span><span class="brand">DiptenZirveye</span></div>
+
+  <p>2023 yılında dünyada 150 milyon kişi ilk kez bir yapay zeka aracıyla konuştu. 2024'te bu sayı 500 milyonu aştı. 2025'in sonunda ise yapay zeka araçlarını en az bir kez kullanan insan sayısı 1,8 milyarı geçti.</p>
+  <p>Bu bir trend değil. Bu bir paradigma kayması.</p>
+  <p>Ve her paradigma kaymasının bir özelliği vardır: <strong>Onu anlayanlar ile anlamayanlar arasında uçurum açar.</strong></p>
+
+  <!-- STORY BOX: Elif -->
+  <div class="story-box">
+    <p>2019'da İstanbul'da yaşayan Elif, küçük bir butik e-ticaret sitesi işletiyordu. El yapımı takılar satıyordu. Ürün açıklamalarını tek tek yazıyor, fotoğraflarını telefonuyla çekiyor, sosyal medya paylaşımlarını haftada 3 saat harcayarak hazırlıyordu. Aylık cirosu 8.000 TL civarındaydı.</p>
+    <p>2024'te Elif, ChatGPT ile tanıştı. İlk ay sadece ürün açıklamalarını AI'a yazdırdı — 3 saatlik iş 20 dakikaya düştü. 6 ayın sonunda Elif'in aylık cirosu <strong>45.000 TL</strong>'ye çıkmıştı. Ekstra bir çalışan almadı. Fazla sermaye yatırmadı.</p>
+    <p style="margin-bottom:0">Tek yaptığı şey: <strong>AI araçlarını iş süreçlerine entegre etmek.</strong></p>
+  </div>
+
+  <p>Her seferinde aynı kalıp: Reddetme → Küçümseme → Fark etme → Panik → Geç kalma.</p>
+  <p><strong>Sen bu döngünün neresinde olmak istiyorsun?</strong></p>
+
+  <h2>Üç Büyük Kırılma Noktası</h2>
+
+  <h3>1. Erişim Demokratikleşti</h3>
+  <p>2020 öncesinde AI kullanmak için ya bir teknoloji şirketinde çalışman ya da doktora derecen olması gerekiyordu. Şimdi? Bir tarayıcı aç ve yapay zekayla sohbet et. Ücretsiz.</p>
+
+  <!-- STAT CARDS -->
+  <div class="stat-row">
+    <div class="stat-card"><div class="num">75</div><div class="label">Yıl · Telefon</div></div>
+    <div class="stat-card"><div class="num">7</div><div class="label">Yıl · İnternet</div></div>
+    <div class="stat-card"><div class="num">2.5</div><div class="label">Yıl · Instagram</div></div>
+    <div class="stat-card"><div class="num">2</div><div class="label">Ay · ChatGPT</div></div>
+  </div>
+  <p style="text-align:center;font-size:9pt;color:var(--g400);margin-top:4px">100 milyon kullanıcıya ulaşma süresi</p>
+
+  <h3>2. Yetenek Patlaması Yaşandı</h3>
+  <p>2022'deki ChatGPT ile 2026'daki modeller arasındaki fark, bir hesap makinesini süper bilgisayarla karşılaştırmak gibi. Sadece 4 yılda metin üretiminden görsel üretime, kod yazmadan analiz yapmaya kadar her alan kökten dönüştü.</p>
+
+  <h3>3. İş Modelleri Dönüşmeye Başladı</h3>
+
+  <!-- STAT CARDS: McKinsey -->
+  <div class="stat-row">
+    <div class="stat-card"><div class="num">%72</div><div class="label">Gelir Artışı Bildiren<br>AI Kullanan Şirketler</div></div>
+    <div class="stat-card"><div class="num">%40</div><div class="label">Ortalama<br>Verimlilik Artışı</div></div>
+    <div class="stat-card"><div class="num">%60</div><div class="label">Daha Hızlı<br>Müşteri Çözümü</div></div>
+  </div>
+  <p style="text-align:center;font-size:8pt;color:var(--g400)">Kaynak: McKinsey, 2025</p>
+
+  <p>Bugün bir kişi, AI araçlarıyla donanmış olarak bir tasarımcı kadar görsel üretebilir, bir metin yazarı kadar içerik çıkarabilir, bir analist kadar veri yorumlayabilir. Bu, tarihte ilk kez bir kişinin 10 kişilik ekip kapasitesine sahip olması demek.</p>
+
+  <hr class="divider">
+
+  <h2>Kaçırma Maliyeti</h2>
+  <p>Harvard Business Review'un 2025 araştırmasına göre, AI'ı iş süreçlerine entegre etmeyen KOBİ'lerin üç yıl içinde rekabet gücünü kaybedeceği öngörülüyor. İnterneti geç benimseyen perakendeciler 2010'larda battı. Mobili geç benimseyen markalar 2015'te müşteri kaybetti. AI da aynı kalıbı izliyor — sadece çok daha hızlı.</p>
+
+  <blockquote><strong>Ama iyi haber şu:</strong> Henüz geç değilsin. Goldman Sachs'ın 2025 raporuna göre, AI'ın küresel ekonomiye yıllık 7 trilyon dolar değer katması bekleniyor. Ve bu değerin büyük kısmı henüz "sahipsiz."</blockquote>
+
+  <h2>Yakalama Fırsatı</h2>
+  <p><strong>Fırsat 1: Giriş Bariyeri Tarihte En Düşük.</strong> AI kullanmak için programlama bilmene gerek yok, büyük sermayeye ihtiyacın yok, teknik arka plana sahip olmak zorunda değilsin. Tek ihtiyacın: internet bağlantısı, öğrenme isteği ve doğru bir rehber.</p>
+  <p><strong>Fırsat 2: Türkçe İçerik Pazarı Boş.</strong> İngilizce AI içerik pazarı doymuş. Ama Türkçe? Devasa bir boşluk var.</p>
+  <p><strong>Fırsat 3: "Bilgi Arbitrajı" Mümkün.</strong> AI araçlarının ne yapabileceğini bilen insanların sayısı, bu araçlara ihtiyaç duyan işletmelerin sayısından çok daha az.</p>
+
+  <div class="takeaway">
+    <div class="takeaway-head">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--o600)" stroke-width="2" stroke-linecap="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+      Bu Bölümden Çıkarımlar
+    </div>
+    <ol>
+      <li><strong>AI devrimi "gelecekte" değil, şu an yaşanıyor</strong> — ve hızlanarak devam ediyor.</li>
+      <li><strong>Üç kırılma noktası</strong> (erişim, yetenek, iş modeli) bu devrimi kaçınılmaz kılıyor.</li>
+      <li><strong>Kaçırma maliyeti yüksek</strong> ama henüz çok geç değil — fırsat penceresi açık.</li>
+    </ol>
+  </div>
+
+  <div class="panel-task">
+    <div class="panel-task-head">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--o600)" stroke-width="2" stroke-linecap="round"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><line x1="3" y1="9" x2="21" y2="9"/><line x1="9" y1="21" x2="9" y2="9"/></svg>
+      Panel Görevi
+    </div>
+    <p>Bu bölümü tamamladıysan → Paneline gir → "Bölüm 1: Neden Şimdi?" bölümünü <strong>"Okudum"</strong> olarak işaretle → <strong>15 XP</strong> kazan.</p>
+    <p><strong>Çalışma Kağıdı:</strong> "AI Farkındalık Yansıması" formunu doldur → <strong>+15 XP</strong> ek kazanım.</p>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════════════════════════ -->
+<!-- BÖLÜM 2 -->
+<!-- ══════════════════════════════════════════════════════════════════ -->
+<div class="ch-open">
+  <div class="ch-open-bg">
+    <svg class="pattern" width="300" height="300" viewBox="0 0 300 300" xmlns="http://www.w3.org/2000/svg">
+      <g stroke="#f97316" fill="none" stroke-width=".5" opacity=".8">
+        <rect x="80" y="80" width="140" height="140" rx="8"/>
+        <rect x="110" y="110" width="80" height="80" rx="4"/>
+        <line x1="150" y1="80" x2="150" y2="110"/><line x1="80" y1="150" x2="110" y2="150"/>
+        <line x1="220" y1="150" x2="190" y2="150"/><line x1="150" y1="220" x2="150" y2="190"/>
+      </g>
+    </svg>
+    <div class="ch-num">Bölüm 02</div>
+    <div class="ch-title">AI Nedir, Ne Değildir</div>
+    <div class="ch-sub">Yapay zekanın gerçek tanımı, Hollywood mitlerinin ötesinde</div>
+    <div class="ch-line"></div>
+    <div class="ch-xp">
+      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#f97316" stroke-width="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+      100 XP · Okuma + Quiz
+    </div>
+  </div>
+</div>
+
+<div class="page">
+  <div class="pg-head"><span>Bölüm 02 · AI Nedir, Ne Değildir</span><span class="brand">DiptenZirveye</span></div>
+
+  <p>"Yapay zeka" kelimesini duyduğunda aklına ne geliyor? Eğer cevabın Terminator, Matrix ya da insanlığı yok eden robotlarsa — yalnız değilsin. 2024'te yapılan bir ankette Türkiye'deki yetişkinlerin <strong>%43</strong>'ü AI'ı "tehlikeli" veya "korkutucu" olarak tanımladı. Oysa aynı ankette <strong>%67</strong>'si AI'ın ne olduğunu doğru tanımlayamadı.</p>
+  <p>Korkmak kolay. Anlamak zor. Ama anlamak — tam da senin gücüne dönüşecek olan şey.</p>
+
+  <blockquote>Yapay zeka, en yalın haliyle şudur: <strong>Makinelerin, normalde insan zekâsı gerektiren görevleri yapabilmesi.</strong> Gizemli bir bilinç yok. Duygular yok. İrade yok.</blockquote>
+
+  <h2>AI'ın Dört Bileşeni</h2>
+
+  <table>
+    <thead><tr><th>Bileşen</th><th>Ne Yapar</th><th>Günlük Örnek</th></tr></thead>
+    <tbody>
+      <tr><td><strong>Makine Öğrenimi (ML)</strong></td><td>Veriden kalıp çıkarır, tahmin yapar</td><td>Netflix'in "sana önerimiz" listesi</td></tr>
+      <tr><td><strong>Doğal Dil İşleme (NLP)</strong></td><td>İnsan dilini anlar ve üretir</td><td>ChatGPT ile sohbet</td></tr>
+      <tr><td><strong>Bilgisayarlı Görü (CV)</strong></td><td>Görüntüleri analiz eder</td><td>Telefonunun yüz tanıma kilidi</td></tr>
+      <tr><td><strong>Üretken AI</strong></td><td>Yeni içerik oluşturur</td><td>Midjourney ile poster tasarlama</td></tr>
+    </tbody>
+  </table>
+
+  <h2>LLM Nasıl Çalışır? — 5 Adım</h2>
+  <p><strong>1. Veri Toplama:</strong> Model, internet üzerindeki trilyonlarca kelimeyi okur. <strong>2. Kalıp Öğrenme:</strong> "Bir kelimeden sonra hangi kelime gelir?" sorusunun milyarlarca versiyonunu çözer. <strong>3. İnce Ayar:</strong> İnsan eğitmenler modele doğru davranışı öğretir (RLHF). <strong>4. Çıktı Üretme:</strong> Sen bir soru sorarsın, model en olası cevabı kelime kelime üretir. <strong>5. Bağlam Penceresi:</strong> Model senin konuşmanın tamamını bir "pencere" içinde tutar.</p>
+
+  <table>
+    <thead><tr><th>Model</th><th>Context Window (2026)</th></tr></thead>
+    <tbody>
+      <tr><td>ChatGPT (GPT-5.2)</td><td>128.000 token (~96.000 kelime)</td></tr>
+      <tr><td>Claude (4.6)</td><td>200.000 token (~150.000 kelime)</td></tr>
+      <tr><td>Gemini (Pro 2.5)</td><td>1.000.000+ token (~750.000 kelime)</td></tr>
+    </tbody>
+  </table>
+
+  <h2>AI Ne Değildir: 5 Mit</h2>
+  <p><strong>Mit 1: "AI Bilinçlidir"</strong> — Hayır. AI'ın bilinci, duyguları, irâdesi yoktur. "Düşünmüyor" — kalıp eşleştiriyor.</p>
+  <p><strong>Mit 2: "AI Her Zaman Doğru Söyler"</strong> — Kesinlikle hayır. AI modelleri "hallüsinasyon" yapar — yani uydurur.</p>
+  <p><strong>Mit 3: "AI İşimi Elimden Alacak"</strong> — Daha doğru bir ifade: <strong>AI kullanan insanlar, AI kullanmayan insanların işini alacak.</strong> World Economic Forum: 2030'a kadar 85 milyon iş ortadan kalkacak — ama 97 milyon yeni iş yaratılacak.</p>
+  <p><strong>Mit 4: "AI Sadece Büyük Şirketler İçin"</strong> — Tam tersi. AI, küçük girişimcileri büyük şirketlerle rekabet edebilir hale getiriyor.</p>
+  <p><strong>Mit 5: "Programlama Bilmem Gerekiyor"</strong> — 2026'da tamamen yanlış. Bugünkü AI araçlarının %95'i sıfır kod bilgisiyle kullanılabilir.</p>
+
+  <h2>AI'ın Üç Seviyesi</h2>
+  <table>
+    <thead><tr><th>Seviye</th><th>Ad</th><th>Açıklama</th><th>Durum (2026)</th></tr></thead>
+    <tbody>
+      <tr><td><strong>ANI</strong></td><td>Dar Yapay Zeka</td><td>Tek bir görevde uzmanlaşmış AI</td><td style="color:var(--ok)">Şu an buradayız</td></tr>
+      <tr><td><strong>AGI</strong></td><td>Genel Yapay Zeka</td><td>İnsan kadar çok yönlü düşünebilen AI</td><td>Henüz mevcut değil</td></tr>
+      <tr><td><strong>ASI</strong></td><td>Süper Yapay Zeka</td><td>İnsan zekâsını aşan AI</td><td>Bilim kurgu alanında</td></tr>
+    </tbody>
+  </table>
+
+  <div class="takeaway">
+    <div class="takeaway-head">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--o600)" stroke-width="2" stroke-linecap="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+      Bu Bölümden Çıkarımlar
+    </div>
+    <ol>
+      <li><strong>AI, kalıp tanıma ve üretme makinesidir</strong> — bilinçli, duygusal veya iradeli değildir.</li>
+      <li><strong>LLM'ler devasa veriyle eğitilir</strong> ve en olası çıktıyı üretir — bu bazen hallüsinasyon demektir.</li>
+      <li><strong>5 yaygın mit</strong> seni yanıltmasın: AI bilinçli değil, her zaman doğru söylemez ve programlama gerektirmiyor.</li>
+    </ol>
+  </div>
+
+  <div class="panel-task">
+    <div class="panel-task-head">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--o600)" stroke-width="2" stroke-linecap="round"><rect x="3" y="3" width="18" height="18" rx="2"/><line x1="3" y1="9" x2="21" y2="9"/><line x1="9" y1="21" x2="9" y2="9"/></svg>
+      Panel Görevi
+    </div>
+    <p><strong>"Okudum"</strong> olarak işaretle → <strong>15 XP</strong>. "AI Farkındalık Testi" quizini tamamla (10 soru, min %70 geçme notu) → <strong>+30 XP</strong>.</p>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════════════════════════ -->
+<!-- BÖLÜM 3 -->
+<!-- ══════════════════════════════════════════════════════════════════ -->
+<div class="ch-open">
+  <div class="ch-open-bg">
+    <svg class="pattern" width="300" height="300" viewBox="0 0 300 300" xmlns="http://www.w3.org/2000/svg">
+      <g stroke="#f97316" fill="none" stroke-width=".5">
+        <path d="M150 40L50 260H250Z"/><path d="M150 100L90 220H210Z"/>
+        <circle cx="150" cy="35" r="4" fill="#f97316" opacity=".3"/>
+      </g>
+    </svg>
+    <div class="ch-num">Bölüm 03</div>
+    <div class="ch-title">Türkiye'de Girişimcinin<br>AI Konumu</div>
+    <div class="ch-sub">Türkiye'deki AI ekosistemi, fırsatlar ve tehditler</div>
+    <div class="ch-line"></div>
+    <div class="ch-xp">
+      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#f97316" stroke-width="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+      100 XP · Okuma + Analiz
+    </div>
+  </div>
+</div>
+
+<div class="page">
+  <div class="pg-head"><span>Bölüm 03 · Türkiye'de Girişimcinin AI Konumu</span><span class="brand">DiptenZirveye</span></div>
+
+  <p>TÜBİTAK'ın 2025 Yapay Zeka Endeksi'ne göre Türkiye, küresel AI hazırlık sıralamasında <strong>38. sırada</strong>. 2022'de 52. sıradaydı — 2 yılda 14 sıra atladı. Bölgesel olarak MENA bölgesinde 2. sırada.</p>
+
+  <h2>Türkiye'nin AI Güç Haritası</h2>
+
+  <div class="stat-row">
+    <div class="stat-card"><div class="num">%60</div><div class="label">35 Yaş Altı<br>Genç Nüfus</div></div>
+    <div class="stat-card"><div class="num">%85</div><div class="label">İnternete<br>Erişim Oranı</div></div>
+    <div class="stat-card"><div class="num">120K+</div><div class="label">2024'te Kurulan<br>Yeni Şirket</div></div>
+  </div>
+
+  <h2>8 Sektörde AI Dönüşüm Haritası</h2>
+  <table>
+    <thead><tr><th>Sektör</th><th>AI Etkisi</th><th>Türkiye Fırsatı</th></tr></thead>
+    <tbody>
+      <tr><td><strong>E-ticaret</strong></td><td style="color:var(--err)">Çok Yüksek</td><td style="color:var(--ok)">Çok Yüksek</td></tr>
+      <tr><td><strong>İçerik Üretimi</strong></td><td style="color:var(--err)">Çok Yüksek</td><td style="color:var(--ok)">Çok Yüksek</td></tr>
+      <tr><td><strong>Eğitim</strong></td><td style="color:var(--o500)">Yüksek</td><td style="color:var(--ok)">Yüksek</td></tr>
+      <tr><td><strong>Pazarlama</strong></td><td style="color:var(--o500)">Yüksek</td><td style="color:var(--ok)">Yüksek</td></tr>
+      <tr><td><strong>Turizm</strong></td><td style="color:var(--a500)">Orta</td><td style="color:var(--ok)">Yüksek</td></tr>
+      <tr><td><strong>Finans</strong></td><td style="color:var(--o500)">Yüksek</td><td style="color:var(--a500)">Orta</td></tr>
+    </tbody>
+  </table>
+
+  <h2>Türkçe Açık Kaynak AI Modelleri</h2>
+  <p>Türkiye'de ciddi AI geliştirme çalışmaları var. Yıldız Teknik Üniversitesi Cosmos AI Araştırma Grubu ve topluluk katkılarıyla dünya çapında rekabet eden modeller üretiliyor:</p>
+  <table>
+    <thead><tr><th>Model</th><th>Ne Yapar</th><th>Avantajı</th></tr></thead>
+    <tbody>
+      <tr><td><strong>Turkish-Gemma-9b-T1</strong> (YTÜ)</td><td>Türkçe akıl yürütme, matematik, mantık</td><td>Hallüsinasyon oranı düşük, Türkçe düşünme güçlü</td></tr>
+      <tr><td><strong>Turkish-Llama-8b</strong></td><td>Türkçe metin üretimi</td><td>30 GB Türkçe veriyle eğitilmiş</td></tr>
+      <tr><td><strong>Turkish-e5-Large</strong> (YTÜ)</td><td>Türkçe arama ve benzerlik</td><td>Anlam bazlı Türkçe arama</td></tr>
+      <tr><td><strong>BERTurk</strong></td><td>Duygu analizi, metin sınıflandırma</td><td>Türkçe NLP'nin temel taşı</td></tr>
+    </tbody>
+  </table>
+
+  <h2>3 Altın Fırsat</h2>
+  <p><strong>1. AI ile Hizmet İhracatı:</strong> Maliyet avantajı + aynı AI araçlarına erişim = arbitraj fırsatı.</p>
+  <p><strong>2. Türkçe AI İçerik Pazarı:</strong> YouTube'da İngilizce vs Türkçe AI içerik: <strong>56 kat fark.</strong> Talep patlıyor, arz yetersiz.</p>
+  <p><strong>3. Niş AI Çözümleri:</strong> Türk restoranları, avukatları, öğretmenleri, e-ticaret satıcıları için özelleştirilmiş AI araçları — henüz kimse yapmıyor.</p>
+
+  <div class="panel-task">
+    <div class="panel-task-head">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--o600)" stroke-width="2" stroke-linecap="round"><rect x="3" y="3" width="18" height="18" rx="2"/><line x1="3" y1="9" x2="21" y2="9"/><line x1="9" y1="21" x2="9" y2="9"/></svg>
+      Panel Görevi
+    </div>
+    <p><strong>"Okudum"</strong> → <strong>15 XP</strong>. "Sektör Fırsat Analizi" matrisini doldur → <strong>+20 XP</strong>.</p>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════════════════════════ -->
+<!-- BÖLÜM 4 -->
+<!-- ══════════════════════════════════════════════════════════════════ -->
+<div class="ch-open">
+  <div class="ch-open-bg">
+    <svg class="pattern" width="300" height="300" viewBox="0 0 300 300" xmlns="http://www.w3.org/2000/svg">
+      <g stroke="#f97316" fill="none" stroke-width=".5">
+        <rect x="60" y="100" width="60" height="100" rx="6"/><rect x="140" y="60" width="60" height="140" rx="6"/>
+        <rect x="220" y="80" width="60" height="120" rx="6"/>
+        <line x1="120" y1="150" x2="140" y2="150" stroke-dasharray="4,4"/>
+        <line x1="200" y1="130" x2="220" y2="130" stroke-dasharray="4,4"/>
+      </g>
+    </svg>
+    <div class="ch-num">Bölüm 04</div>
+    <div class="ch-title">Hangi Modeli<br>Ne Zaman Kullanırsın</div>
+    <div class="ch-sub">ChatGPT, Claude, Gemini — model seçim rehberi</div>
+    <div class="ch-line"></div>
+    <div class="ch-xp">
+      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#f97316" stroke-width="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+      120 XP · Okuma + Karşılaştırma + İlk Konuşma
+    </div>
+  </div>
+</div>
+
+<div class="page">
+  <div class="pg-head"><span>Bölüm 04 · Hangi Modeli Ne Zaman Kullanırsın</span><span class="brand">DiptenZirveye</span></div>
+
+  <p>"ChatGPT en iyisi mi?" sorusu, "hangi araba en iyisi?" sorusu gibidir. Cevap aynı: <strong>Neye ihtiyacın olduğuna bağlı.</strong></p>
+
+  <h2>Dört Büyük Model</h2>
+
+  <table>
+    <thead><tr><th>Model</th><th>En İyi Olduğu Alan</th><th>Context</th><th>Fiyat</th></tr></thead>
+    <tbody>
+      <tr><td><strong>ChatGPT</strong> (GPT-5.2)</td><td>Yaratıcı yazarlık, hızlı prototip, beyin fırtınası</td><td>128K token</td><td>Ücretsiz / $20/ay</td></tr>
+      <tr><td><strong>Claude</strong> (4.6)</td><td>Uzun metin tutarlılığı, analiz, güvenli çıktı</td><td>200K token</td><td>Ücretsiz / $20/ay</td></tr>
+      <tr><td><strong>Gemini</strong> (Pro 2.5)</td><td>Web araştırması, multimodal, Google entegrasyonu</td><td>1M+ token</td><td>Ücretsiz / $20/ay</td></tr>
+    </tbody>
+  </table>
+
+  <h2>Görev Bazlı Seçim Matrisi</h2>
+  <table>
+    <thead><tr><th>Görev</th><th>1. Tercih</th><th>Neden</th></tr></thead>
+    <tbody>
+      <tr><td>Blog yazısı</td><td><strong>ChatGPT</strong></td><td>Daha akıcı ve yaratıcı</td></tr>
+      <tr><td>Uzun rapor/kitap</td><td><strong>Claude</strong></td><td>Uzun metinlerde tutarlı</td></tr>
+      <tr><td>Web araştırması</td><td><strong>Gemini</strong></td><td>Gerçek zamanlı web erişimi</td></tr>
+      <tr><td>Kod yazma</td><td><strong>Claude</strong></td><td>Kod kalitesinde tutarlı</td></tr>
+      <tr><td>Sosyal medya</td><td><strong>ChatGPT</strong></td><td>Kısa, çarpıcı metinler</td></tr>
+      <tr><td>Veri analizi</td><td><strong>Claude</strong></td><td>Dosya yükleme desteği güçlü</td></tr>
+    </tbody>
+  </table>
+
+  <div class="story-box">
+    <p><strong>Gerçek Karşılaştırma:</strong> "Türkiye'de küçük bir kafe işletiyorum. Müşteri sayımı artırmak için AI ile neler yapabilirim?" sorusunu 3 modele sorduk.</p>
+    <p><strong>ChatGPT:</strong> Yaratıcı öneriler, enerjik ton. Türkiye'ye özel detay eksik. <strong>7/10</strong></p>
+    <p><strong>Claude:</strong> Analitik yaklaşım, "neden + nasıl" ile detaylandırılmış. <strong>9/10</strong></p>
+    <p style="margin-bottom:0"><strong>Gemini:</strong> Güncel veri, rakip analizi, somut araç önerileri. <strong>8/10</strong></p>
+  </div>
+
+  <h2>Bütçe Önerileri</h2>
+  <p><strong>Sıfır bütçe:</strong> ChatGPT Free + Gemini Free + Claude Free = temel ihtiyaçlar için yeterli.</p>
+  <p><strong>100-200 TL/ay:</strong> En çok kullandığın modelin premium planını al.</p>
+  <p><strong>500+ TL/ay:</strong> ChatGPT Plus + Claude Pro + Midjourney combo.</p>
+
+  <div class="panel-task">
+    <div class="panel-task-head">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--o600)" stroke-width="2" stroke-linecap="round"><rect x="3" y="3" width="18" height="18" rx="2"/><line x1="3" y1="9" x2="21" y2="9"/><line x1="9" y1="21" x2="9" y2="9"/></svg>
+      Panel Görevi
+    </div>
+    <p><strong>"Okudum"</strong> → <strong>15 XP</strong>. "Model Karşılaştırma Tablosu" matrisini doldur → <strong>+35 XP</strong>. "İlk AI Konuşması" (3 model) → <strong>+50 XP</strong>.</p>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════════════════════════ -->
+<!-- BÖLÜM 5 -->
+<!-- ══════════════════════════════════════════════════════════════════ -->
+<div class="ch-open">
+  <div class="ch-open-bg">
+    <svg class="pattern" width="300" height="300" viewBox="0 0 300 300" xmlns="http://www.w3.org/2000/svg">
+      <g stroke="#f97316" fill="none" stroke-width=".5">
+        <circle cx="150" cy="150" r="120"/><circle cx="150" cy="150" r="80"/><circle cx="150" cy="150" r="40"/>
+        <line x1="150" y1="30" x2="150" y2="270"/><line x1="30" y1="150" x2="270" y2="150"/>
+      </g>
+      <g fill="#f97316" opacity=".2">
+        <circle cx="150" cy="30" r="6"/><circle cx="270" cy="150" r="6"/><circle cx="150" cy="270" r="6"/>
+        <circle cx="30" cy="150" r="6"/><circle cx="150" cy="150" r="8"/>
+      </g>
+    </svg>
+    <div class="ch-num">Bölüm 05</div>
+    <div class="ch-title">İlk 7 Günün<br>Görev Listesi</div>
+    <div class="ch-sub">Günde 1 görev, günde 1 çıktı — harekete geç</div>
+    <div class="ch-line"></div>
+    <div class="ch-xp">
+      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#f97316" stroke-width="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+      175 XP + 60 XP Streak Bonusu
+    </div>
+  </div>
+</div>
+
+<div class="page">
+  <div class="pg-head"><span>Bölüm 05 · İlk 7 Günün Görev Listesi</span><span class="brand">DiptenZirveye</span></div>
+
+  <p>Buraya kadar çok şey okudun. Ama bilgi uygulanmazsa bilgi değildir — sadece enformasyon. Bu bölüm seni harekete geçirecek. <strong>7 gün, 7 görev, 7 çıktı.</strong></p>
+
+  <table>
+    <thead><tr><th>Gün</th><th>Görev</th><th>Süre</th><th>XP</th></tr></thead>
+    <tbody>
+      <tr><td><strong>1</strong></td><td>Hesaplarını Kur (ChatGPT + Claude + Gemini)</td><td>30 dk</td><td>20</td></tr>
+      <tr><td><strong>2</strong></td><td>İlk İş Sorununu Çöz — 3 modele aynı soruyu sor</td><td>45 dk</td><td>25</td></tr>
+      <tr><td><strong>3</strong></td><td>İçerik Üret — blog, Instagram veya e-posta</td><td>45 dk</td><td>25</td></tr>
+      <tr><td><strong>4</strong></td><td>Araştırma Yap — sektör fırsat raporu oluştur</td><td>60 dk</td><td>30</td></tr>
+      <tr><td><strong>5</strong></td><td>Verimlilik Deneyimi — zaman tasarrufunu ölç</td><td>45 dk</td><td>25</td></tr>
+      <tr><td><strong>6</strong></td><td>Bir Kişiye AI'ı Anlat</td><td>30 dk</td><td>20</td></tr>
+      <tr><td><strong>7</strong></td><td>Yansıma ve 30 Günlük Plan</td><td>45 dk</td><td>30</td></tr>
+    </tbody>
+  </table>
+
+  <div class="stat-row">
+    <div class="stat-card"><div class="num">7</div><div class="label">Gün</div></div>
+    <div class="stat-card"><div class="num">175</div><div class="label">XP</div></div>
+    <div class="stat-card"><div class="num">+60</div><div class="label">Streak Bonus</div></div>
+    <div class="stat-card"><div class="num">5</div><div class="label">Saat Toplam</div></div>
+  </div>
+
+  <div class="panel-task">
+    <div class="panel-task-head">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--o600)" stroke-width="2" stroke-linecap="round"><rect x="3" y="3" width="18" height="18" rx="2"/><line x1="3" y1="9" x2="21" y2="9"/><line x1="9" y1="21" x2="9" y2="9"/></svg>
+      Panel Görevi
+    </div>
+    <p>Her gün ilgili görevi tamamla ve panelinde "Uyguladım" olarak işaretle. 7 günün tamamını kesintisiz bitirirsen: <strong>+60 XP streak bonusu</strong>. Toplam potansiyel: <strong>250 XP</strong>.</p>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════════════════════════ -->
+<!-- SONUÇ -->
+<!-- ══════════════════════════════════════════════════════════════════ -->
+<div class="ch-open">
+  <div class="ch-open-bg">
+    <div class="ch-num">Sonuç</div>
+    <div class="ch-title">Buradan Sonrası</div>
+    <div class="ch-line"></div>
+  </div>
+</div>
+
+<div class="page">
+  <p>Bu kitap bir başlangıçtı. 5 bölümde AI'ın ne olduğunu, neden önemli olduğunu, Türkiye'deki konumunu, hangi modeli ne için kullanacağını ve ilk 7 gününü öğrendin. Ama bu sadece Aşama 1.</p>
+
+  <table>
+    <thead><tr><th>Sonraki Adım</th><th>Kitap</th><th>Ne Öğreneceksin</th></tr></thead>
+    <tbody>
+      <tr><td><strong>AI ile konuşmayı öğren</strong></td><td>Kitap 02</td><td>5 bileşenli prompt çerçevesi, 50 hazır şablon</td></tr>
+      <tr><td><strong>Doğru araçları seç</strong></td><td>Kitap 03</td><td>50 AI aracı, kişisel stack kurma</td></tr>
+      <tr><td><strong>Odağını kur</strong></td><td>Kitap 04</td><td>90 günlük dönüşüm programı</td></tr>
+      <tr><td><strong>Para kazan</strong></td><td>Kitap 05</td><td>5 iş modeli, niş bulma, ilk satış</td></tr>
+    </tbody>
+  </table>
+
+  <div class="highlight-box" style="background:var(--bk);border-radius:12px;text-align:center;padding:32px">
+    <p style="font-family:'Syne';font-size:16pt;font-weight:700;margin-bottom:8px;color:var(--wh)">Toplam XP: <span style="color:var(--o500)">500</span></p>
+    <p style="color:var(--g400);margin-bottom:16px;font-size:11pt">Rozet: "AI Temelleri" · +100 XP bonus · +25 DZ Coin</p>
+    <p style="font-size:13pt;font-weight:500;color:var(--wh);margin-bottom:0">Oku. Uygula. Kazan. Tekrar et.</p>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════════════════════════ -->
+<!-- TERİM SÖZLÜĞÜ -->
+<!-- ══════════════════════════════════════════════════════════════════ -->
+<div class="page" style="page-break-before:always">
+  <h2 style="margin-top:40px">Terim Sözlüğü</h2>
+  <table>
+    <thead><tr><th>Terim</th><th>Açıklama</th></tr></thead>
+    <tbody>
+      <tr><td><strong>AI</strong></td><td>Yapay Zeka. Makinelerin insan zekâsı gerektiren görevleri yapabilmesi.</td></tr>
+      <tr><td><strong>AGI</strong></td><td>Genel Yapay Zeka. İnsan seviyesinde genel zekâ. Henüz mevcut değil.</td></tr>
+      <tr><td><strong>ANI</strong></td><td>Dar Yapay Zeka. Tek görevde uzmanlaşmış AI. ChatGPT, Claude vb.</td></tr>
+      <tr><td><strong>Context Window</strong></td><td>AI modelinin aynı anda işleyebildiği metin uzunluğu.</td></tr>
+      <tr><td><strong>Generative AI</strong></td><td>Yeni içerik (metin, görsel, ses, video) oluşturabilen yapay zeka.</td></tr>
+      <tr><td><strong>Hallüsinasyon</strong></td><td>AI modelinin yanlış bilgiyi doğruymuş gibi sunması.</td></tr>
+      <tr><td><strong>LLM</strong></td><td>Büyük Dil Modeli. Devasa veriyle eğitilmiş metin üretim modeli.</td></tr>
+      <tr><td><strong>NLP</strong></td><td>Doğal Dil İşleme. Makinelerin insan dilini anlaması.</td></tr>
+      <tr><td><strong>Prompt</strong></td><td>AI modeline verilen talimat veya soru.</td></tr>
+      <tr><td><strong>RLHF</strong></td><td>İnsan Geri Bildiriminden Pekiştirmeli Öğrenme.</td></tr>
+      <tr><td><strong>Token</strong></td><td>AI'ın metni işleme birimi. ~1 token ≈ 0,75 kelime (Türkçe).</td></tr>
+      <tr><td><strong>Transformer</strong></td><td>Modern AI modellerinin temelini oluşturan sinir ağı mimarisi.</td></tr>
+    </tbody>
+  </table>
+
+  <h2>Kaynak & İleri Okuma</h2>
+  <ol style="font-size:10pt;color:var(--g600)">
+    <li>OpenAI. (2026). <em>GPT-5.2 Technical Report</em>. openai.com</li>
+    <li>Anthropic. (2026). <em>Claude 4.6 Model Card</em>. anthropic.com</li>
+    <li>Google DeepMind. (2026). <em>Gemini Pro 2.5 Technical Overview</em>. deepmind.google</li>
+    <li>McKinsey & Company. (2025). <em>The State of AI in 2025</em>. mckinsey.com</li>
+    <li>Harvard Business Review. (2025). <em>AI Adoption and Business Performance</em>. hbr.org</li>
+    <li>TÜBİTAK. (2025). <em>Türkiye Yapay Zeka Endeksi</em>. tubitak.gov.tr</li>
+    <li>Stanford University. (2025). <em>AI Index Report 2025</em>. aiindex.stanford.edu</li>
+    <li>World Economic Forum. (2025). <em>Future of Jobs Report</em>. weforum.org</li>
+    <li>Goldman Sachs. (2025). <em>The Global AI Economic Impact</em>. goldmansachs.com</li>
+  </ol>
+
+  <p style="font-size:8.5pt;color:var(--g400);font-style:italic;margin-top:20px">Model özellikleri, fiyatlandırma ve performans verileri yayın tarihi (2026) itibarıyla günceldir.</p>
+</div>
+
+<!-- ══════════════════════════════════════════════════════════════════ -->
+<!-- FOOTER -->
+<!-- ══════════════════════════════════════════════════════════════════ -->
+<div class="footer">
+  <div class="logo"><span class="d">Dipten</span><span class="z">Zirveye</span><span style="font-size:7pt;vertical-align:super;color:var(--g600)"></span></div>
+  <p style="color:var(--g400);font-size:9pt;font-family:'DM Sans',sans-serif;font-style:italic;letter-spacing:.02em">Dönüşüm sessiz başlar. <span style="color:var(--o500)">Ama sonuçları gürültülüdür.</span></p>
+</div>
+
+</body>
+</html>

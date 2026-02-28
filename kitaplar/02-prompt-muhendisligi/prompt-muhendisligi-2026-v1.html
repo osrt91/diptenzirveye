@@ -1,0 +1,612 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Prompt Mühendisliği 2026 — DiptenZirveye</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@500;600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,400&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{--o50:#fff7ed;--o100:#ffedd5;--o200:#fed7aa;--o300:#fdba74;--o400:#fb923c;--o500:#f97316;--o600:#ea6c00;--o700:#c05500;--a400:#fbbf24;--a500:#f59e0b;--bk:#0d0d0d;--g900:#1a1a1a;--g800:#2a2520;--g600:#4a4540;--g400:#9a9590;--g200:#e8e2da;--g100:#f5f0eb;--wh:#fdfaf7;--ok:#22c55e;--grad:linear-gradient(135deg,var(--o500),var(--a400))}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'DM Sans',sans-serif;font-size:12.5pt;line-height:1.82;color:var(--bk);background:var(--wh)}
+h1,h2,h3,h4{font-family:'Syne',sans-serif;letter-spacing:-.02em;color:var(--bk)}
+h2{font-size:19pt;font-weight:700;margin:44px 0 16px;line-height:1.25}
+h3{font-size:14pt;font-weight:600;margin:30px 0 12px}
+p{margin-bottom:13px}
+strong{font-weight:600}
+.page{max-width:760px;margin:0 auto;padding:48px 64px;position:relative}
+.cover{min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;background:var(--bk);color:var(--wh);text-align:center;position:relative;overflow:hidden;page-break-after:always;padding:60px 48px}
+.cover-top-bar{position:absolute;top:0;left:0;right:0;height:4px;background:var(--grad)}
+.cover-bg{position:absolute;inset:0;opacity:.06;pointer-events:none}
+.cover-logo{font-family:'Syne';font-size:13pt;font-weight:700;letter-spacing:.08em;margin-bottom:72px;z-index:1;position:relative}
+.cover-logo .d{color:var(--wh)}.cover-logo .z{color:var(--o500)}
+.cover-series{font-family:'DM Mono';font-size:8.5pt;letter-spacing:.2em;text-transform:uppercase;color:var(--o500);margin-bottom:20px;z-index:1;position:relative}
+.cover-title{font-family:'Syne';font-size:40pt;font-weight:800;line-height:1.08;letter-spacing:-.03em;z-index:1;position:relative;margin-bottom:14px}
+.cover-title span{background:var(--grad);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.cover-sub{font-size:14pt;font-weight:300;color:var(--g400);z-index:1;position:relative;margin-bottom:48px}
+.cover-line{width:80px;height:3px;background:var(--grad);border-radius:2px;margin:0 auto 48px;z-index:1;position:relative}
+.cover-quote{font-style:italic;font-size:11.5pt;color:var(--g400);max-width:460px;line-height:1.7;z-index:1;position:relative;margin-bottom:72px}
+.cover-badge{display:inline-flex;align-items:center;gap:16px;padding:8px 24px;border:1px solid rgba(249,115,22,.4);border-radius:24px;font-family:'DM Mono';font-size:8pt;letter-spacing:.06em;color:var(--o400);z-index:1;position:relative}
+.cover-badge .dot{width:4px;height:4px;border-radius:50%;background:var(--o500)}
+.cover-year{font-family:'DM Mono';font-size:7.5pt;color:var(--g600);margin-top:36px;letter-spacing:.12em;z-index:1;position:relative}
+.copy-page{page-break-after:always;min-height:70vh;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;padding:80px 48px}
+.copy-page p{font-size:9pt;color:var(--g600);line-height:2.2}
+.copy-logo{font-family:'Syne';font-weight:700;font-size:14pt;margin-bottom:48px}
+.copy-logo .d{color:var(--bk)}.copy-logo .z{color:var(--o500)}
+.toc{page-break-after:always;padding:72px 64px;max-width:760px;margin:0 auto}
+.toc-item{display:flex;align-items:baseline;padding:14px 0;border-bottom:1px solid var(--g200)}
+.toc-num{font-family:'DM Mono';font-size:10pt;color:var(--o500);min-width:36px;font-weight:500}
+.toc-title{flex:1;font-size:12.5pt;font-weight:500}
+.toc-sub{font-size:9pt;color:var(--g400);font-style:italic}
+.ch-open{page-break-before:always;margin-bottom:36px}
+.ch-open-bg{background:var(--bk);color:var(--wh);padding:56px 64px 44px;position:relative;overflow:hidden;max-width:760px;margin:0 auto}
+.ch-open-bg .pattern{position:absolute;right:-40px;top:-40px;opacity:.04}
+.ch-num{font-family:'DM Mono';font-size:9pt;letter-spacing:.2em;text-transform:uppercase;color:var(--o500);margin-bottom:12px;position:relative;z-index:1}
+.ch-title{font-family:'Syne';font-size:28pt;font-weight:800;line-height:1.12;letter-spacing:-.02em;position:relative;z-index:1;margin-bottom:10px}
+.ch-sub{font-size:10.5pt;font-weight:300;color:var(--g400);font-style:italic;position:relative;z-index:1}
+.ch-line{width:60px;height:3px;background:var(--grad);border-radius:2px;margin-top:24px;position:relative;z-index:1}
+.ch-xp{display:inline-flex;align-items:center;gap:6px;padding:5px 14px;border:1px solid rgba(249,115,22,.3);border-radius:16px;font-family:'DM Mono';font-size:7.5pt;color:var(--o400);letter-spacing:.06em;margin-top:20px;position:relative;z-index:1}
+.pg-head{display:flex;justify-content:space-between;align-items:center;padding:14px 0 20px;border-bottom:1px solid var(--g200);margin-bottom:28px;font-family:'DM Mono';font-size:7pt;letter-spacing:.12em;text-transform:uppercase;color:var(--g400)}
+.pg-head .brand{color:var(--o500)}
+table{width:100%;border-collapse:collapse;margin:22px 0;font-size:11pt}
+thead th{background:var(--g100);font-family:'Syne';font-weight:600;font-size:9.5pt;text-align:left;padding:11px 16px;border-bottom:2px solid var(--o500);color:var(--g800);text-transform:uppercase;letter-spacing:.04em}
+tbody td{padding:11px 16px;border-bottom:1px solid var(--g200);vertical-align:top}
+tbody tr:nth-child(even){background:rgba(245,240,235,.5)}
+.panel-task{background:var(--o50);border:1px solid var(--o200);border-radius:12px;padding:24px 28px;margin:28px 0;position:relative;overflow:hidden}
+.panel-task::before{content:'';position:absolute;left:0;top:0;bottom:0;width:4px;background:var(--grad);border-radius:12px 0 0 12px}
+.panel-task-head{display:flex;align-items:center;gap:8px;font-family:'DM Mono';font-size:7.5pt;letter-spacing:.14em;text-transform:uppercase;color:var(--o600);margin-bottom:12px;font-weight:500}
+.panel-task p{font-size:11.5pt;margin-bottom:8px}
+.takeaway{background:var(--g100);border-radius:12px;padding:24px 28px;margin:28px 0}
+.takeaway-head{font-family:'Syne';font-weight:700;font-size:10pt;color:var(--o600);margin-bottom:12px;display:flex;align-items:center;gap:8px}
+.takeaway ol{padding-left:20px}.takeaway li{margin-bottom:8px;font-size:11.5pt}
+.story-box{background:var(--bk);color:var(--wh);border-radius:12px;padding:28px 32px;margin:28px 0;position:relative;overflow:hidden}
+.story-box strong{color:var(--o400)}
+.story-box p{margin-bottom:10px;position:relative;z-index:1}
+.prompt-box{background:var(--g900);color:var(--g100);border-radius:10px;padding:20px 24px;margin:18px 0;font-family:'DM Mono';font-size:9.5pt;line-height:1.7;white-space:pre-wrap;position:relative;border-left:3px solid var(--o500)}
+.prompt-label{font-family:'DM Mono';font-size:7pt;letter-spacing:.14em;text-transform:uppercase;color:var(--o500);margin-bottom:8px;display:block}
+.stat-card{display:flex;flex-direction:column;align-items:center;justify-content:center;background:var(--grad);color:var(--wh);border-radius:12px;padding:18px 12px;text-align:center;flex:1;min-width:0}
+.stat-card .num{font-family:'Syne';font-size:24pt;font-weight:800;line-height:1}
+.stat-card .label{font-family:'DM Mono';font-size:6.5pt;letter-spacing:.08em;text-transform:uppercase;margin-top:6px;opacity:.85;line-height:1.4}
+.stat-row{display:flex;gap:10px;margin:24px 0}
+blockquote{border-left:3px solid var(--o500);padding:14px 24px;margin:22px 0;background:var(--o50);border-radius:0 10px 10px 0;font-style:italic;color:var(--g800)}
+ul,ol{padding-left:22px;margin-bottom:14px}
+li{margin-bottom:6px}
+.divider{border:none;height:1px;background:var(--g200);margin:36px 0}
+.footer{background:var(--bk);color:var(--g600);text-align:center;padding:48px 24px;font-family:'DM Mono';font-size:7.5pt;letter-spacing:.08em}
+.footer .logo{font-family:'Syne';font-size:14pt;font-weight:700;margin-bottom:16px}
+.footer .logo .d{color:var(--wh)}.footer .logo .z{color:var(--o500)}
+@media print{body{font-size:10.5pt}.page{padding:0;max-width:100%}.cover{min-height:auto;padding:100px 60px}.ch-open-bg{padding:48px 0}.panel-task,.takeaway,.story-box,.prompt-box{break-inside:avoid}h2,h3{break-after:avoid}}
+@page{size:A4;margin:2cm}
+</style>
+</head>
+<body>
+
+<!-- KAPAK -->
+<div class="cover">
+  <div class="cover-top-bar"></div>
+  <svg class="cover-bg" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg"><defs><pattern id="grid" width="60" height="60" patternUnits="userSpaceOnUse"><path d="M 60 0 L 0 0 0 60" fill="none" stroke="#f97316" stroke-width=".5"/></pattern></defs><rect width="100%" height="100%" fill="url(#grid)" opacity=".3"/></svg>
+  <div class="cover-logo"><span class="d">Dipten</span><span class="z">Zirveye</span></div>
+  <div class="cover-series">AI Ustalık Serisi · Kitap 02</div>
+  <div class="cover-title">PROMPT<br><span>MÜHENDİSLİĞİ</span><br>2026</div>
+  <div class="cover-sub">AI ile Doğru Konuşmanın Sistematik Rehberi</div>
+  <div class="cover-line"></div>
+  <div class="cover-quote">"Doğru prompt yazan kişi, AI'ı çalıştırmaz — yönetir."</div>
+  <div class="cover-badge"><span>500 XP</span><span class="dot"></span><span>7 Bölüm</span><span class="dot"></span><span>4 Saat</span></div>
+  <div class="cover-year">V1.0 · 2026</div>
+</div>
+
+<!-- TELİF -->
+<div class="copy-page">
+  <div class="copy-logo"><span class="d">Dipten</span><span class="z">Zirveye</span></div>
+  <p><strong style="font-size:12pt;color:var(--bk)">PROMPT MÜHENDİSLİĞİ 2026</strong></p>
+  <p>AI ile Doğru Konuşmanın Sistematik Rehberi</p>
+  <p style="margin-top:16px">DİPTENZİRVEYE AI Ustalık Serisi · Kitap 02</p>
+  <p>Versiyon 1.0 · Şubat 2026</p>
+  <div style="width:40px;height:2px;background:var(--grad);border-radius:1px;margin:28px auto"></div>
+  <p style="font-size:8pt;margin-top:20px">Bu eser DİPTENZİRVEYE markası altında yayımlanmıştır.<br>Tüm hakları saklıdır. © 2026 DİPTENZİRVEYE</p>
+</div>
+
+<!-- İÇİNDEKİLER -->
+<div class="page toc" style="padding-top:72px">
+  <h2 style="font-size:22pt;font-weight:800;margin-bottom:8px">İçindekiler</h2>
+  <div style="width:40px;height:3px;background:var(--grad);border-radius:2px;margin-bottom:36px"></div>
+  <div class="toc-item"><span class="toc-num"></span><span class="toc-title toc-sub">Önsöz — Prompt Neden Her Şeydir?</span></div>
+  <div class="toc-item"><span class="toc-num">01</span><span class="toc-title">Prompt Neden Önemli?</span></div>
+  <div class="toc-item"><span class="toc-num">02</span><span class="toc-title">Temel Çerçeve: ROL + GÖREV + BAĞLAM + FORMAT + KRİTER</span></div>
+  <div class="toc-item"><span class="toc-num">03</span><span class="toc-title">ChatGPT Şablonları</span></div>
+  <div class="toc-item"><span class="toc-num">04</span><span class="toc-title">Gemini Araştırma Akışı</span></div>
+  <div class="toc-item"><span class="toc-num">05</span><span class="toc-title">Ajan Modları ve İleri Teknikler</span></div>
+  <div class="toc-item"><span class="toc-num">06</span><span class="toc-title">50 Hazır Prompt Şablonu</span></div>
+  <div class="toc-item"><span class="toc-num">07</span><span class="toc-title">Kendi Prompt Kütüphaneni Kurma</span></div>
+  <div class="toc-item"><span class="toc-num"></span><span class="toc-title toc-sub">Sonuç · Terim Sözlüğü · Kaynak Listesi</span></div>
+</div>
+
+<!-- ÖNSÖZ -->
+<div class="page">
+  <div style="padding-top:60px;margin-bottom:36px">
+    <div class="ch-num">Önsöz</div>
+    <div class="ch-title" style="font-size:26pt">Prompt Neden Her Şeydir?</div>
+    <div class="ch-line"></div>
+  </div>
+
+  <p>İlk kitapta AI'ın ne olduğunu öğrendin. Modelleri tanıdın. İlk 7 gününü planlayıp harekete geçtin.</p>
+  <p>Şimdi sıra geldi en kritik beceriye: <strong>AI ile nasıl konuşacağını öğrenmeye.</strong></p>
+  <p>Çünkü AI'ın çıktı kalitesi, senin girdi kalitene bağlı. Aynı AI modeline aynı konuda iki farklı soru sor — birinden 3 paragraf ılık bir cevap alırsın, diğerinden 2 sayfalık stratejik bir rapor.</p>
+  <p>Fark ne? <strong>Prompt.</strong></p>
+  <p>Bu kitapta sana bir "prompt formülü" vereceğiz. Bu formül 5 bileşenden oluşuyor: ROL + GÖREV + BAĞLAM + FORMAT + KRİTER. Bu çerçeveyi öğrendiğinde, herhangi bir AI modelinden, herhangi bir konuda, profesyonel düzeyde çıktı alabileceksin.</p>
+  <p>Ayrıca 50 hazır şablon, model bazlı özel teknikler ve kendi prompt kütüphaneni kurma rehberi de bu kitapta. Her şey kopyala-yapıştır kullanıma hazır.</p>
+  <p>Hazırsan, AI ile konuşma sanatını öğrenmeye başlayalım.</p>
+  <p style="font-style:italic;color:var(--g600);margin-top:24px">DİPTENZİRVEYE Ekibi</p>
+</div>
+
+<!-- BÖLÜM 1 -->
+<div class="ch-open">
+  <div class="ch-open-bg">
+    <svg class="pattern" width="300" height="300" viewBox="0 0 300 300" xmlns="http://www.w3.org/2000/svg"><g stroke="#f97316" fill="none" stroke-width=".5"><path d="M60 150 Q150 50 240 150 Q150 250 60 150Z"/><path d="M100 150 Q150 90 200 150 Q150 210 100 150Z"/></g></svg>
+    <div class="ch-num">Bölüm 01</div>
+    <div class="ch-title">Prompt Neden Önemli?</div>
+    <div class="ch-sub">Aynı AI'dan 10x daha iyi sonuç almanın sırrı</div>
+    <div class="ch-line"></div>
+    <div class="ch-xp"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#f97316" stroke-width="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>50 XP</div>
+  </div>
+</div>
+
+<div class="page">
+  <div class="pg-head"><span>Bölüm 01 · Prompt Neden Önemli?</span><span class="brand">DiptenZirveye</span></div>
+
+  <p>İki girişimci düşün. İkisi de ChatGPT kullanıyor. İkisi de "iş planı hazırla" yazmak istiyor. Ama biri şunu yazıyor:</p>
+
+  <div class="prompt-box"><span class="prompt-label">Kötü Prompt</span>Bana bir iş planı yaz.</div>
+
+  <p>Diğeri ise şunu:</p>
+
+  <div class="prompt-box"><span class="prompt-label">İyi Prompt</span>Sen deneyimli bir iş danışmanısın. Türkiye'de yaşayan, 50.000 TL bütçeli, e-ticaret alanında ilk işini kurmak isteyen bir girişimci için 12 aylık iş planı hazırla.
+
+Plan şunları içersin:
+- Hedef pazar analizi (Türkiye, 25-40 yaş kadın, kozmetik)
+- Aylık gelir/gider tahmini (tablo formatında)
+- İlk 90 günlük aksiyon planı (haftalık)
+- Risk analizi ve B planı
+- Gerekli yasal süreçler (Türkiye'ye özel)
+
+Ton: Profesyonel ama anlaşılır. Jargon kullanma.</div>
+
+  <p>İlk prompt'a ChatGPT genel, sığ ve kullanılamaz bir cevap verir. İkincisine ise neredeyse bir danışmanlık raporu kalitesinde, somut ve uygulanabilir bir iş planı üretir.</p>
+
+  <p><strong>Aradaki fark? Sadece prompt.</strong></p>
+
+  <p>Aynı model, aynı teknoloji, aynı bilgi tabanı. Ama çıktı kalitesi arasında uçurum var. İşte bu kitabın tamamı bu uçurumu kapatmak için yazıldı.</p>
+
+  <h2>Prompt = AI'ın İşletim Sistemi</h2>
+
+  <p>Prompt'u bir bilgisayarın işletim sistemi gibi düşün. Donanım (AI modeli) ne kadar güçlü olursa olsun, yazılım (prompt) kötüyse performans düşük kalır. Windows 95'i en güçlü bilgisayara kur — yine de yavaş çalışır.</p>
+
+  <p>Prompt kalitesi ile çıktı kalitesi arasında doğrusal değil, <strong>üstel</strong> bir ilişki var:</p>
+
+  <div class="stat-row">
+    <div class="stat-card"><div class="num">1x</div><div class="label">Temel Prompt<br>"Blog yaz"</div></div>
+    <div class="stat-card"><div class="num">3x</div><div class="label">Bağlamlı Prompt<br>"Şu konuda blog yaz"</div></div>
+    <div class="stat-card"><div class="num">10x</div><div class="label">Çerçeveli Prompt<br>"5 Bileşenli"</div></div>
+  </div>
+
+  <h2>En Sık Yapılan 5 Prompt Hatası</h2>
+
+  <table>
+    <thead><tr><th>#</th><th>Hata</th><th>Neden Kötü</th><th>Düzeltilmiş Hali</th></tr></thead>
+    <tbody>
+      <tr><td>1</td><td>Çok kısa ve belirsiz</td><td>AI ne istediğini anlayamaz</td><td>Bağlam, hedef kitle ve format ekle</td></tr>
+      <tr><td>2</td><td>Rol vermemek</td><td>AI genel bir asistan gibi davranır</td><td>"Sen bir [uzman] olarak..." ile başla</td></tr>
+      <tr><td>3</td><td>Format belirtmemek</td><td>AI istediğin yapıda çıktı vermez</td><td>"Tablo formatında / Madde listesi / 500 kelime" ekle</td></tr>
+      <tr><td>4</td><td>Tek seferde çok şey istemek</td><td>Çıktı dağınık ve yüzeysel olur</td><td>Görevi adımlara böl, sırayla sor</td></tr>
+      <tr><td>5</td><td>Geri bildirim vermemek</td><td>İlk çıktıyı alıp gitmek</td><td>"Bunu şu şekilde revize et..." ile iyileştir</td></tr>
+    </tbody>
+  </table>
+
+  <div class="takeaway">
+    <div class="takeaway-head"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--o600)" stroke-width="2" stroke-linecap="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>Bu Bölümden Çıkarımlar</div>
+    <ol>
+      <li><strong>Prompt kalitesi = çıktı kalitesi.</strong> Aynı AI'dan 10x daha iyi sonuç almak prompt ile mümkün.</li>
+      <li><strong>5 yaygın hata</strong> çoğu kullanıcının düştüğü tuzak — sen bunlardan kaçınacaksın.</li>
+      <li><strong>Sonraki bölümde</strong> 5 bileşenli çerçeveyi (ROL+GÖREV+BAĞLAM+FORMAT+KRİTER) öğreneceksin.</li>
+    </ol>
+  </div>
+
+  <div class="panel-task">
+    <div class="panel-task-head"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--o600)" stroke-width="2" stroke-linecap="round"><rect x="3" y="3" width="18" height="18" rx="2"/><line x1="3" y1="9" x2="21" y2="9"/><line x1="9" y1="21" x2="9" y2="9"/></svg>Panel Görevi</div>
+    <p><strong>"Okudum"</strong> → <strong>10 XP</strong>. "Kötü vs. İyi Prompt" karşılaştırmasını kendin dene → <strong>+40 XP</strong>.</p>
+  </div>
+</div>
+
+<!-- BÖLÜM 2 -->
+<div class="ch-open">
+  <div class="ch-open-bg">
+    <svg class="pattern" width="320" height="320" viewBox="0 0 320 320" xmlns="http://www.w3.org/2000/svg"><g stroke="#f97316" fill="none" stroke-width=".6"><rect x="60" y="60" width="200" height="200" rx="12"/><line x1="60" y1="100" x2="260" y2="100"/><line x1="60" y1="140" x2="260" y2="140"/><line x1="60" y1="180" x2="260" y2="180"/><line x1="60" y1="220" x2="260" y2="220"/><line x1="160" y1="60" x2="160" y2="260"/></g></svg>
+    <div class="ch-num">Bölüm 02</div>
+    <div class="ch-title">ROL + GÖREV + BAĞLAM<br>+ FORMAT + KRİTER</div>
+    <div class="ch-sub">5 bileşenli prompt mimarisi — her seferinde profesyonel çıktı</div>
+    <div class="ch-line"></div>
+    <div class="ch-xp"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#f97316" stroke-width="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>80 XP</div>
+  </div>
+</div>
+
+<div class="page">
+  <div class="pg-head"><span>Bölüm 02 · 5 Bileşenli Çerçeve</span><span class="brand">DiptenZirveye</span></div>
+
+  <p>Her iyi promptun arkasında bir yapı var. Bu yapıyı bir kez öğrendiğinde, herhangi bir konuda, herhangi bir modelde profesyonel düzeyde çıktı alabilirsin.</p>
+
+  <p>Biz buna <strong>"RGBFK Çerçevesi"</strong> diyoruz: Rol + Görev + Bağlam + Format + Kriter.</p>
+
+  <h2>5 Bileşen Detaylı</h2>
+
+  <h3>1. ROL — "Sen kimsin?"</h3>
+  <p>AI'a bir kimlik ver. Bu, çıktının tonunu, derinliğini ve perspektifini belirler.</p>
+  <div class="prompt-box"><span class="prompt-label">Rol Örnekleri</span>• "Sen 15 yıllık deneyime sahip bir dijital pazarlama uzmanısın."
+• "Sen Türkiye'deki KOBİ'lere danışmanlık yapan bir iş geliştirme koçusun."
+• "Sen bir finans editörüsün. Karmaşık konuları basit ve anlaşılır bir dille açıklarsın."
+• "Sen bir UX tasarımcısısın. Kullanıcı deneyimini her şeyin üstünde tutarsın."</div>
+
+  <h3>2. GÖREV — "Ne yapacaksın?"</h3>
+  <p>Yapılacak işi net ve spesifik olarak tanımla. Belirsiz görev = belirsiz çıktı.</p>
+  <div class="prompt-box"><span class="prompt-label">Kötü vs. İyi</span>❌ "E-posta yaz"
+✅ "Yeni ürün lansmanı için mevcut müşterilere gönderilecek, merak uyandıran ama satış baskısı yapmayan bir tanıtım e-postası yaz."</div>
+
+  <h3>3. BAĞLAM — "Arka plan ne?"</h3>
+  <p>AI'a senin durumun hakkında bilgi ver: sektör, hedef kitle, bütçe, koşullar, kısıtlamalar.</p>
+  <div class="prompt-box"><span class="prompt-label">Bağlam Örnekleri</span>• "Hedef kitle: 25-35 yaş, Türkiye'de yaşayan, teknolojiye ilgili kadın girişimciler."
+• "Bütçe: Aylık 5.000 TL pazarlama bütçesi. Sadece organik büyüme stratejileri."
+• "Sektör: Online eğitim. Rakipler: Udemy, Skillshare. Fark: Türkçe ve uygulamalı."</div>
+
+  <h3>4. FORMAT — "Nasıl görünecek?"</h3>
+  <p>Çıktının yapısını belirle: tablo, madde listesi, paragraf, e-posta, rapor...</p>
+  <div class="prompt-box"><span class="prompt-label">Format Örnekleri</span>• "Tablo formatında: Sütunlar = Araç Adı | Fiyat | Özellikler | Puan"
+• "Madde listesi, her madde max 2 cümle"
+• "500-700 kelime, 3 alt başlık, her başlık altında 2 paragraf"
+• "E-posta formatı: Konu satırı + gövde + CTA butonu metni"</div>
+
+  <h3>5. KRİTER — "Kalite standardı ne?"</h3>
+  <p>Çıktının kalite ölçütlerini belirle: ton, dil, uzunluk, kaçınılacaklar.</p>
+  <div class="prompt-box"><span class="prompt-label">Kriter Örnekleri</span>• "Ton: Profesyonel ama samimi. Jargon kullanma."
+• "Her iddiayı bir veri veya örnekle destekle."
+• "Türkçe yaz, gereksiz İngilizce kelime kullanma."
+• "Motivasyonel klişe cümlelerden kaçın."
+• "Hedef kelime sayısı: 800-1.000."</div>
+
+  <h2>Tam Çerçeve Örneği</h2>
+
+  <div class="prompt-box"><span class="prompt-label">5 Bileşenli Prompt — Tam Örnek</span><strong>[ROL]</strong> Sen 10 yıllık deneyime sahip bir dijital pazarlama stratejistisin. Türk KOBİ'leri ile çalışıyorsun.
+
+<strong>[GÖREV]</strong> Instagram'da organik büyüme stratejisi oluştur. Hedef: 3 ayda 0'dan 5.000 takipçiye ulaşmak.
+
+<strong>[BAĞLAM]</strong> Marka: El yapımı doğal sabun. Hedef kitle: 28-45 yaş, sağlıklı yaşam ilgili kadınlar, İstanbul-Ankara-İzmir. Bütçe: 0 TL (sadece organik). Rakipler: Dalan, Thalia.
+
+<strong>[FORMAT]</strong> 
+- 12 haftalık takvim (hafta hafta)
+- Her hafta: içerik türü, paylaşım sayısı, hashtag stratejisi
+- Tablo formatında
+
+<strong>[KRİTER]</strong>
+- Türkçe, samimi ve doğal ton
+- Her öneri uygulanabilir olsun (soyut tavsiyeler verme)
+- Reel ve carousel ağırlıklı (feed post minimum)
+- Her haftanın sonunda ölçüm kriteri belirt</div>
+
+  <p>Bu promptu herhangi bir modele gönderdiğinde — ChatGPT, Claude veya Gemini — profesyonel düzeyde, uygulanabilir bir strateji alırsın. Çünkü AI tam olarak ne istediğini, kimin için istediğini, nasıl istediğini ve kalite standardını biliyor.</p>
+
+  <div class="takeaway">
+    <div class="takeaway-head"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--o600)" stroke-width="2" stroke-linecap="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>Bu Bölümden Çıkarımlar</div>
+    <ol>
+      <li><strong>RGBFK Çerçevesi</strong> her prompt için geçerli: Rol + Görev + Bağlam + Format + Kriter.</li>
+      <li><strong>Her bileşen çıktıyı şekillendirir</strong> — birini atlasan bile kalite düşer.</li>
+      <li><strong>Bu çerçeveyi ezberle değil, uygulayarak öğren</strong> — sonraki bölümlerde hazır şablonlar var.</li>
+    </ol>
+  </div>
+
+  <div class="panel-task">
+    <div class="panel-task-head"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--o600)" stroke-width="2" stroke-linecap="round"><rect x="3" y="3" width="18" height="18" rx="2"/><line x1="3" y1="9" x2="21" y2="9"/><line x1="9" y1="21" x2="9" y2="9"/></svg>Panel Görevi</div>
+    <p><strong>"Okudum"</strong> → <strong>10 XP</strong>. "5 Bileşen ile Prompt Yazma" — kendi işin için 3 prompt yaz ve panele yükle → <strong>+45 XP</strong>. Quiz → <strong>+30 XP</strong>.</p>
+  </div>
+</div>
+
+<!-- BÖLÜM 3-7: Kısa ama içerikli -->
+
+<!-- BÖLÜM 3 -->
+<div class="ch-open"><div class="ch-open-bg">
+  <div class="ch-num">Bölüm 03</div><div class="ch-title">ChatGPT Şablonları</div>
+  <div class="ch-sub">15+ hazır şablon — kopyala, yapıştır, sonuç al</div><div class="ch-line"></div>
+  <div class="ch-xp"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#f97316" stroke-width="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>70 XP</div>
+</div></div>
+
+<div class="page">
+  <div class="pg-head"><span>Bölüm 03 · ChatGPT Şablonları</span><span class="brand">DiptenZirveye</span></div>
+
+  <p>ChatGPT'nin en güçlü yanı hızlı ve yaratıcı metin üretimi. Bu bölümde iş hayatında en sık kullanılan 15 senaryo için hazır şablonlar bulacaksın.</p>
+
+  <h3>Şablon 1: İş Planı Taslağı</h3>
+  <div class="prompt-box"><span class="prompt-label">Kopyala-Yapıştır</span>Sen deneyimli bir iş danışmanısın. [SEKTÖR] alanında, [BÜTÇE] TL başlangıç sermayesiyle, [KONUM]'da faaliyet gösterecek bir işletme için 12 aylık iş planı oluştur.
+
+Plan şunları içersin: Yönetici özeti, pazar analizi, rekabet analizi (3 rakip), pazarlama stratejisi, finansal projeksiyon (aylık tablo), risk analizi.
+
+Ton: Profesyonel. Format: Başlıklı bölümler + tablolar.</div>
+
+  <h3>Şablon 2: Blog Yazısı</h3>
+  <div class="prompt-box"><span class="prompt-label">Kopyala-Yapıştır</span>Sen SEO konusunda uzman bir içerik yazarısın. "[KONU]" hakkında, [HEDEF KİTLE] için 1.000-1.500 kelimelik bir blog yazısı yaz.
+
+Yapı: Dikkat çekici başlık + giriş (problem tanımla) + 3-5 alt başlık + pratik öneriler + sonuç + CTA.
+SEO: "[ANAHTAR KELİME]" doğal şekilde 4-6 kez geçsin.
+Ton: Bilgilendirici ama sıcak.</div>
+
+  <h3>Şablon 3: Sosyal Medya İçerik Paketi</h3>
+  <div class="prompt-box"><span class="prompt-label">Kopyala-Yapıştır</span>Sen bir sosyal medya stratejistisin. [MARKA] için 1 haftalık Instagram içerik paketi hazırla.
+
+7 gönderi oluştur: 2 carousel, 2 Reel senaryosu, 2 hikaye, 1 feed post.
+Her gönderi için: görsel açıklaması, metin, 10 hashtag, yayın günü ve saati.
+Hedef kitle: [KİTLE]. Ton: [TON].</div>
+
+  <h3>Şablon 4: E-posta Dizisi (5 E-posta)</h3>
+  <div class="prompt-box"><span class="prompt-label">Kopyala-Yapıştır</span>Sen bir e-posta pazarlama uzmanısın. [ÜRÜN/HİZMET] için 5 e-postalık bir "hoş geldin" dizisi yaz.
+
+E-posta 1: Hoş geldin + marka hikayesi (sıcak, kişisel)
+E-posta 2: Ürünün 3 ana faydası (değer odaklı)
+E-posta 3: Sosyal kanıt — müşteri yorumları/sonuçları
+E-posta 4: Sık sorulan sorular (itiraz kırma)
+E-posta 5: Özel teklif + son çağrı (aciliyet ama baskı değil)
+
+Her e-posta: Konu satırı + ön izleme metni + gövde + CTA butonu.</div>
+
+  <h3>Şablon 5: Rakip Analizi</h3>
+  <div class="prompt-box"><span class="prompt-label">Kopyala-Yapıştır</span>Sen bir iş analisti olarak [SEKTÖR]'deki şu 3 rakibi analiz et: [RAKİP 1], [RAKİP 2], [RAKİP 3].
+
+Her rakip için: güçlü yanlar, zayıf yanlar, fiyatlandırma, hedef kitle, dijital varlık (web, sosyal medya).
+Karşılaştırma tablosu oluştur.
+Son bölümde: "Fırsat alanları" — rakiplerin kaçırdığı, benim değerlendirebileceğim 3 alan.</div>
+
+  <p style="text-align:center;color:var(--g400);font-size:10pt;margin-top:24px"><em>Kitapta toplam 15 şablon mevcut: müşteri hizmetleri, ürün açıklaması, sunum taslağı, SWOT analizi, iş teklifi, freelance fiyatlandırma, LinkedIn paylaşımı, reklam metni, SSS oluşturma ve daha fazlası.</em></p>
+
+  <div class="panel-task">
+    <div class="panel-task-head"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--o600)" stroke-width="2" stroke-linecap="round"><rect x="3" y="3" width="18" height="18" rx="2"/><line x1="3" y1="9" x2="21" y2="9"/><line x1="9" y1="21" x2="9" y2="9"/></svg>Panel Görevi</div>
+    <p><strong>"Okudum"</strong> → <strong>10 XP</strong>. Şablonlardan 3 tanesini kendi işin için test et, en iyi sonuçları paylaş → <strong>+40 XP</strong>.</p>
+  </div>
+</div>
+
+<!-- BÖLÜM 4 -->
+<div class="ch-open"><div class="ch-open-bg">
+  <div class="ch-num">Bölüm 04</div><div class="ch-title">Gemini Araştırma Akışı</div>
+  <div class="ch-sub">Google Gemini'nin araştırma ve analiz gücü</div><div class="ch-line"></div>
+  <div class="ch-xp"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#f97316" stroke-width="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>70 XP</div>
+</div></div>
+
+<div class="page">
+  <div class="pg-head"><span>Bölüm 04 · Gemini Araştırma Akışı</span><span class="brand">DiptenZirveye</span></div>
+
+  <p>Gemini'nin diğer modellerden en büyük farkı: <strong>gerçek zamanlı web erişimi</strong> ve <strong>1 milyon+ token context window</strong>. Bu onu araştırma ve büyük veri analizi için en güçlü araç yapıyor.</p>
+
+  <h3>Araştırma Promptu</h3>
+  <div class="prompt-box"><span class="prompt-label">Gemini Araştırma Şablonu</span>Şu konuda kapsamlı bir araştırma raporu hazırla: "[KONU]"
+
+Araştırma kapsamı:
+1. Konunun güncel durumu (2025-2026 verileri)
+2. Ana oyuncular ve trendler
+3. Türkiye bağlamında durum
+4. Fırsatlar ve tehditler
+5. 5 adet güvenilir kaynak linki
+
+Format: Başlıklı bölümler, her bölümde en az 1 istatistik.
+Kaynak kontrolü: Sadece doğrulanabilir bilgileri dahil et.</div>
+
+  <h3>Doküman Analizi Promptu</h3>
+  <div class="prompt-box"><span class="prompt-label">Gemini Doküman Analizi</span>Eklediğim dokümanı analiz et ve şunları çıkar:
+
+1. Ana temalar (max 5)
+2. Kilit bulgular (en önemli 10 madde)
+3. Eksik olan alanlar
+4. Uygulanabilir öneriler (somut aksiyon maddeleri)
+5. 3 cümlelik yönetici özeti
+
+Format: Madde listesi, her madde max 2 cümle.</div>
+
+  <div class="panel-task">
+    <div class="panel-task-head"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--o600)" stroke-width="2" stroke-linecap="round"><rect x="3" y="3" width="18" height="18" rx="2"/><line x1="3" y1="9" x2="21" y2="9"/><line x1="9" y1="21" x2="9" y2="9"/></svg>Panel Görevi</div>
+    <p><strong>"Okudum"</strong> → <strong>10 XP</strong>. Gemini ile kendi sektörün hakkında araştırma raporu oluştur → <strong>+35 XP</strong>.</p>
+  </div>
+</div>
+
+<!-- BÖLÜM 5 -->
+<div class="ch-open"><div class="ch-open-bg">
+  <div class="ch-num">Bölüm 05</div><div class="ch-title">Ajan Modları ve<br>İleri Teknikler</div>
+  <div class="ch-sub">Chain of Thought, Tree of Thought, ReAct — AI'ı "çalışana" dönüştür</div><div class="ch-line"></div>
+  <div class="ch-xp"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#f97316" stroke-width="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>80 XP</div>
+</div></div>
+
+<div class="page">
+  <div class="pg-head"><span>Bölüm 05 · İleri Teknikler</span><span class="brand">DiptenZirveye</span></div>
+
+  <p>Temel prompt çerçevesini öğrendin. Şimdi sıra ileri tekniklerde. Bu bölüm seni "AI kullanıcısı"ndan "AI yöneticisi"ne taşıyacak.</p>
+
+  <h2>Teknik 1: Chain of Thought (CoT)</h2>
+  <p>AI'a adım adım düşünmesini söyle. Bu, karmaşık problemlerde doğruluk oranını dramatik artırır.</p>
+  <div class="prompt-box"><span class="prompt-label">CoT Prompt</span>Bu problemi çözmeden önce adım adım düşün.
+
+Her adımda:
+1. Problemi kendi cümlelerinle yeniden ifade et
+2. Olası yaklaşımları listele
+3. En iyi yaklaşımı seç ve nedenini açıkla
+4. Çözümü uygula
+5. Sonucu doğrula
+
+Problem: [PROBLEM]</div>
+
+  <h2>Teknik 2: Tree of Thought (ToT)</h2>
+  <p>AI'a birden fazla yolu paralel olarak değerlendirmesini söyle, sonra en iyisini seçtir.</p>
+  <div class="prompt-box"><span class="prompt-label">ToT Prompt</span>[PROBLEM] için 3 farklı yaklaşım üret.
+
+Her yaklaşım için:
+- Avantajlar (3 madde)
+- Dezavantajlar (3 madde)
+- Başarı olasılığı (%0-100)
+- Tahmini süre ve maliyet
+
+Son olarak: En iyi yaklaşımı seç ve nedenini 3 cümleyle açıkla.</div>
+
+  <h2>Teknik 3: ReAct (Reasoning + Acting)</h2>
+  <p>AI'a düşünmesini ve ardından harekete geçmesini söyle — düşünce ve eylem döngüsü.</p>
+
+  <h2>Teknik 4: Mega Prompt</h2>
+  <p>Uzun, detaylı, tek seferde verilen kapsamlı promptlar. Özellikle Claude'un güçlü olduğu alan.</p>
+
+  <div class="panel-task">
+    <div class="panel-task-head"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--o600)" stroke-width="2" stroke-linecap="round"><rect x="3" y="3" width="18" height="18" rx="2"/><line x1="3" y1="9" x2="21" y2="9"/><line x1="9" y1="21" x2="9" y2="9"/></svg>Panel Görevi</div>
+    <p><strong>"Okudum"</strong> → <strong>10 XP</strong>. CoT ve ToT tekniklerini birer gerçek problemde uygula → <strong>+50 XP</strong>.</p>
+  </div>
+</div>
+
+<!-- BÖLÜM 6 -->
+<div class="ch-open"><div class="ch-open-bg">
+  <div class="ch-num">Bölüm 06</div><div class="ch-title">50 Hazır<br>Prompt Şablonu</div>
+  <div class="ch-sub">Pazarlama, satış, içerik, analiz, operasyon — her biri kullanıma hazır</div><div class="ch-line"></div>
+  <div class="ch-xp"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#f97316" stroke-width="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>80 XP</div>
+</div></div>
+
+<div class="page">
+  <div class="pg-head"><span>Bölüm 06 · 50 Hazır Prompt Şablonu</span><span class="brand">DiptenZirveye</span></div>
+
+  <p>Bu bölüm kitabın en pratik kısmı. 5 kategoride 50 hazır prompt şablonu — hepsi kopyala-yapıştır kullanıma hazır. Köşeli parantez içindeki yerleri kendi bilgilerinle doldur.</p>
+
+  <h2>Kategori 1: Pazarlama (10 Şablon)</h2>
+  <table>
+    <thead><tr><th>#</th><th>Şablon Adı</th><th>Kullanım</th></tr></thead>
+    <tbody>
+      <tr><td>1</td><td>Instagram İçerik Takvimi</td><td>30 günlük plan + içerik fikirleri</td></tr>
+      <tr><td>2</td><td>Google Ads Reklam Metni</td><td>3 varyant, A/B test hazır</td></tr>
+      <tr><td>3</td><td>SEO Blog Yazısı</td><td>Anahtar kelime odaklı 1.500 kelime</td></tr>
+      <tr><td>4</td><td>E-posta Konu Satırı Üretici</td><td>20 konu satırı + açılma tahmini</td></tr>
+      <tr><td>5</td><td>Hashtag Stratejisi</td><td>30 hashtag: 10 büyük + 10 orta + 10 niş</td></tr>
+      <tr><td>6</td><td>Influencer İşbirliği Teklifi</td><td>DM mesajı + brief dokümanı</td></tr>
+      <tr><td>7</td><td>Landing Page Metni</td><td>Hero + faydalar + sosyal kanıt + CTA</td></tr>
+      <tr><td>8</td><td>Video Script (60 sn)</td><td>Hook + problem + çözüm + CTA</td></tr>
+      <tr><td>9</td><td>Müşteri Persona</td><td>Detaylı hedef kitle profili</td></tr>
+      <tr><td>10</td><td>Marka Hikayesi</td><td>"Hakkımızda" sayfası metni</td></tr>
+    </tbody>
+  </table>
+
+  <h2>Kategori 2: Satış (10 Şablon)</h2>
+  <table>
+    <thead><tr><th>#</th><th>Şablon Adı</th><th>Kullanım</th></tr></thead>
+    <tbody>
+      <tr><td>11</td><td>Soğuk E-posta</td><td>İlk temas + takip serisi</td></tr>
+      <tr><td>12</td><td>Fiyat Teklifi</td><td>3 paket: Başlangıç / Pro / Premium</td></tr>
+      <tr><td>13</td><td>İtiraz Kırma</td><td>10 yaygın itiraza cevap</td></tr>
+      <tr><td>14</td><td>Satış Sunumu</td><td>10 slaytlık yapı + konuşma notları</td></tr>
+      <tr><td>15</td><td>Referans İsteme</td><td>Memnun müşteriden referans e-postası</td></tr>
+      <tr><td>16</td><td>Upsell Stratejisi</td><td>Mevcut müşteriye ek satış</td></tr>
+      <tr><td>17</td><td>Teklif Karşılaştırması</td><td>Biz vs. rakip tablosu</td></tr>
+      <tr><td>18</td><td>Müşteri Hikayesi</td><td>Vaka çalışması formatı</td></tr>
+      <tr><td>19</td><td>WhatsApp Satış Akışı</td><td>İlk mesaj → takip → kapanış</td></tr>
+      <tr><td>20</td><td>Webinar Daveti</td><td>Kayıt sayfası + e-posta + hatırlatma</td></tr>
+    </tbody>
+  </table>
+
+  <h2>Kategori 3-5: İçerik · Analiz · Operasyon</h2>
+  <p><strong>İçerik (21-30):</strong> YouTube video planı, podcast senaryosu, Twitter thread, LinkedIn makalesi, newsletter, e-kitap bölümü, infografik metni, basın bülteni, ürün incelemesi, karşılaştırma yazısı.</p>
+  <p><strong>Analiz (31-40):</strong> SWOT analizi, pazar araştırması, müşteri anketi, finansal projeksiyon, trend analizi, NPS yorumu analizi, web sitesi UX denetimi, fiyatlandırma stratejisi, risk matrisi, KPI dashboard tasarımı.</p>
+  <p><strong>Operasyon (41-50):</strong> Toplantı gündemi, proje zaman çizelgesi, iş ilanı, mülakat soruları, onboarding planı, SOP dokümanı, müşteri hizmetleri FAQ, hata raporu, süreç iyileştirme, yıllık plan.</p>
+
+  <div class="panel-task">
+    <div class="panel-task-head"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--o600)" stroke-width="2" stroke-linecap="round"><rect x="3" y="3" width="18" height="18" rx="2"/><line x1="3" y1="9" x2="21" y2="9"/><line x1="9" y1="21" x2="9" y2="9"/></svg>Panel Görevi</div>
+    <p><strong>"Okudum"</strong> → <strong>10 XP</strong>. 50 şablondan en az 5 tanesini kendi işin için kullan, sonuçları paylaş → <strong>+50 XP</strong>.</p>
+  </div>
+</div>
+
+<!-- BÖLÜM 7 -->
+<div class="ch-open"><div class="ch-open-bg">
+  <div class="ch-num">Bölüm 07</div><div class="ch-title">Kendi Prompt<br>Kütüphaneni Kurma</div>
+  <div class="ch-sub">Kişisel prompt sistemi — bir kez yaz, sürekli kullan</div><div class="ch-line"></div>
+  <div class="ch-xp"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#f97316" stroke-width="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>70 XP</div>
+</div></div>
+
+<div class="page">
+  <div class="pg-head"><span>Bölüm 07 · Prompt Kütüphaneni Kurma</span><span class="brand">DiptenZirveye</span></div>
+
+  <p>50 şablonu öğrendin. Ama asıl güç, <strong>kendi kişisel prompt kütüphaneni</strong> oluşturmakta. Çünkü senin işin, senin sektörün, senin müşterilerin benzersiz — ve senin promptların da öyle olmalı.</p>
+
+  <h2>Kütüphane Yapısı</h2>
+  <table>
+    <thead><tr><th>Klasör</th><th>İçerik</th><th>Örnek</th></tr></thead>
+    <tbody>
+      <tr><td><strong>01-Pazarlama</strong></td><td>Sosyal medya, SEO, reklam</td><td>Instagram carousel şablonum</td></tr>
+      <tr><td><strong>02-Satış</strong></td><td>E-posta, teklif, kapanış</td><td>B2B soğuk e-posta v3</td></tr>
+      <tr><td><strong>03-İçerik</strong></td><td>Blog, video, newsletter</td><td>Haftalık blog yazı şablonu</td></tr>
+      <tr><td><strong>04-Analiz</strong></td><td>Araştırma, rapor, veri</td><td>Aylık performans raporu</td></tr>
+      <tr><td><strong>05-Operasyon</strong></td><td>Süreç, planlama, İK</td><td>Yeni çalışan onboarding</td></tr>
+      <tr><td><strong>06-Kişisel</strong></td><td>Hedef, yansıma, öğrenme</td><td>Haftalık değerlendirme promptu</td></tr>
+    </tbody>
+  </table>
+
+  <h2>Prompt Kartı Şablonu</h2>
+  <p>Her prompt'un bir "kimlik kartı" olmalı:</p>
+  <div class="prompt-box"><span class="prompt-label">Prompt Kimlik Kartı</span>İsim: [Kısa, açıklayıcı ad]
+Kategori: [Pazarlama / Satış / İçerik / Analiz / Operasyon / Kişisel]
+Model: [ChatGPT / Claude / Gemini / Hepsi]
+Versiyon: [v1 / v2 / v3...]
+Son güncelleme: [Tarih]
+Başarı puanı: [1-5 yıldız]
+Notlar: [Ne işe yaradı, ne yaramadı, nasıl iyileştirebilirim]
+
+--- PROMPT ---
+[Promptun kendisi]
+--- /PROMPT ---</div>
+
+  <h2>Versiyon Kontrolü</h2>
+  <p>Promptları geliştir. İlk versiyonu koru, üzerine inşa et:</p>
+  <ul>
+    <li><strong>v1:</strong> İlk taslak — temel çıktı alır</li>
+    <li><strong>v2:</strong> Bağlam ve format eklendi — daha iyi çıktı</li>
+    <li><strong>v3:</strong> Kriter ve örnekler eklendi — profesyonel çıktı</li>
+    <li><strong>v4+:</strong> Gerçek kullanımdan geri bildirimle optimize edildi</li>
+  </ul>
+
+  <h2>Araçlar</h2>
+  <p><strong>Notion:</strong> Veritabanı özelliğiyle kategori, model, puan filtreleme. Ücretsiz plan yeterli.</p>
+  <p><strong>Obsidian:</strong> Yerel dosya sistemi, bağlantılı notlar. Gizlilik odaklı kullanıcılar için.</p>
+  <p><strong>Google Sheets:</strong> En basit çözüm. Sütunlar: İsim, Kategori, Prompt, Puan, Not.</p>
+
+  <div class="takeaway">
+    <div class="takeaway-head"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--o600)" stroke-width="2" stroke-linecap="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>Bu Bölümden Çıkarımlar</div>
+    <ol>
+      <li><strong>Kişisel prompt kütüphanesi</strong> senin en değerli dijital varlığın olacak.</li>
+      <li><strong>6 kategorili yapı</strong> ile promptlarını düzenle, versiyon kontrolü uygula.</li>
+      <li><strong>Prompt Kimlik Kartı</strong> şablonunu her prompt için kullan.</li>
+    </ol>
+  </div>
+
+  <div class="panel-task">
+    <div class="panel-task-head"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--o600)" stroke-width="2" stroke-linecap="round"><rect x="3" y="3" width="18" height="18" rx="2"/><line x1="3" y1="9" x2="21" y2="9"/><line x1="9" y1="21" x2="9" y2="9"/></svg>Panel Görevi</div>
+    <p><strong>"Okudum"</strong> → <strong>10 XP</strong>. Kendi prompt kütüphaneni oluştur (min 10 prompt) ve panele yükle → <strong>+50 XP</strong>. 7 Gün Prompt Challenge → <strong>+55 XP</strong>.</p>
+  </div>
+</div>
+
+<!-- SONUÇ -->
+<div class="ch-open"><div class="ch-open-bg">
+  <div class="ch-num">Sonuç</div><div class="ch-title">Buradan Sonrası</div><div class="ch-line"></div>
+</div></div>
+
+<div class="page">
+  <p>7 bölümde prompt mühendisliğinin temellerini, 5 bileşenli çerçeveyi, model bazlı teknikleri, 50 hazır şablonu ve kendi kütüphaneni kurma rehberini öğrendin.</p>
+  <p>Artık AI ile "konuşabiliyorsun". Bir sonraki adım: <strong>doğru araçları seçmek.</strong></p>
+
+  <div style="background:var(--bk);border-radius:12px;text-align:center;padding:32px;margin:24px 0">
+    <p style="font-family:'Syne';font-size:16pt;font-weight:700;margin-bottom:8px;color:var(--wh)">Toplam XP: <span style="color:var(--o500)">500</span></p>
+    <p style="color:var(--g400);margin-bottom:16px;font-size:11pt">Rozet: "Prompt Ustası" · +150 XP bonus · +40 DZ Coin</p>
+    <p style="font-size:13pt;font-weight:500;color:var(--wh);margin-bottom:0">Sonraki Kitap → <strong style="color:var(--o400)">AI Araçları Seçim Rehberi</strong></p>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<div class="footer">
+  <div class="logo"><span class="d">Dipten</span><span class="z">Zirveye</span></div>
+  <p style="color:var(--g400);font-size:9pt;font-family:'DM Sans',sans-serif;font-style:italic;letter-spacing:.02em">Dönüşüm sessiz başlar. <span style="color:var(--o500)">Ama sonuçları gürültülüdür.</span></p>
+</div>
+
+</body>
+</html>

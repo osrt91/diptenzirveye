@@ -1,0 +1,45 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 160" width="100%" height="auto">
+  <defs>
+    <!-- Zirve altını - ana dağ gradienti -->
+    <linearGradient id="mgrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#F5C842" stop-opacity="0.9"/>
+      <stop offset="60%" stop-color="#D4A03C" stop-opacity="0.6"/>
+      <stop offset="100%" stop-color="#2A3562" stop-opacity="0.3"/>
+    </linearGradient>
+    
+    <!-- Taş grisi - arka dağ gradienti -->
+    <linearGradient id="mgrad2" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#8892B0" stop-opacity="0.4"/>
+      <stop offset="100%" stop-color="#2A3562" stop-opacity="0.15"/>
+    </linearGradient>
+
+    <!-- Animasyon kuralları SVG'nin içinde çalışması için -->
+    <style>
+      @keyframes glowPulse {
+        0% { opacity: 0.4; transform: scale(1); }
+        50% { opacity: 1; transform: scale(1.4); }
+        100% { opacity: 0.4; transform: scale(1); }
+      }
+
+      .star-glow {
+        animation: glowPulse 2s infinite ease-in-out;
+        transform-origin: 300px 12px;
+      }
+    </style>
+  </defs>
+
+  <!-- Arka plan dağları (Sol) -->
+  <polygon points="80,160 170,55 260,160" fill="url(#mgrad2)" />
+  
+  <!-- Arka plan dağları (Sağ) -->
+  <polygon points="340,160 440,50 540,160" fill="url(#mgrad2)" />
+  
+  <!-- Ana Dağ (Ortadaki ve en büyük olan) -->
+  <polygon points="180,160 300,20 420,160" fill="url(#mgrad)" />
+  
+  <!-- Zirvedeki karlar -->
+  <polygon points="280,25 300,20 320,25 310,22 290,22" fill="#FFF8E8" opacity="0.9"/>
+  
+  <!-- Zirvenin yukarısındaki parlayan animasyonlu nokta/yıldız -->
+  <circle class="star-glow" cx="300" cy="12" r="4" fill="#F5C842" />
+</svg>

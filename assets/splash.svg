@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 2732 2732" width="2732" height="2732">
+  <rect width="2732" height="2732" fill="#0a0a0c"/>
+  <defs>
+    <linearGradient id="logoGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#f97316"/>
+      <stop offset="100%" stop-color="#ea6c00"/>
+    </linearGradient>
+    <radialGradient id="glow" cx="50%" cy="45%" r="30%">
+      <stop offset="0%" stop-color="#f97316" stop-opacity="0.15"/>
+      <stop offset="100%" stop-color="#f97316" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <rect width="2732" height="2732" fill="url(#glow)"/>
+  <rect x="1166" y="1066" width="400" height="400" rx="88" fill="url(#logoGrad)"/>
+  <text x="1366" y="1310" text-anchor="middle" font-family="system-ui, -apple-system, sans-serif" font-size="200" font-weight="900" fill="#ffffff">DZ</text>
+  <text x="1366" y="1600" text-anchor="middle" font-family="system-ui, -apple-system, sans-serif" font-size="56" font-weight="700" fill="#ffffff" opacity="0.9">DiptenZirveye</text>
+  <text x="1366" y="1670" text-anchor="middle" font-family="system-ui, -apple-system, sans-serif" font-size="32" font-weight="400" fill="#f97316" opacity="0.7">AI Ustal1k Serisi</text>
+</svg>

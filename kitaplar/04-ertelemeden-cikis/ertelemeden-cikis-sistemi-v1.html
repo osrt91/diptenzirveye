@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ertelemeden Çıkış Sistemi — DiptenZirveye</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@500;600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,400&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{--o50:#fff7ed;--o100:#ffedd5;--o200:#fed7aa;--o400:#fb923c;--o500:#f97316;--o600:#ea6c00;--o700:#c05500;--a400:#fbbf24;--bk:#0d0d0d;--g900:#1a1a1a;--g600:#4a4540;--g400:#9a9590;--g200:#e8e2da;--g100:#f5f0eb;--wh:#fdfaf7;--ok:#22c55e;--grad:linear-gradient(135deg,var(--o500),var(--a400))}
+*{margin:0;padding:0;box-sizing:border-box}body{font-family:'DM Sans',sans-serif;font-size:12.5pt;line-height:1.82;color:var(--bk);background:var(--wh)}h1,h2,h3,h4{font-family:'Syne',sans-serif;letter-spacing:-.02em;color:var(--bk)}h2{font-size:19pt;font-weight:700;margin:44px 0 16px;line-height:1.25}h3{font-size:14pt;font-weight:600;margin:30px 0 12px}p{margin-bottom:13px}strong{font-weight:600}.page{max-width:760px;margin:0 auto;padding:48px 64px}.cover{min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;background:var(--bk);color:var(--wh);text-align:center;position:relative;overflow:hidden;page-break-after:always;padding:60px 48px}.cover-top-bar{position:absolute;top:0;left:0;right:0;height:4px;background:var(--grad)}.cover-bg{position:absolute;inset:0;opacity:.06;pointer-events:none}.cover-logo{font-family:'Syne';font-size:13pt;font-weight:700;letter-spacing:.08em;margin-bottom:72px;z-index:1;position:relative}.cover-logo .d{color:var(--wh)}.cover-logo .z{color:var(--o500)}.cover-series{font-family:'DM Mono';font-size:8.5pt;letter-spacing:.2em;text-transform:uppercase;color:var(--o500);margin-bottom:20px;z-index:1;position:relative}.cover-title{font-family:'Syne';font-size:36pt;font-weight:800;line-height:1.08;letter-spacing:-.03em;z-index:1;position:relative;margin-bottom:14px}.cover-title span{background:var(--grad);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}.cover-sub{font-size:13pt;font-weight:300;color:var(--g400);z-index:1;position:relative;margin-bottom:48px}.cover-line{width:80px;height:3px;background:var(--grad);border-radius:2px;margin:0 auto 48px;z-index:1;position:relative}.cover-quote{font-style:italic;font-size:11.5pt;color:var(--g400);max-width:480px;line-height:1.7;z-index:1;position:relative;margin-bottom:72px}.cover-badge{display:inline-flex;align-items:center;gap:16px;padding:8px 24px;border:1px solid rgba(249,115,22,.4);border-radius:24px;font-family:'DM Mono';font-size:8pt;letter-spacing:.06em;color:var(--o400);z-index:1;position:relative}.cover-badge .dot{width:4px;height:4px;border-radius:50%;background:var(--o500)}.cover-year{font-family:'DM Mono';font-size:7.5pt;color:var(--g600);margin-top:36px;letter-spacing:.12em;z-index:1;position:relative}
+.copy-page{page-break-after:always;min-height:70vh;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;padding:80px 48px}.copy-page p{font-size:9pt;color:var(--g600);line-height:2.2}.copy-logo{font-family:'Syne';font-weight:700;font-size:14pt;margin-bottom:48px}.copy-logo .d{color:var(--bk)}.copy-logo .z{color:var(--o500)}
+.toc{page-break-after:always;padding:72px 64px;max-width:760px;margin:0 auto}.toc-item{display:flex;align-items:baseline;padding:14px 0;border-bottom:1px solid var(--g200)}.toc-num{font-family:'DM Mono';font-size:10pt;color:var(--o500);min-width:36px;font-weight:500}.toc-title{flex:1;font-size:12.5pt;font-weight:500}.toc-sub{font-size:9pt;color:var(--g400);font-style:italic}
+.ch-open{page-break-before:always;margin-bottom:36px}.ch-open-bg{background:var(--bk);color:var(--wh);padding:56px 64px 44px;position:relative;overflow:hidden;max-width:760px;margin:0 auto}.ch-num{font-family:'DM Mono';font-size:9pt;letter-spacing:.2em;text-transform:uppercase;color:var(--o500);margin-bottom:12px;position:relative;z-index:1}.ch-title{font-family:'Syne';font-size:28pt;font-weight:800;line-height:1.12;letter-spacing:-.02em;position:relative;z-index:1;margin-bottom:10px}.ch-sub{font-size:10.5pt;font-weight:300;color:var(--g400);font-style:italic;position:relative;z-index:1}.ch-line{width:60px;height:3px;background:var(--grad);border-radius:2px;margin-top:24px;position:relative;z-index:1}.ch-xp{display:inline-flex;align-items:center;gap:6px;padding:5px 14px;border:1px solid rgba(249,115,22,.3);border-radius:16px;font-family:'DM Mono';font-size:7.5pt;color:var(--o400);letter-spacing:.06em;margin-top:20px;position:relative;z-index:1}
+.pg-head{display:flex;justify-content:space-between;align-items:center;padding:14px 0 20px;border-bottom:1px solid var(--g200);margin-bottom:28px;font-family:'DM Mono';font-size:7pt;letter-spacing:.12em;text-transform:uppercase;color:var(--g400)}.pg-head .brand{color:var(--o500)}
+table{width:100%;border-collapse:collapse;margin:22px 0;font-size:11pt}thead th{background:var(--g100);font-family:'Syne';font-weight:600;font-size:9.5pt;text-align:left;padding:11px 16px;border-bottom:2px solid var(--o500);color:#2a2520;text-transform:uppercase;letter-spacing:.04em}tbody td{padding:11px 16px;border-bottom:1px solid var(--g200);vertical-align:top}tbody tr:nth-child(even){background:rgba(245,240,235,.5)}
+.panel-task{background:var(--o50);border:1px solid var(--o200);border-radius:12px;padding:24px 28px;margin:28px 0;position:relative;overflow:hidden}.panel-task::before{content:'';position:absolute;left:0;top:0;bottom:0;width:4px;background:var(--grad);border-radius:12px 0 0 12px}.panel-task-head{display:flex;align-items:center;gap:8px;font-family:'DM Mono';font-size:7.5pt;letter-spacing:.14em;text-transform:uppercase;color:var(--o600);margin-bottom:12px;font-weight:500}.panel-task p{font-size:11.5pt;margin-bottom:8px}
+.takeaway{background:var(--g100);border-radius:12px;padding:24px 28px;margin:28px 0}.takeaway-head{font-family:'Syne';font-weight:700;font-size:10pt;color:var(--o600);margin-bottom:12px}.takeaway ol{padding-left:20px}.takeaway li{margin-bottom:8px;font-size:11.5pt}
+.story-box{background:var(--bk);color:var(--wh);border-radius:12px;padding:28px 32px;margin:28px 0}.story-box strong{color:var(--o400)}.story-box p{margin-bottom:10px}
+.phase-bar{display:flex;border-radius:10px;overflow:hidden;height:40px;margin:24px 0}.phase-bar div{display:flex;align-items:center;justify-content:center;font-family:'DM Mono';font-size:8pt;letter-spacing:.06em;color:var(--wh);font-weight:500}
+.stat-card{display:flex;flex-direction:column;align-items:center;justify-content:center;background:var(--grad);color:var(--wh);border-radius:12px;padding:18px 12px;text-align:center;flex:1;min-width:0}.stat-card .num{font-family:'Syne';font-size:24pt;font-weight:800;line-height:1}.stat-card .label{font-family:'DM Mono';font-size:6.5pt;letter-spacing:.08em;text-transform:uppercase;margin-top:6px;opacity:.85;line-height:1.4}.stat-row{display:flex;gap:10px;margin:24px 0}
+blockquote{border-left:3px solid var(--o500);padding:14px 24px;margin:22px 0;background:var(--o50);border-radius:0 10px 10px 0;font-style:italic}
+ul,ol{padding-left:22px;margin-bottom:14px}li{margin-bottom:6px}
+.footer{background:var(--bk);color:var(--g600);text-align:center;padding:48px 24px;font-family:'DM Mono';font-size:7.5pt;letter-spacing:.08em}.footer .logo{font-family:'Syne';font-size:14pt;font-weight:700;margin-bottom:16px}.footer .logo .d{color:var(--wh)}.footer .logo .z{color:var(--o500)}
+@media print{body{font-size:10.5pt}.page{padding:0;max-width:100%}.cover{min-height:auto;padding:100px 60px}.panel-task,.takeaway,.story-box{break-inside:avoid}h2,h3{break-after:avoid}}@page{size:A4;margin:2cm}
+</style>
+</head>
+<body>
+
+<!-- KAPAK -->
+<div class="cover">
+  <div class="cover-top-bar"></div>
+  <svg class="cover-bg" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg"><defs><pattern id="grid" width="60" height="60" patternUnits="userSpaceOnUse"><path d="M 60 0 L 0 0 0 60" fill="none" stroke="#f97316" stroke-width=".5"/></pattern></defs><rect width="100%" height="100%" fill="url(#grid)" opacity=".3"/></svg>
+  <div class="cover-logo"><span class="d">Dipten</span><span class="z">Zirveye</span></div>
+  <div class="cover-series">AI Ustalık Serisi · Kitap 04</div>
+  <div class="cover-title">ERTELEMEDEN<br><span>ÇIKIŞ SİSTEMİ</span></div>
+  <div class="cover-sub">90 Günde Odak, Alışkanlık ve Sürdürülebilir Üretkenlik</div>
+  <div class="cover-line"></div>
+  <div class="cover-quote">"Erteleme bir karakter sorunu değil. Bir sistem sorunudur. Bu kitap o sistemi kurar."</div>
+  <div class="cover-badge"><span>500 XP</span><span class="dot"></span><span>6 Bölüm</span><span class="dot"></span><span>4,5 Saat</span></div>
+  <div class="cover-year">V1.0 · 2026</div>
+</div>
+
+<!-- TELİF -->
+<div class="copy-page">
+  <div class="copy-logo"><span class="d">Dipten</span><span class="z">Zirveye</span></div>
+  <p><strong style="font-size:12pt;color:var(--bk)">ERTELEMEDEN ÇIKIŞ SİSTEMİ</strong></p>
+  <p>90 Günde Odak, Alışkanlık ve Sürdürülebilir Üretkenlik</p>
+  <p style="margin-top:16px">DİPTENZİRVEYE AI Ustalık Serisi · Kitap 04</p>
+  <p>Versiyon 1.0 · 2026</p>
+  <div style="width:40px;height:2px;background:var(--grad);border-radius:1px;margin:28px auto"></div>
+  <p style="font-size:8pt;margin-top:20px">© 2026 DİPTENZİRVEYE · Tüm hakları saklıdır.</p>
+</div>
+
+<!-- İÇİNDEKİLER -->
+<div class="page toc" style="padding-top:72px">
+  <h2 style="font-size:22pt;font-weight:800;margin-bottom:8px">İçindekiler</h2>
+  <div style="width:40px;height:3px;background:var(--grad);border-radius:2px;margin-bottom:36px"></div>
+  <div class="toc-item"><span class="toc-num">01</span><span class="toc-title">Ertelemenin Psikolojisi</span></div>
+  <div class="toc-item"><span class="toc-num">02</span><span class="toc-title">21 Gün: Farkındalık Fazı</span></div>
+  <div class="toc-item"><span class="toc-num">03</span><span class="toc-title">30 Gün: Alışkanlık Kurma Fazı</span></div>
+  <div class="toc-item"><span class="toc-num">04</span><span class="toc-title">30 Gün: Verimlilik Fazı</span></div>
+  <div class="toc-item"><span class="toc-num">05</span><span class="toc-title">30 Gün: Sürdürülebilir Başarı Fazı</span></div>
+  <div class="toc-item" style="border-bottom:none"><span class="toc-num">06</span><span class="toc-title">ADHD Özel Protokoller</span></div>
+</div>
+
+<!-- 90 GÜN GENEL BAKIŞ -->
+<div class="page">
+  <h2 style="margin-top:40px">90 Günlük Program Yapısı</h2>
+  <div class="phase-bar">
+    <div style="flex:21;background:#3b82f6">Farkındalık · 21 gün</div>
+    <div style="flex:30;background:var(--o500)">Alışkanlık · 30 gün</div>
+    <div style="flex:30;background:#8b5cf6">Verimlilik · 30 gün</div>
+    <div style="flex:30;background:var(--ok)">Sürdürme · 30 gün</div>
+  </div>
+  <p>Bu kitap 4 fazdan oluşan 90+ günlük bir dönüşüm programı. Her faz bir öncekinin üzerine inşa eder. Atlamayın, sırayla ilerleyin.</p>
+  <div class="stat-row">
+    <div class="stat-card"><div class="num">90+</div><div class="label">Gün</div></div>
+    <div class="stat-card"><div class="num">4</div><div class="label">Faz</div></div>
+    <div class="stat-card"><div class="num">500</div><div class="label">XP</div></div>
+    <div class="stat-card"><div class="num">75</div><div class="label">DZ Coin</div></div>
+  </div>
+</div>
+
+<!-- BÖLÜM 1 -->
+<div class="ch-open"><div class="ch-open-bg">
+  <div class="ch-num">Bölüm 01</div><div class="ch-title">Ertelemenin Psikolojisi</div>
+  <div class="ch-sub">Neden erteliyorsun? Bilimsel açıklama ve kişisel profil</div><div class="ch-line"></div>
+  <div class="ch-xp"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#f97316" stroke-width="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>60 XP</div>
+</div></div>
+
+<div class="page">
+  <div class="pg-head"><span>Bölüm 01 · Ertelemenin Psikolojisi</span><span class="brand">DiptenZirveye</span></div>
+
+  <p>Erteleme, tembellik değildir. Bu cümleyi birkaç kez oku ve sindirt.</p>
+  <p>Erteleme, beynin bir <strong>koruma mekanizmasıdır</strong>. Zor, belirsiz veya tehditkar gördüğü görevlerden seni korumak için devreye girer. Problem: koruma mekanizması 2026'daki hayatın için kalibre edilmemiş — 50.000 yıl önceki Afrika savanasının tehditleri için tasarlanmış.</p>
+
+  <blockquote>"Erteleme bir karakter hatası değil, bir duygu düzenleme sorunudur." — Dr. Tim Pychyl, Carleton Üniversitesi</blockquote>
+
+  <h2>Ertelemenin 5 Tipi</h2>
+  <table>
+    <thead><tr><th>Tip</th><th>Tetikleyici</th><th>İç Ses</th><th>Çözüm İpucu</th></tr></thead>
+    <tbody>
+      <tr><td><strong>Mükemmeliyetçi</strong></td><td>Başarısızlık korkusu</td><td>"Mükemmel yapamayacaksam hiç yapmayayım"</td><td>"Kötü bir taslak, mükemmel bir hiçlikten iyidir"</td></tr>
+      <tr><td><strong>Kaçınmacı</strong></td><td>Görevin zorluk derecesi</td><td>"Bu çok zor, nereden başlayacağımı bilmiyorum"</td><td>2 dakika kuralı: sadece 2 dk başla</td></tr>
+      <tr><td><strong>Karar Felci</strong></td><td>Çok fazla seçenek</td><td>"Hangi yolu seçeceğimi bilmiyorum"</td><td>İlk adımı at, yolda düzelt</td></tr>
+      <tr><td><strong>Heyecan Arayıcı</strong></td><td>Deadline baskısı gereksinimi</td><td>"Son dakikada daha iyi çalışıyorum"</td><td>Yapay deadline koy</td></tr>
+      <tr><td><strong>İsyankar</strong></td><td>Özerklik ihtiyacı</td><td>"Bana kimse ne yapacağımı söyleyemez"</td><td>Görevi kendi seçimin haline getir</td></tr>
+    </tbody>
+  </table>
+
+  <h2>Erteleme Döngüsü</h2>
+  <div class="story-box">
+    <p><strong>1. Tetikleyici:</strong> Zor bir görevle karşılaşırsın</p>
+    <p><strong>2. Rahatsızlık:</strong> Beyin kaygı, sıkıntı veya korku üretir</p>
+    <p><strong>3. Kaçış:</strong> Telefona bakarsın, Netflix açarsın, "yarın yaparım" dersin</p>
+    <p><strong>4. Geçici Rahatlama:</strong> Anlık olarak iyi hissedersin</p>
+    <p><strong>5. Suçluluk:</strong> "Neden yapmadım?" diye kendini yerirsin</p>
+    <p style="margin-bottom:0"><strong>6. Döngü Tekrarı:</strong> Bir sonraki görevde aynı kalıp başlar</p>
+  </div>
+
+  <p><strong>Bu kitap bu döngüyü kırmak için tasarlandı.</strong> 90 günde, adım adım, bilimsel temelli bir sistemle.</p>
+
+  <div class="panel-task">
+    <div class="panel-task-head">Panel Görevi</div>
+    <p><strong>"Okudum"</strong> → <strong>12 XP</strong>. "Erteleme Profili Testi" quizini tamamla → <strong>+30 XP</strong>.</p>
+  </div>
+</div>
+
+<!-- BÖLÜM 2 -->
+<div class="ch-open"><div class="ch-open-bg">
+  <div class="ch-num">Bölüm 02 · Gün 1-21</div><div class="ch-title">Farkındalık Fazı</div>
+  <div class="ch-sub">Erteleme kalıplarını tanı, tetikleyicilerini keşfet</div><div class="ch-line"></div>
+  <div class="ch-xp"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#f97316" stroke-width="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>80 XP</div>
+</div></div>
+
+<div class="page">
+  <div class="pg-head"><span>Bölüm 02 · Farkındalık Fazı (Gün 1-21)</span><span class="brand">DiptenZirveye</span></div>
+
+  <p>İlk 21 gün ertelemeyi "tedavi etmek" değil, <strong>tanımak</strong> için. Düşmanını tanımadan savaşamazsın.</p>
+
+  <h3>Hafta 1: Erteleme Günlüğü (Gün 1-7)</h3>
+  <p>Her gün şu tabloyu doldur:</p>
+  <table>
+    <thead><tr><th>Soru</th><th>Yanıt</th></tr></thead>
+    <tbody>
+      <tr><td>Bugün ne erteledim?</td><td><em>(doldurulacak)</em></td></tr>
+      <tr><td>Ne zaman erteledim? (saat)</td><td><em>(doldurulacak)</em></td></tr>
+      <tr><td>O an ne hissediyordum?</td><td><em>(doldurulacak)</em></td></tr>
+      <tr><td>Bunun yerine ne yaptım?</td><td><em>(doldurulacak)</em></td></tr>
+      <tr><td>Daha sonra ne hissettim?</td><td><em>(doldurulacak)</em></td></tr>
+    </tbody>
+  </table>
+
+  <h3>Hafta 2: Tetikleyici Haritası (Gün 8-14)</h3>
+  <p>İlk haftanın verilerini analiz et. Kalıpları bul: Hangi saatte en çok erteliyorsun? Hangi görev türleri? Hangi duygular tetikliyor?</p>
+
+  <h3>Hafta 3: İç Konuşma Dönüştürme (Gün 15-21)</h3>
+  <table>
+    <thead><tr><th>Eski İç Ses</th><th>Yeni İç Ses</th></tr></thead>
+    <tbody>
+      <tr><td>"Bu çok zor, yapamam"</td><td>"Bu zor ama 2 dakika başlayabilirim"</td></tr>
+      <tr><td>"Mükemmel yapmalıyım"</td><td>"İlk adım mükemmel olmak zorunda değil"</td></tr>
+      <tr><td>"Yarın yaparım"</td><td>"Bugün 5 dakika versem bile ilerleme sayılır"</td></tr>
+      <tr><td>"Motivasyonum yok"</td><td>"Motivasyon eylemden sonra gelir, önce değil"</td></tr>
+    </tbody>
+  </table>
+
+  <div class="panel-task">
+    <div class="panel-task-head">Panel Görevi</div>
+    <p><strong>"Okudum"</strong> → <strong>12 XP</strong>. Erteleme Günlüğü (21 gün) → <strong>+60 XP</strong> streak ödülü.</p>
+  </div>
+</div>
+
+<!-- BÖLÜM 3 -->
+<div class="ch-open"><div class="ch-open-bg">
+  <div class="ch-num">Bölüm 03 · Gün 22-51</div><div class="ch-title">Alışkanlık Kurma Fazı</div>
+  <div class="ch-sub">Yeni alışkanlıklar inşa et, mikro-görev sistemi</div><div class="ch-line"></div>
+  <div class="ch-xp"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#f97316" stroke-width="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>100 XP</div>
+</div></div>
+
+<div class="page">
+  <div class="pg-head"><span>Bölüm 03 · Alışkanlık Kurma (Gün 22-51)</span><span class="brand">DiptenZirveye</span></div>
+
+  <p>Farkındalık fazını tamamladın. Artık erteleme kalıplarını tanıyorsun. Şimdi sıra <strong>yeni alışkanlıklar inşa etmekte</strong>.</p>
+
+  <h2>Atomic Habits Uygulaması</h2>
+  <p>James Clear'ın 4 adımlı modelini DİPTENZİRVEYE sistemine uyarladık:</p>
+  <table>
+    <thead><tr><th>Adım</th><th>Kural</th><th>Uygulama</th></tr></thead>
+    <tbody>
+      <tr><td><strong>1. Görünür Kıl</strong></td><td>Alışkanlığı tetikleyecek ipucu koy</td><td>Telefon kilit ekranına "Bugün 1 bölüm oku" yaz</td></tr>
+      <tr><td><strong>2. Çekici Kıl</strong></td><td>Alışkanlığı ödülle eşleştir</td><td>"Bölümü oku → panelde XP kazan → streak koru"</td></tr>
+      <tr><td><strong>3. Kolay Kıl</strong></td><td>Başlangıç bariyerini düşür</td><td>"2 Dakika Kuralı: Sadece 2 dk başla"</td></tr>
+      <tr><td><strong>4. Tatmin Edici Kıl</strong></td><td>Anlık ödül sağla</td><td>DZ Panel'deki XP animasyonu + DZ Coin</td></tr>
+    </tbody>
+  </table>
+
+  <h2>Habit Stacking</h2>
+  <p>Yeni alışkanlığı mevcut bir alışkanlığa bağla:</p>
+  <blockquote>"[MEVCUT ALIŞKANLIK]'tan sonra [YENİ ALIŞKANLIK] yapacağım."<br><br><strong>Örnek:</strong> "Sabah kahvemi aldıktan sonra 1 bölüm okuyacağım."<br><strong>Örnek:</strong> "Öğle yemeğinden sonra 1 Pomodoro çalışacağım."</blockquote>
+
+  <h2>2 Dakika Kuralı (İleri Versiyon)</h2>
+  <p>Herhangi bir göreve "sadece 2 dakika" başla. 2 dakika sonra devam etmek isteyip istemediğine karar ver. Araştırmalar gösteriyor ki <strong>%80 oranında devam edersin</strong> — çünkü en zor kısım başlamak.</p>
+
+  <div class="panel-task">
+    <div class="panel-task-head">Panel Görevi</div>
+    <p><strong>"Okudum"</strong> → <strong>12 XP</strong>. Alışkanlık Tracker (30 gün) → <strong>+70 XP</strong>.</p>
+  </div>
+</div>
+
+<!-- BÖLÜM 4-5-6 kısa -->
+<div class="ch-open"><div class="ch-open-bg">
+  <div class="ch-num">Bölüm 04 · Gün 52-81</div><div class="ch-title">Verimlilik Fazı</div>
+  <div class="ch-sub">Deep work, time blocking, enerji yönetimi</div><div class="ch-line"></div>
+  <div class="ch-xp"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#f97316" stroke-width="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>100 XP</div>
+</div></div>
+
+<div class="page">
+  <div class="pg-head"><span>Bölüm 04 · Verimlilik Fazı (Gün 52-81)</span><span class="brand">DiptenZirveye</span></div>
+
+  <p>Alışkanlıkların oturdu. Şimdi sıra <strong>verimliliği maksimize etmekte</strong>.</p>
+
+  <h2>Deep Work Protokolü</h2>
+  <p>Cal Newport'un Deep Work kavramını 3 adımda uygula:</p>
+  <ol>
+    <li><strong>Ortamı Hazırla:</strong> Telefonu sessize al, bildirimleri kapat, "Rahatsız Etmeyin" modunu aç</li>
+    <li><strong>Zaman Blokla:</strong> 90 dakikalık "derin çalışma" blokları. Günde max 3-4 blok.</li>
+    <li><strong>Mola Ritüeli:</strong> Her bloktan sonra 15-20 dk mola — yürüyüş, su, nefes egzersizi (ekran yok)</li>
+  </ol>
+
+  <h2>Enerji Yönetimi</h2>
+  <table>
+    <thead><tr><th>Saat Dilimi</th><th>Enerji</th><th>Uygun Görev</th></tr></thead>
+    <tbody>
+      <tr><td><strong>06:00-10:00</strong></td><td style="color:var(--ok)">Yüksek</td><td>Yaratıcı iş, yazarlık, strateji, deep work</td></tr>
+      <tr><td><strong>10:00-12:00</strong></td><td style="color:var(--o500)">Orta-Yüksek</td><td>Toplantılar, analiz, karar verme</td></tr>
+      <tr><td><strong>12:00-14:00</strong></td><td style="color:var(--g400)">Düşük</td><td>Rutin görevler, e-posta, organizasyon</td></tr>
+      <tr><td><strong>14:00-17:00</strong></td><td style="color:var(--o500)">Orta</td><td>İşbirliği, geri bildirim, hafif analiz</td></tr>
+      <tr><td><strong>17:00-19:00</strong></td><td style="color:var(--ok)">İkinci Zirve</td><td>Egzersiz, öğrenme, yan projeler</td></tr>
+    </tbody>
+  </table>
+
+  <div class="panel-task">
+    <div class="panel-task-head">Panel Görevi</div>
+    <p><strong>"Okudum"</strong> → <strong>12 XP</strong>. Deep Work Challenge (14 gün) → <strong>+50 XP</strong>. Haftalık rapor (4 hafta) → <strong>+40 XP</strong>.</p>
+  </div>
+</div>
+
+<!-- BÖLÜM 5 -->
+<div class="ch-open"><div class="ch-open-bg">
+  <div class="ch-num">Bölüm 05 · Gün 82-111</div><div class="ch-title">Sürdürülebilir<br>Başarı Fazı</div>
+  <div class="ch-sub">Geri düşüş protokolü, esneklik planı, ödül sistemi</div><div class="ch-line"></div>
+  <div class="ch-xp"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#f97316" stroke-width="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>80 XP</div>
+</div></div>
+
+<div class="page">
+  <div class="pg-head"><span>Bölüm 05 · Sürdürülebilir Başarı (Gün 82-111)</span><span class="brand">DiptenZirveye</span></div>
+
+  <p>90 günün sonuna geliyorsun. Ama asıl soru şu: <strong>91. gün ne olacak?</strong> Bu bölüm sürdürülebilirlik hakkında.</p>
+
+  <h2>Geri Düşüş Protokolü</h2>
+  <p>Herkes düşer. Önemli olan düşmemek değil — düştüğünde ne yapacağını bilmek.</p>
+  <ol>
+    <li><strong>Fark et:</strong> "Bugün erteledim" de ve suçluluk duymadan kabul et</li>
+    <li><strong>Analiz et:</strong> Tetikleyici ne? Günlüğüne yaz</li>
+    <li><strong>Sıfırla:</strong> Yarın yeni bir gün. "Bir gün" düşüş bir "başarısızlık" değil</li>
+    <li><strong>Küçült:</strong> Ertesi gün sadece en küçük görevi yap (2 dakika kuralı)</li>
+  </ol>
+
+  <blockquote>"Mükemmel değil, sürdürülebilir." Bu cümle seni 91. günden 365. güne taşıyacak.</blockquote>
+
+  <div class="panel-task">
+    <div class="panel-task-head">Panel Görevi</div>
+    <p><strong>"Okudum"</strong> → <strong>12 XP</strong>. Kişisel 90 Gün Planı Oluşturma → <strong>+35 XP</strong>.</p>
+  </div>
+</div>
+
+<!-- BÖLÜM 6 -->
+<div class="ch-open"><div class="ch-open-bg">
+  <div class="ch-num">Bölüm 06</div><div class="ch-title">ADHD Özel<br>Protokoller</div>
+  <div class="ch-sub">Dikkat eksikliği ve hiperfokus yönetimi</div><div class="ch-line"></div>
+  <div class="ch-xp"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#f97316" stroke-width="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>80 XP</div>
+</div></div>
+
+<div class="page">
+  <div class="pg-head"><span>Bölüm 06 · ADHD Özel Protokoller</span><span class="brand">DiptenZirveye</span></div>
+
+  <p>ADHD veya dikkat eksikliği yaşıyorsan, bu bölüm sana özel. Standart verimlilik tavsiyeleri ("sadece odaklan!") ADHD'li bireyler için çoğu zaman işe yaramaz — çünkü beyin farklı çalışıyor.</p>
+
+  <h2>ADHD Beynini Anla</h2>
+  <table>
+    <thead><tr><th>Özellik</th><th>Zorluk</th><th>Güç</th></tr></thead>
+    <tbody>
+      <tr><td><strong>Dopamin Sistemi</strong></td><td>Düşük uyarı eşiği → sıkıcı görevlerde odak kaybı</td><td>İlgi çekici görevlerde süper odak (hiperfokus)</td></tr>
+      <tr><td><strong>Zaman Algısı</strong></td><td>"Zaman körlüğü" → deadline'ları kaçırma</td><td>Acil görevlerde yoğun performans</td></tr>
+      <tr><td><strong>Çalışma Belleği</strong></td><td>Birden fazla bilgiyi aynı anda tutamama</td><td>Yaratıcı düşünce, kalıp dışı çözümler</td></tr>
+    </tbody>
+  </table>
+
+  <h2>ADHD İçin Özelleştirilmiş Stratejiler</h2>
+  <ul>
+    <li><strong>Body Doubling:</strong> Yanında biri varken çalış (fiziksel veya sanal)</li>
+    <li><strong>Pomodoro Kısaltılmış:</strong> 25 dk yerine 15 dk bloklar dene</li>
+    <li><strong>Gamification:</strong> DZ Panel'in XP/Streak sistemi ADHD beyni için ideal — anlık ödül döngüsü</li>
+    <li><strong>Dış Zamanlayıcı:</strong> Her göreve sesli timer koy — "zamanın görünür" olsun</li>
+    <li><strong>Çevresel Tasarım:</strong> Çalışma masasında sadece aktif görev olsun, her şeyi kaldır</li>
+    <li><strong>AI Asistan:</strong> ChatGPT'ye "beni 15 dakika boyunca motive et ve görevime odaklanmamı sağla" de</li>
+  </ul>
+
+  <div class="panel-task">
+    <div class="panel-task-head">Panel Görevi</div>
+    <p><strong>"Okudum"</strong> → <strong>12 XP</strong>. ADHD stratejilerinden 3'ünü 1 hafta boyunca uygula → <strong>+50 XP</strong>.</p>
+  </div>
+
+  <!-- SONUÇ -->
+  <div style="background:var(--bk);border-radius:12px;text-align:center;padding:32px;margin:28px 0">
+    <p style="font-family:'Syne';font-size:16pt;font-weight:700;margin-bottom:8px;color:var(--wh)">Toplam XP: <span style="color:var(--o500)">500</span></p>
+    <p style="color:var(--g400);margin-bottom:16px;font-size:11pt">Rozet: "Odak Ustası" · +200 XP bonus · +75 DZ Coin</p>
+    <p style="font-size:13pt;font-weight:500;color:var(--wh);margin-bottom:0">Sonraki Kitap → <strong style="color:var(--o400)">AI ile İlk Gelirim</strong></p>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<div class="footer">
+  <div class="logo"><span class="d">Dipten</span><span class="z">Zirveye</span></div>
+  <p style="color:var(--g400);font-size:9pt;font-family:'DM Sans',sans-serif;font-style:italic;letter-spacing:.02em">Dönüşüm sessiz başlar. <span style="color:var(--o500)">Ama sonuçları gürültülüdür.</span></p>
+</div>
+
+</body>
+</html>
