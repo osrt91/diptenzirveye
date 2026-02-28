@@ -33,9 +33,12 @@ Sadece yapılacak işler. Tamamlanan özellikler bu listeden çıkarıldı.
 
 | İş | Not |
 |----|-----|
-| Supabase Site URL ve Redirect URLs | Canlı domain ile güncelle |
-| Polar webhook URL | Canlı ortamda güncelle |
-| Custom domain | diptenzirveye.com bağla |
+| ~~Root middleware.ts~~ | ✅ Tamamlandı — auth koruması aktif |
+| Supabase Site URL ve Redirect URLs | Canlı domain ile güncelle (bkz. DEPLOY.md §4) |
+| Polar webhook URL | Canlı ortamda güncelle (bkz. DEPLOY.md §5) |
+| Custom domain | diptenzirveye.com bağla (bkz. DEPLOY.md §3) |
+| Vercel env vars | Production env değişkenlerini tanımla (bkz. DEPLOY.md §2) |
+| Google Cloud Console redirect URI | Production domain ekle (bkz. DEPLOY.md §4d) |
 | Android Studio ile APK build | JDK 17+, Capacitor hazır |
 
 ### 2c. Mobil (Capacitor)
@@ -48,4 +51,4 @@ Sadece yapılacak işler. Tamamlanan özellikler bu listeden çıkarıldı.
 
 ---
 
-*Son güncelleme: 27 Şubat 2026*
+*Son güncelleme: 28 Şubat 2026*

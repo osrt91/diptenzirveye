@@ -1,59 +1,187 @@
-# DiptenZirveye — Deploy
+# DiptenZirveye — Deploy Kılavuzu
 
-## 0. Deploy kaydı (kayıtlı kalsın)
+> **Domain:** `diptenzirveye.com` | **Region:** `fra1` (Frankfurt) | **Framework:** Next.js 16
 
-- **Kod:** Tüm değişiklikler GitHub `main` branch’ine push edildiğinde kayıtlıdır.
-- **Canlı sürüm:** Vercel projesi GitHub’a bağlıysa her push sonrası otomatik production deploy yapılır.
-- **Manuel deploy (isteğe bağlı):** Proje kökünde `diptenzirveye` klasörü içindeyken:
+---
+
+## 0. Deploy kaydı
+
+- **Kod:** GitHub `main` branch'ine push edildiğinde kayıtlıdır.
+- **Canlı sürüm:** Vercel projesi GitHub'a bağlıysa her push sonrası otomatik production deploy yapılır.
+- **Manuel deploy:**
   ```bash
+  cd diptenzirveye
   npx vercel login
   npx vercel --prod --yes
   ```
-  (`--yes` sormadan deploy eder; ilk seferde link için `npx vercel link` gerekebilir.)
 
-## 1. Vercel’e deploy
+---
 
-**GitHub ile:** Vercel → Add New Project → repoyu seç → **Root Directory:** `diptenzirveye` (iç klasör).
+## 1. Vercel'e Deploy
 
-**CLI ile:**
+### GitHub ile (önerilen)
+1. [vercel.com/new](https://vercel.com/new) → GitHub reposunu seç
+2. **Root Directory:** `diptenzirveye`
+3. Framework: Next.js (otomatik algılanır)
+4. Deploy
+
+### CLI ile
 ```bash
 cd diptenzirveye
 npx vercel login
+npx vercel link        # ilk seferde
 npx vercel --prod
 ```
-Environment Variables’ı Vercel Dashboard’dan ekleyin.
 
-## 2. Ortam değişkenleri (Vercel)
+---
 
-| Değişken | Açıklama |
-|----------|----------|
-| `NEXT_PUBLIC_SUPABASE_URL` | Supabase proje URL |
-| `NEXT_PUBLIC_SUPABASE_ANON_KEY` | Supabase anon key |
-| `SUPABASE_SERVICE_ROLE_KEY` | Supabase service role (webhook/admin) |
-| `NEXT_PUBLIC_SITE_URL` | Canlı site URL (örn. https://diptenzirveye.com) |
-| `NEXT_PUBLIC_BASE_URL` | Genelde `NEXT_PUBLIC_SITE_URL` ile aynı |
-| `NEXT_PUBLIC_GOOGLE_CLIENT_ID` | Google OAuth client ID |
-| `POLAR_ACCESS_TOKEN`, `POLAR_WEBHOOK_SECRET`, `POLAR_ORGANIZATION_ID` | Polar abonelik (varsa) |
-| `NEXT_PUBLIC_GA_ID` | Google Analytics (isteğe bağlı) |
-| `PAYTR_MERCHANT_ID`, `PAYTR_MERCHANT_KEY`, `PAYTR_MERCHANT_SALT` | PayTR (isteğe bağlı) |
+## 2. Vercel Ortam Değişkenleri
 
-## 3. Deploy sonrası
+Vercel Dashboard → Project → Settings → Environment Variables
 
-**Supabase:** Authentication → URL Configuration → Site URL ve Redirect URLs’i canlı domain ile güncelle (`https://yourdomain.com`, `https://*.vercel.app/**`).
+| Değişken | Değer | Zorunlu |
+|----------|-------|---------|
+| `NEXT_PUBLIC_SUPABASE_URL` | `https://xaxwdyinefikqrosodjl.supabase.co` | ✅ |
+| `NEXT_PUBLIC_SUPABASE_ANON_KEY` | Supabase anon key | ✅ |
+| `NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY` | Supabase publishable key | ✅ |
+| `SUPABASE_SERVICE_ROLE_KEY` | Supabase service role key | ✅ |
+| `NEXT_PUBLIC_SITE_URL` | `https://diptenzirveye.com` | ✅ |
+| `NEXT_PUBLIC_BASE_URL` | `https://diptenzirveye.com` | ✅ |
+| `NEXT_PUBLIC_GOOGLE_CLIENT_ID` | Google OAuth Client ID | ✅ |
+| `POLAR_ACCESS_TOKEN` | Polar access token | ✅ |
+| `POLAR_WEBHOOK_SECRET` | Polar webhook secret | ✅ |
+| `POLAR_ORGANIZATION_ID` | Polar org ID | İsteğe bağlı |
+| `NEXT_PUBLIC_GA_ID` | Google Analytics ID (`G-XXXXXXXXXX`) | İsteğe bağlı |
 
-**Polar:** Webhooks → Webhook URL: `https://yourdomain.com/api/webhook/polar`; secret’ı `POLAR_WEBHOOK_SECRET` ile aynı yap.
+---
 
-## 4. Kontrol listesi
+## 3. Custom Domain Ayarı
 
-- [ ] Vercel’e deploy (Root Directory: `diptenzirveye`)
-- [ ] Tüm env değişkenleri Vercel’de tanımlandı
-- [ ] Supabase Site URL ve Redirect URLs güncellendi
-- [ ] Polar webhook URL canlı domain ile güncellendi
-- [ ] Canlıda giriş/kayıt ve panel test edildi
+### Vercel tarafı
+1. Vercel Dashboard → Project → Settings → **Domains**
+2. `diptenzirveye.com` ekle
+3. `www.diptenzirveye.com` ekle (→ `diptenzirveye.com`'a redirect)
+4. Vercel'in verdiği DNS kayıtlarını not al
 
-## 5. Güvenlik (özet)
+### DNS tarafı (domain sağlayıcınızda)
+| Tip | Ad | Değer |
+|-----|-----|-------|
+| A | `@` | `76.76.21.21` (Vercel) |
+| CNAME | `www` | `cname.vercel-dns.com` |
 
-- E-posta doğrulama: Supabase → Authentication → Email → Confirm email açık.
-- Panel yalnızca doğrulanmış e-postalara açık; doğrulanmamayanlar `/onay-bekliyor`’a yönlendirilir.
-- Rate limiting: Giriş/kayıt IP başına sınırlı (`lib/rate-limit.ts`). Çok instance’da Upstash Redis / Vercel KV kullanın.
-- Güvenlik başlıkları: `next.config.ts` içinde X-Frame-Options, X-Content-Type-Options vb. ayarlı.
+> SSL sertifikası Vercel tarafından otomatik sağlanır.
+
+---
+
+## 4. Supabase Konfigürasyonu
+
+### 4a. Site URL
+1. [Supabase Dashboard](https://supabase.com/dashboard) → Projeniz → Authentication → URL Configuration
+2. **Site URL:** `https://diptenzirveye.com`
+
+### 4b. Redirect URLs
+Aynı sayfada "Redirect URLs" bölümüne şunları ekleyin:
+
+```
+https://diptenzirveye.com/auth/callback
+https://www.diptenzirveye.com/auth/callback
+https://*.vercel.app/auth/callback
+```
+
+### 4c. Google OAuth (Supabase tarafı)
+1. Authentication → Providers → Google
+2. Client ID ve Client Secret doğru olmalı
+
+### 4d. Google Cloud Console
+1. [Google Cloud Console](https://console.cloud.google.com) → APIs & Services → Credentials
+2. OAuth 2.0 Client → Authorized redirect URIs:
+   ```
+   https://xaxwdyinefikqrosodjl.supabase.co/auth/v1/callback
+   ```
+3. Authorized JavaScript origins:
+   ```
+   https://diptenzirveye.com
+   https://www.diptenzirveye.com
+   ```
+
+### 4e. Facebook OAuth (varsa)
+1. [Meta Developers](https://developers.facebook.com) → App → Facebook Login → Settings
+2. Valid OAuth Redirect URIs:
+   ```
+   https://xaxwdyinefikqrosodjl.supabase.co/auth/v1/callback
+   ```
+
+---
+
+## 5. Polar Konfigürasyonu
+
+### Webhook URL
+1. [Polar Dashboard](https://polar.sh) → Settings → Webhooks
+2. **Endpoint URL:** `https://diptenzirveye.com/api/webhook/polar`
+3. **Secret:** `.env.local` deki `POLAR_WEBHOOK_SECRET` ile aynı
+4. **Events:** `order.paid`, `subscription.active`, `subscription.canceled`
+
+### Kontrol
+- Checkout route'ta `server` otomatik olarak `production` moduna geçer (`NODE_ENV === "production"`)
+- Sandbox token değil, production token kullanıldığından emin olun
+
+---
+
+## 6. Deploy Kontrol Listesi
+
+### Vercel
+- [ ] Vercel'e deploy edildi (Root Directory: `diptenzirveye`)
+- [ ] Tüm env değişkenleri Vercel'de tanımlandı
+- [ ] `NEXT_PUBLIC_SITE_URL` = `https://diptenzirveye.com`
+- [ ] Custom domain eklendi (`diptenzirveye.com` + `www`)
+- [ ] DNS kayıtları domain sağlayıcıda tanımlandı
+- [ ] SSL sertifikası aktif (Vercel otomatik)
+
+### Supabase
+- [ ] Site URL: `https://diptenzirveye.com`
+- [ ] Redirect URLs eklendi (3 adet)
+- [ ] Google OAuth provider ayarları doğru
+- [ ] E-posta doğrulama (Confirm email) açık
+
+### Google Cloud Console
+- [ ] Authorized redirect URI: `https://xaxwdyinefikqrosodjl.supabase.co/auth/v1/callback`
+- [ ] Authorized JavaScript origins: `https://diptenzirveye.com`
+
+### Polar
+- [ ] Webhook URL: `https://diptenzirveye.com/api/webhook/polar`
+- [ ] Webhook secret eşleşiyor
+- [ ] Production token kullanılıyor (sandbox değil)
+
+### Canlı Test
+- [ ] Ana sayfa yükleniyor
+- [ ] E-posta ile kayıt çalışıyor
+- [ ] E-posta doğrulama linki çalışıyor
+- [ ] Google OAuth çalışıyor
+- [ ] Panel erişimi çalışıyor
+- [ ] Admin panel erişimi çalışıyor
+- [ ] Polar checkout çalışıyor
+- [ ] Polar webhook tetikleniyor
+
+---
+
+## 7. Middleware (Auth Koruması)
+
+Root `middleware.ts` dosyası tüm sayfa isteklerinde çalışır:
+
+- Auth oturumunu otomatik yeniler
+- `/panel/*` ve `/admin/*` giriş yapmamış kullanıcıları `/giris`'e yönlendirir
+- E-posta doğrulanmamış kullanıcıları `/onay-bekliyor`'a yönlendirir
+- Giriş yapmış kullanıcıları auth sayfalarından `/panel`'e yönlendirir
+
+---
+
+## 8. Güvenlik
+
+- **E-posta doğrulama:** Supabase → Authentication → Email → Confirm email açık
+- **Rate limiting:** `lib/rate-limit.ts` — IP başına sınırlı (prod'da Upstash Redis / Vercel KV önerilir)
+- **Güvenlik başlıkları:** `next.config.ts` — X-Frame-Options, CSP, HSTS, X-Content-Type-Options
+- **Middleware koruması:** `middleware.ts` — korumalı rotalar için auth kontrolü
+
+---
+
+*Son güncelleme: 28 Şubat 2026*
