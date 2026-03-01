@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import { GoogleGenerativeAI } from "@google/generative-ai";
+import { createClient } from "@/lib/supabase/server";
 
 const API_KEY = process.env.GOOGLE_API_KEY ?? "";
 
@@ -12,6 +13,12 @@ const MOTIVATIONAL_MESSAGES = [
 
 export async function POST(req: NextRequest) {
     try {
+        const supabase = await createClient();
+        const { data: { user } } = await supabase.auth.getUser();
+        if (!user) {
+            return NextResponse.json({ error: "Giriş yapmalısınız." }, { status: 401 });
+        }
+
         const { question, userContext } = await req.json();
 
         // Basit motivasyon (soru yoksa)

@@ -23,7 +23,7 @@ const footerLinks = [
       { label: "Eylem İvmesi Serisi", href: "/panel/erteleme" },
       { label: "Liderlik Tablosu", href: "/panel/siralama" },
       { label: "Topluluk", href: "/panel/sohbet" },
-      { label: "Sertifikalar", href: "/panel/rozetler" },
+      { label: "Sertifikalar", href: "/panel/sertifika" },
     ],
   },
   {

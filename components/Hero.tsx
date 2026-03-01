@@ -97,7 +97,7 @@ export default function Hero() {
           className="flex flex-col sm:flex-row gap-6 justify-center items-center"
         >
           <Link
-            href="/test"
+            href="/kayit-ol"
             className="group relative flex items-center justify-center gap-3 bg-dz-orange-500 text-white font-bold text-lg py-5 px-10 rounded-2xl overflow-hidden transition-all duration-300 transform hover:scale-[1.03] shadow-[0_0_30px_rgba(249,115,22,0.3)] hover:shadow-[0_0_50px_rgba(249,115,22,0.5)] w-full sm:w-auto"
           >
             <span className="relative z-10 flex items-center gap-2">

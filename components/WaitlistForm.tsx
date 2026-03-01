@@ -28,7 +28,7 @@ export default function WaitlistForm({ onSuccess, variant = "hero" }: WaitlistFo
       });
       const data = await res.json();
       if (!res.ok) {
-        setMessage(data.error || "Bir hata oluþtu.");
+        setMessage(data.error || "Bir hata olu?tu.");
         setStatus("error");
         return;
       }
@@ -36,7 +36,7 @@ export default function WaitlistForm({ onSuccess, variant = "hero" }: WaitlistFo
       setStatus("success");
       onSuccess?.(data.position ?? 0);
     } catch {
-      setMessage("Baðlantý hatasý. Lütfen tekrar dene.");
+      setMessage("Ba?lant? hatas?. Lütfen tekrar dene.");
       setStatus("error");
     }
   }
@@ -52,7 +52,7 @@ export default function WaitlistForm({ onSuccess, variant = "hero" }: WaitlistFo
           Listeye eklendin.
         </p>
         <p className="mt-2 text-dz-grey-600 dark:text-dz-grey-400">
-          Sýra numaran: <span className="font-mono font-medium text-dz-orange-500">#{position}</span>
+          S?ra numaran: <span className="font-mono font-medium text-dz-orange-500">#{position}</span>
         </p>
       </motion.div>
     );
@@ -72,7 +72,7 @@ export default function WaitlistForm({ onSuccess, variant = "hero" }: WaitlistFo
         />
         <input
           type="text"
-          placeholder="Ýsim (isteðe baðlý)"
+          placeholder="?sim (iste?e ba?l?)"
           value={name}
           onChange={(e) => setName(e.target.value)}
           className="w-full rounded-xl border border-dz-grey-200 dark:border-dz-grey-600 bg-dz-white dark:bg-dz-grey-800 px-4 py-3 font-sans text-dz-black dark:text-dz-white placeholder:text-dz-grey-400 focus:border-dz-orange-400 focus:outline-none focus:ring-2 focus:ring-dz-orange-400/20"
@@ -80,7 +80,7 @@ export default function WaitlistForm({ onSuccess, variant = "hero" }: WaitlistFo
       </div>
       <input
         type="text"
-        placeholder="Ýlgi alanýn (örn: giriþimcilik, AI)"
+        placeholder="?lgi alan?n (örn: giri?imcilik, AI)"
         value={interest}
         onChange={(e) => setInterest(e.target.value)}
         className="w-full rounded-xl border border-dz-grey-200 dark:border-dz-grey-600 bg-dz-white dark:bg-dz-grey-800 px-4 py-3 font-sans text-dz-black dark:text-dz-white placeholder:text-dz-grey-400 focus:border-dz-orange-400 focus:outline-none focus:ring-2 focus:ring-dz-orange-400/20"
@@ -90,7 +90,7 @@ export default function WaitlistForm({ onSuccess, variant = "hero" }: WaitlistFo
         disabled={status === "loading"}
         className="w-full rounded-xl bg-dz-orange-500 px-6 py-3 font-display font-semibold text-dz-white hover:bg-dz-orange-600 focus:outline-none focus:ring-2 focus:ring-dz-orange-400 focus:ring-offset-2 disabled:opacity-70"
       >
-        {status === "loading" ? "Ekleniyor…" : "Bekleme listesine katýl"}
+        {status === "loading" ? "Ekleniyor\u2026" : "Bekleme listesine kat\u0131l"}
       </button>
       {message && (
         <p className="text-sm text-red-500 dark:text-red-400">{message}</p>

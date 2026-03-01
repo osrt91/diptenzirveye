@@ -7,15 +7,21 @@ const siteUrl =
     process.env.NEXT_PUBLIC_BASE_URL ??
     "http://localhost:3000";
 
-const polarCheckout = Checkout({
-    accessToken: process.env.POLAR_ACCESS_TOKEN as string,
+const polarToken = process.env.POLAR_ACCESS_TOKEN;
+
+const polarCheckout = polarToken ? Checkout({
+    accessToken: polarToken,
     successUrl: `${siteUrl}/panel?payment=success`,
     returnUrl: siteUrl,
     server: process.env.NODE_ENV === "production" ? "production" : "sandbox",
     theme: "dark",
-});
+}) : null;
 
 export const GET = async (req: NextRequest) => {
+    if (!polarCheckout) {
+        return NextResponse.json({ error: "Ödeme altyapısı yapılandırılmamış." }, { status: 503 });
+    }
+
     // 1. Check if user is authenticated via Supabase
     const supabase = await createClient();
     const { data: { user } } = await supabase.auth.getUser();

@@ -18,7 +18,7 @@ export default async function NotDefteriPage() {
   // Kullanıcının sahip olduğu kitapları/modülleri çek
   const { data: userBooksRes } = await supabase
     .from("user_books")
-    .select("book_id, book:books(title, content_url)")
+    .select("book_id, book:books(title)")
     .eq("user_id", user.id);
 
   const userBooks = (userBooksRes ?? []).map(ub => {
