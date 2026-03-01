@@ -73,14 +73,14 @@ export default async function AdminDashboardPage() {
   ]);
 
   const dailySignups: Record<string, number> = {};
-  (signupsRes.data ?? []).forEach((p: any) => {
+  (signupsRes.data ?? []).forEach((p: { created_at: string }) => {
     const date = new Date(p.created_at).toLocaleDateString("tr-TR", { day: "2-digit", month: "short" });
     dailySignups[date] = (dailySignups[date] ?? 0) + 1;
   });
   const dailySignupsData = Object.entries(dailySignups).map(([date, count]) => ({ date, count }));
 
   const levelDist: Record<string, number> = {};
-  (progressDistRes.data ?? []).forEach((p: any) => {
+  (progressDistRes.data ?? []).forEach((p: { level: number }) => {
     const bucket = p.level <= 5 ? "1-5" : p.level <= 10 ? "6-10" : p.level <= 20 ? "11-20" : "20+";
     levelDist[bucket] = (levelDist[bucket] ?? 0) + 1;
   });
@@ -99,7 +99,7 @@ export default async function AdminDashboardPage() {
   }
 
   const bookReaders: Record<string, number> = {};
-  (bookReadersRes.data ?? []).forEach((item: any) => {
+  (bookReadersRes.data ?? []).forEach((item: { book: { title: string } | { title: string }[] | null }) => {
     const book = Array.isArray(item.book) ? item.book[0] : item.book;
     const name = book?.title ?? "Bilinmeyen";
     bookReaders[name] = (bookReaders[name] ?? 0) + 1;

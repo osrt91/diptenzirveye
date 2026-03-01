@@ -14,14 +14,14 @@ export default async function AdminLayout({
 }: {
   children: React.ReactNode;
 }) {
-  const admin = await isAdmin();
-  if (!admin) redirect("/panel");
-
   const supabase = await createClient();
   const {
     data: { user },
   } = await supabase.auth.getUser();
   if (!user) redirect("/giris");
+
+  const admin = await isAdmin();
+  if (!admin) redirect("/panel");
 
   return <AdminShell user={user}>{children}</AdminShell>;
 }

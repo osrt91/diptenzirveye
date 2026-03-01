@@ -1,9 +1,10 @@
 "use client";
 
+import { useState } from "react";
 import type { User } from "@supabase/supabase-js";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { Users, BookOpen, Medal, MessageSquare, Lightbulb, ArrowLeft, Shield, Flag, PenTool, Ticket, Star } from "lucide-react";
+import { Users, BookOpen, Medal, MessageSquare, Lightbulb, ArrowLeft, Shield, Flag, PenTool, Ticket, Star, Menu, X } from "lucide-react";
 import { FaChartBar } from "react-icons/fa";
 
 type NavItem = {
@@ -33,13 +34,36 @@ export default function AdminShell({
     children: React.ReactNode;
 }) {
     const pathname = usePathname();
+    const [sidebarOpen, setSidebarOpen] = useState(false);
 
     return (
         <div className="flex min-h-screen bg-dz-grey-50 dark:bg-background text-dz-black dark:text-white">
+            {/* Mobile Header */}
+            <div className="fixed top-0 left-0 right-0 z-50 lg:hidden flex items-center justify-between px-4 py-3 bg-dz-white/90 dark:bg-dz-grey-900/90 backdrop-blur-md border-b border-dz-grey-200 dark:border-white/5">
+                <button
+                    onClick={() => setSidebarOpen(true)}
+                    className="w-9 h-9 rounded-xl bg-dz-grey-100 dark:bg-dz-grey-800 flex items-center justify-center"
+                    aria-label="Menüyü aç"
+                >
+                    <Menu className="w-5 h-5" />
+                </button>
+                <span className="font-display font-bold text-sm">Admin Paneli</span>
+                <div className="w-9" />
+            </div>
+
+            {/* Mobile Overlay */}
+            {sidebarOpen && (
+                <div
+                    className="fixed inset-0 z-40 bg-black/40 lg:hidden"
+                    onClick={() => setSidebarOpen(false)}
+                    aria-hidden="true"
+                />
+            )}
+
             {/* Sidebar */}
-            <aside className="w-64 shrink-0 border-r border-dz-grey-200 dark:border-white/5 bg-dz-white dark:bg-dz-grey-900 flex flex-col">
+            <aside className={`fixed inset-y-0 left-0 z-50 w-64 shrink-0 border-r border-dz-grey-200 dark:border-white/5 bg-dz-white dark:bg-dz-grey-900 flex flex-col transition-transform duration-200 lg:static lg:translate-x-0 ${sidebarOpen ? "translate-x-0" : "-translate-x-full"}`}>
                 {/* Logo */}
-                <div className="p-5 border-b border-dz-grey-200 dark:border-white/5">
+                <div className="p-5 border-b border-dz-grey-200 dark:border-white/5 flex items-center justify-between">
                     <div className="flex items-center gap-3">
                         <div className="w-9 h-9 rounded-xl bg-gradient-to-br from-red-500 to-orange-500 flex items-center justify-center">
                             <Shield className="w-4 h-4 text-white" />
@@ -51,6 +75,13 @@ export default function AdminShell({
                             <p className="text-[10px] text-dz-grey-500 dark:text-white/40 font-mono">Dipten<span className="text-dz-orange-500">Zirveye</span></p>
                         </div>
                     </div>
+                    <button
+                        onClick={() => setSidebarOpen(false)}
+                        className="lg:hidden w-8 h-8 rounded-lg bg-dz-grey-100 dark:bg-dz-grey-800 flex items-center justify-center"
+                        aria-label="Menüyü kapat"
+                    >
+                        <X className="w-4 h-4" />
+                    </button>
                 </div>
 
                 {/* Nav */}
@@ -62,6 +93,7 @@ export default function AdminShell({
                             <Link
                                 key={href}
                                 href={href}
+                                onClick={() => setSidebarOpen(false)}
                                 className={`flex items-center gap-3 rounded-xl px-3 py-2.5 text-sm font-medium transition-all duration-200 ${isActive
                                     ? "bg-red-500/10 text-red-500 dark:text-red-400 border border-red-500/20"
                                     : "text-dz-grey-600 dark:text-white/50 hover:bg-dz-grey-100 dark:hover:bg-white/5 hover:text-dz-black dark:hover:text-white/80 border border-transparent"
@@ -92,8 +124,8 @@ export default function AdminShell({
             </aside>
 
             {/* Main */}
-            <main className="flex-1 overflow-y-auto">
-                <div className="max-w-7xl mx-auto p-6 lg:p-8">{children}</div>
+            <main className="flex-1 overflow-y-auto pt-14 lg:pt-0">
+                <div className="max-w-7xl mx-auto p-4 sm:p-6 lg:p-8">{children}</div>
             </main>
         </div>
     );
