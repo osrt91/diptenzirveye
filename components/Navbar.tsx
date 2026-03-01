@@ -49,7 +49,7 @@ export default function Navbar() {
                     {/* Theme Toggle */}
                     <button
                         onClick={() => setTheme(isDark ? "light" : "dark")}
-                        className="w-9 h-9 rounded-xl bg-dz-grey-100 dark:bg-dz-grey-800 border border-dz-grey-200 dark:border-dz-white/10 flex items-center justify-center hover:bg-dz-grey-200 dark:hover:bg-dz-grey-700 transition-colors"
+                        className="w-11 h-11 sm:w-9 sm:h-9 rounded-xl bg-dz-grey-100 dark:bg-dz-grey-800 border border-dz-grey-200 dark:border-dz-white/10 flex items-center justify-center hover:bg-dz-grey-200 dark:hover:bg-dz-grey-700 transition-colors"
                         aria-label="Temayı değiştir"
                     >
                         {isDark ? (
@@ -68,7 +68,7 @@ export default function Navbar() {
                         <Link href="/giris" className="text-sm font-bold bg-dz-orange-500 text-white px-5 py-2 rounded-xl hover:bg-dz-orange-600 transition-colors shadow-sm shadow-dz-orange-500/20">
                             Giriş Yap
                         </Link>
-                        <button onClick={handleGoogleSignIn} className="w-9 h-9 flex items-center justify-center rounded-xl bg-dz-grey-100 dark:bg-dz-grey-800 border border-dz-grey-200 dark:border-dz-white/10 hover:bg-dz-grey-200 dark:hover:bg-dz-grey-700 transition-colors text-dz-black dark:text-dz-white" aria-label="Google ile Giriş Yap">
+                        <button onClick={handleGoogleSignIn} className="w-11 h-11 sm:w-9 sm:h-9 flex items-center justify-center rounded-xl bg-dz-grey-100 dark:bg-dz-grey-800 border border-dz-grey-200 dark:border-dz-white/10 hover:bg-dz-grey-200 dark:hover:bg-dz-grey-700 transition-colors text-dz-black dark:text-dz-white" aria-label="Google ile Giriş Yap">
                             <FaGoogle className="w-4 h-4" />
                         </button>
                     </div>
@@ -78,7 +78,7 @@ export default function Navbar() {
                 <div className="flex md:hidden items-center gap-2">
                     <button
                         onClick={() => setTheme(isDark ? "light" : "dark")}
-                        className="w-9 h-9 rounded-xl bg-dz-grey-100 dark:bg-dz-grey-800 border border-dz-grey-200 dark:border-dz-white/10 flex items-center justify-center"
+                        className="w-11 h-11 sm:w-9 sm:h-9 rounded-xl bg-dz-grey-100 dark:bg-dz-grey-800 border border-dz-grey-200 dark:border-dz-white/10 flex items-center justify-center"
                         aria-label="Temayı değiştir"
                     >
                         {isDark ? (
@@ -93,7 +93,7 @@ export default function Navbar() {
                     </button>
                     <button
                         onClick={() => setMenuOpen(!menuOpen)}
-                        className="w-9 h-9 rounded-xl bg-dz-grey-100 dark:bg-dz-grey-800 border border-dz-grey-200 dark:border-dz-white/10 flex items-center justify-center"
+                        className="w-11 h-11 sm:w-9 sm:h-9 rounded-xl bg-dz-grey-100 dark:bg-dz-grey-800 border border-dz-grey-200 dark:border-dz-white/10 flex items-center justify-center"
                         aria-label="Menü"
                         aria-expanded={menuOpen}
                     >

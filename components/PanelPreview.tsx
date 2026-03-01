@@ -57,7 +57,7 @@ export default function PanelPreview() {
             </div>
           </div>
 
-          <div className="flex flex-col md:flex-row gap-4 h-[500px] overflow-hidden rounded-xl">
+          <div className="flex flex-col md:flex-row gap-4 h-[350px] sm:h-[420px] md:h-[500px] overflow-hidden rounded-xl">
             {/* Sidebar (gorsel onizleme - tiklanamaz) */}
             <div className="hidden md:flex flex-col w-64 border-r border-dz-grey-200 dark:border-dz-white/5 pr-4 py-4 space-y-2">
               <div className="h-10 rounded-lg bg-dz-orange-500/10 border border-dz-orange-500/20 flex items-center px-4 gap-3 text-dz-orange-500 font-bold text-sm">
@@ -97,7 +97,7 @@ export default function PanelPreview() {
             <div className="flex-1 p-2 md:p-6 overflow-hidden flex flex-col gap-6">
 
               {/* Header Stats */}
-              <div className="grid grid-cols-3 gap-4">
+              <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 sm:gap-4">
                 <div className="p-4 rounded-xl border border-dz-grey-200 dark:border-dz-white/5 bg-dz-white dark:bg-dz-grey-900 shadow-sm flex items-center gap-4">
                   <div className="w-10 h-10 rounded-lg bg-orange-500/10 flex flex-col items-center justify-center text-orange-500">
                     <Flame className="w-4 h-4" />
