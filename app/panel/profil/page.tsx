@@ -60,11 +60,14 @@ export default async function ProfilPage() {
 
   type UserBadgeRow = {
     badge_id: string;
-    badges: { slug: string } | null;
+    badges: { slug: string } | { slug: string }[] | null;
   };
 
   const earnedBadgeSlugs = (badgesRes.data ?? [])
-    .map((b: UserBadgeRow) => b.badges?.slug)
+    .map((b: UserBadgeRow) => {
+      const badge = Array.isArray(b.badges) ? b.badges[0] : b.badges;
+      return badge?.slug;
+    })
     .filter(Boolean) as string[];
 
   return (
