@@ -1,0 +1,498 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>İçerik İmparatorluğu — DiptenZirveye</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@500;600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,400&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{--o50:#fff7ed;--o100:#ffedd5;--o200:#fed7aa;--o400:#fb923c;--o500:#f97316;--o600:#ea6c00;--o700:#c05500;--a400:#fbbf24;--bk:#0d0d0d;--g900:#1a1a1a;--g600:#4a4540;--g400:#9a9590;--g200:#e8e2da;--g100:#f5f0eb;--wh:#fdfaf7;--ok:#22c55e;--grad:linear-gradient(135deg,var(--o500),var(--a400))}
+*{margin:0;padding:0;box-sizing:border-box}body{font-family:'DM Sans',sans-serif;font-size:12.5pt;line-height:1.82;color:var(--bk);background:var(--wh)}h1,h2,h3,h4{font-family:'Syne',sans-serif;letter-spacing:-.02em;color:var(--bk)}h2{font-size:19pt;font-weight:700;margin:44px 0 16px;line-height:1.25}h3{font-size:14pt;font-weight:600;margin:30px 0 12px}p{margin-bottom:13px}strong{font-weight:600}.page{max-width:760px;margin:0 auto;padding:48px 64px}
+.cover{min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;background:var(--bk);color:var(--wh);text-align:center;position:relative;overflow:hidden;page-break-after:always;padding:60px 48px}.cover-top-bar{position:absolute;top:0;left:0;right:0;height:4px;background:var(--grad)}.cover-bg{position:absolute;inset:0;opacity:.06;pointer-events:none}.cover-logo{font-family:'Syne';font-size:13pt;font-weight:700;letter-spacing:.08em;margin-bottom:72px;z-index:1;position:relative}.cover-logo .d{color:var(--wh)}.cover-logo .z{color:var(--o500)}.cover-series{font-family:'DM Mono';font-size:8.5pt;letter-spacing:.2em;text-transform:uppercase;color:var(--o500);margin-bottom:20px;z-index:1;position:relative}.cover-title{font-family:'Syne';font-size:40pt;font-weight:800;line-height:1.08;letter-spacing:-.03em;z-index:1;position:relative;margin-bottom:14px}.cover-title span{background:var(--grad);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}.cover-sub{font-size:13pt;font-weight:300;color:var(--g400);z-index:1;position:relative;margin-bottom:48px}.cover-line{width:80px;height:3px;background:var(--grad);border-radius:2px;margin:0 auto 48px;z-index:1;position:relative}.cover-quote{font-style:italic;font-size:11.5pt;color:var(--g400);max-width:480px;line-height:1.7;z-index:1;position:relative;margin-bottom:72px}.cover-badge{display:inline-flex;align-items:center;gap:16px;padding:8px 24px;border:1px solid rgba(249,115,22,.4);border-radius:24px;font-family:'DM Mono';font-size:8pt;letter-spacing:.06em;color:var(--o400);z-index:1;position:relative}.cover-badge .dot{width:4px;height:4px;border-radius:50%;background:var(--o500)}.cover-year{font-family:'DM Mono';font-size:7.5pt;color:var(--g600);margin-top:36px;letter-spacing:.12em;z-index:1;position:relative}
+.copy-page{page-break-after:always;min-height:70vh;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;padding:80px 48px}.copy-page p{font-size:9pt;color:var(--g600);line-height:2.2}.copy-logo{font-family:'Syne';font-weight:700;font-size:14pt;margin-bottom:48px}.copy-logo .d{color:var(--bk)}.copy-logo .z{color:var(--o500)}
+.toc{page-break-after:always;padding:72px 64px;max-width:760px;margin:0 auto}.toc-item{display:flex;align-items:baseline;padding:14px 0;border-bottom:1px solid var(--g200)}.toc-num{font-family:'DM Mono';font-size:10pt;color:var(--o500);min-width:36px;font-weight:500}.toc-title{flex:1;font-size:12.5pt;font-weight:500}.toc-sub{font-size:9pt;color:var(--g400);font-style:italic}
+.ch-open{page-break-before:always;margin-bottom:36px}.ch-open-bg{background:var(--bk);color:var(--wh);padding:56px 64px 44px;position:relative;overflow:hidden;max-width:760px;margin:0 auto}.ch-num{font-family:'DM Mono';font-size:9pt;letter-spacing:.2em;text-transform:uppercase;color:var(--o500);margin-bottom:12px;position:relative;z-index:1}.ch-title{font-family:'Syne';font-size:28pt;font-weight:800;line-height:1.12;letter-spacing:-.02em;position:relative;z-index:1;margin-bottom:10px}.ch-sub{font-size:10.5pt;font-weight:300;color:var(--g400);font-style:italic;position:relative;z-index:1}.ch-line{width:60px;height:3px;background:var(--grad);border-radius:2px;margin-top:24px;position:relative;z-index:1}.ch-xp{display:inline-flex;align-items:center;gap:6px;padding:5px 14px;border:1px solid rgba(249,115,22,.3);border-radius:16px;font-family:'DM Mono';font-size:7.5pt;color:var(--o400);letter-spacing:.06em;margin-top:20px;position:relative;z-index:1}
+.pg-head{display:flex;justify-content:space-between;align-items:center;padding:14px 0 20px;border-bottom:1px solid var(--g200);margin-bottom:28px;font-family:'DM Mono';font-size:7pt;letter-spacing:.12em;text-transform:uppercase;color:var(--g400)}.pg-head .brand{color:var(--o500)}
+table{width:100%;border-collapse:collapse;margin:22px 0;font-size:11pt}thead th{background:var(--g100);font-family:'Syne';font-weight:600;font-size:9.5pt;text-align:left;padding:11px 16px;border-bottom:2px solid var(--o500);text-transform:uppercase;letter-spacing:.04em}tbody td{padding:11px 16px;border-bottom:1px solid var(--g200);vertical-align:top}tbody tr:nth-child(even){background:rgba(245,240,235,.5)}
+.panel-task{background:var(--o50);border:1px solid var(--o200);border-radius:12px;padding:24px 28px;margin:28px 0;position:relative;overflow:hidden}.panel-task::before{content:'';position:absolute;left:0;top:0;bottom:0;width:4px;background:var(--grad)}.panel-task-head{font-family:'DM Mono';font-size:7.5pt;letter-spacing:.14em;text-transform:uppercase;color:var(--o600);margin-bottom:12px;font-weight:500}.panel-task p{font-size:11.5pt;margin-bottom:8px}
+.takeaway{background:var(--g100);border-radius:12px;padding:24px 28px;margin:28px 0}.takeaway-head{font-family:'Syne';font-weight:700;font-size:10pt;color:var(--o600);margin-bottom:12px}.takeaway ol{padding-left:20px}.takeaway li{margin-bottom:8px;font-size:11.5pt}
+.story-box{background:var(--bk);color:var(--wh);border-radius:12px;padding:28px 32px;margin:28px 0}.story-box strong{color:var(--o400)}.story-box p{margin-bottom:10px}
+.stat-card{display:flex;flex-direction:column;align-items:center;justify-content:center;background:var(--grad);color:var(--wh);border-radius:12px;padding:18px 12px;text-align:center;flex:1;min-width:0}.stat-card .num{font-family:'Syne';font-size:24pt;font-weight:800;line-height:1}.stat-card .label{font-family:'DM Mono';font-size:6.5pt;letter-spacing:.08em;text-transform:uppercase;margin-top:6px;opacity:.85;line-height:1.4}.stat-row{display:flex;gap:10px;margin:24px 0}
+blockquote{border-left:3px solid var(--o500);padding:14px 24px;margin:22px 0;background:var(--o50);border-radius:0 10px 10px 0;font-style:italic}
+ul,ol{padding-left:22px;margin-bottom:14px}li{margin-bottom:6px}
+.model-card{border:2px solid var(--o200);border-radius:12px;padding:24px 28px;margin:20px 0;background:var(--wh)}.model-card h3{margin-top:0}
+.footer{background:var(--bk);color:var(--g600);text-align:center;padding:48px 24px;font-family:'DM Mono';font-size:7.5pt;letter-spacing:.08em}.footer .logo{font-family:'Syne';font-size:14pt;font-weight:700;margin-bottom:16px}.footer .logo .d{color:var(--wh)}.footer .logo .z{color:var(--o500)}
+@media print{body{font-size:10.5pt}.page{padding:0;max-width:100%}.cover{min-height:auto;padding:100px 60px}.panel-task,.takeaway,.story-box,.model-card{break-inside:avoid}h2,h3{break-after:avoid}}@page{size:A4;margin:2cm}
+</style>
+</head>
+<body>
+
+<div class="cover">
+  <div class="cover-top-bar"></div>
+  <svg class="cover-bg" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg"><defs><pattern id="grid" width="60" height="60" patternUnits="userSpaceOnUse"><path d="M 60 0 L 0 0 0 60" fill="none" stroke="#f97316" stroke-width=".5"/></pattern></defs><rect width="100%" height="100%" fill="url(#grid)" opacity=".3"/></svg>
+  <div class="cover-logo"><span class="d">Dipten</span><span class="z">Zirveye</span></div>
+  <div class="cover-series">AI Ustalık Serisi · Kitap 06</div>
+  <div class="cover-title">İÇERİK<br><span>İMPARATORLUĞU</span></div>
+  <div class="cover-sub">AI ile Durmadan, Yorulmadan Kaliteli Dijital Varlıklar Üretmek</div>
+  <div class="cover-line"></div>
+  <div class="cover-quote">"İçerik üretmek zor değil — sistematik üretmek, kaliteyi düşürmeden ölçeklemek zor."</div>
+  <div class="cover-badge"><span>600 XP</span><span class="dot"></span><span>7 Bölüm</span><span class="dot"></span><span>6 Saat</span></div>
+  <div class="cover-year">V1.0 · 2026</div>
+</div>
+
+<div class="copy-page">
+  <div class="copy-logo"><span class="d">Dipten</span><span class="z">Zirveye</span></div>
+  <p><strong style="font-size:12pt;color:var(--bk)">İÇERİK İMPARATORLUĞU</strong></p>
+  <p>AI ile Durmadan, Yorulmadan Kaliteli Dijital Varlıklar Üretmek</p>
+  <p style="margin-top:16px">DİPTENZİRVEYE AI Ustalık Serisi · Kitap 06</p>
+  <p>Versiyon 1.0 · 2026</p>
+  <div style="width:40px;height:2px;background:var(--grad);border-radius:1px;margin:28px auto"></div>
+  <p style="font-size:8pt;margin-top:20px">© 2026 DİPTENZİRVEYE · Tüm hakları saklıdır.</p>
+</div>
+
+<div class="page toc" style="padding-top:72px">
+  <h2 style="font-size:22pt;font-weight:800;margin-bottom:8px">İçindekiler</h2>
+  <div style="width:40px;height:3px;background:var(--grad);border-radius:2px;margin-bottom:36px"></div>
+  <div class="toc-item"><span class="toc-num">01</span><span class="toc-title">İçerik Ekonomisi Haritası</span></div>
+  <div class="toc-item"><span class="toc-num">02</span><span class="toc-title">AI İçerik Fabrikası Kurulumu</span></div>
+  <div class="toc-item"><span class="toc-num">03</span><span class="toc-title">Yazılı İçerik Üretimi</span></div>
+  <div class="toc-item"><span class="toc-num">04</span><span class="toc-title">Görsel ve Video Üretimi</span></div>
+  <div class="toc-item"><span class="toc-num">05</span><span class="toc-title">İçerik Dağıtım Stratejisi</span></div>
+  <div class="toc-item"><span class="toc-num">06</span><span class="toc-title">Monetizasyon Modelleri</span></div>
+  <div class="toc-item" style="border-bottom:none"><span class="toc-num">07</span><span class="toc-title">7 Günlük İçerik İmparatorluğu Planı</span></div>
+</div>
+
+<!-- BÖLÜM 1 -->
+<div class="ch-open"><div class="ch-open-bg">
+  <div class="ch-num">Bölüm 01</div><div class="ch-title">İçerik Ekonomisi<br>Haritası</div>
+  <div class="ch-sub">2026'da içerik üreticisi olmanın altın çağı</div><div class="ch-line"></div>
+  <div class="ch-xp"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#f97316" stroke-width="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>80 XP</div>
+</div></div>
+
+<div class="page">
+  <div class="pg-head"><span>Bölüm 01 · İçerik Ekonomisi Haritası</span><span class="brand">DiptenZirveye</span></div>
+
+  <p>2026 yılında dijital içerik ekonomisi 500 milyar doları aşmış durumda. YouTube'dan TikTok'a, Medium'dan Substack'e, podcast'lerden e-kitaplara kadar her platformda içerik tüketimi rekor seviyede. Ancak asıl fırsat tüketen tarafta değil — <strong>üreten tarafta</strong>.</p>
+
+  <p>Geleneksel içerik üretimi haftada 40+ saat çalışma gerektiriyordu. Araştırma, yazma, düzenleme, görsel hazırlama, yayınlama, dağıtım... Her biri ayrı bir uzmanlık alanı. Bugün AI bu sürecin %70'ini otomatize edebilir — ama yalnızca doğru sistemi kuranlar için.</p>
+
+  <h2>İçerik Üretim Paradigması Değişti</h2>
+
+  <p>Eskiden bir blog yazısı yazmak 4-6 saat sürerdi. Şimdi doğru prompt yapısıyla 45 dakikada araştırılmış, SEO uyumlu, özgün bir makale üretebilirsin. Ancak dikkat: "AI yazdı" demek yetmez. Farkı yaratan senin <strong>editöryal vizyonun</strong>, marka sesin ve stratejik bakış açın.</p>
+
+  <div class="stat-row">
+    <div class="stat-card"><div class="num">73%</div><div class="label">Pazarlamacıların AI<br>kullanım oranı</div></div>
+    <div class="stat-card"><div class="num">4.2x</div><div class="label">AI ile içerik<br>üretim hızı artışı</div></div>
+    <div class="stat-card"><div class="num">$500B</div><div class="label">Dijital içerik<br>ekonomisi büyüklüğü</div></div>
+  </div>
+
+  <h2>İçerik İmparatorluğu Piramidi</h2>
+
+  <p>Başarılı bir içerik operasyonu 4 katmandan oluşur:</p>
+
+  <ol>
+    <li><strong>Temel Katman — Uzmanlık Alanı:</strong> Hangi konuda içerik üreteceksin? Niş seçimi her şeyin başlangıcı.</li>
+    <li><strong>Üretim Katmanı — AI Fabrikası:</strong> İçeriği sistematik olarak üretecek workflow ve araçlar.</li>
+    <li><strong>Dağıtım Katmanı — Çoklu Platform:</strong> Bir içerikten 7+ platform için materyal çıkarmak.</li>
+    <li><strong>Monetizasyon Katmanı — Gelir Modeli:</strong> İçeriği paraya dönüştüren mekanizmalar.</li>
+  </ol>
+
+  <div class="panel-task">
+    <div class="panel-task-head">⚡ Eylem Görevi</div>
+    <p>Şu 3 soruyu yanıtla ve not defterine yaz:</p>
+    <p>1. Hangi konuda saatlerce konuşabilirsin?</p>
+    <p>2. İnsanlar senden ne konuda tavsiye istiyor?</p>
+    <p>3. Hangi sektörde bilgi asimetrisi (bilgili-bilgisiz uçurumu) en yüksek?</p>
+    <p>Bu üç sorunun kesişim noktası senin <strong>içerik niş'in</strong>.</p>
+  </div>
+
+  <h2>Niş Seçim Matrisi</h2>
+
+  <table>
+    <thead><tr><th>Kriter</th><th>Düşük Puan</th><th>Yüksek Puan</th></tr></thead>
+    <tbody>
+      <tr><td><strong>Talep</strong></td><td>Kimse aramıyor</td><td>Aylık 10K+ arama</td></tr>
+      <tr><td><strong>Rekabet</strong></td><td>Dev markalar hakim</td><td>Bireysel üreticiler başarılı</td></tr>
+      <tr><td><strong>Monetizasyon</strong></td><td>Reklam geliri düşük</td><td>Ürün/hizmet satışı mümkün</td></tr>
+      <tr><td><strong>Tutku</strong></td><td>Sıkıcı buluyorsun</td><td>Ücretsiz yaparsın</td></tr>
+      <tr><td><strong>Uzmanlık</strong></td><td>Yeni öğreniyorsun</td><td>5+ yıl deneyim</td></tr>
+    </tbody>
+  </table>
+
+  <div class="takeaway">
+    <div class="takeaway-head">🎯 Bölüm Çıkarımları</div>
+    <ol>
+      <li>İçerik ekonomisi 2026'da en büyük fırsat alanlarından biri.</li>
+      <li>AI, içerik üretim sürecinin %70'ini hızlandırabilir — ama strateji ve marka sesi senin işin.</li>
+      <li>Niş seçimi başarının %50'sini belirler: talep, rekabet, monetizasyon, tutku ve uzmanlık kesişimi.</li>
+    </ol>
+  </div>
+</div>
+
+<!-- BÖLÜM 2 -->
+<div class="ch-open"><div class="ch-open-bg">
+  <div class="ch-num">Bölüm 02</div><div class="ch-title">AI İçerik Fabrikası<br>Kurulumu</div>
+  <div class="ch-sub">Tek seferlik kurulum, sürekli üretim</div><div class="ch-line"></div>
+  <div class="ch-xp"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#f97316" stroke-width="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>90 XP</div>
+</div></div>
+
+<div class="page">
+  <div class="pg-head"><span>Bölüm 02 · AI İçerik Fabrikası Kurulumu</span><span class="brand">DiptenZirveye</span></div>
+
+  <p>İçerik İmparatorluğu kurmak için önce "fabrikayı" inşa etmelisin. Fabrika derken mekanik, ruhsuz bir üretim bandından bahsetmiyoruz — aksine, senin yaratıcı vizyonunu <strong>ölçeklenebilir bir sisteme</strong> dönüştüren bir altyapıdan bahsediyoruz.</p>
+
+  <h2>İçerik Üretim Hattı (Content Pipeline)</h2>
+
+  <p>Her içerik parçası 5 aşamadan geçer:</p>
+
+  <ol>
+    <li><strong>İdeation (Fikir Üretme):</strong> AI ile trend analizi, rakip içerik taraması, anahtar kelime araştırması.</li>
+    <li><strong>Drafting (Taslak):</strong> AI ile ilk taslağı oluşturma — ama senin ses tonunla.</li>
+    <li><strong>Editing (Düzenleme):</strong> İnsan dokunuşu: kişisel hikayeler, özgün bakış açıları, marka sesi.</li>
+    <li><strong>Repurposing (Dönüştürme):</strong> 1 içerikten 7+ formata çevirme (blog → tweet dizisi → carousel → video script).</li>
+    <li><strong>Distribution (Dağıtım):</strong> Doğru zamanda, doğru platformda yayınlama.</li>
+  </ol>
+
+  <h2>AI Araç Yığını (Tech Stack)</h2>
+
+  <table>
+    <thead><tr><th>Aşama</th><th>Araç</th><th>Kullanım</th></tr></thead>
+    <tbody>
+      <tr><td><strong>Araştırma</strong></td><td>Perplexity AI</td><td>Kaynaklı araştırma, trend tespiti</td></tr>
+      <tr><td><strong>Yazı</strong></td><td>Claude / ChatGPT</td><td>Taslak oluşturma, düzenleme</td></tr>
+      <tr><td><strong>SEO</strong></td><td>Surfer SEO</td><td>Anahtar kelime optimizasyonu</td></tr>
+      <tr><td><strong>Görsel</strong></td><td>Midjourney / DALL-E</td><td>Blog görselleri, sosyal medya</td></tr>
+      <tr><td><strong>Video</strong></td><td>Runway / HeyGen</td><td>Kısa video, avatar videoları</td></tr>
+      <tr><td><strong>Ses</strong></td><td>ElevenLabs</td><td>Podcast, sesli makale</td></tr>
+      <tr><td><strong>Planlama</strong></td><td>Notion AI</td><td>İçerik takvimi, proje yönetimi</td></tr>
+    </tbody>
+  </table>
+
+  <h2>Marka Sesi DNA'sı</h2>
+
+  <p>AI'dan tutarlı çıktı almak için "Marka Sesi Belgesi" oluşturmalısın. Bu belge şunları içerir:</p>
+
+  <ul>
+    <li><strong>Ton:</strong> Profesyonel mi, samimi mi, provokatif mi?</li>
+    <li><strong>Hitap:</strong> "Siz" mi, "sen" mi?</li>
+    <li><strong>Kelime havuzu:</strong> Sıklıkla kullanılan terimler.</li>
+    <li><strong>Yasak kelimeler:</strong> Asla kullanılmayacak ifadeler.</li>
+    <li><strong>Örnek paragraflar:</strong> "Bu tarzda yaz" diyebileceğin referanslar.</li>
+  </ul>
+
+  <div class="story-box">
+    <p><strong>Vaka Çalışması: Tek Kişilik İçerik Ajansı</strong></p>
+    <p>Emre, dijital pazarlama uzmanı. Haftada 3 blog yazısı, günde 2 Instagram postu ve ayda 4 YouTube videosu üretiyor. Eskiden bu iş için 5 kişilik ekip gerekiyordu. Şimdi? AI araç yığını + 4 saat/gün odaklı çalışma. Aylık gelir: 45.000 TL (reklam + sponsorluk + dijital ürün).</p>
+  </div>
+
+  <div class="panel-task">
+    <div class="panel-task-head">⚡ Eylem Görevi</div>
+    <p>Kendi marka sesi belgenizi oluşturun. Claude veya ChatGPT'ye şu promptu verin:</p>
+    <p><em>"Benim hakkımda bildiklerin: [kısa bio]. Hedef kitlem: [kim]. Ses tonum: [3 sıfat]. Bu bilgilere göre içerik üretirken kullanabileceğim bir marka sesi rehberi oluştur."</em></p>
+  </div>
+
+  <div class="takeaway">
+    <div class="takeaway-head">🎯 Bölüm Çıkarımları</div>
+    <ol>
+      <li>İçerik üretim hattını 5 aşamada (fikir → taslak → düzenleme → dönüştürme → dağıtım) kur.</li>
+      <li>Her aşama için doğru AI aracını seç ve birbirine entegre et.</li>
+      <li>Marka Sesi DNA belgesi, AI çıktılarının tutarlılığını garanti eder.</li>
+    </ol>
+  </div>
+</div>
+
+<!-- BÖLÜM 3 -->
+<div class="ch-open"><div class="ch-open-bg">
+  <div class="ch-num">Bölüm 03</div><div class="ch-title">Yazılı İçerik<br>Üretimi</div>
+  <div class="ch-sub">Blog, newsletter ve sosyal medya metinleri</div><div class="ch-line"></div>
+  <div class="ch-xp"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#f97316" stroke-width="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>90 XP</div>
+</div></div>
+
+<div class="page">
+  <div class="pg-head"><span>Bölüm 03 · Yazılı İçerik Üretimi</span><span class="brand">DiptenZirveye</span></div>
+
+  <p>Yazılı içerik, dijital varlığının temelidir. SEO trafik çeker, newsletter sadık kitle oluşturur, sosyal medya metinleri marka bilinirliği sağlar. AI ile yazılı içerik üretmenin formülü: <strong>%30 AI taslak + %40 insan editörlüğü + %30 kişisel deneyim</strong>.</p>
+
+  <h2>SEO Uyumlu Blog Yazısı Formülü</h2>
+
+  <p>Bir blog yazısını 45 dakikada üretmenin adımları:</p>
+
+  <ol>
+    <li><strong>Anahtar kelime seç</strong> (Perplexity + Google Trends ile 5 dk)</li>
+    <li><strong>Rakip analizi yap</strong> — İlk 5 sonucu analiz et, eksik noktaları bul (10 dk)</li>
+    <li><strong>AI ile taslak oluştur</strong> — Detaylı prompt ver, yapı iste (10 dk)</li>
+    <li><strong>İnsan dokunuşu ekle</strong> — Kişisel hikaye, özgün veri, marka sesi (15 dk)</li>
+    <li><strong>SEO optimizasyonu</strong> — Başlık, meta açıklama, iç linkler (5 dk)</li>
+  </ol>
+
+  <h2>Yüksek Dönüşüm Getiren Başlık Formülleri</h2>
+
+  <table>
+    <thead><tr><th>Formül</th><th>Örnek</th></tr></thead>
+    <tbody>
+      <tr><td><strong>Sayı + Sonuç</strong></td><td>"7 Adımda AI ile Pasif Gelir Sistemi Kurma"</td></tr>
+      <tr><td><strong>Nasıl + Spesifik</strong></td><td>"ChatGPT ile Haftada 10 Blog Yazısı Nasıl Yazılır?"</td></tr>
+      <tr><td><strong>Karşılaştırma</strong></td><td>"Claude vs ChatGPT: İçerik Üretiminde Hangisi Daha İyi?"</td></tr>
+      <tr><td><strong>Soru + Merak</strong></td><td>"AI Yazarlar İnsan Yazarları Geçti mi?"</td></tr>
+      <tr><td><strong>Kılavuz</strong></td><td>"2026 AI İçerik Stratejisi: Eksiksiz Rehber"</td></tr>
+    </tbody>
+  </table>
+
+  <h2>Newsletter Stratejisi</h2>
+
+  <p>E-posta listesi senin en değerli dijital varlığın. Platform algoritmaları değişir, ama e-posta listen her zaman senindir. AI ile haftalık newsletter üretim süreci:</p>
+
+  <ul>
+    <li><strong>Pazartesi:</strong> Haftanın AI haberleri taraması (Perplexity)</li>
+    <li><strong>Salı:</strong> Ana tema seçimi ve taslak (Claude)</li>
+    <li><strong>Çarşamba:</strong> Kişisel yorum ve düzenleme</li>
+    <li><strong>Perşembe:</strong> A/B test başlığı oluşturma</li>
+    <li><strong>Cuma:</strong> Gönderim + performans analizi</li>
+  </ul>
+
+  <div class="panel-task">
+    <div class="panel-task-head">⚡ Eylem Görevi</div>
+    <p>Niş'inize uygun 1 blog yazısı taslağı oluşturun. DiptenZirveye'nin Prompt Hub'daki "Blog Yazısı Taslağı" şablonunu kullanın.</p>
+  </div>
+
+  <div class="takeaway">
+    <div class="takeaway-head">🎯 Bölüm Çıkarımları</div>
+    <ol>
+      <li>Blog yazısı formülü: Anahtar kelime → Rakip analizi → AI taslak → İnsan dokunuşu → SEO.</li>
+      <li>Başlık formülleri tıklama oranını 2-3x artırabilir.</li>
+      <li>Newsletter, algoritma bağımsız en güçlü kitle oluşturma aracıdır.</li>
+    </ol>
+  </div>
+</div>
+
+<!-- BÖLÜM 4 -->
+<div class="ch-open"><div class="ch-open-bg">
+  <div class="ch-num">Bölüm 04</div><div class="ch-title">Görsel ve Video<br>Üretimi</div>
+  <div class="ch-sub">Tasarımcı olmadan profesyonel görseller</div><div class="ch-line"></div>
+  <div class="ch-xp"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#f97316" stroke-width="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>90 XP</div>
+</div></div>
+
+<div class="page">
+  <div class="pg-head"><span>Bölüm 04 · Görsel ve Video Üretimi</span><span class="brand">DiptenZirveye</span></div>
+
+  <p>Görsel içerik, yazılı içerikten 40x daha fazla paylaşılıyor. Video ise 2026'da internet trafiğinin %82'sini oluşturuyor. AI görsel ve video araçlarıyla, profesyonel ekip gerektirmeden yüksek kaliteli multimedya içerik üretebilirsin.</p>
+
+  <h2>AI Görsel Üretim Araçları</h2>
+
+  <table>
+    <thead><tr><th>Araç</th><th>En İyi Kullanım</th><th>Fiyat</th></tr></thead>
+    <tbody>
+      <tr><td><strong>Midjourney</strong></td><td>Artistik, yaratıcı görseller</td><td>$10/ay</td></tr>
+      <tr><td><strong>DALL-E 3</strong></td><td>Metin içeren görseller, infografikler</td><td>ChatGPT Plus içinde</td></tr>
+      <tr><td><strong>Ideogram</strong></td><td>Logo, tipografi içeren tasarımlar</td><td>Freemium</td></tr>
+      <tr><td><strong>Canva AI</strong></td><td>Sosyal medya şablonları</td><td>$13/ay</td></tr>
+    </tbody>
+  </table>
+
+  <h2>Kısa Video Üretim Sistemi</h2>
+
+  <p>Bir kısa video (60-90 sn) üretmek için AI destekli workflow:</p>
+
+  <ol>
+    <li><strong>Script yazımı:</strong> Claude ile hook + değer + CTA yapısında script (5 dk)</li>
+    <li><strong>Görsel üretimi:</strong> Midjourney veya stok görseller (5 dk)</li>
+    <li><strong>Seslendirme:</strong> ElevenLabs ile profesyonel ses (3 dk)</li>
+    <li><strong>Montaj:</strong> CapCut veya Runway ile birleştirme (10 dk)</li>
+    <li><strong>Altyazı:</strong> Otomatik altyazı ekleme (2 dk)</li>
+  </ol>
+
+  <p>Toplam: <strong>25 dakikada 1 profesyonel kısa video.</strong> Günde 3 video = haftada 21 video = ayda 90 video.</p>
+
+  <div class="story-box">
+    <p><strong>Hook Formülleri (İlk 3 Saniye)</strong></p>
+    <p>• "Bunu bilmiyorsan AI'ı yanlış kullanıyorsun."</p>
+    <p>• "3 dakikada 1 haftalık içerik nasıl üretilir?"</p>
+    <p>• "Bu araç hayatımı değiştirdi — ve ücretsiz."</p>
+    <p>• "Herkes X yapıyor, ama doğrusu Y."</p>
+  </div>
+
+  <h2>Carousel (Kaydırmalı) İçerik</h2>
+
+  <p>Instagram ve LinkedIn'in en çok etkileşim alan formatı carousel'ler. AI ile carousel üretim süreci:</p>
+
+  <ul>
+    <li>Blog yazısından ana maddeleri çıkar (Claude)</li>
+    <li>Her slide için başlık + açıklama oluştur</li>
+    <li>Canva AI veya Figma ile görselleştir</li>
+    <li>Son slide: CTA (kaydet, takip et, linke tıkla)</li>
+  </ul>
+
+  <div class="takeaway">
+    <div class="takeaway-head">🎯 Bölüm Çıkarımları</div>
+    <ol>
+      <li>25 dakikada profesyonel kısa video üretim sistemi kurulabilir.</li>
+      <li>Hook (ilk 3 saniye) videonun başarısının %80'ini belirler.</li>
+      <li>Carousel formatı en yüksek kaydetme ve paylaşma oranına sahip.</li>
+    </ol>
+  </div>
+</div>
+
+<!-- BÖLÜM 5 -->
+<div class="ch-open"><div class="ch-open-bg">
+  <div class="ch-num">Bölüm 05</div><div class="ch-title">İçerik Dağıtım<br>Stratejisi</div>
+  <div class="ch-sub">1 içerik → 7 platform → 7x etki</div><div class="ch-line"></div>
+  <div class="ch-xp"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#f97316" stroke-width="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>80 XP</div>
+</div></div>
+
+<div class="page">
+  <div class="pg-head"><span>Bölüm 05 · İçerik Dağıtım Stratejisi</span><span class="brand">DiptenZirveye</span></div>
+
+  <p>İçerik üretmek savaşın yarısı — dağıtım diğer yarısı. "Harika içerik üretip kimsenin görmediği" senaryo, doğru dağıtım stratejisi olmamasından kaynaklanır. Çözüm: <strong>İçerik Atomizasyonu</strong>.</p>
+
+  <h2>İçerik Atomizasyonu Nedir?</h2>
+
+  <p>Bir "ana içerik parçası" (pillar content) oluştur, sonra onu 7+ formata dönüştür:</p>
+
+  <table>
+    <thead><tr><th>Ana İçerik</th><th>Dönüştürülen Format</th><th>Platform</th></tr></thead>
+    <tbody>
+      <tr><td rowspan="7"><strong>1 Blog Yazısı<br>(2000 kelime)</strong></td><td>Tweet dizisi (10 tweet)</td><td>X (Twitter)</td></tr>
+      <tr><td>Carousel (8-10 slide)</td><td>Instagram, LinkedIn</td></tr>
+      <tr><td>Kısa video (60 sn)</td><td>TikTok, Reels, Shorts</td></tr>
+      <tr><td>Podcast bölümü (15 dk)</td><td>Spotify, Apple Podcasts</td></tr>
+      <tr><td>Newsletter bölümü</td><td>E-posta</td></tr>
+      <tr><td>Quora/Reddit cevabı</td><td>Quora, Reddit</td></tr>
+      <tr><td>Infografik</td><td>Pinterest</td></tr>
+    </tbody>
+  </table>
+
+  <p>AI ile bu dönüşüm süreci dramatik olarak kısalır. Claude'a "Bu blog yazısını 10 tweet'lik bir diziye dönüştür" demen yeterli. Ardından her platform için optimize et.</p>
+
+  <h2>Platform Önceliklendirme</h2>
+
+  <p>Her platforma eşit yatırım yapamazsın. Niş'ine göre önceliklendirme yap:</p>
+
+  <ul>
+    <li><strong>B2B / Profesyonel:</strong> LinkedIn → Newsletter → Blog → YouTube</li>
+    <li><strong>B2C / Tüketici:</strong> Instagram → TikTok → YouTube → Blog</li>
+    <li><strong>Eğitim:</strong> YouTube → Blog → Newsletter → LinkedIn</li>
+    <li><strong>Yaratıcı:</strong> Instagram → TikTok → Pinterest → YouTube</li>
+  </ul>
+
+  <div class="panel-task">
+    <div class="panel-task-head">⚡ Eylem Görevi</div>
+    <p>Bir önceki bölümde yazdığınız blog taslağını alın ve Claude'a şu promptu verin:</p>
+    <p><em>"Bu blog yazısını şu formatlara dönüştür: 1) 10 tweet'lik bir dizi, 2) 8 slide'lık bir carousel metni, 3) 60 saniyelik bir video scripti."</em></p>
+  </div>
+
+  <div class="takeaway">
+    <div class="takeaway-head">🎯 Bölüm Çıkarımları</div>
+    <ol>
+      <li>1 ana içerikten 7+ platform için materyal çıkarabilirsin (atomizasyon).</li>
+      <li>Niş'ine göre 2-3 ana platformu önceliklendir, geri kalanı atomize et.</li>
+      <li>AI, format dönüşümünü dakikalar içinde yapabilir.</li>
+    </ol>
+  </div>
+</div>
+
+<!-- BÖLÜM 6 -->
+<div class="ch-open"><div class="ch-open-bg">
+  <div class="ch-num">Bölüm 06</div><div class="ch-title">Monetizasyon<br>Modelleri</div>
+  <div class="ch-sub">İçeriği gelire dönüştürmenin 5 yolu</div><div class="ch-line"></div>
+  <div class="ch-xp"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#f97316" stroke-width="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>90 XP</div>
+</div></div>
+
+<div class="page">
+  <div class="pg-head"><span>Bölüm 06 · Monetizasyon Modelleri</span><span class="brand">DiptenZirveye</span></div>
+
+  <p>İçerik üretmek güzel, ama sonuçta bir iş modeli kuruyorsun. İçerik İmparatorluğunun 5 temel gelir kanalı:</p>
+
+  <h2>1. Dijital Ürünler</h2>
+  <p>E-kitap, online kurs, şablon paketi, prompt kütüphanesi. Bir kere üret, sınırsız sat. AI ile dijital ürün üretim süreci:</p>
+  <ul>
+    <li>Blog serisinden e-kitap derle (Claude ile düzenleme)</li>
+    <li>Video serisinden kurs oluştur (Descript ile düzenleme)</li>
+    <li>Notion şablonları, Canva şablonları, prompt paketleri</li>
+  </ul>
+  <p><strong>Potansiyel:</strong> 10.000-100.000 TL/ay</p>
+
+  <h2>2. Sponsorluk ve Marka İşbirlikleri</h2>
+  <p>10K+ takipçi veya 5K+ e-posta abonesi ile sponsorluk alabilirsin. Niş ne kadar spesifikse, sponsorluk değeri o kadar yüksek.</p>
+  <p><strong>Potansiyel:</strong> 5.000-50.000 TL/iş birliği</p>
+
+  <h2>3. Danışmanlık ve Koçluk</h2>
+  <p>İçeriklerinle uzmanlığını kanıtla, sonra 1-1 veya grup danışmanlık sat. AI ile danışmanlık sürecini ölçekle.</p>
+  <p><strong>Potansiyel:</strong> 2.000-10.000 TL/seans</p>
+
+  <h2>4. Abonelik Modeli</h2>
+  <p>Premium newsletter, üyelik topluluğu, özel içerik. Substack, Patreon veya kendi platformun.</p>
+  <p><strong>Potansiyel:</strong> 500-5.000 abone × 50-200 TL = 25.000-1.000.000 TL/ay</p>
+
+  <h2>5. Affiliate Marketing</h2>
+  <p>Kullandığın AI araçlarını öner, komisyon kazan. Teknoloji nişinde affiliate oranları %20-50 arasında.</p>
+  <p><strong>Potansiyel:</strong> 5.000-30.000 TL/ay</p>
+
+  <div class="stat-row">
+    <div class="stat-card"><div class="num">5</div><div class="label">Gelir Kanalı</div></div>
+    <div class="stat-card"><div class="num">6-12</div><div class="label">Ay İçinde<br>İlk Gelir</div></div>
+    <div class="stat-card"><div class="num">∞</div><div class="label">Ölçeklenme<br>Potansiyeli</div></div>
+  </div>
+
+  <div class="takeaway">
+    <div class="takeaway-head">🎯 Bölüm Çıkarımları</div>
+    <ol>
+      <li>Dijital ürünler en yüksek marjlı gelir kanalıdır — bir kere üret, sınırsız sat.</li>
+      <li>İlk 6 ayda içerik üret ve kitle oluştur, sonra monetizasyona geç.</li>
+      <li>Birden fazla gelir kanalını paralel çalıştırarak riski dağıt.</li>
+    </ol>
+  </div>
+</div>
+
+<!-- BÖLÜM 7 -->
+<div class="ch-open"><div class="ch-open-bg">
+  <div class="ch-num">Bölüm 07</div><div class="ch-title">7 Günlük İçerik<br>İmparatorluğu Planı</div>
+  <div class="ch-sub">Bu kitaptaki her şeyi 1 haftada hayata geçir</div><div class="ch-line"></div>
+  <div class="ch-xp"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#f97316" stroke-width="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>80 XP</div>
+</div></div>
+
+<div class="page">
+  <div class="pg-head"><span>Bölüm 07 · 7 Günlük Eylem Planı</span><span class="brand">DiptenZirveye</span></div>
+
+  <p>Teori güzel, ama asıl güç uygulamada. İşte 7 günde İçerik İmparatorluğunun temellerini atman için adım adım plan:</p>
+
+  <table>
+    <thead><tr><th>Gün</th><th>Görev</th><th>Çıktı</th><th>Süre</th></tr></thead>
+    <tbody>
+      <tr><td><strong>1</strong></td><td>Niş seçimi ve rakip analizi</td><td>Niş belgesi + 5 rakip analizi</td><td>2 saat</td></tr>
+      <tr><td><strong>2</strong></td><td>Marka sesi DNA belgesi oluştur</td><td>Ton, kelime havuzu, örnek paragraflar</td><td>1.5 saat</td></tr>
+      <tr><td><strong>3</strong></td><td>AI araç yığınını kur</td><td>Tüm araçlara kayıt + test</td><td>2 saat</td></tr>
+      <tr><td><strong>4</strong></td><td>İlk blog yazısını üret</td><td>2000+ kelimelik SEO uyumlu makale</td><td>3 saat</td></tr>
+      <tr><td><strong>5</strong></td><td>İçerik atomizasyonu</td><td>Blog → tweet dizisi, carousel, video script</td><td>2 saat</td></tr>
+      <tr><td><strong>6</strong></td><td>İlk kısa videoyu üret</td><td>60 saniyelik profesyonel video</td><td>1.5 saat</td></tr>
+      <tr><td><strong>7</strong></td><td>İçerik takvimi oluştur</td><td>30 günlük yayın planı</td><td>2 saat</td></tr>
+    </tbody>
+  </table>
+
+  <div class="panel-task">
+    <div class="panel-task-head">⚡ Son Görev</div>
+    <p>Bu 7 günlük planı DiptenZirveye panelindeki Proje Planlayıcı'ya girin. Her günü bir görev olarak ekleyin ve tamamladıkça işaretleyin. Her görev XP kazandırır!</p>
+  </div>
+
+  <blockquote>"Mükemmel içerik diye bir şey yoktur — yayınlanmış içerik vardır. İlk 100 içerik parçanı yayınla, sonra optimize et."</blockquote>
+
+  <div class="takeaway">
+    <div class="takeaway-head">🎯 Kitap Özeti</div>
+    <ol>
+      <li>İçerik ekonomisi 500B+ dolar — fırsat penceresi açık.</li>
+      <li>AI, içerik üretim sürecinin %70'ini hızlandırır ama strateji senin işin.</li>
+      <li>İçerik Atomizasyonu: 1 içerik → 7+ platform.</li>
+      <li>5 monetizasyon kanalı: dijital ürün, sponsorluk, danışmanlık, abonelik, affiliate.</li>
+      <li>İlk 7 günde temeli at, 30 günde düzenli üretim alışkanlığı kazan.</li>
+    </ol>
+  </div>
+</div>
+
+<div class="footer">
+  <div class="logo"><span class="d">Dipten</span><span class="z">Zirveye</span></div>
+  <p>AI USTALIK SERİSİ · KİTAP 06 · İÇERİK İMPARATORLUĞU</p>
+  <p style="margin-top:8px">© 2026 DİPTENZİRVEYE · V1.0</p>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Otomasyon Mimarı — DiptenZirveye</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@500;600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,400&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{--o50:#fff7ed;--o100:#ffedd5;--o200:#fed7aa;--o400:#fb923c;--o500:#f97316;--o600:#ea6c00;--o700:#c05500;--a400:#fbbf24;--bk:#0d0d0d;--g900:#1a1a1a;--g600:#4a4540;--g400:#9a9590;--g200:#e8e2da;--g100:#f5f0eb;--wh:#fdfaf7;--ok:#22c55e;--grad:linear-gradient(135deg,var(--o500),var(--a400))}
+*{margin:0;padding:0;box-sizing:border-box}body{font-family:'DM Sans',sans-serif;font-size:12.5pt;line-height:1.82;color:var(--bk);background:var(--wh)}h1,h2,h3,h4{font-family:'Syne',sans-serif;letter-spacing:-.02em;color:var(--bk)}h2{font-size:19pt;font-weight:700;margin:44px 0 16px;line-height:1.25}h3{font-size:14pt;font-weight:600;margin:30px 0 12px}p{margin-bottom:13px}strong{font-weight:600}.page{max-width:760px;margin:0 auto;padding:48px 64px}
+.cover{min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;background:var(--bk);color:var(--wh);text-align:center;position:relative;overflow:hidden;page-break-after:always;padding:60px 48px}.cover-top-bar{position:absolute;top:0;left:0;right:0;height:4px;background:var(--grad)}.cover-bg{position:absolute;inset:0;opacity:.06;pointer-events:none}.cover-logo{font-family:'Syne';font-size:13pt;font-weight:700;letter-spacing:.08em;margin-bottom:72px;z-index:1;position:relative}.cover-logo .d{color:var(--wh)}.cover-logo .z{color:var(--o500)}.cover-series{font-family:'DM Mono';font-size:8.5pt;letter-spacing:.2em;text-transform:uppercase;color:var(--o500);margin-bottom:20px;z-index:1;position:relative}.cover-title{font-family:'Syne';font-size:40pt;font-weight:800;line-height:1.08;letter-spacing:-.03em;z-index:1;position:relative;margin-bottom:14px}.cover-title span{background:var(--grad);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}.cover-sub{font-size:13pt;font-weight:300;color:var(--g400);z-index:1;position:relative;margin-bottom:48px}.cover-line{width:80px;height:3px;background:var(--grad);border-radius:2px;margin:0 auto 48px;z-index:1;position:relative}.cover-quote{font-style:italic;font-size:11.5pt;color:var(--g400);max-width:480px;line-height:1.7;z-index:1;position:relative;margin-bottom:72px}.cover-badge{display:inline-flex;align-items:center;gap:16px;padding:8px 24px;border:1px solid rgba(249,115,22,.4);border-radius:24px;font-family:'DM Mono';font-size:8pt;letter-spacing:.06em;color:var(--o400);z-index:1;position:relative}.cover-badge .dot{width:4px;height:4px;border-radius:50%;background:var(--o500)}.cover-year{font-family:'DM Mono';font-size:7.5pt;color:var(--g600);margin-top:36px;letter-spacing:.12em;z-index:1;position:relative}
+.copy-page{page-break-after:always;min-height:70vh;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;padding:80px 48px}.copy-page p{font-size:9pt;color:var(--g600);line-height:2.2}.copy-logo{font-family:'Syne';font-weight:700;font-size:14pt;margin-bottom:48px}.copy-logo .d{color:var(--bk)}.copy-logo .z{color:var(--o500)}
+.toc{page-break-after:always;padding:72px 64px;max-width:760px;margin:0 auto}.toc-item{display:flex;align-items:baseline;padding:14px 0;border-bottom:1px solid var(--g200)}.toc-num{font-family:'DM Mono';font-size:10pt;color:var(--o500);min-width:36px;font-weight:500}.toc-title{flex:1;font-size:12.5pt;font-weight:500}
+.ch-open{page-break-before:always;margin-bottom:36px}.ch-open-bg{background:var(--bk);color:var(--wh);padding:56px 64px 44px;position:relative;overflow:hidden;max-width:760px;margin:0 auto}.ch-num{font-family:'DM Mono';font-size:9pt;letter-spacing:.2em;text-transform:uppercase;color:var(--o500);margin-bottom:12px;position:relative;z-index:1}.ch-title{font-family:'Syne';font-size:28pt;font-weight:800;line-height:1.12;letter-spacing:-.02em;position:relative;z-index:1;margin-bottom:10px}.ch-sub{font-size:10.5pt;font-weight:300;color:var(--g400);font-style:italic;position:relative;z-index:1}.ch-line{width:60px;height:3px;background:var(--grad);border-radius:2px;margin-top:24px;position:relative;z-index:1}.ch-xp{display:inline-flex;align-items:center;gap:6px;padding:5px 14px;border:1px solid rgba(249,115,22,.3);border-radius:16px;font-family:'DM Mono';font-size:7.5pt;color:var(--o400);letter-spacing:.06em;margin-top:20px;position:relative;z-index:1}
+.pg-head{display:flex;justify-content:space-between;align-items:center;padding:14px 0 20px;border-bottom:1px solid var(--g200);margin-bottom:28px;font-family:'DM Mono';font-size:7pt;letter-spacing:.12em;text-transform:uppercase;color:var(--g400)}.pg-head .brand{color:var(--o500)}
+table{width:100%;border-collapse:collapse;margin:22px 0;font-size:11pt}thead th{background:var(--g100);font-family:'Syne';font-weight:600;font-size:9.5pt;text-align:left;padding:11px 16px;border-bottom:2px solid var(--o500);text-transform:uppercase;letter-spacing:.04em}tbody td{padding:11px 16px;border-bottom:1px solid var(--g200);vertical-align:top}tbody tr:nth-child(even){background:rgba(245,240,235,.5)}
+.panel-task{background:var(--o50);border:1px solid var(--o200);border-radius:12px;padding:24px 28px;margin:28px 0;position:relative;overflow:hidden}.panel-task::before{content:'';position:absolute;left:0;top:0;bottom:0;width:4px;background:var(--grad)}.panel-task-head{font-family:'DM Mono';font-size:7.5pt;letter-spacing:.14em;text-transform:uppercase;color:var(--o600);margin-bottom:12px;font-weight:500}.panel-task p{font-size:11.5pt;margin-bottom:8px}
+.takeaway{background:var(--g100);border-radius:12px;padding:24px 28px;margin:28px 0}.takeaway-head{font-family:'Syne';font-weight:700;font-size:10pt;color:var(--o600);margin-bottom:12px}.takeaway ol{padding-left:20px}.takeaway li{margin-bottom:8px;font-size:11.5pt}
+.story-box{background:var(--bk);color:var(--wh);border-radius:12px;padding:28px 32px;margin:28px 0}.story-box strong{color:var(--o400)}.story-box p{margin-bottom:10px}
+.stat-card{display:flex;flex-direction:column;align-items:center;justify-content:center;background:var(--grad);color:var(--wh);border-radius:12px;padding:18px 12px;text-align:center;flex:1;min-width:0}.stat-card .num{font-family:'Syne';font-size:24pt;font-weight:800;line-height:1}.stat-card .label{font-family:'DM Mono';font-size:6.5pt;letter-spacing:.08em;text-transform:uppercase;margin-top:6px;opacity:.85;line-height:1.4}.stat-row{display:flex;gap:10px;margin:24px 0}
+blockquote{border-left:3px solid var(--o500);padding:14px 24px;margin:22px 0;background:var(--o50);border-radius:0 10px 10px 0;font-style:italic}
+ul,ol{padding-left:22px;margin-bottom:14px}li{margin-bottom:6px}
+.footer{background:var(--bk);color:var(--g600);text-align:center;padding:48px 24px;font-family:'DM Mono';font-size:7.5pt;letter-spacing:.08em}.footer .logo{font-family:'Syne';font-size:14pt;font-weight:700;margin-bottom:16px}.footer .logo .d{color:var(--wh)}.footer .logo .z{color:var(--o500)}
+@media print{body{font-size:10.5pt}.page{padding:0;max-width:100%}.cover{min-height:auto;padding:100px 60px}.panel-task,.takeaway,.story-box{break-inside:avoid}h2,h3{break-after:avoid}}@page{size:A4;margin:2cm}
+</style>
+</head>
+<body>
+
+<div class="cover">
+  <div class="cover-top-bar"></div>
+  <svg class="cover-bg" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg"><defs><pattern id="grid" width="60" height="60" patternUnits="userSpaceOnUse"><path d="M 60 0 L 0 0 0 60" fill="none" stroke="#f97316" stroke-width=".5"/></pattern></defs><rect width="100%" height="100%" fill="url(#grid)" opacity=".3"/></svg>
+  <div class="cover-logo"><span class="d">Dipten</span><span class="z">Zirveye</span></div>
+  <div class="cover-series">AI Ustalık Serisi · Kitap 07</div>
+  <div class="cover-title">OTOMASYON<br><span>MİMARI</span></div>
+  <div class="cover-sub">Sen Uyurken de Çalışan Sistemler İnşa Etmek</div>
+  <div class="cover-line"></div>
+  <div class="cover-quote">"Çalışmayı bıraktığında bile sistem çalışmaya devam ediyorsa — otomasyon mimarısın demektir."</div>
+  <div class="cover-badge"><span>700 XP</span><span class="dot"></span><span>7 Bölüm</span><span class="dot"></span><span>7 Saat</span></div>
+  <div class="cover-year">V1.0 · 2026</div>
+</div>
+
+<div class="copy-page">
+  <div class="copy-logo"><span class="d">Dipten</span><span class="z">Zirveye</span></div>
+  <p><strong style="font-size:12pt;color:var(--bk)">OTOMASYON MİMARI</strong></p>
+  <p>Sen Uyurken de Çalışan Sistemler İnşa Etmek</p>
+  <p style="margin-top:16px">DİPTENZİRVEYE AI Ustalık Serisi · Kitap 07</p>
+  <p>Versiyon 1.0 · 2026</p>
+  <div style="width:40px;height:2px;background:var(--grad);border-radius:1px;margin:28px auto"></div>
+  <p style="font-size:8pt;margin-top:20px">© 2026 DİPTENZİRVEYE · Tüm hakları saklıdır.</p>
+</div>
+
+<div class="page toc" style="padding-top:72px">
+  <h2 style="font-size:22pt;font-weight:800;margin-bottom:8px">İçindekiler</h2>
+  <div style="width:40px;height:3px;background:var(--grad);border-radius:2px;margin-bottom:36px"></div>
+  <div class="toc-item"><span class="toc-num">01</span><span class="toc-title">Otomasyon Mindset'i</span></div>
+  <div class="toc-item"><span class="toc-num">02</span><span class="toc-title">No-Code Otomasyon Araçları</span></div>
+  <div class="toc-item"><span class="toc-num">03</span><span class="toc-title">İş Süreçleri Otomasyonu</span></div>
+  <div class="toc-item"><span class="toc-num">04</span><span class="toc-title">AI Ajan Kurulumu</span></div>
+  <div class="toc-item"><span class="toc-num">05</span><span class="toc-title">E-posta ve CRM Otomasyonu</span></div>
+  <div class="toc-item"><span class="toc-num">06</span><span class="toc-title">Otomasyon Hizmeti Satmak</span></div>
+  <div class="toc-item" style="border-bottom:none"><span class="toc-num">07</span><span class="toc-title">7 Günlük Otomasyon Mimarisi Planı</span></div>
+</div>
+
+<!-- BÖLÜM 1 -->
+<div class="ch-open"><div class="ch-open-bg">
+  <div class="ch-num">Bölüm 01</div><div class="ch-title">Otomasyon<br>Mindset'i</div>
+  <div class="ch-sub">Manuel işlerden kurtulmanın felsefi temeli</div><div class="ch-line"></div>
+  <div class="ch-xp"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#f97316" stroke-width="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>80 XP</div>
+</div></div>
+
+<div class="page">
+  <div class="pg-head"><span>Bölüm 01 · Otomasyon Mindset'i</span><span class="brand">DiptenZirveye</span></div>
+
+  <p>Her gün yaptığın işlerin kaçı gerçekten senin beynini gerektiriyor? Çoğu insan zamanının %60-80'ini tekrarlayan, düşük değerli görevlere harcıyor: e-posta yanıtlama, veri girişi, sosyal medya paylaşımı, fatura takibi, rapor oluşturma... Bu görevlerin hepsi <strong>otomatize edilebilir</strong>.</p>
+
+  <p>Otomasyon mimarı olmak, tembel olmak değil — <strong>stratejik olmaktır</strong>. Zamanını yüksek değerli işlere (strateji, yaratıcılık, ilişki kurma) ayırabilmek için düşük değerli işleri sistemlere devretmektir.</p>
+
+  <h2>Otomasyon Olgunluk Modeli</h2>
+
+  <table>
+    <thead><tr><th>Seviye</th><th>Durum</th><th>Özellik</th></tr></thead>
+    <tbody>
+      <tr><td><strong>0 — Manuel</strong></td><td>Her şeyi elle yapıyorsun</td><td>Zaman = Para, sınırlı ölçek</td></tr>
+      <tr><td><strong>1 — Şablon</strong></td><td>Tekrarlayan işler için şablonlar</td><td>Copy-paste, e-posta şablonları</td></tr>
+      <tr><td><strong>2 — Tetikleme</strong></td><td>Basit if-then otomasyonları</td><td>Zapier/Make ile basit akışlar</td></tr>
+      <tr><td><strong>3 — Workflow</strong></td><td>Çok adımlı iş akışları</td><td>Birden fazla araç entegre</td></tr>
+      <tr><td><strong>4 — AI Ajan</strong></td><td>Karar veren sistemler</td><td>AI destekli otonom süreçler</td></tr>
+      <tr><td><strong>5 — Ekosistem</strong></td><td>Tüm iş otomatik</td><td>Sen yalnızca strateji belirlersin</td></tr>
+    </tbody>
+  </table>
+
+  <div class="stat-row">
+    <div class="stat-card"><div class="num">60%</div><div class="label">İş görevlerinin<br>otomasyon potansiyeli</div></div>
+    <div class="stat-card"><div class="num">20+</div><div class="label">Saat/hafta<br>tasarruf potansiyeli</div></div>
+    <div class="stat-card"><div class="num">$4.5T</div><div class="label">Global otomasyon<br>pazarı (2026)</div></div>
+  </div>
+
+  <div class="panel-task">
+    <div class="panel-task-head">⚡ Eylem Görevi</div>
+    <p>Bu hafta yaptığın tüm işleri listele. Her birinin yanına "Manuel" veya "Otomatize Edilebilir" yaz. Otomatize edilebilir olanları öncelik sırasına koy.</p>
+  </div>
+
+  <div class="takeaway">
+    <div class="takeaway-head">🎯 Bölüm Çıkarımları</div>
+    <ol>
+      <li>Zamanının %60-80'i otomatize edilebilir görevlere gidiyor.</li>
+      <li>Otomasyon olgunluk modeli: Manuel → Şablon → Tetikleme → Workflow → AI Ajan → Ekosistem.</li>
+      <li>Hedef: Seviye 3-4'e ulaşmak ve stratejik işlere odaklanmak.</li>
+    </ol>
+  </div>
+</div>
+
+<!-- BÖLÜM 2 -->
+<div class="ch-open"><div class="ch-open-bg">
+  <div class="ch-num">Bölüm 02</div><div class="ch-title">No-Code Otomasyon<br>Araçları</div>
+  <div class="ch-sub">Kod yazmadan güçlü sistemler kur</div><div class="ch-line"></div>
+  <div class="ch-xp"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#f97316" stroke-width="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>100 XP</div>
+</div></div>
+
+<div class="page">
+  <div class="pg-head"><span>Bölüm 02 · No-Code Otomasyon Araçları</span><span class="brand">DiptenZirveye</span></div>
+
+  <p>2026'da otomasyon kurmak için yazılım mühendisi olmana gerek yok. No-code ve low-code araçlar, görsel arayüzlerle karmaşık iş akışları kurmanı sağlıyor.</p>
+
+  <h2>Otomasyon Araç Karşılaştırması</h2>
+
+  <table>
+    <thead><tr><th>Araç</th><th>En İyi Kullanım</th><th>Fiyat</th><th>Öğrenme Eğrisi</th></tr></thead>
+    <tbody>
+      <tr><td><strong>Zapier</strong></td><td>Basit entegrasyonlar, hızlı kurulum</td><td>$20/ay</td><td>Düşük</td></tr>
+      <tr><td><strong>Make (Integromat)</strong></td><td>Karmaşık akışlar, görsel editor</td><td>$9/ay</td><td>Orta</td></tr>
+      <tr><td><strong>n8n</strong></td><td>Self-hosted, sınırsız akış</td><td>Ücretsiz (self-host)</td><td>Orta-Yüksek</td></tr>
+      <tr><td><strong>Bardeen</strong></td><td>Browser otomasyonu, scraping</td><td>Freemium</td><td>Düşük</td></tr>
+      <tr><td><strong>ActivePieces</strong></td><td>Açık kaynak alternatif</td><td>Ücretsiz (self-host)</td><td>Orta</td></tr>
+    </tbody>
+  </table>
+
+  <h2>İlk Otomasyon: Tetikleme Yapısı</h2>
+
+  <p>Her otomasyon 3 parçadan oluşur:</p>
+
+  <ol>
+    <li><strong>Tetikleyici (Trigger):</strong> Olayın başlangıcı. "Yeni form doldurulduğunda", "e-posta geldiğinde", "dosya yüklendiğinde".</li>
+    <li><strong>İşlem (Action):</strong> Yapılacak iş. "E-posta gönder", "veritabanına kaydet", "Slack mesajı at".</li>
+    <li><strong>Koşul (Filter):</strong> İşlemin yapılıp yapılmayacağını belirler. "Eğer konu 'acil' içeriyorsa".</li>
+  </ol>
+
+  <div class="story-box">
+    <p><strong>Örnek Otomasyon: Müşteri Onboarding</strong></p>
+    <p>Tetikleyici: Yeni ödeme alındı (Stripe) →</p>
+    <p>1. Hoş geldin e-postası gönder (Gmail) →</p>
+    <p>2. CRM'e müşteri kaydı oluştur (Notion) →</p>
+    <p>3. Slack'e bildirim gönder (#yeni-musteri kanalı) →</p>
+    <p>4. 3 gün sonra takip e-postası planla</p>
+    <p><strong>Kurulum süresi: 30 dakika. Tasarruf: Haftada 5+ saat.</strong></p>
+  </div>
+
+  <div class="takeaway">
+    <div class="takeaway-head">🎯 Bölüm Çıkarımları</div>
+    <ol>
+      <li>Make ve Zapier ile kod yazmadan güçlü otomasyonlar kurulabilir.</li>
+      <li>Her otomasyon: Tetikleyici → İşlem → Koşul yapısındadır.</li>
+      <li>Başlangıç için en değerli 3 otomasyon: müşteri onboarding, sosyal medya paylaşımı, rapor oluşturma.</li>
+    </ol>
+  </div>
+</div>
+
+<!-- BÖLÜM 3 -->
+<div class="ch-open"><div class="ch-open-bg">
+  <div class="ch-num">Bölüm 03</div><div class="ch-title">İş Süreçleri<br>Otomasyonu</div>
+  <div class="ch-sub">Gerçek iş senaryolarıyla otomasyon</div><div class="ch-line"></div>
+  <div class="ch-xp"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#f97316" stroke-width="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>100 XP</div>
+</div></div>
+
+<div class="page">
+  <div class="pg-head"><span>Bölüm 03 · İş Süreçleri Otomasyonu</span><span class="brand">DiptenZirveye</span></div>
+
+  <p>Artık araçları tanıdın. Şimdi gerçek iş senaryolarında bunları uygulayalım. İşte en yaygın 5 otomasyon senaryosu:</p>
+
+  <h2>1. İçerik Yayın Otomasyonu</h2>
+  <p>Blog yazısı yayınlandığında otomatik olarak: tweet dizisi oluştur → Instagram story planla → LinkedIn paylaşımı yap → newsletter'a ekle. <strong>Make + Buffer + Mailchimp entegrasyonu.</strong></p>
+
+  <h2>2. Lead (Potansiyel Müşteri) Yönetimi</h2>
+  <p>Web sitesi form doldurulduğunda: CRM'e kayıt → segmentasyon → kişiselleştirilmiş hoş geldin e-postası → 3 günlük nurturing serisi başlat. <strong>Zapier + HubSpot/Notion + Gmail.</strong></p>
+
+  <h2>3. Finansal Raporlama</h2>
+  <p>Her ayın 1'inde otomatik olarak: Stripe'tan gelir verisi çek → Google Sheets'e yaz → grafik oluştur → PDF rapor üret → e-posta ile gönder. <strong>Make + Google Sheets + PDF.co.</strong></p>
+
+  <h2>4. Müşteri Destek Otomasyonu</h2>
+  <p>Destek e-postası geldiğinde: AI ile kategorize et → SSS'de cevap varsa otomatik yanıtla → yoksa doğru ekip üyesine yönlendir → SLA timer başlat. <strong>n8n + OpenAI API + Zendesk/Notion.</strong></p>
+
+  <h2>5. Sosyal Dinleme ve Trend Takibi</h2>
+  <p>Sektörle ilgili yeni trend veya haber çıktığında: otomatik tespit → özet çıkar → içerik fırsatı olarak etiketle → Slack'e bildir. <strong>Make + RSS + Claude API + Slack.</strong></p>
+
+  <div class="panel-task">
+    <div class="panel-task-head">⚡ Eylem Görevi</div>
+    <p>Bu 5 senaryo arasından işine en çok yarayacak 1 tanesini seç. Make veya Zapier'de ücretsiz hesap aç ve ilk otomasyonunu kur.</p>
+  </div>
+
+  <div class="takeaway">
+    <div class="takeaway-head">🎯 Bölüm Çıkarımları</div>
+    <ol>
+      <li>Otomasyon en çok tekrarlayan, zaman alan ve hata riski yüksek işlerde değer yaratır.</li>
+      <li>5 temel senaryo: içerik dağıtımı, lead yönetimi, raporlama, müşteri desteği, trend takibi.</li>
+      <li>Her otomasyon başlangıçta 30-60 dk kurulum gerektirir, sonra haftalarca/aylarca çalışır.</li>
+    </ol>
+  </div>
+</div>
+
+<!-- BÖLÜM 4 -->
+<div class="ch-open"><div class="ch-open-bg">
+  <div class="ch-num">Bölüm 04</div><div class="ch-title">AI Ajan<br>Kurulumu</div>
+  <div class="ch-sub">Senin adına karar veren akıllı sistemler</div><div class="ch-line"></div>
+  <div class="ch-xp"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#f97316" stroke-width="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>120 XP</div>
+</div></div>
+
+<div class="page">
+  <div class="pg-head"><span>Bölüm 04 · AI Ajan Kurulumu</span><span class="brand">DiptenZirveye</span></div>
+
+  <p>Basit otomasyonlar "eğer X olursa Y yap" mantığıyla çalışır. AI ajanlar ise <strong>bağlamı anlayıp karar verir</strong>. Bu, otomasyonun bir sonraki seviyesidir.</p>
+
+  <h2>AI Ajan Nedir?</h2>
+
+  <p>AI ajan, belirli bir görevi otonom olarak yerine getiren, gerektiğinde karar alan ve araçları kullanan bir AI sistemidir. Örneğin:</p>
+
+  <ul>
+    <li><strong>Müşteri Destek Ajanı:</strong> Gelen soruları anlayıp, bilgi tabanından cevap bulan, gerekirse insana yönlendiren ajan.</li>
+    <li><strong>İçerik Araştırma Ajanı:</strong> Belirli konularda web'i tarayıp, özetleyip, içerik fırsatı olarak raporlayan ajan.</li>
+    <li><strong>Satış Asistanı Ajanı:</strong> Lead'leri değerlendirip, kişiselleştirilmiş takip e-postaları hazırlayan ajan.</li>
+  </ul>
+
+  <h2>AI Ajan Oluşturma Araçları</h2>
+
+  <table>
+    <thead><tr><th>Araç</th><th>Kullanım</th><th>Seviye</th></tr></thead>
+    <tbody>
+      <tr><td><strong>Custom GPTs</strong></td><td>Basit sohbet ajanları</td><td>Başlangıç</td></tr>
+      <tr><td><strong>Claude Projects</strong></td><td>Bağlam farkındalıklı ajanlar</td><td>Orta</td></tr>
+      <tr><td><strong>Relevance AI</strong></td><td>No-code ajan platformu</td><td>Orta</td></tr>
+      <tr><td><strong>LangChain + n8n</strong></td><td>Karmaşık multi-step ajanlar</td><td>İleri</td></tr>
+      <tr><td><strong>CrewAI</strong></td><td>Çoklu ajan ekosistemi</td><td>İleri</td></tr>
+    </tbody>
+  </table>
+
+  <div class="story-box">
+    <p><strong>Vaka: AI Destekli İçerik Araştırma Ajanı</strong></p>
+    <p>Selin, AI eğitimi veriyor. Her hafta sektör trendlerini takip etmesi gerekiyor. n8n + Claude API ile bir ajan kurdu:</p>
+    <p>Her sabah 08:00'de → 50+ kaynak taranır → AI ile özetlenir → "Bu hafta dikkat edilmesi gereken 5 trend" raporu → e-posta ile Selin'e gönderilir.</p>
+    <p><strong>Tasarruf: Haftada 4 saat araştırma süresi.</strong></p>
+  </div>
+
+  <div class="takeaway">
+    <div class="takeaway-head">🎯 Bölüm Çıkarımları</div>
+    <ol>
+      <li>AI ajanlar, basit otomasyonların ötesinde bağlam farkındalıklı karar alabilir.</li>
+      <li>Custom GPTs ve Claude Projects ile başla, ihtiyaç büyüdükçe n8n + API entegrasyonuna geç.</li>
+      <li>En değerli 3 ajan: müşteri desteği, içerik araştırması, satış asistanı.</li>
+    </ol>
+  </div>
+</div>
+
+<!-- BÖLÜM 5 -->
+<div class="ch-open"><div class="ch-open-bg">
+  <div class="ch-num">Bölüm 05</div><div class="ch-title">E-posta ve CRM<br>Otomasyonu</div>
+  <div class="ch-sub">İlişki yönetimini sistematize et</div><div class="ch-line"></div>
+  <div class="ch-xp"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#f97316" stroke-width="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>100 XP</div>
+</div></div>
+
+<div class="page">
+  <div class="pg-head"><span>Bölüm 05 · E-posta ve CRM Otomasyonu</span><span class="brand">DiptenZirveye</span></div>
+
+  <p>E-posta pazarlaması hâlâ en yüksek ROI'ye sahip kanal: ortalama $36 dönüş her $1 harcama için. AI ile e-posta otomasyonunu bir üst seviyeye taşıyabilirsin.</p>
+
+  <h2>E-posta Otomasyon Akışları</h2>
+
+  <ol>
+    <li><strong>Hoş Geldin Serisi (7 e-posta):</strong> Yeni abone olduğunda otomatik başlayan, güven inşa eden seri.</li>
+    <li><strong>Nurturing Serisi:</strong> Abonenin ilgi alanına göre kişiselleştirilmiş eğitim içerikleri.</li>
+    <li><strong>Satış Serisi:</strong> Ürün/hizmet tanıtımı, sosyal kanıt, urgency, teklif.</li>
+    <li><strong>Win-Back Serisi:</strong> İnaktif aboneleri geri kazanma kampanyası.</li>
+    <li><strong>Post-Purchase:</strong> Satış sonrası memnuniyet, upsell, referral talebi.</li>
+  </ol>
+
+  <h2>AI ile Kişiselleştirme</h2>
+
+  <p>Claude API veya OpenAI API ile her abone için kişiselleştirilmiş e-posta konu satırları ve içerik blokları oluşturabilirsin. Segmentasyon + AI = her aboneye özel deneyim.</p>
+
+  <div class="panel-task">
+    <div class="panel-task-head">⚡ Eylem Görevi</div>
+    <p>7 e-postalık bir "Hoş Geldin Serisi" taslağı oluşturun. Her e-posta için: konu satırı, ana mesaj ve CTA belirleyin.</p>
+  </div>
+
+  <div class="takeaway">
+    <div class="takeaway-head">🎯 Bölüm Çıkarımları</div>
+    <ol>
+      <li>E-posta otomasyonu en yüksek ROI'li pazarlama kanalıdır ($36 per $1).</li>
+      <li>5 temel otomasyon akışı: hoş geldin, nurturing, satış, win-back, post-purchase.</li>
+      <li>AI kişiselleştirmesi açılma oranlarını %25-40 artırabilir.</li>
+    </ol>
+  </div>
+</div>
+
+<!-- BÖLÜM 6 -->
+<div class="ch-open"><div class="ch-open-bg">
+  <div class="ch-num">Bölüm 06</div><div class="ch-title">Otomasyon Hizmeti<br>Satmak</div>
+  <div class="ch-sub">Öğrendiklerini gelire dönüştür</div><div class="ch-line"></div>
+  <div class="ch-xp"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#f97316" stroke-width="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>100 XP</div>
+</div></div>
+
+<div class="page">
+  <div class="pg-head"><span>Bölüm 06 · Otomasyon Hizmeti Satmak</span><span class="brand">DiptenZirveye</span></div>
+
+  <p>Otomasyon bilgisi sadece kendi işin için değil — başkalarına hizmet olarak satılabilir. "Otomasyon Danışmanı" veya "AI Otomasyon Mimarı" olarak konumlanabilirsin. Pazar büyük: küçük ve orta ölçekli işletmelerin %85'i hâlâ manuel süreçlerle çalışıyor.</p>
+
+  <h2>Hizmet Paketleri</h2>
+
+  <table>
+    <thead><tr><th>Paket</th><th>İçerik</th><th>Fiyat Aralığı</th></tr></thead>
+    <tbody>
+      <tr><td><strong>Starter</strong></td><td>3 temel otomasyon kurulumu + eğitim</td><td>5.000-10.000 TL</td></tr>
+      <tr><td><strong>Growth</strong></td><td>10 otomasyon + AI ajan + CRM entegrasyonu</td><td>15.000-30.000 TL</td></tr>
+      <tr><td><strong>Enterprise</strong></td><td>Full iş süreci dönüşümü + 3 ay destek</td><td>50.000-100.000 TL</td></tr>
+    </tbody>
+  </table>
+
+  <h2>Müşteri Bulma Stratejisi</h2>
+
+  <ul>
+    <li><strong>LinkedIn:</strong> "Manuel süreçler sizi yavaşlatıyor mu?" temalı içerikler paylaş.</li>
+    <li><strong>Vaka Çalışmaları:</strong> Kendi otomasyonlarını portfolyo olarak göster.</li>
+    <li><strong>Ücretsiz Audit:</strong> "İş sürecinizi 30 dakikada analiz edip otomasyon fırsatlarını göstereyim."</li>
+    <li><strong>Referral:</strong> Mevcut müşterilerden yeni müşteri yönlendirmesi.</li>
+  </ul>
+
+  <div class="takeaway">
+    <div class="takeaway-head">🎯 Bölüm Çıkarımları</div>
+    <ol>
+      <li>Otomasyon danışmanlığı yüksek talep gören, yüksek marjlı bir hizmettir.</li>
+      <li>3 farklı paket (Starter, Growth, Enterprise) ile farklı bütçelere hitap et.</li>
+      <li>Ücretsiz audit teklifi en etkili müşteri kazanma yöntemidir.</li>
+    </ol>
+  </div>
+</div>
+
+<!-- BÖLÜM 7 -->
+<div class="ch-open"><div class="ch-open-bg">
+  <div class="ch-num">Bölüm 07</div><div class="ch-title">7 Günlük Otomasyon<br>Mimarisi Planı</div>
+  <div class="ch-sub">Teoriyi pratiğe dönüştür</div><div class="ch-line"></div>
+  <div class="ch-xp"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#f97316" stroke-width="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>100 XP</div>
+</div></div>
+
+<div class="page">
+  <div class="pg-head"><span>Bölüm 07 · 7 Günlük Eylem Planı</span><span class="brand">DiptenZirveye</span></div>
+
+  <table>
+    <thead><tr><th>Gün</th><th>Görev</th><th>Çıktı</th><th>Süre</th></tr></thead>
+    <tbody>
+      <tr><td><strong>1</strong></td><td>Manuel iş envanteri çıkar</td><td>Otomatize edilebilir işler listesi</td><td>1 saat</td></tr>
+      <tr><td><strong>2</strong></td><td>Make veya Zapier'e kayıt ol, ilk akış</td><td>Basit e-posta → Slack bildirimi</td><td>2 saat</td></tr>
+      <tr><td><strong>3</strong></td><td>İçerik dağıtım otomasyonu kur</td><td>Blog → Sosyal medya akışı</td><td>2 saat</td></tr>
+      <tr><td><strong>4</strong></td><td>E-posta hoş geldin serisi oluştur</td><td>7 e-postalık otomasyon</td><td>3 saat</td></tr>
+      <tr><td><strong>5</strong></td><td>AI ajan prototipi yap</td><td>Custom GPT veya Claude Project</td><td>2 saat</td></tr>
+      <tr><td><strong>6</strong></td><td>Otomasyon hizmet paketi tasarla</td><td>3 paket + fiyatlandırma</td><td>2 saat</td></tr>
+      <tr><td><strong>7</strong></td><td>Portfolyo ve vaka çalışması hazırla</td><td>LinkedIn profili güncellemesi</td><td>2 saat</td></tr>
+    </tbody>
+  </table>
+
+  <blockquote>"Her otomasyon, gelecekteki senin yerine çalışan bir dijital asistan. Bu hafta kurduğun her sistem, gelecekte sana saatler kazandıracak."</blockquote>
+
+  <div class="takeaway">
+    <div class="takeaway-head">🎯 Kitap Özeti</div>
+    <ol>
+      <li>İş görevlerinin %60'ı otomatize edilebilir — zaman ve enerji kurtarır.</li>
+      <li>No-code araçlar (Make, Zapier, n8n) ile kod yazmadan güçlü otomasyonlar kurulabilir.</li>
+      <li>AI ajanlar otomasyonun bir sonraki seviyesi — karar veren akıllı sistemler.</li>
+      <li>Otomasyon bilgisi hizmet olarak satılabilir: 5.000-100.000 TL/proje.</li>
+      <li>7 günde ilk otomasyon ekosisteminin temellerini at.</li>
+    </ol>
+  </div>
+</div>
+
+<div class="footer">
+  <div class="logo"><span class="d">Dipten</span><span class="z">Zirveye</span></div>
+  <p>AI USTALIK SERİSİ · KİTAP 07 · OTOMASYON MİMARI</p>
+  <p style="margin-top:8px">© 2026 DİPTENZİRVEYE · V1.0</p>
+</div>
+
+</body>
+</html>
