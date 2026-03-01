@@ -1,4 +1,4 @@
-﻿import { createClient } from "@/lib/supabase/server";
+import { createClient } from "@/lib/supabase/server";
 import TestEkraniClient from "@/components/panel/test/TestEkraniClient";
 
 export const dynamic = "force-dynamic";
@@ -11,7 +11,7 @@ export default async function TestPage() {
 
   const envOk =
     !!process.env.NEXT_PUBLIC_SUPABASE_URL &&
-    !!(process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY || process.env.NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY);
+    !!process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
 
   let dbLeaderboard: "ok" | "fail" | "skip" = "skip";
   let dbChatRooms: "ok" | "fail" | "skip" = "skip";

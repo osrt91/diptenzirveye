@@ -153,7 +153,7 @@ async function DailyTasksSection() {
       .limit(1)
       .single();
 
-    const bookObj = activeBookData?.book as any;
+    const bookObj = activeBookData?.book as { title: string } | { title: string }[] | null;
     const bookTitle = Array.isArray(bookObj) ? bookObj[0]?.title : bookObj?.title;
 
     // Yüklenecek varsayılan görevler
@@ -216,10 +216,10 @@ async function BookEcosystemSection() {
   ]);
 
   const userBookMap = new Map(
-    (userBooksRes.data ?? []).map((ub: any) => [ub.book_id, ub])
+    (userBooksRes.data ?? []).map((ub: { book_id: string; current_chapter: number; completed_at: string | null }) => [ub.book_id, ub])
   );
 
-  const books = (booksRes.data ?? []).map((book: any) => {
+  const books = (booksRes.data ?? []).map((book: { id: string; slug: string; title: string; sort_order: number }) => {
     const ub = userBookMap.get(book.id);
     return {
       id: book.id,
