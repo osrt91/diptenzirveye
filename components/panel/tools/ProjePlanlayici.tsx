@@ -421,21 +421,23 @@ export default function ProjePlanlayici() {
   const Lbl = ({ t }: { t: string }) => <div className="font-bold text-[11px] text-dz-grey-600 dark:text-dz-grey-400 mb-1.5 font-mono tracking-widest uppercase">{t}</div>;
   const Tip = ({ s, children }: { s: string; children: React.ReactNode }) => <div className="p-3 bg-dz-orange-500/10 dark:bg-dz-orange-500/5 rounded-lg border border-dz-orange-200 dark:border-dz-orange-500/20 border-l-[3px] border-l-dz-orange-500 text-[13px] text-dz-grey-700 dark:text-dz-grey-300 font-sans leading-relaxed mt-3.5"><strong className="text-dz-orange-600 dark:text-dz-orange-500">{s} </strong>{children}</div>;
 
-  const priBadge = (p: string) => {
-    const m: Record<string, { bg: string; c: string; border: string }> = { kritik: { bg: "#fef2f2", c: "#dc2626", border: "#fca5a5" }, yüksek: { bg: "#fff7ed", c: "#c05500", border: "#fed7aa" }, orta: { bg: "#f5f0eb", c: "#4a4540", border: "#e8e2da" } };
-    const s = m[p] || m.orta;
-    return { fontSize: 9, padding: "2px 8px", borderRadius: 99, background: s.bg, color: s.c, border: `1px solid ${s.border}`, fontFamily: "'DM Mono'", fontWeight: 600, letterSpacing: ".06em", textTransform: "uppercase" as const };
+  const priBadgeCls = (p: string) => {
+    const m: Record<string, string> = {
+      kritik: "bg-red-50 dark:bg-red-500/10 text-red-600 dark:text-red-400 border border-red-300 dark:border-red-500/30",
+      yüksek: "bg-orange-50 dark:bg-dz-orange-500/10 text-dz-orange-600 dark:text-dz-orange-400 border border-orange-200 dark:border-dz-orange-500/30",
+      orta: "bg-dz-grey-100 dark:bg-dz-grey-800 text-dz-grey-600 dark:text-dz-grey-400 border border-dz-grey-200 dark:border-dz-grey-700",
+    };
+    return `text-[9px] px-2 py-0.5 rounded-full font-mono font-semibold tracking-wider uppercase shrink-0 ${m[p] || m.orta}`;
   };
 
-  // ─── Inline recommendation mini-panel (shown on certain steps) ───
   const InlineRecs = () => {
     if (a.mode !== "new" || recs.warnings.length === 0) return null;
     return (
-      <div style={{ marginTop: 18, padding: "14px 16px", background: "#fffbf5", borderRadius: 10, border: "1px solid #fed7aa" }}>
-        <div style={{ fontFamily: "'Syne'", fontSize: 12, fontWeight: 700, color: "#c05500", textTransform: "uppercase", letterSpacing: ".06em", marginBottom: 8 }}>⚠ Anlık Uyarılar</div>
+      <div className="mt-4 p-3.5 bg-amber-50 dark:bg-amber-500/10 rounded-xl border border-orange-200 dark:border-dz-orange-500/30">
+        <div className="font-display text-xs font-bold text-dz-orange-600 dark:text-dz-orange-400 uppercase tracking-wider mb-2">⚠ Anlık Uyarılar</div>
         {recs.warnings.map((w, i) => (
-          <div key={i} style={{ fontSize: 13, color: "#7c2d12", marginBottom: 6, fontFamily: "'DM Sans'" }}>
-            <strong>{w.text}</strong> → <span style={{ color: "#15803d" }}>{w.fix}</span>
+          <div key={i} className="text-[13px] text-orange-900 dark:text-orange-300 mb-1.5 font-sans">
+            <strong>{w.text}</strong> → <span className="text-green-700 dark:text-green-400">{w.fix}</span>
           </div>
         ))}
       </div>
@@ -448,28 +450,22 @@ export default function ProjePlanlayici() {
     const sid = STEPS[step]?.id;
 
     if (sid === "welcome") return (
-      <div style={{ textAlign: "center", padding: "20px 0" }}>
-        <div style={{ fontFamily: "'DM Mono'", fontSize: 10, letterSpacing: ".14em", textTransform: "uppercase", color: "#f97316", border: "1px solid rgba(249,115,22,.3)", display: "inline-block", padding: "5px 14px", borderRadius: 999, marginBottom: 20 }}>proje başlangıç & analiz rehberi · 2026</div>
-        <div style={{ fontSize: 40, fontWeight: 800, fontFamily: "'Syne'", color: "#0d0d0d", letterSpacing: "-.03em", lineHeight: 1.05, marginBottom: 4 }}>Dipten<span style={{ color: "#f97316" }}>Zirveye</span><sup style={{ fontSize: 14, color: "#f97316" }}>™</sup></div>
-        <div style={{ fontFamily: "'DM Mono'", fontSize: 10, letterSpacing: ".16em", textTransform: "uppercase", color: "#9a9590", marginBottom: 28 }}>sistematik proje planlama</div>
-        <p style={{ fontSize: 15, color: "#4a4540", maxWidth: 480, margin: "0 auto 32px", lineHeight: 1.75, fontFamily: "'DM Sans'" }}>Yeni bir projeye mi başlıyorsun, yoksa mevcut projeni mi düzeltmek istiyorsun? Sana özel <strong>KULLAN / KULLANMA</strong> raporu çıkaralım.</p>
+      <div className="text-center py-5">
+        <div className="font-mono text-[10px] tracking-[.14em] uppercase text-dz-orange-500 border border-dz-orange-500/30 inline-block px-3.5 py-1 rounded-full mb-5">proje başlangıç & analiz rehberi · 2026</div>
+        <div className="text-4xl font-extrabold font-display text-dz-black dark:text-dz-white tracking-tighter leading-none mb-1">Dipten<span className="text-dz-orange-500">Zirveye</span><sup className="text-sm text-dz-orange-500">™</sup></div>
+        <div className="font-mono text-[10px] tracking-[.16em] uppercase text-dz-grey-500 mb-7">sistematik proje planlama</div>
+        <p className="text-[15px] text-dz-grey-600 dark:text-dz-grey-400 max-w-[480px] mx-auto mb-8 leading-relaxed font-sans">Yeni bir projeye mi başlıyorsun, yoksa mevcut projeni mi düzeltmek istiyorsun? Sana özel <strong>KULLAN / KULLANMA</strong> raporu çıkaralım.</p>
 
-        <div style={{ display: "flex", gap: 14, justifyContent: "center", maxWidth: 500, margin: "0 auto" }}>
-          <button onClick={() => { set("mode", "new"); setStep(1); }} style={{
-            flex: 1, padding: "24px 20px", borderRadius: 12, border: "2px solid #e8e2da", background: "#fdfaf7",
-            cursor: "pointer", textAlign: "left", transition: "all .2s",
-          }}>
-            <div style={{ fontSize: 28, marginBottom: 6 }}>🚀</div>
-            <div style={{ fontFamily: "'Syne'", fontSize: 16, fontWeight: 700, color: "#0d0d0d", marginBottom: 4 }}>Yeni Proje</div>
-            <div style={{ fontSize: 12, color: "#9a9590", lineHeight: 1.5 }}>Sıfırdan başlıyorum, plan lazım</div>
+        <div className="flex gap-3.5 justify-center max-w-[500px] mx-auto">
+          <button onClick={() => { set("mode", "new"); setStep(1); }} className="flex-1 p-5 rounded-xl border-2 border-dz-grey-200 dark:border-dz-grey-700 bg-dz-grey-50 dark:bg-dz-grey-900 text-left transition-all hover:border-dz-orange-400 cursor-pointer">
+            <div className="text-[28px] mb-1.5">🚀</div>
+            <div className="font-display text-base font-bold text-dz-black dark:text-dz-white mb-1">Yeni Proje</div>
+            <div className="text-xs text-dz-grey-500 leading-relaxed">Sıfırdan başlıyorum, plan lazım</div>
           </button>
-          <button onClick={() => { set("mode", "existing"); setStep(1); }} style={{
-            flex: 1, padding: "24px 20px", borderRadius: 12, border: "2px solid #f97316", background: "#fff7ed",
-            cursor: "pointer", textAlign: "left", transition: "all .2s",
-          }}>
-            <div style={{ fontSize: 28, marginBottom: 6 }}>🔧</div>
-            <div style={{ fontFamily: "'Syne'", fontSize: 16, fontWeight: 700, color: "#c05500", marginBottom: 4 }}>Mevcut Proje</div>
-            <div style={{ fontSize: 12, color: "#7c2d12", lineHeight: 1.5 }}>Projem var, düzeltmek istiyorum</div>
+          <button onClick={() => { set("mode", "existing"); setStep(1); }} className="flex-1 p-5 rounded-xl border-2 border-dz-orange-500 bg-orange-50 dark:bg-dz-orange-500/10 text-left transition-all hover:bg-orange-100 dark:hover:bg-dz-orange-500/15 cursor-pointer">
+            <div className="text-[28px] mb-1.5">🔧</div>
+            <div className="font-display text-base font-bold text-dz-orange-600 dark:text-dz-orange-400 mb-1">Mevcut Proje</div>
+            <div className="text-xs text-orange-900 dark:text-orange-300 leading-relaxed">Projem var, düzeltmek istiyorum</div>
           </button>
         </div>
       </div>
@@ -478,21 +474,17 @@ export default function ProjePlanlayici() {
     if (sid === "level") return (
       <div>
         <H2 t="Senin Seviyen" d="Öneriler seviyene göre kişiselleştirilecek. Dürüst ol!" />
-        <div style={{ display: "flex", flexDirection: "column", gap: 10 }}>
+        <div className="flex flex-col gap-2.5">
           {[
             { v: 0, t: "Acemi / Yeni Başlıyorum", d: "HTML/CSS öğreniyorum veya ilk projemi yapıyorum. Kod yazmak yeni.", icon: "🌱" },
             { v: 1, t: "Orta Seviye", d: "React/Next.js kullandım, birkaç proje yaptım ama hâlâ öğreniyorum.", icon: "🌿" },
             { v: 2, t: "İleri Seviye", d: "Üretimde çalışan projelerim var, mimari kararlar alabiliyorum.", icon: "🌳" },
           ].map(l => (
-            <button key={l.v} onClick={() => set("userLevel", l.v)} style={{
-              display: "flex", alignItems: "flex-start", gap: 14, padding: "18px", borderRadius: 12, cursor: "pointer",
-              border: a.userLevel === l.v ? "2px solid #f97316" : "1.5px solid #e8e2da",
-              background: a.userLevel === l.v ? "#fff7ed" : "#fdfaf7", textAlign: "left", transition: "all .15s",
-            }}>
-              <span style={{ fontSize: 28, flexShrink: 0 }}>{l.icon}</span>
+            <button key={l.v} onClick={() => set("userLevel", l.v)} className={`flex items-start gap-3.5 p-4 rounded-xl cursor-pointer text-left transition-all ${a.userLevel === l.v ? "border-2 border-dz-orange-500 bg-orange-50 dark:bg-dz-orange-500/10" : "border-[1.5px] border-dz-grey-200 dark:border-dz-grey-700 bg-dz-grey-50 dark:bg-dz-grey-900 hover:border-dz-orange-400"}`}>
+              <span className="text-[28px] shrink-0">{l.icon}</span>
               <div>
-                <div style={{ fontWeight: 700, fontSize: 15, color: a.userLevel === l.v ? "#c05500" : "#0d0d0d", fontFamily: "'Syne'" }}>{l.t}</div>
-                <div style={{ fontSize: 13, color: "#9a9590", lineHeight: 1.5, marginTop: 2 }}>{l.d}</div>
+                <div className={`font-bold text-[15px] font-display ${a.userLevel === l.v ? "text-dz-orange-600 dark:text-dz-orange-400" : "text-dz-black dark:text-dz-white"}`}>{l.t}</div>
+                <div className="text-[13px] text-dz-grey-500 leading-relaxed mt-0.5">{l.d}</div>
               </div>
             </button>
           ))}
@@ -508,7 +500,7 @@ export default function ProjePlanlayici() {
         <Lbl t="Projeyi kısaca anlat" />
         <textarea className={`${inpCls} min-h-[80px] resize-y`} placeholder="Örn: React ile bir e-ticaret sitesi yapıyorum, ödeme kısmı sorunlu, mobilde kötü görünüyor..." value={a.existingDesc} onChange={e => set("existingDesc", e.target.value)} />
         <Lbl t="Hangi teknolojileri kullanıyorsun?" />
-        <div style={{ display: "flex", flexWrap: "wrap", gap: 7, marginBottom: 18 }}>
+        <div className="flex flex-wrap gap-1.5 mb-4">
           {[
             { v: "html_css", l: "HTML / CSS" }, { v: "javascript", l: "JavaScript" }, { v: "react", l: "React" }, { v: "nextjs", l: "Next.js" },
             { v: "vue", l: "Vue.js" }, { v: "svelte", l: "Svelte" }, { v: "typescript", l: "TypeScript" }, { v: "tailwind", l: "Tailwind CSS" },
@@ -525,25 +517,21 @@ export default function ProjePlanlayici() {
     if (sid === "problems") return (
       <div>
         <H2 t="Sorunların Ne?" d="Projende yaşadığın sorunları seç. Birden fazla seçebilirsin." />
-        <div style={{ display: "flex", flexDirection: "column", gap: 7 }}>
+        <div className="flex flex-col gap-1.5">
           {EXISTING_PROBLEMS.map(p => {
             const sel = a.existingProblems.includes(p.id);
             return (
-              <button key={p.id} onClick={() => toggleArr("existingProblems", p.id)} style={{
-                display: "flex", alignItems: "center", gap: 12, padding: "12px 16px", borderRadius: 8, textAlign: "left",
-                border: sel ? "2px solid #f97316" : "1.5px solid #e8e2da", background: sel ? "#fff7ed" : "#fdfaf7",
-                cursor: "pointer", transition: "all .15s",
-              }}>
-                <div style={{ width: 20, height: 20, borderRadius: 5, border: sel ? "none" : "2px solid #9a9590", background: sel ? "#f97316" : "transparent", display: "flex", alignItems: "center", justifyContent: "center", color: "#fff", fontSize: 13, fontWeight: 700, flexShrink: 0 }}>{sel ? "✓" : ""}</div>
-                <div style={{ flex: 1 }}>
-                  <div style={{ fontWeight: 600, fontSize: 14, color: sel ? "#c05500" : "#0d0d0d", fontFamily: "'DM Sans'" }}>{p.label}</div>
+              <button key={p.id} onClick={() => toggleArr("existingProblems", p.id)} className={`flex items-center gap-3 px-4 py-3 rounded-lg text-left cursor-pointer transition-all ${sel ? "border-2 border-dz-orange-500 bg-orange-50 dark:bg-dz-orange-500/10" : "border-[1.5px] border-dz-grey-200 dark:border-dz-grey-700 bg-dz-grey-50 dark:bg-dz-grey-900 hover:border-dz-orange-400"}`}>
+                <div className={`w-5 h-5 rounded shrink-0 flex items-center justify-center text-[13px] font-bold ${sel ? "bg-dz-orange-500 text-white" : "border-2 border-dz-grey-500"}`}>{sel ? "✓" : ""}</div>
+                <div className="flex-1">
+                  <div className={`font-semibold text-sm font-sans ${sel ? "text-dz-orange-600 dark:text-dz-orange-400" : "text-dz-black dark:text-dz-white"}`}>{p.label}</div>
                 </div>
-                <span style={{ fontSize: 10, padding: "2px 8px", borderRadius: 99, background: "#f5f0eb", color: "#9a9590", fontFamily: "'DM Mono'", fontWeight: 500 }}>{p.cat}</span>
+                <span className="text-[10px] px-2 py-0.5 rounded-full bg-dz-grey-100 dark:bg-dz-grey-800 text-dz-grey-500 font-mono font-medium">{p.cat}</span>
               </button>
             );
           })}
         </div>
-        {a.existingProblems.length > 0 && <div style={{ marginTop: 14, fontSize: 13, color: "#c05500", fontFamily: "'DM Mono'" }}>{a.existingProblems.length} sorun seçildi — raporda çözüm önerileri göreceksin</div>}
+        {a.existingProblems.length > 0 && <div className="mt-3.5 text-[13px] text-dz-orange-600 dark:text-dz-orange-400 font-mono">{a.existingProblems.length} sorun seçildi — raporda çözüm önerileri göreceksin</div>}
       </div>
     );
 
@@ -553,7 +541,7 @@ export default function ProjePlanlayici() {
         <H2 t="Proje Vizyonu" d="Büyük resmi çizelim." />
         <Lbl t="Proje Adı" /><input className={inpCls} placeholder="örn: TaskFlow, ShopEase..." value={a.projectName} onChange={e => set("projectName", e.target.value)} />
         <Lbl t="Proje Türü" />
-        <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 7, marginBottom: 16 }}>
+        <div className="grid grid-cols-2 gap-1.5 mb-4">
           {["SaaS Uygulama", "E-Ticaret", "Portfolio / Blog", "Dashboard / Panel", "Mobil Uygulama", "Landing Page", "Sosyal Platform", "Diğer"].map(t => (
             <button key={t} onClick={() => set("projectType", t)} className={C(a.projectType === t)}>{t}</button>
           ))}
@@ -568,17 +556,17 @@ export default function ProjePlanlayici() {
       <div>
         <H2 t="Hedef Kitle" d="Kim kullanacak?" />
         <Lbl t="Kullanıcı Tipi" />
-        <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 7, marginBottom: 16 }}>
+        <div className="grid grid-cols-2 gap-1.5 mb-4">
           {[{ v: "B2C", d: "Son kullanıcı" }, { v: "B2B", d: "Şirketler" }, { v: "Dahili", d: "Kendi ekibin" }, { v: "Geliştirici", d: "Teknik kullanıcılar" }].map(t => (
             <button key={t.v} onClick={() => set("audienceType", t.v)} className={C(a.audienceType === t.v, { col: true })}><span className="font-bold">{t.v}</span><span className="text-[11px] opacity-70">{t.d}</span></button>
           ))}
         </div>
         <Lbl t="Beklenen Kullanıcı" />
-        <div style={{ display: "flex", gap: 7, marginBottom: 16, flexWrap: "wrap" }}>
+        <div className="flex gap-1.5 mb-4 flex-wrap">
           {["1-50", "50-500", "500-5K", "5K+"].map(s => <button key={s} onClick={() => set("audienceSize", s)} className={C(a.audienceSize === s)}>{s}</button>)}
         </div>
         <Lbl t="Teknik Seviye" />
-        <div style={{ display: "flex", gap: 7, flexWrap: "wrap" }}>
+        <div className="flex gap-1.5 flex-wrap">
           {["Teknik değil", "Temel", "Orta", "Geliştirici"].map(s => <button key={s} onClick={() => set("audienceTech", s)} className={C(a.audienceTech === s)}>{s}</button>)}
         </div>
         <InlineRecs />
@@ -588,10 +576,10 @@ export default function ProjePlanlayici() {
     if (sid === "features") return (
       <div>
         <H2 t="Özellik Seçimi" d="MVP için sadece olmazsa olmazları seç." />
-        {a.selectedFeatures.length > 0 && <div style={{ marginBottom: 12, padding: "7px 14px", background: a.selectedFeatures.length > 10 ? "#fef2f2" : "#fff7ed", borderRadius: 8, fontSize: 12, fontFamily: "'DM Mono'", color: a.selectedFeatures.length > 10 ? "#dc2626" : "#c05500", border: `1px solid ${a.selectedFeatures.length > 10 ? "#fca5a5" : "#fed7aa"}` }}>{a.selectedFeatures.length} seçildi{a.selectedFeatures.length > 10 && " — MVP için çok fazla!"}</div>}
+        {a.selectedFeatures.length > 0 && <div className={`mb-3 px-3.5 py-1.5 rounded-lg text-xs font-mono border ${a.selectedFeatures.length > 10 ? "bg-red-50 dark:bg-red-500/10 text-red-600 dark:text-red-400 border-red-300 dark:border-red-500/30" : "bg-orange-50 dark:bg-dz-orange-500/10 text-dz-orange-600 dark:text-dz-orange-400 border-orange-200 dark:border-dz-orange-500/30"}`}>{a.selectedFeatures.length} seçildi{a.selectedFeatures.length > 10 && " — MVP için çok fazla!"}</div>}
         {FEATURE_CATS.map(cat => (
-          <div key={cat.cat} style={{ marginBottom: 18 }}>
-            <div style={{ fontWeight: 700, fontSize: 11, color: "#4a4540", fontFamily: "'DM Mono'", letterSpacing: ".06em", textTransform: "uppercase", borderBottom: "1px solid #e8e2da", paddingBottom: 5, marginBottom: 8 }}>{cat.cat}</div>
+          <div key={cat.cat} className="mb-4">
+            <div className="font-bold text-[11px] text-dz-grey-600 dark:text-dz-grey-400 font-mono tracking-wider uppercase border-b border-dz-grey-200 dark:border-dz-grey-700 pb-1 mb-2">{cat.cat}</div>
             <div className="flex flex-wrap gap-1.5">{cat.items.map(i => <button key={i} onClick={() => toggleArr("selectedFeatures", i)} className={C(a.selectedFeatures.includes(i))}>{i}</button>)}</div>
           </div>
         ))}
@@ -605,27 +593,20 @@ export default function ProjePlanlayici() {
         {Object.entries(TECH_OPTIONS).map(([cat, opts]) => {
           const names: Record<string, string> = { frontend: "Frontend", backend: "Backend", database: "Veritabanı", styling: "UI / Styling", deploy: "Deploy" };
           return (
-            <div key={cat} style={{ marginBottom: 22 }}>
+            <div key={cat} className="mb-5">
               <Lbl t={names[cat]} />
-              <div style={{ display: "flex", flexDirection: "column", gap: 5 }}>
+              <div className="flex flex-col gap-1">
                 {opts.map(o => {
                   const sel = a.techChoices[cat] === o.name;
                   const tooHard = o.levelMin > a.userLevel;
                   return (
-                    <button key={o.name} onClick={() => !tooHard && setA(p => ({ ...p, techChoices: { ...p.techChoices, [cat]: o.name } }))} style={{
-                      display: "flex", alignItems: "center", gap: 11, padding: "10px 14px", borderRadius: 8,
-                      border: sel ? "2px solid #f97316" : "1.5px solid #e8e2da", background: sel ? "#fff7ed" : tooHard ? "#f9f7f5" : "#fdfaf7",
-                      cursor: tooHard ? "not-allowed" : "pointer", textAlign: "left", transition: "all .15s", opacity: tooHard ? 0.5 : 1,
-                    }}>
-                      <div style={{ width: 16, height: 16, borderRadius: "50%", border: sel ? "5px solid #f97316" : "2px solid #9a9590", flexShrink: 0 }} />
-                      <div style={{ flex: 1 }}>
-                        <div style={{ fontWeight: 700, fontSize: 13, color: sel ? "#c05500" : "#0d0d0d", fontFamily: "'DM Sans'" }}>{o.name} {tooHard && <span style={{ fontSize: 10, color: "#dc2626" }}>(seviyenin üstü)</span>}</div>
-                        <div style={{ fontSize: 11.5, color: "#9a9590" }}>{o.desc}</div>
+                    <button key={o.name} onClick={() => !tooHard && setA(p => ({ ...p, techChoices: { ...p.techChoices, [cat]: o.name } }))} className={`flex items-center gap-3 px-3.5 py-2.5 rounded-lg text-left transition-all ${tooHard ? "opacity-50 cursor-not-allowed" : "cursor-pointer"} ${sel ? "border-2 border-dz-orange-500 bg-orange-50 dark:bg-dz-orange-500/10" : "border-[1.5px] border-dz-grey-200 dark:border-dz-grey-700 bg-dz-grey-50 dark:bg-dz-grey-900 hover:border-dz-orange-400"}`}>
+                      <div className={`w-4 h-4 rounded-full shrink-0 ${sel ? "border-[5px] border-dz-orange-500" : "border-2 border-dz-grey-500"}`} />
+                      <div className="flex-1">
+                        <div className={`font-bold text-[13px] font-sans ${sel ? "text-dz-orange-600 dark:text-dz-orange-400" : "text-dz-black dark:text-dz-white"}`}>{o.name} {tooHard && <span className="text-[10px] text-red-600">(seviyenin üstü)</span>}</div>
+                        <div className="text-[11.5px] text-dz-grey-500">{o.desc}</div>
                       </div>
-                      <span style={{ fontSize: 10, padding: "2px 7px", borderRadius: 99, fontFamily: "'DM Mono'", fontWeight: 600,
-                        background: o.level === "Başlangıç" ? "#f0fdf4" : o.level === "Orta" ? "#fff7ed" : "#fef2f2",
-                        color: o.level === "Başlangıç" ? "#15803d" : o.level === "Orta" ? "#c05500" : "#dc2626",
-                      }}>{o.level}</span>
+                      <span className={`text-[10px] px-2 py-0.5 rounded-full font-mono font-semibold ${o.level === "Başlangıç" ? "bg-green-50 dark:bg-green-500/10 text-green-700 dark:text-green-400" : o.level === "Orta" ? "bg-orange-50 dark:bg-dz-orange-500/10 text-dz-orange-600 dark:text-dz-orange-400" : "bg-red-50 dark:bg-red-500/10 text-red-600 dark:text-red-400"}`}>{o.level}</span>
                     </button>
                   );
                 })}
@@ -640,21 +621,17 @@ export default function ProjePlanlayici() {
     if (sid === "architecture") return (
       <div>
         <H2 t="Mimari" d="Projenin genel yapısı." />
-        <div style={{ display: "flex", flexDirection: "column", gap: 8 }}>
+        <div className="flex flex-col gap-2">
           {ARCH.map(ar => {
             const sel = a.archPattern === ar.name;
             const hard = ar.lvl > a.userLevel;
             return (
-              <button key={ar.name} onClick={() => !hard && set("archPattern", ar.name)} style={{
-                textAlign: "left", padding: "14px 16px", borderRadius: 10, cursor: hard ? "not-allowed" : "pointer",
-                border: sel ? "2px solid #f97316" : "1.5px solid #e8e2da", background: sel ? "#fff7ed" : "#fdfaf7",
-                opacity: hard ? 0.5 : 1, transition: "all .15s",
-              }}>
-                <div style={{ fontWeight: 700, fontSize: 14, color: sel ? "#c05500" : "#0d0d0d", fontFamily: "'Syne'", marginBottom: 2 }}>{ar.name} {hard && <span style={{ fontSize: 10, color: "#dc2626" }}>(ileri seviye)</span>}</div>
-                <div style={{ fontSize: 12, color: "#9a9590", marginBottom: 6 }}>{ar.desc}</div>
-                <div style={{ display: "flex", gap: 14, fontSize: 11 }}>
-                  <span style={{ color: "#15803d", fontWeight: 600 }}>En iyi: {ar.best}</span>
-                  <span style={{ color: "#dc2626", fontWeight: 600 }}>Risk: {ar.risk}</span>
+              <button key={ar.name} onClick={() => !hard && set("archPattern", ar.name)} className={`text-left p-3.5 rounded-xl transition-all ${hard ? "opacity-50 cursor-not-allowed" : "cursor-pointer"} ${sel ? "border-2 border-dz-orange-500 bg-orange-50 dark:bg-dz-orange-500/10" : "border-[1.5px] border-dz-grey-200 dark:border-dz-grey-700 bg-dz-grey-50 dark:bg-dz-grey-900 hover:border-dz-orange-400"}`}>
+                <div className={`font-bold text-sm font-display mb-0.5 ${sel ? "text-dz-orange-600 dark:text-dz-orange-400" : "text-dz-black dark:text-dz-white"}`}>{ar.name} {hard && <span className="text-[10px] text-red-600">(ileri seviye)</span>}</div>
+                <div className="text-xs text-dz-grey-500 mb-1.5">{ar.desc}</div>
+                <div className="flex gap-3.5 text-[11px]">
+                  <span className="text-green-700 dark:text-green-400 font-semibold">En iyi: {ar.best}</span>
+                  <span className="text-red-600 dark:text-red-400 font-semibold">Risk: {ar.risk}</span>
                 </div>
               </button>
             );
@@ -667,23 +644,23 @@ export default function ProjePlanlayici() {
     if (sid === "checklist") return (
       <div>
         <H2 t="Kontrol Listesi" d={`Başlamadan önce: ${doneC}/${totalC}`} />
-        <div style={{ height: 5, background: "#e8e2da", borderRadius: 99, marginBottom: 20, overflow: "hidden" }}>
-          <div style={{ height: "100%", background: doneC === totalC ? "#22c55e" : "linear-gradient(90deg,#f97316,#fbbf24)", width: `${(doneC / totalC) * 100}%`, borderRadius: 99, transition: "width .3s" }} />
+        <div className="h-1.5 bg-dz-grey-200 dark:bg-dz-grey-700 rounded-full mb-5 overflow-hidden">
+          <div className={`h-full rounded-full transition-all duration-300 ${doneC === totalC ? "bg-green-500" : "bg-gradient-to-r from-dz-orange-500 to-amber-400"}`} style={{ width: `${(doneC / totalC) * 100}%` }} />
         </div>
         {CHECKLIST.map(sec => (
-          <div key={sec.section} style={{ marginBottom: 18 }}>
-            <div style={{ fontWeight: 700, fontSize: 11, color: "#4a4540", fontFamily: "'DM Mono'", letterSpacing: ".06em", textTransform: "uppercase", borderBottom: "1px solid #e8e2da", paddingBottom: 5, marginBottom: 8 }}>{sec.section}</div>
+          <div key={sec.section} className="mb-4">
+            <div className="font-bold text-[11px] text-dz-grey-600 dark:text-dz-grey-400 font-mono tracking-wider uppercase border-b border-dz-grey-200 dark:border-dz-grey-700 pb-1 mb-2">{sec.section}</div>
             {sec.items.map((it, i) => {
               const done = a.checkedItems.includes(it.text);
               const tk = `${sec.section}-${i}`;
               return (
-                <div key={i} style={{ marginBottom: 4 }}>
-                  <div onClick={() => toggleArr("checkedItems", it.text)} style={{ display: "flex", alignItems: "center", gap: 10, padding: "8px 11px", borderRadius: 7, background: done ? "#f0fdf4" : "#f5f0eb", border: done ? "1px solid #86efac" : "1px solid #e8e2da", cursor: "pointer" }}>
-                    <div style={{ width: 18, height: 18, borderRadius: 4, border: done ? "none" : "2px solid #9a9590", background: done ? "#22c55e" : "transparent", display: "flex", alignItems: "center", justifyContent: "center", color: "#fff", fontSize: 12, fontWeight: 700, flexShrink: 0 }}>{done ? "✓" : ""}</div>
-                    <span style={{ flex: 1, fontSize: 13, color: done ? "#15803d" : "#4a4540", textDecoration: done ? "line-through" : "none", opacity: done ? .7 : 1 }}>{it.text}</span>
-                    <button onClick={e => { e.stopPropagation(); setExpTip(expTip === tk ? null : tk); }} style={{ background: "none", border: "none", cursor: "pointer", color: "#9a9590", fontSize: 12, padding: "2px 5px" }}>?</button>
+                <div key={i} className="mb-1">
+                  <div onClick={() => toggleArr("checkedItems", it.text)} className={`flex items-center gap-2.5 px-3 py-2 rounded-lg cursor-pointer ${done ? "bg-green-50 dark:bg-green-500/10 border border-green-300 dark:border-green-500/30" : "bg-dz-grey-100 dark:bg-dz-grey-800 border border-dz-grey-200 dark:border-dz-grey-700"}`}>
+                    <div className={`w-[18px] h-[18px] rounded shrink-0 flex items-center justify-center text-xs font-bold ${done ? "bg-green-500 text-white" : "border-2 border-dz-grey-500"}`}>{done ? "✓" : ""}</div>
+                    <span className={`flex-1 text-[13px] ${done ? "text-green-700 dark:text-green-400 line-through opacity-70" : "text-dz-grey-600 dark:text-dz-grey-400"}`}>{it.text}</span>
+                    <button onClick={e => { e.stopPropagation(); setExpTip(expTip === tk ? null : tk); }} className="bg-transparent border-none cursor-pointer text-dz-grey-500 text-xs px-1">?</button>
                   </div>
-                  {expTip === tk && <div style={{ marginLeft: 28, marginTop: 3, padding: "7px 11px", background: "#fff7ed", borderRadius: 6, fontSize: 12, color: "#c05500", border: "1px solid #fed7aa" }}>{it.tip}</div>}
+                  {expTip === tk && <div className="ml-7 mt-1 px-3 py-1.5 bg-orange-50 dark:bg-dz-orange-500/10 rounded-md text-xs text-dz-orange-600 dark:text-dz-orange-400 border border-orange-200 dark:border-dz-orange-500/30">{it.tip}</div>}
                 </div>
               );
             })}
@@ -705,106 +682,96 @@ export default function ProjePlanlayici() {
         <div>
           <H2 t="Zirve Raporu" d={isExisting ? "Mevcut projendeki sorunların analizi ve çözüm önerileri." : "Seçimlerine göre kişiselleştirilmiş proje analizi."} />
 
-          {/* Skor kartları */}
-          <div style={{ display: "grid", gridTemplateColumns: `repeat(${tabs.length}, 1fr)`, gap: 8, marginBottom: 18 }}>
+          <div className={`grid gap-2 mb-4`} style={{ gridTemplateColumns: `repeat(${tabs.length}, 1fr)` }}>
             {tabs.map(t => (
-              <button key={t.id} onClick={() => setRTab(t.id)} style={{
-                padding: "12px 8px", borderRadius: 10, cursor: "pointer", textAlign: "center", transition: "all .15s",
-                border: activeTab === t.id ? "2px solid #f97316" : "1.5px solid #e8e2da",
-                background: activeTab === t.id ? "#fff7ed" : "#fdfaf7",
-              }}>
-                <div style={{ fontSize: 22, fontWeight: 800, fontFamily: "'Syne'", color: activeTab === t.id ? "#f97316" : "#0d0d0d" }}>{t.c}</div>
-                <div style={{ fontSize: 11, fontWeight: 600, color: activeTab === t.id ? "#c05500" : "#9a9590", fontFamily: "'DM Sans'" }}>{t.l}</div>
+              <button key={t.id} onClick={() => setRTab(t.id)} className={`p-3 rounded-xl cursor-pointer text-center transition-all ${activeTab === t.id ? "border-2 border-dz-orange-500 bg-orange-50 dark:bg-dz-orange-500/10" : "border-[1.5px] border-dz-grey-200 dark:border-dz-grey-700 bg-dz-grey-50 dark:bg-dz-grey-900 hover:border-dz-orange-400"}`}>
+                <div className={`text-[22px] font-extrabold font-display ${activeTab === t.id ? "text-dz-orange-500" : "text-dz-black dark:text-dz-white"}`}>{t.c}</div>
+                <div className={`text-[11px] font-semibold font-sans ${activeTab === t.id ? "text-dz-orange-600 dark:text-dz-orange-400" : "text-dz-grey-500"}`}>{t.l}</div>
               </button>
             ))}
           </div>
 
-          {/* DÜZELTİLMESİ GEREKENLER */}
           {activeTab === "fixes" && (
             <div>
-              <div style={{ padding: "14px 16px", background: "#fef2f2", borderRadius: 10, border: "1px solid #fca5a5", marginBottom: 14 }}>
-                <div style={{ fontFamily: "'Syne'", fontWeight: 700, fontSize: 14, color: "#dc2626", marginBottom: 2 }}>Önce Bunları Düzelt</div>
-                <div style={{ fontSize: 12, color: "#7f1d1d" }}>Seçtiğin sorunlara göre acil çözüm adımları.</div>
+              <div className="p-3.5 bg-red-50 dark:bg-red-500/10 rounded-xl border border-red-300 dark:border-red-500/30 mb-3.5">
+                <div className="font-display font-bold text-sm text-red-600 dark:text-red-400 mb-0.5">Önce Bunları Düzelt</div>
+                <div className="text-xs text-red-900 dark:text-red-300">Seçtiğin sorunlara göre acil çözüm adımları.</div>
               </div>
               {recs.fixes.map((f, i) => (
-                <div key={i} style={{ padding: "14px 16px", borderRadius: 10, border: "1px solid #e8e2da", background: "#fdfaf7", marginBottom: 8 }}>
-                  <div style={{ display: "flex", alignItems: "center", gap: 8, marginBottom: 6 }}>
-                    <span style={{ fontSize: 14 }}>🔧</span>
-                    <span style={{ fontWeight: 700, fontSize: 14, color: "#0d0d0d", fontFamily: "'DM Sans'", flex: 1 }}>{f.text}</span>
-                    {f.priority && <span style={priBadge(f.priority)}>{f.priority}</span>}
+                <div key={i} className="p-3.5 rounded-xl border border-dz-grey-200 dark:border-dz-grey-700 bg-dz-grey-50 dark:bg-dz-grey-900 mb-2">
+                  <div className="flex items-center gap-2 mb-1.5">
+                    <span className="text-sm">🔧</span>
+                    <span className="font-bold text-sm text-dz-black dark:text-dz-white font-sans flex-1">{f.text}</span>
+                    {f.priority && <span className={priBadgeCls(f.priority)}>{f.priority}</span>}
                   </div>
-                  <div style={{ fontSize: 13, color: "#15803d", fontWeight: 600, fontFamily: "'DM Sans'", padding: "8px 12px", background: "#f0fdf4", borderRadius: 8, border: "1px solid #86efac" }}>→ {f.fix}</div>
+                  <div className="text-[13px] text-green-700 dark:text-green-400 font-semibold font-sans px-3 py-2 bg-green-50 dark:bg-green-500/10 rounded-lg border border-green-300 dark:border-green-500/30">→ {f.fix}</div>
                 </div>
               ))}
-              {recs.fixes.length === 0 && <div style={{ textAlign: "center", padding: "28px", color: "#9a9590" }}>Sorun seçilmedi — önceki adıma dönüp sorunlarını seç.</div>}
+              {recs.fixes.length === 0 && <div className="text-center p-7 text-dz-grey-500">Sorun seçilmedi — önceki adıma dönüp sorunlarını seç.</div>}
             </div>
           )}
 
-          {/* KULLAN */}
           {activeTab === "use" && (
             <div>
-              <div style={{ padding: "14px 16px", background: "#f0fdf4", borderRadius: 10, border: "1px solid #86efac", marginBottom: 14 }}>
-                <div style={{ fontFamily: "'Syne'", fontWeight: 700, fontSize: 14, color: "#15803d", marginBottom: 2 }}>Projende Kullan</div>
-                <div style={{ fontSize: 12, color: "#166534" }}>Seçimlerine göre önerilen araç ve teknolojiler.</div>
+              <div className="p-3.5 bg-green-50 dark:bg-green-500/10 rounded-xl border border-green-300 dark:border-green-500/30 mb-3.5">
+                <div className="font-display font-bold text-sm text-green-700 dark:text-green-400 mb-0.5">Projende Kullan</div>
+                <div className="text-xs text-green-800 dark:text-green-300">Seçimlerine göre önerilen araç ve teknolojiler.</div>
               </div>
               {recs.use.map((r, i) => (
-                <div key={i} style={{ display: "flex", gap: 11, padding: "11px 14px", borderRadius: 8, background: i % 2 === 0 ? "#fdfaf7" : "#f5f0eb", marginBottom: 3, alignItems: "flex-start" }}>
-                  <div style={{ width: 22, height: 22, borderRadius: 5, background: "#22c55e", color: "#fff", display: "flex", alignItems: "center", justifyContent: "center", fontSize: 13, fontWeight: 700, flexShrink: 0, marginTop: 1 }}>✓</div>
-                  <div style={{ flex: 1 }}>
-                    <div style={{ fontWeight: 700, fontSize: 13.5, color: "#0d0d0d" }}>{r.tool}</div>
-                    <div style={{ fontSize: 12, color: "#4a4540", lineHeight: 1.5 }}>{r.why}</div>
+                <div key={i} className={`flex gap-3 px-3.5 py-2.5 rounded-lg items-start mb-0.5 ${i % 2 === 0 ? "bg-dz-grey-50 dark:bg-dz-grey-900" : "bg-dz-grey-100 dark:bg-dz-grey-800"}`}>
+                  <div className="w-[22px] h-[22px] rounded shrink-0 mt-0.5 bg-green-500 text-white flex items-center justify-center text-[13px] font-bold">✓</div>
+                  <div className="flex-1">
+                    <div className="font-bold text-[13.5px] text-dz-black dark:text-dz-white">{r.tool}</div>
+                    <div className="text-xs text-dz-grey-600 dark:text-dz-grey-400 leading-relaxed">{r.why}</div>
                   </div>
-                  {r.priority && <span style={priBadge(r.priority)}>{r.priority}</span>}
+                  {r.priority && <span className={priBadgeCls(r.priority)}>{r.priority}</span>}
                 </div>
               ))}
             </div>
           )}
 
-          {/* KULLANMA */}
           {activeTab === "avoid" && (
             <div>
-              <div style={{ padding: "14px 16px", background: "#fef2f2", borderRadius: 10, border: "1px solid #fca5a5", marginBottom: 14 }}>
-                <div style={{ fontFamily: "'Syne'", fontWeight: 700, fontSize: 14, color: "#dc2626", marginBottom: 2 }}>Projende Kullanma</div>
-                <div style={{ fontSize: 12, color: "#7f1d1d" }}>Bu araçlar uyumsuz, modası geçmiş veya riskli.</div>
+              <div className="p-3.5 bg-red-50 dark:bg-red-500/10 rounded-xl border border-red-300 dark:border-red-500/30 mb-3.5">
+                <div className="font-display font-bold text-sm text-red-600 dark:text-red-400 mb-0.5">Projende Kullanma</div>
+                <div className="text-xs text-red-900 dark:text-red-300">Bu araçlar uyumsuz, modası geçmiş veya riskli.</div>
               </div>
               {recs.avoid.map((r, i) => (
-                <div key={i} style={{ display: "flex", gap: 11, padding: "11px 14px", borderRadius: 8, background: i % 2 === 0 ? "#fdfaf7" : "#f5f0eb", marginBottom: 3, alignItems: "flex-start" }}>
-                  <div style={{ width: 22, height: 22, borderRadius: 5, background: "#ef4444", color: "#fff", display: "flex", alignItems: "center", justifyContent: "center", fontSize: 13, fontWeight: 700, flexShrink: 0, marginTop: 1 }}>✗</div>
+                <div key={i} className={`flex gap-3 px-3.5 py-2.5 rounded-lg items-start mb-0.5 ${i % 2 === 0 ? "bg-dz-grey-50 dark:bg-dz-grey-900" : "bg-dz-grey-100 dark:bg-dz-grey-800"}`}>
+                  <div className="w-[22px] h-[22px] rounded shrink-0 mt-0.5 bg-red-500 text-white flex items-center justify-center text-[13px] font-bold">✗</div>
                   <div>
-                    <div style={{ fontWeight: 700, fontSize: 13.5, color: "#0d0d0d" }}>{r.tool}</div>
-                    <div style={{ fontSize: 12, color: "#4a4540", lineHeight: 1.5 }}>{r.why}</div>
+                    <div className="font-bold text-[13.5px] text-dz-black dark:text-dz-white">{r.tool}</div>
+                    <div className="text-xs text-dz-grey-600 dark:text-dz-grey-400 leading-relaxed">{r.why}</div>
                   </div>
                 </div>
               ))}
             </div>
           )}
 
-          {/* UYARILAR */}
           {activeTab === "warnings" && (
             <div>
               {recs.warnings.length === 0 ? (
-                <div style={{ textAlign: "center", padding: "28px", color: "#22c55e", fontWeight: 600, fontSize: 15, fontFamily: "'DM Sans'" }}>Seçimlerinde çakışma yok!</div>
+                <div className="text-center p-7 text-green-500 font-semibold text-[15px] font-sans">Seçimlerinde çakışma yok!</div>
               ) : recs.warnings.map((w, i) => (
-                <div key={i} style={{ padding: "14px 16px", borderRadius: 10, border: "1px solid #fed7aa", background: "#fffbf5", marginBottom: 8 }}>
-                  <div style={{ fontWeight: 700, fontSize: 14, color: "#c05500", marginBottom: 4 }}>⚠ {w.text}</div>
-                  <div style={{ fontSize: 13, color: "#15803d", fontWeight: 600, padding: "6px 10px", background: "#f0fdf4", borderRadius: 6 }}>→ {w.fix}</div>
+                <div key={i} className="p-3.5 rounded-xl border border-orange-200 dark:border-dz-orange-500/30 bg-amber-50 dark:bg-amber-500/10 mb-2">
+                  <div className="font-bold text-sm text-dz-orange-600 dark:text-dz-orange-400 mb-1">⚠ {w.text}</div>
+                  <div className="text-[13px] text-green-700 dark:text-green-400 font-semibold px-2.5 py-1.5 bg-green-50 dark:bg-green-500/10 rounded-md">→ {w.fix}</div>
                 </div>
               ))}
             </div>
           )}
 
-          {/* İPUÇLARI */}
           {activeTab === "tips" && (
             <div>
               {recs.tips.length === 0 ? (
-                <div style={{ textAlign: "center", padding: "28px", color: "#9a9590" }}>Daha fazla adım doldurdukça ipuçları burada belirecek.</div>
+                <div className="text-center p-7 text-dz-grey-500">Daha fazla adım doldurdukça ipuçları burada belirecek.</div>
               ) : recs.tips.map((t, i) => (
-                <div key={i} style={{ padding: "12px 14px", background: "#fff7ed", borderRadius: 8, border: "1px solid #fed7aa", fontSize: 13, color: "#7c2d12", marginBottom: 6, lineHeight: 1.6 }}>💡 {t}</div>
+                <div key={i} className="px-3.5 py-3 bg-orange-50 dark:bg-dz-orange-500/10 rounded-lg border border-orange-200 dark:border-dz-orange-500/30 text-[13px] text-orange-900 dark:text-orange-300 mb-1.5 leading-relaxed">💡 {t}</div>
               ))}
             </div>
           )}
 
-          <Tip s="Sonraki Adım:">Bu raporu Claude'a veya Cursor IDE'ye yapıştır: "Bu plana göre projemi düzenle / oluştur." KULLAN listesindeki araçları referans al.</Tip>
+          <Tip s="Sonraki Adım:">Bu raporu Claude'a veya Cursor IDE'ye yapıştır: &ldquo;Bu plana göre projemi düzenle / oluştur.&rdquo; KULLAN listesindeki araçları referans al.</Tip>
         </div>
       );
     }
