@@ -43,10 +43,8 @@ Vercel Dashboard → Project → Settings → Environment Variables
 |----------|-------|---------|
 | `NEXT_PUBLIC_SUPABASE_URL` | `https://bcelltvotdqqhkqbcuib.supabase.co` | ✅ |
 | `NEXT_PUBLIC_SUPABASE_ANON_KEY` | Supabase anon key | ✅ |
-| `NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY` | Supabase publishable key | ✅ |
 | `SUPABASE_SERVICE_ROLE_KEY` | Supabase service role key | ✅ |
 | `NEXT_PUBLIC_SITE_URL` | `https://diptenzirveye.com` | ✅ |
-| `NEXT_PUBLIC_BASE_URL` | `https://diptenzirveye.com` | ✅ |
 | `NEXT_PUBLIC_GOOGLE_CLIENT_ID` | Google OAuth Client ID | ✅ |
 | `POLAR_ACCESS_TOKEN` | Polar access token | ✅ |
 | `POLAR_WEBHOOK_SECRET` | Polar webhook secret | ✅ |

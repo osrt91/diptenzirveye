@@ -23,10 +23,11 @@ Bu dosya, Vercel / deploy ve yakın dönem kalan işleri listeler. Detaylı list
 - [ ] **Root Directory:** `diptenzirveye` olarak ayarla
 - [ ] **Environment Variables** ekle (Production + Preview):
   - `NEXT_PUBLIC_SITE_URL`
-  - `NEXT_PUBLIC_BASE_URL`
-  - `SUPABASE_SERVICE_ROLE_KEY`
-  - `NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY`
   - `NEXT_PUBLIC_SUPABASE_URL`
+  - `NEXT_PUBLIC_SUPABASE_ANON_KEY`
+  - `SUPABASE_SERVICE_ROLE_KEY`
+  - `POLAR_ACCESS_TOKEN`
+  - `POLAR_WEBHOOK_SECRET`
 - [ ] **Deploy** tetikle
 
 ### 2. Domain ve Supabase
@@ -53,4 +54,4 @@ Bu dosya, Vercel / deploy ve yakın dönem kalan işleri listeler. Detaylı list
 
 ---
 
-*Son güncelleme: 27 Şubat 2026*
+*Son güncelleme: 1 Mart 2026*
