@@ -14,7 +14,7 @@ export default function Navbar() {
     const isDark = resolvedTheme === "dark";
 
     return (
-        <nav className="fixed top-0 left-0 right-0 z-50 px-4 py-3">
+        <nav className="fixed top-0 left-0 right-0 z-50 px-4 py-3" aria-label="Ana navigasyon">
             <div className="max-w-7xl mx-auto flex items-center justify-between bg-dz-white/80 dark:bg-dz-black/80 backdrop-blur-xl border border-dz-grey-200 dark:border-dz-white/10 rounded-2xl px-5 py-3 shadow-lg shadow-dz-black/5 dark:shadow-dz-black/30">
 
                 {/* Logo */}
