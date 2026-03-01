@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI Liderliği — DiptenZirveye</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@500;600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,400&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{--o50:#fff7ed;--o100:#ffedd5;--o200:#fed7aa;--o400:#fb923c;--o500:#f97316;--o600:#ea6c00;--o700:#c05500;--a400:#fbbf24;--bk:#0d0d0d;--g900:#1a1a1a;--g600:#4a4540;--g400:#9a9590;--g200:#e8e2da;--g100:#f5f0eb;--wh:#fdfaf7;--ok:#22c55e;--grad:linear-gradient(135deg,var(--o500),var(--a400))}*{margin:0;padding:0;box-sizing:border-box}body{font-family:'DM Sans',sans-serif;font-size:12.5pt;line-height:1.82;color:var(--bk);background:var(--wh)}h1,h2,h3,h4{font-family:'Syne',sans-serif;letter-spacing:-.02em;color:var(--bk)}h2{font-size:19pt;font-weight:700;margin:44px 0 16px;line-height:1.25}h3{font-size:14pt;font-weight:600;margin:30px 0 12px}p{margin-bottom:13px}strong{font-weight:600}.page{max-width:760px;margin:0 auto;padding:48px 64px}.cover{min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;background:var(--bk);color:var(--wh);text-align:center;position:relative;overflow:hidden;page-break-after:always;padding:60px 48px}.cover-top-bar{position:absolute;top:0;left:0;right:0;height:4px;background:var(--grad)}.cover-bg{position:absolute;inset:0;opacity:.06;pointer-events:none}.cover-logo{font-family:'Syne';font-size:13pt;font-weight:700;letter-spacing:.08em;margin-bottom:72px;z-index:1;position:relative}.cover-logo .d{color:var(--wh)}.cover-logo .z{color:var(--o500)}.cover-series{font-family:'DM Mono';font-size:8.5pt;letter-spacing:.2em;text-transform:uppercase;color:var(--o500);margin-bottom:20px;z-index:1;position:relative}.cover-title{font-family:'Syne';font-size:40pt;font-weight:800;line-height:1.08;letter-spacing:-.03em;z-index:1;position:relative;margin-bottom:14px}.cover-title span{background:var(--grad);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}.cover-sub{font-size:13pt;font-weight:300;color:var(--g400);z-index:1;position:relative;margin-bottom:48px}.cover-line{width:80px;height:3px;background:var(--grad);border-radius:2px;margin:0 auto 48px;z-index:1;position:relative}.cover-quote{font-style:italic;font-size:11.5pt;color:var(--g400);max-width:480px;line-height:1.7;z-index:1;position:relative;margin-bottom:72px}.cover-badge{display:inline-flex;align-items:center;gap:16px;padding:8px 24px;border:1px solid rgba(249,115,22,.4);border-radius:24px;font-family:'DM Mono';font-size:8pt;letter-spacing:.06em;color:var(--o400);z-index:1;position:relative}.cover-badge .dot{width:4px;height:4px;border-radius:50%;background:var(--o500)}.cover-year{font-family:'DM Mono';font-size:7.5pt;color:var(--g600);margin-top:36px;letter-spacing:.12em;z-index:1;position:relative}.copy-page{page-break-after:always;min-height:70vh;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;padding:80px 48px}.copy-page p{font-size:9pt;color:var(--g600);line-height:2.2}.copy-logo{font-family:'Syne';font-weight:700;font-size:14pt;margin-bottom:48px}.copy-logo .d{color:var(--bk)}.copy-logo .z{color:var(--o500)}.toc{page-break-after:always;padding:72px 64px;max-width:760px;margin:0 auto}.toc-item{display:flex;align-items:baseline;padding:14px 0;border-bottom:1px solid var(--g200)}.toc-num{font-family:'DM Mono';font-size:10pt;color:var(--o500);min-width:36px;font-weight:500}.toc-title{flex:1;font-size:12.5pt;font-weight:500}.ch-open{page-break-before:always;margin-bottom:36px}.ch-open-bg{background:var(--bk);color:var(--wh);padding:56px 64px 44px;position:relative;overflow:hidden;max-width:760px;margin:0 auto}.ch-num{font-family:'DM Mono';font-size:9pt;letter-spacing:.2em;text-transform:uppercase;color:var(--o500);margin-bottom:12px;position:relative;z-index:1}.ch-title{font-family:'Syne';font-size:28pt;font-weight:800;line-height:1.12;letter-spacing:-.02em;position:relative;z-index:1;margin-bottom:10px}.ch-sub{font-size:10.5pt;font-weight:300;color:var(--g400);font-style:italic;position:relative;z-index:1}.ch-line{width:60px;height:3px;background:var(--grad);border-radius:2px;margin-top:24px;position:relative;z-index:1}.ch-xp{display:inline-flex;align-items:center;gap:6px;padding:5px 14px;border:1px solid rgba(249,115,22,.3);border-radius:16px;font-family:'DM Mono';font-size:7.5pt;color:var(--o400);letter-spacing:.06em;margin-top:20px;position:relative;z-index:1}.pg-head{display:flex;justify-content:space-between;align-items:center;padding:14px 0 20px;border-bottom:1px solid var(--g200);margin-bottom:28px;font-family:'DM Mono';font-size:7pt;letter-spacing:.12em;text-transform:uppercase;color:var(--g400)}.pg-head .brand{color:var(--o500)}table{width:100%;border-collapse:collapse;margin:22px 0;font-size:11pt}thead th{background:var(--g100);font-family:'Syne';font-weight:600;font-size:9.5pt;text-align:left;padding:11px 16px;border-bottom:2px solid var(--o500);text-transform:uppercase;letter-spacing:.04em}tbody td{padding:11px 16px;border-bottom:1px solid var(--g200);vertical-align:top}tbody tr:nth-child(even){background:rgba(245,240,235,.5)}.panel-task{background:var(--o50);border:1px solid var(--o200);border-radius:12px;padding:24px 28px;margin:28px 0;position:relative;overflow:hidden}.panel-task::before{content:'';position:absolute;left:0;top:0;bottom:0;width:4px;background:var(--grad)}.panel-task-head{font-family:'DM Mono';font-size:7.5pt;letter-spacing:.14em;text-transform:uppercase;color:var(--o600);margin-bottom:12px;font-weight:500}.panel-task p{font-size:11.5pt;margin-bottom:8px}.takeaway{background:var(--g100);border-radius:12px;padding:24px 28px;margin:28px 0}.takeaway-head{font-family:'Syne';font-weight:700;font-size:10pt;color:var(--o600);margin-bottom:12px}.takeaway ol{padding-left:20px}.takeaway li{margin-bottom:8px;font-size:11.5pt}.story-box{background:var(--bk);color:var(--wh);border-radius:12px;padding:28px 32px;margin:28px 0}.story-box strong{color:var(--o400)}.story-box p{margin-bottom:10px}.stat-card{display:flex;flex-direction:column;align-items:center;justify-content:center;background:var(--grad);color:var(--wh);border-radius:12px;padding:18px 12px;text-align:center;flex:1;min-width:0}.stat-card .num{font-family:'Syne';font-size:24pt;font-weight:800;line-height:1}.stat-card .label{font-family:'DM Mono';font-size:6.5pt;letter-spacing:.08em;text-transform:uppercase;margin-top:6px;opacity:.85;line-height:1.4}.stat-row{display:flex;gap:10px;margin:24px 0}blockquote{border-left:3px solid var(--o500);padding:14px 24px;margin:22px 0;background:var(--o50);border-radius:0 10px 10px 0;font-style:italic}ul,ol{padding-left:22px;margin-bottom:14px}li{margin-bottom:6px}.footer{background:var(--bk);color:var(--g600);text-align:center;padding:48px 24px;font-family:'DM Mono';font-size:7.5pt;letter-spacing:.08em}.footer .logo{font-family:'Syne';font-size:14pt;font-weight:700;margin-bottom:16px}.footer .logo .d{color:var(--wh)}.footer .logo .z{color:var(--o500)}@media print{body{font-size:10.5pt}.page{padding:0;max-width:100%}.cover{min-height:auto;padding:100px 60px}.panel-task,.takeaway,.story-box{break-inside:avoid}h2,h3{break-after:avoid}}@page{size:A4;margin:2cm}
+</style>
+</head>
+<body>
+
+<div class="cover">
+  <div class="cover-top-bar"></div>
+  <svg class="cover-bg" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg"><defs><pattern id="grid" width="60" height="60" patternUnits="userSpaceOnUse"><path d="M 60 0 L 0 0 0 60" fill="none" stroke="#f97316" stroke-width=".5"/></pattern></defs><rect width="100%" height="100%" fill="url(#grid)" opacity=".3"/></svg>
+  <div class="cover-logo"><span class="d">Dipten</span><span class="z">Zirveye</span></div>
+  <div class="cover-series">AI Ustalık Serisi · Kitap 09</div>
+  <div class="cover-title">AI<br><span>LİDERLİĞİ</span></div>
+  <div class="cover-sub">Organizasyonu Dönüştürmek — Teknolojiyle İnsanları Güçlendirmek</div>
+  <div class="cover-line"></div>
+  <div class="cover-quote">"AI liderliği, teknolojiyi yönetmek değil — teknolojiyle insanları güçlendirmektir."</div>
+  <div class="cover-badge"><span>900 XP</span><span class="dot"></span><span>7 Bölüm</span><span class="dot"></span><span>8 Saat</span></div>
+  <div class="cover-year">V1.0 · 2026</div>
+</div>
+
+<div class="copy-page">
+  <div class="copy-logo"><span class="d">Dipten</span><span class="z">Zirveye</span></div>
+  <p><strong style="font-size:12pt;color:var(--bk)">AI LİDERLİĞİ</strong></p>
+  <p>Organizasyonu Dönüştürmek — Teknolojiyle İnsanları Güçlendirmek</p>
+  <p style="margin-top:16px">DİPTENZİRVEYE AI Ustalık Serisi · Kitap 09</p>
+  <p>Versiyon 1.0 · 2026</p>
+  <div style="width:40px;height:2px;background:var(--grad);border-radius:1px;margin:28px auto"></div>
+  <p style="font-size:8pt;margin-top:20px">© 2026 DİPTENZİRVEYE · Tüm hakları saklıdır.</p>
+</div>
+
+<div class="page toc" style="padding-top:72px">
+  <h2 style="font-size:22pt;font-weight:800;margin-bottom:8px">İçindekiler</h2>
+  <div style="width:40px;height:3px;background:var(--grad);border-radius:2px;margin-bottom:36px"></div>
+  <div class="toc-item"><span class="toc-num">01</span><span class="toc-title">AI Çağında Liderlik Nedir?</span></div>
+  <div class="toc-item"><span class="toc-num">02</span><span class="toc-title">Organizasyonel AI Dönüşümü</span></div>
+  <div class="toc-item"><span class="toc-num">03</span><span class="toc-title">AI Kültürü İnşa Etmek</span></div>
+  <div class="toc-item"><span class="toc-num">04</span><span class="toc-title">Etik AI ve Sorumluluk</span></div>
+  <div class="toc-item"><span class="toc-num">05</span><span class="toc-title">AI Destekli Karar Alma</span></div>
+  <div class="toc-item"><span class="toc-num">06</span><span class="toc-title">Kişisel Marka ve Otorite</span></div>
+  <div class="toc-item" style="border-bottom:none"><span class="toc-num">07</span><span class="toc-title">7 Günlük AI Liderlik Planı</span></div>
+</div>
+
+<!-- BÖLÜM 1 -->
+<div class="ch-open"><div class="ch-open-bg">
+  <div class="ch-num">Bölüm 01</div><div class="ch-title">AI Çağında<br>Liderlik Nedir?</div>
+  <div class="ch-sub">Teknolojiyi yönetmek değil, teknolojiyle yönetmek</div><div class="ch-line"></div>
+  <div class="ch-xp"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#f97316" stroke-width="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>120 XP</div>
+</div></div>
+
+<div class="page">
+  <div class="pg-head"><span>Bölüm 01 · AI Çağında Liderlik</span><span class="brand">DiptenZirveye</span></div>
+
+  <p>Bu kitap serisinin ilk 8 kitabında AI'ı anlamayı, kullanmayı, üretmeyi, otomatize etmeyi ve ölçeklemeyi öğrendin. Şimdi son aşamaya geçiyorsun: <strong>AI liderliği</strong>.</p>
+
+  <p>AI lideri, sadece AI araçlarını kullanan kişi değildir. AI lideri, <strong>organizasyonları, ekipleri ve toplulukları AI çağına hazırlayan, dönüşümü yöneten ve yapay zekayı insanların gücünü artırmak için kullanan</strong> kişidir.</p>
+
+  <h2>AI Liderinin 5 Temel Yetkinliği</h2>
+
+  <table>
+    <thead><tr><th>Yetkinlik</th><th>Açıklama</th></tr></thead>
+    <tbody>
+      <tr><td><strong>Vizyon</strong></td><td>AI'ın sektörü nasıl dönüştüreceğini öngörmek</td></tr>
+      <tr><td><strong>Strateji</strong></td><td>AI'ı iş stratejisine entegre etmek</td></tr>
+      <tr><td><strong>Kültür</strong></td><td>AI-pozitif organizasyon kültürü inşa etmek</td></tr>
+      <tr><td><strong>Etik</strong></td><td>AI kullanımında etik çerçeve oluşturmak</td></tr>
+      <tr><td><strong>İletişim</strong></td><td>AI dönüşümünü paydaşlara anlatabilmek</td></tr>
+    </tbody>
+  </table>
+
+  <div class="stat-row">
+    <div class="stat-card"><div class="num">92%</div><div class="label">CEO'ların AI'ı<br>öncelik görmesi</div></div>
+    <div class="stat-card"><div class="num">14%</div><div class="label">Organizasyonların<br>AI'ı tam entegre etmesi</div></div>
+    <div class="stat-card"><div class="num">78%</div><div class="label">Liderlik boşluğu:<br>AI bilen yönetici eksikliği</div></div>
+  </div>
+
+  <blockquote>"AI çağının gerçek liderleri, teknoloji uzmanları değil — teknolojiyi insani değerlerle birleştiren vizyonerlerdir."</blockquote>
+
+  <div class="takeaway">
+    <div class="takeaway-head">🎯 Bölüm Çıkarımları</div>
+    <ol>
+      <li>AI liderliği = teknoloji bilgisi + insan anlayışı + stratejik vizyon.</li>
+      <li>Organizasyonların %86'sı AI dönüşümünde liderlik boşluğu yaşıyor.</li>
+      <li>Bu boşluk senin fırsatın: AI liderliği en çok aranan yetkinlik.</li>
+    </ol>
+  </div>
+</div>
+
+<!-- BÖLÜM 2 -->
+<div class="ch-open"><div class="ch-open-bg">
+  <div class="ch-num">Bölüm 02</div><div class="ch-title">Organizasyonel<br>AI Dönüşümü</div>
+  <div class="ch-sub">Kurumları AI çağına taşıma yol haritası</div><div class="ch-line"></div>
+  <div class="ch-xp"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#f97316" stroke-width="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>130 XP</div>
+</div></div>
+
+<div class="page">
+  <div class="pg-head"><span>Bölüm 02 · Organizasyonel AI Dönüşümü</span><span class="brand">DiptenZirveye</span></div>
+
+  <p>AI dönüşümü sadece araç kurmak değildir. Organizasyonun <strong>düşünme biçimini, çalışma kültürünü ve iş süreçlerini</strong> yeniden tasarlamaktır.</p>
+
+  <h2>AI Dönüşüm Yol Haritası (6 Ay)</h2>
+
+  <table>
+    <thead><tr><th>Ay</th><th>Odak</th><th>Eylem</th></tr></thead>
+    <tbody>
+      <tr><td><strong>1</strong></td><td>Keşif</td><td>Mevcut süreçleri haritalandır, AI fırsatlarını belirle</td></tr>
+      <tr><td><strong>2</strong></td><td>Pilot</td><td>1-2 departmanda küçük ölçekli AI pilot başlat</td></tr>
+      <tr><td><strong>3</strong></td><td>Eğitim</td><td>Tüm ekibi AI araçları konusunda eğit</td></tr>
+      <tr><td><strong>4</strong></td><td>Genişleme</td><td>Başarılı pilotları diğer departmanlara yay</td></tr>
+      <tr><td><strong>5</strong></td><td>Entegrasyon</td><td>AI'ı iş akışlarının kalıcı parçası haline getir</td></tr>
+      <tr><td><strong>6</strong></td><td>Optimizasyon</td><td>Verilere göre sürekli iyileştir</td></tr>
+    </tbody>
+  </table>
+
+  <h2>Değişim Yönetimi</h2>
+
+  <p>AI dönüşümünün en büyük engeli teknoloji değil, <strong>insan direncidir</strong>. Değişim yönetimi stratejisi:</p>
+
+  <ul>
+    <li><strong>Korkuyu azalt:</strong> "AI işinizi almayacak, AI kullanan insanlar alacak" mesajı.</li>
+    <li><strong>Hızlı kazanımlar göster:</strong> İlk 2 haftada somut sonuçlar elde et.</li>
+    <li><strong>Şampiyonlar belirle:</strong> Her departmanda AI savunucuları oluştur.</li>
+    <li><strong>Eğitim sürekli olsun:</strong> Tek seferlik değil, devam eden öğrenme programı.</li>
+  </ul>
+
+  <div class="panel-task">
+    <div class="panel-task-head">⚡ Eylem Görevi</div>
+    <p>Kendi organizasyonunuz (veya müşteri organizasyonu) için 6 aylık AI dönüşüm yol haritası taslağı oluşturun.</p>
+  </div>
+
+  <div class="takeaway">
+    <div class="takeaway-head">🎯 Bölüm Çıkarımları</div>
+    <ol>
+      <li>AI dönüşümü 6 aşamalı bir süreçtir: Keşif → Pilot → Eğitim → Genişleme → Entegrasyon → Optimizasyon.</li>
+      <li>En büyük engel teknoloji değil, insan direncidir — değişim yönetimi şart.</li>
+      <li>Küçük başla, hızlı kazanımlar göster, sonra ölçekle.</li>
+    </ol>
+  </div>
+</div>
+
+<!-- BÖLÜM 3-6 -->
+<div class="ch-open"><div class="ch-open-bg">
+  <div class="ch-num">Bölüm 03</div><div class="ch-title">AI Kültürü<br>İnşa Etmek</div>
+  <div class="ch-sub">Organizasyonda AI-pozitif zihniyet yaratmak</div><div class="ch-line"></div>
+  <div class="ch-xp"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#f97316" stroke-width="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>120 XP</div>
+</div></div>
+
+<div class="page">
+  <div class="pg-head"><span>Bölüm 03 · AI Kültürü İnşa Etmek</span><span class="brand">DiptenZirveye</span></div>
+
+  <p>Araçlar değişir, kültür kalır. AI-pozitif bir organizasyon kültürü, her yeni teknoloji dalgasına adapte olabilir. Kültür inşasının 4 sütunu:</p>
+
+  <h2>1. Deneyselcilik</h2>
+  <p>"Hata yapma korkusu" AI adaptasyonunun en büyük düşmanı. Ekibe güvenli deneme alanları sun: "AI sandbox" ortamları, hackathon günleri, "AI keşif saatleri".</p>
+
+  <h2>2. Şeffaflık</h2>
+  <p>AI kararlarını açıkla. "Bu raporu AI hazırladı" demek utanılacak bir şey değil — aksine, AI'ı etkin kullanmanın göstergesi.</p>
+
+  <h2>3. Sürekli Öğrenme</h2>
+  <p>Haftalık "AI öğrenme saati", aylık workshop'lar, iç eğitim programları. Her çalışan temel AI okuryazarlığına sahip olmalı.</p>
+
+  <h2>4. İnsan Merkezlilik</h2>
+  <p>AI, insanların yerini almak için değil — insanların potansiyelini açığa çıkarmak için kullanılmalı. Her AI uygulaması "Bu, çalışanlarımızın hayatını nasıl kolaylaştırıyor?" sorusuyla değerlendirilmeli.</p>
+
+  <div class="story-box">
+    <p><strong>AI Kültürü Anketi</strong></p>
+    <p>Ekibinize şu 5 soruyu sorun (1-5 puan):</p>
+    <p>1. AI araçlarını günlük işlerimde kullanıyorum.</p>
+    <p>2. AI ile deney yapma konusunda kendimi güvende hissediyorum.</p>
+    <p>3. Yönetimim AI kullanımını destekliyor.</p>
+    <p>4. AI eğitim fırsatlarından yararlanabiliyorum.</p>
+    <p>5. AI'ın işimi kolaylaştırdığını düşünüyorum.</p>
+    <p><strong>Ortalama 3.5 altı = acil kültür müdahalesi gerekli.</strong></p>
+  </div>
+
+  <div class="takeaway">
+    <div class="takeaway-head">🎯 Bölüm Çıkarımları</div>
+    <ol>
+      <li>AI kültürünün 4 sütunu: deneyselcilik, şeffaflık, sürekli öğrenme, insan merkezlilik.</li>
+      <li>Güvenli deneme ortamları (sandbox, hackathon) korkuyu azaltır.</li>
+      <li>Her çalışan temel AI okuryazarlığına sahip olmalı.</li>
+    </ol>
+  </div>
+</div>
+
+<!-- BÖLÜM 4 -->
+<div class="ch-open"><div class="ch-open-bg">
+  <div class="ch-num">Bölüm 04</div><div class="ch-title">Etik AI ve<br>Sorumluluk</div>
+  <div class="ch-sub">Güçle gelen sorumluluk</div><div class="ch-line"></div>
+  <div class="ch-xp"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#f97316" stroke-width="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>130 XP</div>
+</div></div>
+
+<div class="page">
+  <div class="pg-head"><span>Bölüm 04 · Etik AI ve Sorumluluk</span><span class="brand">DiptenZirveye</span></div>
+
+  <p>AI güçlü bir araç — ve güçlü araçlar sorumluluk gerektirir. AI lideri olarak, etik bir çerçeve oluşturmak senin görevin.</p>
+
+  <h2>AI Etiğinin 5 İlkesi</h2>
+
+  <ol>
+    <li><strong>Şeffaflık:</strong> AI ne zaman ve nasıl kullanıldığını açıkla.</li>
+    <li><strong>Adillik:</strong> AI çıktılarının önyargı içermediğinden emin ol.</li>
+    <li><strong>Gizlilik:</strong> Kullanıcı verilerini koru, AI'a gizli bilgi verme.</li>
+    <li><strong>Sorumluluk:</strong> AI çıktılarının sorumluluğu her zaman insandadır.</li>
+    <li><strong>Fayda:</strong> AI uygulamaları net bir fayda sağlamalıdır.</li>
+  </ol>
+
+  <h2>Pratik Etik Kuralları</h2>
+
+  <ul>
+    <li>AI ile üretilen içeriği "AI destekli" olarak etiketle.</li>
+    <li>Müşteri verilerini AI modeline göndermeden önce anonimleştir.</li>
+    <li>AI kararlarını düzenli olarak denetle (bias audit).</li>
+    <li>AI kullanım politikası oluştur ve ekiple paylaş.</li>
+  </ul>
+
+  <div class="takeaway">
+    <div class="takeaway-head">🎯 Bölüm Çıkarımları</div>
+    <ol>
+      <li>AI etiği isteğe bağlı değil — liderlik sorumluluğudur.</li>
+      <li>5 ilke: şeffaflık, adillik, gizlilik, sorumluluk, fayda.</li>
+      <li>Yazılı AI kullanım politikası oluştur.</li>
+    </ol>
+  </div>
+</div>
+
+<!-- BÖLÜM 5-6 -->
+<div class="ch-open"><div class="ch-open-bg">
+  <div class="ch-num">Bölüm 05</div><div class="ch-title">AI Destekli<br>Karar Alma</div>
+  <div class="ch-sub">Veri + sezgi = üstün kararlar</div><div class="ch-line"></div>
+  <div class="ch-xp"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#f97316" stroke-width="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>120 XP</div>
+</div></div>
+
+<div class="page">
+  <div class="pg-head"><span>Bölüm 05 · AI Destekli Karar Alma</span><span class="brand">DiptenZirveye</span></div>
+
+  <p>Liderliğin özü karar almaktır. AI, karar alma sürecinizi dramatik olarak iyileştirebilir — ama asla yerine geçmez. <strong>AI veri sağlar, insan karar verir.</strong></p>
+
+  <h2>AI Destekli Karar Alma Framework'ü</h2>
+  <ol>
+    <li><strong>Veri topla:</strong> AI ile büyük veri setlerini analiz et.</li>
+    <li><strong>Senaryo oluştur:</strong> Claude'a "Bu verilerle 3 farklı senaryo oluştur" de.</li>
+    <li><strong>Risk değerlendir:</strong> Her senaryonun olası sonuçlarını AI ile model.</li>
+    <li><strong>İnsan kararı:</strong> Sezgi + deneyim + AI analizi = üstün karar.</li>
+    <li><strong>Sonucu ölç:</strong> Kararın sonuçlarını takip et, gelecek kararlar için öğren.</li>
+  </ol>
+
+  <div class="takeaway">
+    <div class="takeaway-head">🎯 Bölüm Çıkarımları</div>
+    <ol>
+      <li>AI, karar destek sistemidir — karar veren her zaman insandır.</li>
+      <li>Senaryo analizi + risk değerlendirmesi ile daha bilinçli kararlar al.</li>
+      <li>Her kararı sonuç takibi ile değerlendir — sürekli öğrenme döngüsü kur.</li>
+    </ol>
+  </div>
+</div>
+
+<!-- BÖLÜM 6 -->
+<div class="ch-open"><div class="ch-open-bg">
+  <div class="ch-num">Bölüm 06</div><div class="ch-title">Kişisel Marka<br>ve Otorite</div>
+  <div class="ch-sub">AI alanında otorite konumuna yüksel</div><div class="ch-line"></div>
+  <div class="ch-xp"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#f97316" stroke-width="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>120 XP</div>
+</div></div>
+
+<div class="page">
+  <div class="pg-head"><span>Bölüm 06 · Kişisel Marka ve Otorite</span><span class="brand">DiptenZirveye</span></div>
+
+  <p>AI liderliği yalnızca iç organizasyon için değil — sektörde de otorite konumuna yükselmek demektir. Kişisel marka stratejisi:</p>
+
+  <ul>
+    <li><strong>Thought Leadership İçerikleri:</strong> LinkedIn makaleleri, konferans konuşmaları, podcast konuklukları.</li>
+    <li><strong>Vaka Çalışmaları Yayınla:</strong> AI dönüşüm projelerinin sonuçlarını paylaş.</li>
+    <li><strong>Topluluk Oluştur:</strong> AI liderleri ağı kur, mentor ol.</li>
+    <li><strong>Kitap/Kurs Yaz:</strong> Bilgini sistematik şekilde paketle.</li>
+  </ul>
+
+  <div class="panel-task">
+    <div class="panel-task-head">⚡ Eylem Görevi</div>
+    <p>LinkedIn'de "AI ile [sektörünüz] nasıl dönüşüyor?" başlıklı bir makale yayınlayın. Kendi deneyimlerinizden örnekler verin.</p>
+  </div>
+
+  <div class="takeaway">
+    <div class="takeaway-head">🎯 Bölüm Çıkarımları</div>
+    <ol>
+      <li>AI liderliği = iç organizasyon + dış otorite.</li>
+      <li>Thought leadership içerikler ile sektörde görünür ol.</li>
+      <li>Topluluk oluştur — liderler ağından güç al.</li>
+    </ol>
+  </div>
+</div>
+
+<!-- BÖLÜM 7 -->
+<div class="ch-open"><div class="ch-open-bg">
+  <div class="ch-num">Bölüm 07</div><div class="ch-title">7 Günlük<br>AI Liderlik Planı</div>
+  <div class="ch-sub">Liderlik yolculuğunu başlat</div><div class="ch-line"></div>
+  <div class="ch-xp"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#f97316" stroke-width="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>90 XP</div>
+</div></div>
+
+<div class="page">
+  <div class="pg-head"><span>Bölüm 07 · 7 Günlük Eylem Planı</span><span class="brand">DiptenZirveye</span></div>
+
+  <table>
+    <thead><tr><th>Gün</th><th>Görev</th><th>Çıktı</th></tr></thead>
+    <tbody>
+      <tr><td><strong>1</strong></td><td>AI liderlik yetkinlik değerlendirmesi yap</td><td>Güçlü/zayıf yön analizi</td></tr>
+      <tr><td><strong>2</strong></td><td>Organizasyon AI olgunluk analizi</td><td>Mevcut durum raporu</td></tr>
+      <tr><td><strong>3</strong></td><td>6 aylık AI dönüşüm yol haritası oluştur</td><td>Aşama planı + milestone'lar</td></tr>
+      <tr><td><strong>4</strong></td><td>AI etik politikası taslağı yaz</td><td>5 ilke + uygulama kuralları</td></tr>
+      <tr><td><strong>5</strong></td><td>Ekip AI eğitim programı tasarla</td><td>4 haftalık eğitim müfredatı</td></tr>
+      <tr><td><strong>6</strong></td><td>İlk thought leadership makaleni yaz</td><td>LinkedIn makalesi yayını</td></tr>
+      <tr><td><strong>7</strong></td><td>AI liderler ağı oluşturmaya başla</td><td>5 AI lideri ile bağlantı kur</td></tr>
+    </tbody>
+  </table>
+
+  <blockquote>"Liderlik unvanla değil, etkiyle ölçülür. AI çağında en büyük etki, başkalarını bu dönüşüme hazırlamaktır."</blockquote>
+
+  <div class="takeaway">
+    <div class="takeaway-head">🎯 Kitap Özeti</div>
+    <ol>
+      <li>AI liderliği = teknoloji bilgisi + insan anlayışı + stratejik vizyon.</li>
+      <li>Organizasyonel AI dönüşümü 6 aşamalı sistematik bir süreçtir.</li>
+      <li>AI kültürü inşası: deneyselcilik, şeffaflık, sürekli öğrenme, insan merkezlilik.</li>
+      <li>Etik AI kullanımı liderlik sorumluluğudur.</li>
+      <li>Kişisel marka + thought leadership = sektörel otorite.</li>
+    </ol>
+  </div>
+</div>
+
+<div class="footer">
+  <div class="logo"><span class="d">Dipten</span><span class="z">Zirveye</span></div>
+  <p>AI USTALIK SERİSİ · KİTAP 09 · AI LİDERLİĞİ</p>
+  <p style="margin-top:8px">© 2026 DİPTENZİRVEYE · V1.0</p>
+</div>
+
+</body>
+</html>

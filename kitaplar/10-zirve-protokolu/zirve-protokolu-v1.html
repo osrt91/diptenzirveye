@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI Çağının Mimarı — DiptenZirveye</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@500;600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,400&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{--o50:#fff7ed;--o100:#ffedd5;--o200:#fed7aa;--o400:#fb923c;--o500:#f97316;--o600:#ea6c00;--o700:#c05500;--a400:#fbbf24;--bk:#0d0d0d;--g900:#1a1a1a;--g600:#4a4540;--g400:#9a9590;--g200:#e8e2da;--g100:#f5f0eb;--wh:#fdfaf7;--ok:#22c55e;--grad:linear-gradient(135deg,var(--o500),var(--a400))}*{margin:0;padding:0;box-sizing:border-box}body{font-family:'DM Sans',sans-serif;font-size:12.5pt;line-height:1.82;color:var(--bk);background:var(--wh)}h1,h2,h3,h4{font-family:'Syne',sans-serif;letter-spacing:-.02em;color:var(--bk)}h2{font-size:19pt;font-weight:700;margin:44px 0 16px;line-height:1.25}h3{font-size:14pt;font-weight:600;margin:30px 0 12px}p{margin-bottom:13px}strong{font-weight:600}.page{max-width:760px;margin:0 auto;padding:48px 64px}.cover{min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;background:var(--bk);color:var(--wh);text-align:center;position:relative;overflow:hidden;page-break-after:always;padding:60px 48px}.cover-top-bar{position:absolute;top:0;left:0;right:0;height:4px;background:var(--grad)}.cover-bg{position:absolute;inset:0;opacity:.06;pointer-events:none}.cover-logo{font-family:'Syne';font-size:13pt;font-weight:700;letter-spacing:.08em;margin-bottom:72px;z-index:1;position:relative}.cover-logo .d{color:var(--wh)}.cover-logo .z{color:var(--o500)}.cover-series{font-family:'DM Mono';font-size:8.5pt;letter-spacing:.2em;text-transform:uppercase;color:var(--o500);margin-bottom:20px;z-index:1;position:relative}.cover-title{font-family:'Syne';font-size:38pt;font-weight:800;line-height:1.08;letter-spacing:-.03em;z-index:1;position:relative;margin-bottom:14px}.cover-title span{background:var(--grad);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}.cover-sub{font-size:13pt;font-weight:300;color:var(--g400);z-index:1;position:relative;margin-bottom:48px}.cover-line{width:80px;height:3px;background:var(--grad);border-radius:2px;margin:0 auto 48px;z-index:1;position:relative}.cover-quote{font-style:italic;font-size:11.5pt;color:var(--g400);max-width:480px;line-height:1.7;z-index:1;position:relative;margin-bottom:72px}.cover-badge{display:inline-flex;align-items:center;gap:16px;padding:8px 24px;border:1px solid rgba(249,115,22,.4);border-radius:24px;font-family:'DM Mono';font-size:8pt;letter-spacing:.06em;color:var(--o400);z-index:1;position:relative}.cover-badge .dot{width:4px;height:4px;border-radius:50%;background:var(--o500)}.cover-year{font-family:'DM Mono';font-size:7.5pt;color:var(--g600);margin-top:36px;letter-spacing:.12em;z-index:1;position:relative}.copy-page{page-break-after:always;min-height:70vh;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;padding:80px 48px}.copy-page p{font-size:9pt;color:var(--g600);line-height:2.2}.copy-logo{font-family:'Syne';font-weight:700;font-size:14pt;margin-bottom:48px}.copy-logo .d{color:var(--bk)}.copy-logo .z{color:var(--o500)}.toc{page-break-after:always;padding:72px 64px;max-width:760px;margin:0 auto}.toc-item{display:flex;align-items:baseline;padding:14px 0;border-bottom:1px solid var(--g200)}.toc-num{font-family:'DM Mono';font-size:10pt;color:var(--o500);min-width:36px;font-weight:500}.toc-title{flex:1;font-size:12.5pt;font-weight:500}.ch-open{page-break-before:always;margin-bottom:36px}.ch-open-bg{background:var(--bk);color:var(--wh);padding:56px 64px 44px;position:relative;overflow:hidden;max-width:760px;margin:0 auto}.ch-num{font-family:'DM Mono';font-size:9pt;letter-spacing:.2em;text-transform:uppercase;color:var(--o500);margin-bottom:12px;position:relative;z-index:1}.ch-title{font-family:'Syne';font-size:28pt;font-weight:800;line-height:1.12;letter-spacing:-.02em;position:relative;z-index:1;margin-bottom:10px}.ch-sub{font-size:10.5pt;font-weight:300;color:var(--g400);font-style:italic;position:relative;z-index:1}.ch-line{width:60px;height:3px;background:var(--grad);border-radius:2px;margin-top:24px;position:relative;z-index:1}.ch-xp{display:inline-flex;align-items:center;gap:6px;padding:5px 14px;border:1px solid rgba(249,115,22,.3);border-radius:16px;font-family:'DM Mono';font-size:7.5pt;color:var(--o400);letter-spacing:.06em;margin-top:20px;position:relative;z-index:1}.pg-head{display:flex;justify-content:space-between;align-items:center;padding:14px 0 20px;border-bottom:1px solid var(--g200);margin-bottom:28px;font-family:'DM Mono';font-size:7pt;letter-spacing:.12em;text-transform:uppercase;color:var(--g400)}.pg-head .brand{color:var(--o500)}table{width:100%;border-collapse:collapse;margin:22px 0;font-size:11pt}thead th{background:var(--g100);font-family:'Syne';font-weight:600;font-size:9.5pt;text-align:left;padding:11px 16px;border-bottom:2px solid var(--o500);text-transform:uppercase;letter-spacing:.04em}tbody td{padding:11px 16px;border-bottom:1px solid var(--g200);vertical-align:top}tbody tr:nth-child(even){background:rgba(245,240,235,.5)}.panel-task{background:var(--o50);border:1px solid var(--o200);border-radius:12px;padding:24px 28px;margin:28px 0;position:relative;overflow:hidden}.panel-task::before{content:'';position:absolute;left:0;top:0;bottom:0;width:4px;background:var(--grad)}.panel-task-head{font-family:'DM Mono';font-size:7.5pt;letter-spacing:.14em;text-transform:uppercase;color:var(--o600);margin-bottom:12px;font-weight:500}.panel-task p{font-size:11.5pt;margin-bottom:8px}.takeaway{background:var(--g100);border-radius:12px;padding:24px 28px;margin:28px 0}.takeaway-head{font-family:'Syne';font-weight:700;font-size:10pt;color:var(--o600);margin-bottom:12px}.takeaway ol{padding-left:20px}.takeaway li{margin-bottom:8px;font-size:11.5pt}.story-box{background:var(--bk);color:var(--wh);border-radius:12px;padding:28px 32px;margin:28px 0}.story-box strong{color:var(--o400)}.story-box p{margin-bottom:10px}.stat-card{display:flex;flex-direction:column;align-items:center;justify-content:center;background:var(--grad);color:var(--wh);border-radius:12px;padding:18px 12px;text-align:center;flex:1;min-width:0}.stat-card .num{font-family:'Syne';font-size:24pt;font-weight:800;line-height:1}.stat-card .label{font-family:'DM Mono';font-size:6.5pt;letter-spacing:.08em;text-transform:uppercase;margin-top:6px;opacity:.85;line-height:1.4}.stat-row{display:flex;gap:10px;margin:24px 0}blockquote{border-left:3px solid var(--o500);padding:14px 24px;margin:22px 0;background:var(--o50);border-radius:0 10px 10px 0;font-style:italic}ul,ol{padding-left:22px;margin-bottom:14px}li{margin-bottom:6px}.footer{background:var(--bk);color:var(--g600);text-align:center;padding:48px 24px;font-family:'DM Mono';font-size:7.5pt;letter-spacing:.08em}.footer .logo{font-family:'Syne';font-size:14pt;font-weight:700;margin-bottom:16px}.footer .logo .d{color:var(--wh)}.footer .logo .z{color:var(--o500)}@media print{body{font-size:10.5pt}.page{padding:0;max-width:100%}.cover{min-height:auto;padding:100px 60px}.panel-task,.takeaway,.story-box{break-inside:avoid}h2,h3{break-after:avoid}}@page{size:A4;margin:2cm}
+</style>
+</head>
+<body>
+
+<div class="cover">
+  <div class="cover-top-bar"></div>
+  <svg class="cover-bg" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg"><defs><pattern id="grid" width="60" height="60" patternUnits="userSpaceOnUse"><path d="M 60 0 L 0 0 0 60" fill="none" stroke="#f97316" stroke-width=".5"/></pattern></defs><rect width="100%" height="100%" fill="url(#grid)" opacity=".3"/></svg>
+  <div class="cover-logo"><span class="d">Dipten</span><span class="z">Zirveye</span></div>
+  <div class="cover-series">AI Ustalık Serisi · Kitap 10 · Seri Finali</div>
+  <div class="cover-title">AI ÇAĞININ<br><span>MİMARI</span></div>
+  <div class="cover-sub">Sektörünü Yeniden Tanımlamak — Artık Tüketici Değil, Geleceği İnşa Eden Bir Üreticisin</div>
+  <div class="cover-line"></div>
+  <div class="cover-quote">"AI çağını anlayanlar adapte olur. Tasarlayanlar ise yönetir."</div>
+  <div class="cover-badge"><span>1000 XP</span><span class="dot"></span><span>7 Bölüm</span><span class="dot"></span><span>10 Saat</span></div>
+  <div class="cover-year">V1.0 · 2026</div>
+</div>
+
+<div class="copy-page">
+  <div class="copy-logo"><span class="d">Dipten</span><span class="z">Zirveye</span></div>
+  <p><strong style="font-size:12pt;color:var(--bk)">AI ÇAĞININ MİMARI</strong></p>
+  <p>Sektörünü Yeniden Tanımlamak</p>
+  <p style="margin-top:16px">DİPTENZİRVEYE AI Ustalık Serisi · Kitap 10 · SERİ FİNALİ</p>
+  <p>Versiyon 1.0 · 2026</p>
+  <div style="width:40px;height:2px;background:var(--grad);border-radius:1px;margin:28px auto"></div>
+  <p style="font-size:8pt;margin-top:20px">© 2026 DİPTENZİRVEYE · Tüm hakları saklıdır.</p>
+</div>
+
+<div class="page toc" style="padding-top:72px">
+  <h2 style="font-size:22pt;font-weight:800;margin-bottom:8px">İçindekiler</h2>
+  <div style="width:40px;height:3px;background:var(--grad);border-radius:2px;margin-bottom:36px"></div>
+  <div class="toc-item"><span class="toc-num">01</span><span class="toc-title">Yolculuğun Sentezi: 9 Kitaptan 1 Vizyon</span></div>
+  <div class="toc-item"><span class="toc-num">02</span><span class="toc-title">Sektörel AI Vizyonu Oluşturmak</span></div>
+  <div class="toc-item"><span class="toc-num">03</span><span class="toc-title">Gelecek Tasarımı: Trend Öngörüsü</span></div>
+  <div class="toc-item"><span class="toc-num">04</span><span class="toc-title">AI Ekosistemi İnşa Etmek</span></div>
+  <div class="toc-item"><span class="toc-num">05</span><span class="toc-title">Miras ve Etki: Kalıcı Değer Yaratma</span></div>
+  <div class="toc-item"><span class="toc-num">06</span><span class="toc-title">Sürdürülebilir Büyüme Manifestosu</span></div>
+  <div class="toc-item" style="border-bottom:none"><span class="toc-num">07</span><span class="toc-title">Zirve Protokolü: Son Görev</span></div>
+</div>
+
+<!-- BÖLÜM 1 -->
+<div class="ch-open"><div class="ch-open-bg">
+  <div class="ch-num">Bölüm 01</div><div class="ch-title">Yolculuğun Sentezi<br>9 Kitaptan 1 Vizyon</div>
+  <div class="ch-sub">Neredeydin, neredesin, nereye gidiyorsun</div><div class="ch-line"></div>
+  <div class="ch-xp"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#f97316" stroke-width="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>150 XP</div>
+</div></div>
+
+<div class="page">
+  <div class="pg-head"><span>Bölüm 01 · Yolculuğun Sentezi</span><span class="brand">DiptenZirveye</span></div>
+
+  <p>Bu serinin ilk kitabıyla AI'ın ne olduğunu öğrendin. Son kitabıyla — <strong>AI çağının mimarı</strong> olacaksın.</p>
+
+  <h2>10 Kitaplık Yolculuk Haritası</h2>
+
+  <table>
+    <thead><tr><th>Kitap</th><th>Kazanım</th><th>Fiil</th></tr></thead>
+    <tbody>
+      <tr><td><strong>01</strong> AI Devrimini Anlamak</td><td>AI'ın temellerini kavradın</td><td>Anlarsın</td></tr>
+      <tr><td><strong>02</strong> Prompt Mühendisliği</td><td>AI ile doğru iletişimi öğrendin</td><td>Konuşursun</td></tr>
+      <tr><td><strong>03</strong> AI Araçları Rehberi</td><td>Doğru araçları seçtin</td><td>Seçersin</td></tr>
+      <tr><td><strong>04</strong> Ertelemeden Çıkış</td><td>Odaklanma ve eylem alışkanlığı kazandın</td><td>Odaklanırsın</td></tr>
+      <tr><td><strong>05</strong> AI ile İlk Gelirim</td><td>İlk gelirini elde ettin</td><td>Kazanırsın</td></tr>
+      <tr><td><strong>06</strong> İçerik İmparatorluğu</td><td>Sistematik içerik üretim makinesi kurdun</td><td>Üretirsin</td></tr>
+      <tr><td><strong>07</strong> Otomasyon Mimarı</td><td>İşini otonom çalışan sistemlere dönüştürdün</td><td>Otomatize edersin</td></tr>
+      <tr><td><strong>08</strong> AI ile Ölçek</td><td>Solo'dan sisteme geçtin</td><td>Ölçeklersin</td></tr>
+      <tr><td><strong>09</strong> AI Liderliği</td><td>Organizasyonu dönüştürdün</td><td>Liderlik edersin</td></tr>
+      <tr><td><strong>10</strong> AI Çağının Mimarı</td><td>Geleceği tasarlıyorsun</td><td><strong>Çağı yönetirsin</strong></td></tr>
+    </tbody>
+  </table>
+
+  <div class="stat-row">
+    <div class="stat-card"><div class="num">10</div><div class="label">Kitap<br>tamamlandı</div></div>
+    <div class="stat-card"><div class="num">70+</div><div class="label">Bölüm<br>çalışıldı</div></div>
+    <div class="stat-card"><div class="num">∞</div><div class="label">Potansiyel<br>sınırsız</div></div>
+  </div>
+
+  <blockquote>"Kitap 1 ile AI'ı anlarsın. Kitap 2 ile konuşursun. Kitap 5'e geldiğinde, ilk gelirine ulaşırsın. Kitap 10'da — çağı yönetenlerden birisin."</blockquote>
+
+  <div class="takeaway">
+    <div class="takeaway-head">🎯 Bölüm Çıkarımları</div>
+    <ol>
+      <li>9 kitaplık yolculuk seni AI'ı anlayan birinden AI ile değer üreten bir lidere dönüştürdü.</li>
+      <li>Bu son kitap, tüm parçaları birleştirip vizyoner bir perspektif kazandıracak.</li>
+      <li>Artık AI tüketicisi değilsin — AI çağının mimarısın.</li>
+    </ol>
+  </div>
+</div>
+
+<!-- BÖLÜM 2 -->
+<div class="ch-open"><div class="ch-open-bg">
+  <div class="ch-num">Bölüm 02</div><div class="ch-title">Sektörel AI<br>Vizyonu Oluşturmak</div>
+  <div class="ch-sub">Sektörünü AI gözüyle yeniden hayal et</div><div class="ch-line"></div>
+  <div class="ch-xp"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#f97316" stroke-width="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>150 XP</div>
+</div></div>
+
+<div class="page">
+  <div class="pg-head"><span>Bölüm 02 · Sektörel AI Vizyonu</span><span class="brand">DiptenZirveye</span></div>
+
+  <p>Her sektör AI tarafından dönüştürülecek. Soru <em>dönüşecek mi</em> değil — <em>ne zaman</em> ve <em>kim yönetecek</em>. O kişi sen olabilirsin.</p>
+
+  <h2>Sektörel Dönüşüm Analizi</h2>
+
+  <p>Claude'a şu promptu ver: <em>"[Sektörüm] sektöründe AI'ın önümüzdeki 3-5 yılda yaratacağı en büyük 5 değişimi analiz et. Her değişim için: mevcut durum, AI ile gelecek durum, fırsat penceresi ve risk."</em></p>
+
+  <h2>Vizyon Oluşturma Framework'ü</h2>
+
+  <ol>
+    <li><strong>Mevcut Durum Analizi:</strong> Sektörde AI kullanımı şu an nerede?</li>
+    <li><strong>Boşluk Tespiti:</strong> Hangi süreçler hâlâ manuel? Nerede verim kaybı var?</li>
+    <li><strong>Gelecek Senaryoları:</strong> 1 yıl, 3 yıl, 5 yıl sonra sektör nasıl görünecek?</li>
+    <li><strong>Pozisyon Belirleme:</strong> Bu dönüşümde senin rolün ne olacak?</li>
+    <li><strong>Aksiyon Planı:</strong> İlk 90 günde hangi adımları atacaksın?</li>
+  </ol>
+
+  <div class="panel-task">
+    <div class="panel-task-head">⚡ Eylem Görevi</div>
+    <p>Kendi sektörünüz için "AI Vizyon Belgesi" oluşturun. 1 sayfalık bir doküman: mevcut durum, 3 yıllık vizyon, sizin rolünüz, ilk 3 aksiyon.</p>
+  </div>
+
+  <div class="takeaway">
+    <div class="takeaway-head">🎯 Bölüm Çıkarımları</div>
+    <ol>
+      <li>Her sektör AI tarafından dönüşecek — soru ne zaman ve kim yönetecek.</li>
+      <li>Vizyon belgesi: mevcut durum → boşluk → gelecek → pozisyon → aksiyon.</li>
+      <li>AI vizyoneri olmak, sektörde otorite konumunu garantiler.</li>
+    </ol>
+  </div>
+</div>
+
+<!-- BÖLÜM 3 -->
+<div class="ch-open"><div class="ch-open-bg">
+  <div class="ch-num">Bölüm 03</div><div class="ch-title">Gelecek Tasarımı<br>Trend Öngörüsü</div>
+  <div class="ch-sub">Bugünün trendlerinden yarının fırsatlarını çıkar</div><div class="ch-line"></div>
+  <div class="ch-xp"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#f97316" stroke-width="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>140 XP</div>
+</div></div>
+
+<div class="page">
+  <div class="pg-head"><span>Bölüm 03 · Gelecek Tasarımı</span><span class="brand">DiptenZirveye</span></div>
+
+  <p>AI çağının mimarı, trendleri takip eden değil — <strong>trendleri şekillendiren</strong> kişidir.</p>
+
+  <h2>2026-2030 AI Mega Trendleri</h2>
+
+  <table>
+    <thead><tr><th>Trend</th><th>Etki</th><th>Fırsat</th></tr></thead>
+    <tbody>
+      <tr><td><strong>AI Ajanlar</strong></td><td>Otonom görev tamamlayan sistemler</td><td>AI ajan geliştirme/satma</td></tr>
+      <tr><td><strong>Multimodal AI</strong></td><td>Metin + görsel + ses + video birlikte</td><td>Zengin içerik üretimi</td></tr>
+      <tr><td><strong>On-Device AI</strong></td><td>Bulut bağımsız, cihaz üzerinde AI</td><td>Gizlilik odaklı çözümler</td></tr>
+      <tr><td><strong>AI Demokratizasyonu</strong></td><td>Herkes AI geliştirici olabilir</td><td>No-code AI araçları</td></tr>
+      <tr><td><strong>Sektörel AI</strong></td><td>Sektöre özel AI modelleri</td><td>Niş AI danışmanlığı</td></tr>
+    </tbody>
+  </table>
+
+  <h2>Trend Radar Sistemi</h2>
+
+  <p>Haftalık "AI Trend Radar" oluştur:</p>
+  <ul>
+    <li>Perplexity ile haftalık AI haber taraması</li>
+    <li>ArXiv, Product Hunt, Hacker News takibi</li>
+    <li>Sektörel raporlar (McKinsey, Gartner, CB Insights)</li>
+    <li>Her trendi "Şimdi | Yakında | Gelecekte" olarak sınıflandır</li>
+  </ul>
+
+  <div class="takeaway">
+    <div class="takeaway-head">🎯 Bölüm Çıkarımları</div>
+    <ol>
+      <li>5 mega trend: AI ajanlar, multimodal AI, on-device AI, demokratizasyon, sektörel AI.</li>
+      <li>Haftalık trend radar ile gelecekteki fırsatları erken tespit et.</li>
+      <li>Trendleri takip etmek yetmez — konumlan ve eyleme geç.</li>
+    </ol>
+  </div>
+</div>
+
+<!-- BÖLÜM 4-5 -->
+<div class="ch-open"><div class="ch-open-bg">
+  <div class="ch-num">Bölüm 04</div><div class="ch-title">AI Ekosistemi<br>İnşa Etmek</div>
+  <div class="ch-sub">Topluluk, network ve değer ağları</div><div class="ch-line"></div>
+  <div class="ch-xp"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#f97316" stroke-width="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>140 XP</div>
+</div></div>
+
+<div class="page">
+  <div class="pg-head"><span>Bölüm 04 · AI Ekosistemi İnşa Etmek</span><span class="brand">DiptenZirveye</span></div>
+
+  <p>Gerçek güç izole değil, <strong>ekosistem</strong> içinde oluşur. AI çağının mimarı, kendi etrafında değer üreten bir ağ oluşturur.</p>
+
+  <h2>Ekosistem Katmanları</h2>
+
+  <ol>
+    <li><strong>İç Halka — Çekirdek Ekip:</strong> Senin vizyonunu paylaşan 3-5 kişi.</li>
+    <li><strong>Orta Halka — Strateji Ortakları:</strong> Komplementer beceriler sunan profesyoneller.</li>
+    <li><strong>Dış Halka — Topluluk:</strong> Senin içeriklerinden öğrenen, etkileşen kitle.</li>
+    <li><strong>Ekosistem Halka — Sektör:</strong> Konferanslar, ortaklıklar, yayınlar.</li>
+  </ol>
+
+  <h2>Topluluk Oluşturma</h2>
+
+  <ul>
+    <li><strong>Discord/Slack topluluğu:</strong> AI meraklıları ve profesyoneller için.</li>
+    <li><strong>Mastermind grupları:</strong> 5-10 kişilik üst düzey lider grupları.</li>
+    <li><strong>Mentorluk programı:</strong> Yeni nesil AI liderlerini yetiştir.</li>
+    <li><strong>Etkinlikler:</strong> Online/offline workshop, hackathon, konferans.</li>
+  </ul>
+
+  <div class="story-box">
+    <p><strong>Ekosistem Etkisi</strong></p>
+    <p>Bir AI liderinin oluşturduğu ekosistem şu değer döngüsünü yaratır:</p>
+    <p><strong>İçerik üret → Topluluk büyüt → Otorite kazan → Fırsat çek → Değer yarat → İçerik üret...</strong></p>
+    <p>Bu döngü kendi kendini besleyen bir <strong>flywheel</strong> etkisi oluşturur.</p>
+  </div>
+
+  <div class="takeaway">
+    <div class="takeaway-head">🎯 Bölüm Çıkarımları</div>
+    <ol>
+      <li>Ekosistem, izole başarıdan kat kat güçlüdür.</li>
+      <li>4 halka: çekirdek ekip, strateji ortakları, topluluk, sektör.</li>
+      <li>Flywheel etkisi: içerik → topluluk → otorite → fırsat → değer.</li>
+    </ol>
+  </div>
+</div>
+
+<!-- BÖLÜM 5 -->
+<div class="ch-open"><div class="ch-open-bg">
+  <div class="ch-num">Bölüm 05</div><div class="ch-title">Miras ve Etki<br>Kalıcı Değer Yaratma</div>
+  <div class="ch-sub">Gelir ötesinde anlam</div><div class="ch-line"></div>
+  <div class="ch-xp"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#f97316" stroke-width="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>130 XP</div>
+</div></div>
+
+<div class="page">
+  <div class="pg-head"><span>Bölüm 05 · Miras ve Etki</span><span class="brand">DiptenZirveye</span></div>
+
+  <p>Para kazanmak önemli. Ama gerçek başarı, <strong>kalıcı değer yaratmaktır</strong>. AI çağının mimarı olarak bırakacağın miras nedir?</p>
+
+  <h2>Etki Alanları</h2>
+
+  <ul>
+    <li><strong>Eğitim:</strong> AI okuryazarlığını yaygınlaştır. Mentorluk yap, kurs oluştur, topluluk eğit.</li>
+    <li><strong>İstihdam:</strong> AI ile yeni iş modelleri oluştur. İnsanların AI çağında istihdam edilebilirliğini artır.</li>
+    <li><strong>İnovasyon:</strong> Sektöründe AI ile çözülmemiş sorunlara çözüm üret.</li>
+    <li><strong>Etik:</strong> AI'ın sorumlu kullanımı için standartlar belirle.</li>
+    <li><strong>İlham:</strong> Kendi hikayenle başkalarına ilham ver. "Ben yapabildiysem, sen de yapabilirsin."</li>
+  </ul>
+
+  <blockquote>"Gerçek zenginlik hesabındaki rakam değil — kaç insanın hayatını dönüştürdüğündür."</blockquote>
+
+  <div class="panel-task">
+    <div class="panel-task-head">⚡ Eylem Görevi</div>
+    <p>"5 yıl sonra benim sayemde kaç kişinin hayatı değişmiş olacak?" sorusunu yanıtlayın. Bu vizyonu yazılı hale getirin ve her gün gözünüzün önünde tutun.</p>
+  </div>
+
+  <div class="takeaway">
+    <div class="takeaway-head">🎯 Bölüm Çıkarımları</div>
+    <ol>
+      <li>Gelir ötesinde anlam: eğitim, istihdam, inovasyon, etik, ilham.</li>
+      <li>AI çağının gerçek mimarları, başkalarının potansiyelini açığa çıkaranlardır.</li>
+      <li>Mirasın, kaç insanın hayatını dönüştürdüğünle ölçülür.</li>
+    </ol>
+  </div>
+</div>
+
+<!-- BÖLÜM 6 -->
+<div class="ch-open"><div class="ch-open-bg">
+  <div class="ch-num">Bölüm 06</div><div class="ch-title">Sürdürülebilir Büyüme<br>Manifestosu</div>
+  <div class="ch-sub">Zirvede kalmanın kuralları</div><div class="ch-line"></div>
+  <div class="ch-xp"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#f97316" stroke-width="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>130 XP</div>
+</div></div>
+
+<div class="page">
+  <div class="pg-head"><span>Bölüm 06 · Sürdürülebilir Büyüme Manifestosu</span><span class="brand">DiptenZirveye</span></div>
+
+  <p>Zirveye çıkmak zor — ama zirvede kalmak daha zor. Sürdürülebilir büyümenin 7 kuralı:</p>
+
+  <ol>
+    <li><strong>Öğrenmeyi asla bırakma.</strong> AI her 6 ayda bir paradigma değiştiriyor. Günde 30 dk öğrenme ritüeli koy.</li>
+    <li><strong>Sağlığını ihmal etme.</strong> Burnout, başarının en büyük düşmanı. Uyku, egzersiz, beslenme — bunlar lüks değil, zorunluluk.</li>
+    <li><strong>Otomasyonu kendi üzerine de uygula.</strong> Kendi iş yükünü de otomasyon ile hafiflet.</li>
+    <li><strong>Toplulukla büyü.</strong> İzole başarı sınırlıdır. Güçlü bir ağ, bireysel kapasiteni çarpanlar.</li>
+    <li><strong>Etik çizginden sapma.</strong> Kısa vadeli kazanç için uzun vadeli itibar kurban edilmez.</li>
+    <li><strong>Mentee'lerin yetişsin.</strong> Bilgini paylaş. En iyi öğrenme yöntemi öğretmektir.</li>
+    <li><strong>Düzenli geri çekil ve büyük resme bak.</strong> Haftada 1 saat "stratejik düşünme zamanı" ayır.</li>
+  </ol>
+
+  <div class="takeaway">
+    <div class="takeaway-head">🎯 Bölüm Çıkarımları</div>
+    <ol>
+      <li>Sürdürülebilir büyüme, hızdan daha önemlidir.</li>
+      <li>Sağlık, öğrenme ve topluluk — bunlar seni zirvede tutar.</li>
+      <li>Her hafta 1 saat "helikopter bakışı" ile büyük resme odaklan.</li>
+    </ol>
+  </div>
+</div>
+
+<!-- BÖLÜM 7 — SERİ FİNALİ -->
+<div class="ch-open"><div class="ch-open-bg">
+  <div class="ch-num">Bölüm 07 · Seri Finali</div><div class="ch-title">Zirve Protokolü<br>Son Görev</div>
+  <div class="ch-sub">10 kitaplık yolculuğun taçlandırılması</div><div class="ch-line"></div>
+  <div class="ch-xp"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#f97316" stroke-width="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>160 XP</div>
+</div></div>
+
+<div class="page">
+  <div class="pg-head"><span>Bölüm 07 · Zirve Protokolü</span><span class="brand">DiptenZirveye</span></div>
+
+  <p>Bu, 10 kitaplık serinin son sayfası. Buraya kadar geldin. AI'ı anladın, kullandın, ürettin, otomatize ettin, ölçekledin, liderlik ettin ve şimdi — <strong>geleceği tasarlıyorsun</strong>.</p>
+
+  <h2>Zirve Protokolü: Son 7 Günlük Plan</h2>
+
+  <table>
+    <thead><tr><th>Gün</th><th>Görev</th><th>Çıktı</th></tr></thead>
+    <tbody>
+      <tr><td><strong>1</strong></td><td>9 kitapta öğrendiklerini tek sayfada özetle</td><td>"Benim AI Manifestom"</td></tr>
+      <tr><td><strong>2</strong></td><td>Sektörel AI vizyon belgesi oluştur</td><td>3 yıllık vizyon dokümanı</td></tr>
+      <tr><td><strong>3</strong></td><td>AI ekosistem haritanı çiz</td><td>4 halkalı ekosistem planı</td></tr>
+      <tr><td><strong>4</strong></td><td>"AI Çağının Mimarı" makaleni yaz ve yayınla</td><td>LinkedIn/blog makalesi</td></tr>
+      <tr><td><strong>5</strong></td><td>İlk mentorluk görüşmeni yap</td><td>1 kişiye AI yolculuğunu anlat</td></tr>
+      <tr><td><strong>6</strong></td><td>12 aylık stratejik plan oluştur</td><td>Çeyreklik hedefler + KPI'lar</td></tr>
+      <tr><td><strong>7</strong></td><td>DiptenZirveye'de "Zirve Fatihi" rozetini kazan</td><td>Sertifikan hazır!</td></tr>
+    </tbody>
+  </table>
+
+  <div class="story-box">
+    <p><strong>Son Söz</strong></p>
+    <p>10 kitap önce, "AI nedir?" diye merak ediyordun. Şimdi <strong>AI çağının mimarı</strong> olarak geleceği tasarlıyorsun.</p>
+    <p>Bu yolculuk burada bitmiyor — aslında daha yeni başlıyor. Her yeni AI modeli, her yeni araç, her yeni trend — senin için bir fırsat.</p>
+    <p>Ama unutma: En güçlü AI bile bir insan vizyonu olmadan anlamsızdır. <strong>O vizyon senin.</strong></p>
+    <p style="margin-top:20px;font-size:14pt;color:var(--o400)"><strong>Dipten Zirveye — Yolculuk Devam Ediyor.</strong></p>
+  </div>
+
+  <div class="takeaway">
+    <div class="takeaway-head">🏆 Seri Finali — Tüm Serinin Özeti</div>
+    <ol>
+      <li><strong>Anla</strong> — AI devriminin ne olduğunu kavra.</li>
+      <li><strong>Konuş</strong> — AI ile doğru iletişim kur (prompt mühendisliği).</li>
+      <li><strong>Seç</strong> — Doğru araçları bul ve kullan.</li>
+      <li><strong>Odaklan</strong> — Ertelemeyi yen, derin çalış.</li>
+      <li><strong>Kazan</strong> — AI ile ilk gelirini elde et.</li>
+      <li><strong>Üret</strong> — Sistematik içerik üretim makinesi kur.</li>
+      <li><strong>Otomatize et</strong> — Uyurken çalışan sistemler inşa et.</li>
+      <li><strong>Ölçekle</strong> — Solo'dan sisteme geç.</li>
+      <li><strong>Liderlik et</strong> — Organizasyonu ve insanları dönüştür.</li>
+      <li><strong>Çağı yönet</strong> — Geleceği tasarla, miras bırak.</li>
+    </ol>
+  </div>
+</div>
+
+<div class="footer">
+  <div class="logo"><span class="d">Dipten</span><span class="z">Zirveye</span></div>
+  <p>AI USTALIK SERİSİ · KİTAP 10 · AI ÇAĞININ MİMARI · SERİ FİNALİ</p>
+  <p style="margin-top:8px">© 2026 DİPTENZİRVEYE · V1.0</p>
+  <p style="margin-top:16px;font-size:9pt;color:var(--o500)">Tebrikler! 10 kitaplık seriyi tamamladınız. Artık AI çağının mimarısınız.</p>
+</div>
+
+</body>
+</html>

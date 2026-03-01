@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI ile Ölçek — DiptenZirveye</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@500;600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,400&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{--o50:#fff7ed;--o100:#ffedd5;--o200:#fed7aa;--o400:#fb923c;--o500:#f97316;--o600:#ea6c00;--o700:#c05500;--a400:#fbbf24;--bk:#0d0d0d;--g900:#1a1a1a;--g600:#4a4540;--g400:#9a9590;--g200:#e8e2da;--g100:#f5f0eb;--wh:#fdfaf7;--ok:#22c55e;--grad:linear-gradient(135deg,var(--o500),var(--a400))}
+*{margin:0;padding:0;box-sizing:border-box}body{font-family:'DM Sans',sans-serif;font-size:12.5pt;line-height:1.82;color:var(--bk);background:var(--wh)}h1,h2,h3,h4{font-family:'Syne',sans-serif;letter-spacing:-.02em;color:var(--bk)}h2{font-size:19pt;font-weight:700;margin:44px 0 16px;line-height:1.25}h3{font-size:14pt;font-weight:600;margin:30px 0 12px}p{margin-bottom:13px}strong{font-weight:600}.page{max-width:760px;margin:0 auto;padding:48px 64px}
+.cover{min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;background:var(--bk);color:var(--wh);text-align:center;position:relative;overflow:hidden;page-break-after:always;padding:60px 48px}.cover-top-bar{position:absolute;top:0;left:0;right:0;height:4px;background:var(--grad)}.cover-bg{position:absolute;inset:0;opacity:.06;pointer-events:none}.cover-logo{font-family:'Syne';font-size:13pt;font-weight:700;letter-spacing:.08em;margin-bottom:72px;z-index:1;position:relative}.cover-logo .d{color:var(--wh)}.cover-logo .z{color:var(--o500)}.cover-series{font-family:'DM Mono';font-size:8.5pt;letter-spacing:.2em;text-transform:uppercase;color:var(--o500);margin-bottom:20px;z-index:1;position:relative}.cover-title{font-family:'Syne';font-size:40pt;font-weight:800;line-height:1.08;letter-spacing:-.03em;z-index:1;position:relative;margin-bottom:14px}.cover-title span{background:var(--grad);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}.cover-sub{font-size:13pt;font-weight:300;color:var(--g400);z-index:1;position:relative;margin-bottom:48px}.cover-line{width:80px;height:3px;background:var(--grad);border-radius:2px;margin:0 auto 48px;z-index:1;position:relative}.cover-quote{font-style:italic;font-size:11.5pt;color:var(--g400);max-width:480px;line-height:1.7;z-index:1;position:relative;margin-bottom:72px}.cover-badge{display:inline-flex;align-items:center;gap:16px;padding:8px 24px;border:1px solid rgba(249,115,22,.4);border-radius:24px;font-family:'DM Mono';font-size:8pt;letter-spacing:.06em;color:var(--o400);z-index:1;position:relative}.cover-badge .dot{width:4px;height:4px;border-radius:50%;background:var(--o500)}.cover-year{font-family:'DM Mono';font-size:7.5pt;color:var(--g600);margin-top:36px;letter-spacing:.12em;z-index:1;position:relative}
+.copy-page{page-break-after:always;min-height:70vh;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;padding:80px 48px}.copy-page p{font-size:9pt;color:var(--g600);line-height:2.2}.copy-logo{font-family:'Syne';font-weight:700;font-size:14pt;margin-bottom:48px}.copy-logo .d{color:var(--bk)}.copy-logo .z{color:var(--o500)}
+.toc{page-break-after:always;padding:72px 64px;max-width:760px;margin:0 auto}.toc-item{display:flex;align-items:baseline;padding:14px 0;border-bottom:1px solid var(--g200)}.toc-num{font-family:'DM Mono';font-size:10pt;color:var(--o500);min-width:36px;font-weight:500}.toc-title{flex:1;font-size:12.5pt;font-weight:500}
+.ch-open{page-break-before:always;margin-bottom:36px}.ch-open-bg{background:var(--bk);color:var(--wh);padding:56px 64px 44px;position:relative;overflow:hidden;max-width:760px;margin:0 auto}.ch-num{font-family:'DM Mono';font-size:9pt;letter-spacing:.2em;text-transform:uppercase;color:var(--o500);margin-bottom:12px;position:relative;z-index:1}.ch-title{font-family:'Syne';font-size:28pt;font-weight:800;line-height:1.12;letter-spacing:-.02em;position:relative;z-index:1;margin-bottom:10px}.ch-sub{font-size:10.5pt;font-weight:300;color:var(--g400);font-style:italic;position:relative;z-index:1}.ch-line{width:60px;height:3px;background:var(--grad);border-radius:2px;margin-top:24px;position:relative;z-index:1}.ch-xp{display:inline-flex;align-items:center;gap:6px;padding:5px 14px;border:1px solid rgba(249,115,22,.3);border-radius:16px;font-family:'DM Mono';font-size:7.5pt;color:var(--o400);letter-spacing:.06em;margin-top:20px;position:relative;z-index:1}
+.pg-head{display:flex;justify-content:space-between;align-items:center;padding:14px 0 20px;border-bottom:1px solid var(--g200);margin-bottom:28px;font-family:'DM Mono';font-size:7pt;letter-spacing:.12em;text-transform:uppercase;color:var(--g400)}.pg-head .brand{color:var(--o500)}
+table{width:100%;border-collapse:collapse;margin:22px 0;font-size:11pt}thead th{background:var(--g100);font-family:'Syne';font-weight:600;font-size:9.5pt;text-align:left;padding:11px 16px;border-bottom:2px solid var(--o500);text-transform:uppercase;letter-spacing:.04em}tbody td{padding:11px 16px;border-bottom:1px solid var(--g200);vertical-align:top}tbody tr:nth-child(even){background:rgba(245,240,235,.5)}
+.panel-task{background:var(--o50);border:1px solid var(--o200);border-radius:12px;padding:24px 28px;margin:28px 0;position:relative;overflow:hidden}.panel-task::before{content:'';position:absolute;left:0;top:0;bottom:0;width:4px;background:var(--grad)}.panel-task-head{font-family:'DM Mono';font-size:7.5pt;letter-spacing:.14em;text-transform:uppercase;color:var(--o600);margin-bottom:12px;font-weight:500}.panel-task p{font-size:11.5pt;margin-bottom:8px}
+.takeaway{background:var(--g100);border-radius:12px;padding:24px 28px;margin:28px 0}.takeaway-head{font-family:'Syne';font-weight:700;font-size:10pt;color:var(--o600);margin-bottom:12px}.takeaway ol{padding-left:20px}.takeaway li{margin-bottom:8px;font-size:11.5pt}
+.story-box{background:var(--bk);color:var(--wh);border-radius:12px;padding:28px 32px;margin:28px 0}.story-box strong{color:var(--o400)}.story-box p{margin-bottom:10px}
+.stat-card{display:flex;flex-direction:column;align-items:center;justify-content:center;background:var(--grad);color:var(--wh);border-radius:12px;padding:18px 12px;text-align:center;flex:1;min-width:0}.stat-card .num{font-family:'Syne';font-size:24pt;font-weight:800;line-height:1}.stat-card .label{font-family:'DM Mono';font-size:6.5pt;letter-spacing:.08em;text-transform:uppercase;margin-top:6px;opacity:.85;line-height:1.4}.stat-row{display:flex;gap:10px;margin:24px 0}
+blockquote{border-left:3px solid var(--o500);padding:14px 24px;margin:22px 0;background:var(--o50);border-radius:0 10px 10px 0;font-style:italic}
+ul,ol{padding-left:22px;margin-bottom:14px}li{margin-bottom:6px}
+.footer{background:var(--bk);color:var(--g600);text-align:center;padding:48px 24px;font-family:'DM Mono';font-size:7.5pt;letter-spacing:.08em}.footer .logo{font-family:'Syne';font-size:14pt;font-weight:700;margin-bottom:16px}.footer .logo .d{color:var(--wh)}.footer .logo .z{color:var(--o500)}
+@media print{body{font-size:10.5pt}.page{padding:0;max-width:100%}.cover{min-height:auto;padding:100px 60px}.panel-task,.takeaway,.story-box{break-inside:avoid}h2,h3{break-after:avoid}}@page{size:A4;margin:2cm}
+</style>
+</head>
+<body>
+
+<div class="cover">
+  <div class="cover-top-bar"></div>
+  <svg class="cover-bg" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg"><defs><pattern id="grid" width="60" height="60" patternUnits="userSpaceOnUse"><path d="M 60 0 L 0 0 0 60" fill="none" stroke="#f97316" stroke-width=".5"/></pattern></defs><rect width="100%" height="100%" fill="url(#grid)" opacity=".3"/></svg>
+  <div class="cover-logo"><span class="d">Dipten</span><span class="z">Zirveye</span></div>
+  <div class="cover-series">AI Ustalık Serisi · Kitap 08</div>
+  <div class="cover-title">AI İLE<br><span>ÖLÇEK</span></div>
+  <div class="cover-sub">Tek İnsandan Ekibe — Küçük Başarıları Devasa Sistemlere Dönüştürmek</div>
+  <div class="cover-line"></div>
+  <div class="cover-quote">"Solo'dan scale'e geçiş, daha çok çalışmak değil — sistemi daha iyi kurmak demektir."</div>
+  <div class="cover-badge"><span>800 XP</span><span class="dot"></span><span>7 Bölüm</span><span class="dot"></span><span>7 Saat</span></div>
+  <div class="cover-year">V1.0 · 2026</div>
+</div>
+
+<div class="copy-page">
+  <div class="copy-logo"><span class="d">Dipten</span><span class="z">Zirveye</span></div>
+  <p><strong style="font-size:12pt;color:var(--bk)">AI İLE ÖLÇEK</strong></p>
+  <p>Tek İnsandan Ekibe — Küçük Başarıları Devasa Sistemlere Dönüştürmek</p>
+  <p style="margin-top:16px">DİPTENZİRVEYE AI Ustalık Serisi · Kitap 08</p>
+  <p>Versiyon 1.0 · 2026</p>
+  <div style="width:40px;height:2px;background:var(--grad);border-radius:1px;margin:28px auto"></div>
+  <p style="font-size:8pt;margin-top:20px">© 2026 DİPTENZİRVEYE · Tüm hakları saklıdır.</p>
+</div>
+
+<div class="page toc" style="padding-top:72px">
+  <h2 style="font-size:22pt;font-weight:800;margin-bottom:8px">İçindekiler</h2>
+  <div style="width:40px;height:3px;background:var(--grad);border-radius:2px;margin-bottom:36px"></div>
+  <div class="toc-item"><span class="toc-num">01</span><span class="toc-title">Ölçeklenme Zihniyeti</span></div>
+  <div class="toc-item"><span class="toc-num">02</span><span class="toc-title">Süreç Standartlaştırma</span></div>
+  <div class="toc-item"><span class="toc-num">03</span><span class="toc-title">AI ile Ekip Kurma</span></div>
+  <div class="toc-item"><span class="toc-num">04</span><span class="toc-title">Gelir Akışlarını Çoğaltma</span></div>
+  <div class="toc-item"><span class="toc-num">05</span><span class="toc-title">Operasyonel Mükemmellik</span></div>
+  <div class="toc-item"><span class="toc-num">06</span><span class="toc-title">Büyüme Metrikleri ve KPI'lar</span></div>
+  <div class="toc-item" style="border-bottom:none"><span class="toc-num">07</span><span class="toc-title">7 Günlük Ölçekleme Planı</span></div>
+</div>
+
+<!-- BÖLÜM 1 -->
+<div class="ch-open"><div class="ch-open-bg">
+  <div class="ch-num">Bölüm 01</div><div class="ch-title">Ölçeklenme<br>Zihniyeti</div>
+  <div class="ch-sub">Solo'dan sisteme geçiş paradigması</div><div class="ch-line"></div>
+  <div class="ch-xp"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#f97316" stroke-width="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>100 XP</div>
+</div></div>
+
+<div class="page">
+  <div class="pg-head"><span>Bölüm 01 · Ölçeklenme Zihniyeti</span><span class="brand">DiptenZirveye</span></div>
+
+  <p>İlk gelirini kazandın, otomasyonlarını kurdun, içerik üretim sistemin çalışıyor. Şimdi kritik soru: <strong>Bu işi nasıl 10x büyütürüm?</strong></p>
+
+  <p>Ölçeklenmek, daha çok çalışmak değildir. Ölçeklenmek, <strong>sistemi yeniden tasarlamaktır</strong>. Solo çalışan birinin günde maksimum 10-12 saat üretken olabilir. Ama doğru sistemle, 24 saat boyunca değer üreten bir makine inşa edebilirsin.</p>
+
+  <h2>Ölçeklenme Engelleri</h2>
+
+  <table>
+    <thead><tr><th>Engel</th><th>Belirti</th><th>Çözüm</th></tr></thead>
+    <tbody>
+      <tr><td><strong>Zaman</strong></td><td>Her şeyi kendin yapıyorsun</td><td>Delege et + otomasyon</td></tr>
+      <tr><td><strong>Bilgi</strong></td><td>Senin kafandaki bilgi yazılı değil</td><td>SOP (Standard Operating Procedures)</td></tr>
+      <tr><td><strong>Kalite</strong></td><td>"Kimse benim kadar iyi yapamaz"</td><td>%80 kuralı: %80 yeterli, mükemmel değil</td></tr>
+      <tr><td><strong>Sermaye</strong></td><td>Ekip kurma bütçesi yok</td><td>AI + freelancer hibrit model</td></tr>
+      <tr><td><strong>Korku</strong></td><td>Kontrolü kaybetme korkusu</td><td>Dashboard + KPI takibi</td></tr>
+    </tbody>
+  </table>
+
+  <h2>AI Destekli Ölçeklenme Formülü</h2>
+
+  <p>Geleneksel ölçeklenme: Daha fazla insan = daha fazla çıktı. AI destekli ölçeklenme: <strong>Daha akıllı sistem = daha fazla çıktı</strong>.</p>
+
+  <ol>
+    <li><strong>Sistematize et:</strong> Her süreci dokümante et (SOP).</li>
+    <li><strong>Otomatize et:</strong> Tekrarlayan işleri AI + otomasyon araçlarına devret.</li>
+    <li><strong>Delege et:</strong> İnsan gerektiren işleri freelancer/ekip üyelerine ver.</li>
+    <li><strong>Ölç:</strong> KPI'lar ile performansı takip et.</li>
+    <li><strong>Optimize et:</strong> Verilere göre sürekli iyileştir.</li>
+  </ol>
+
+  <div class="stat-row">
+    <div class="stat-card"><div class="num">10x</div><div class="label">Ölçeklenme<br>hedefi</div></div>
+    <div class="stat-card"><div class="num">AI+İnsan</div><div class="label">Hibrit model<br>en verimli</div></div>
+    <div class="stat-card"><div class="num">SOP</div><div class="label">Her süreç<br>yazılı olmalı</div></div>
+  </div>
+
+  <div class="takeaway">
+    <div class="takeaway-head">🎯 Bölüm Çıkarımları</div>
+    <ol>
+      <li>Ölçeklenmek daha çok çalışmak değil, sistemi yeniden tasarlamaktır.</li>
+      <li>5 engeli aş: zaman, bilgi, kalite, sermaye, korku.</li>
+      <li>Formül: Sistematize → Otomatize → Delege → Ölç → Optimize.</li>
+    </ol>
+  </div>
+</div>
+
+<!-- BÖLÜM 2 -->
+<div class="ch-open"><div class="ch-open-bg">
+  <div class="ch-num">Bölüm 02</div><div class="ch-title">Süreç<br>Standartlaştırma</div>
+  <div class="ch-sub">SOP'lar ile bilgiyi sisteme dönüştür</div><div class="ch-line"></div>
+  <div class="ch-xp"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#f97316" stroke-width="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>100 XP</div>
+</div></div>
+
+<div class="page">
+  <div class="pg-head"><span>Bölüm 02 · Süreç Standartlaştırma</span><span class="brand">DiptenZirveye</span></div>
+
+  <p>İşini ölçeklemeden önce, kafandaki bilgiyi <strong>yazılı prosedürlere</strong> (SOP — Standard Operating Procedure) dönüştürmelisin. SOP, herhangi birinin senin yerine aynı kalitede iş yapabilmesini sağlayan adım adım rehberdir.</p>
+
+  <h2>SOP Oluşturma Framework'ü</h2>
+
+  <p>AI ile SOP oluşturma süreci:</p>
+
+  <ol>
+    <li><strong>Ekran kaydı al:</strong> İşi yaparken Loom ile kaydet (5-15 dk).</li>
+    <li><strong>Transkript çıkar:</strong> Otter.ai veya Descript ile metne dönüştür.</li>
+    <li><strong>SOP'a dönüştür:</strong> Claude'a "Bu transkriptten adım adım SOP oluştur" de.</li>
+    <li><strong>Şablonlaştır:</strong> Notion veya Google Docs'ta düzenle.</li>
+    <li><strong>Test et:</strong> Başka birine SOP'u vererek testi yaptır.</li>
+  </ol>
+
+  <h2>SOP Kategorileri</h2>
+
+  <table>
+    <thead><tr><th>Kategori</th><th>Örnek SOP'lar</th></tr></thead>
+    <tbody>
+      <tr><td><strong>İçerik</strong></td><td>Blog yazısı yayınlama, video prodüksiyon, sosyal medya</td></tr>
+      <tr><td><strong>Müşteri</strong></td><td>Onboarding, destek talebi, fatura gönderimi</td></tr>
+      <tr><td><strong>Operasyon</strong></td><td>Haftalık raporlama, veri yedekleme, araç güncelleme</td></tr>
+      <tr><td><strong>Satış</strong></td><td>Lead takibi, teklif hazırlama, sözleşme gönderimi</td></tr>
+    </tbody>
+  </table>
+
+  <div class="panel-task">
+    <div class="panel-task-head">⚡ Eylem Görevi</div>
+    <p>En sık yaptığın 3 işi belirle. Her biri için Loom kaydı al ve Claude ile SOP'a dönüştür.</p>
+  </div>
+
+  <div class="takeaway">
+    <div class="takeaway-head">🎯 Bölüm Çıkarımları</div>
+    <ol>
+      <li>SOP'lar, işini sana bağımlı olmaktan kurtarır.</li>
+      <li>AI ile SOP oluşturma: ekran kaydı → transkript → Claude → şablon.</li>
+      <li>Her SOP, bir başka insanın (veya AI'ın) o işi yapabilmesini sağlar.</li>
+    </ol>
+  </div>
+</div>
+
+<!-- BÖLÜM 3-7 KISA ÖZET -->
+<div class="ch-open"><div class="ch-open-bg">
+  <div class="ch-num">Bölüm 03</div><div class="ch-title">AI ile<br>Ekip Kurma</div>
+  <div class="ch-sub">İnsan + AI hibrit ekip modeli</div><div class="ch-line"></div>
+  <div class="ch-xp"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#f97316" stroke-width="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>120 XP</div>
+</div></div>
+
+<div class="page">
+  <div class="pg-head"><span>Bölüm 03 · AI ile Ekip Kurma</span><span class="brand">DiptenZirveye</span></div>
+
+  <p>Geleneksel ekip kurma modeli: tam zamanlı çalışan al, ofis kirala, maaş öde. AI çağında hibrit model: <strong>AI ajanlar + freelancerlar + minimum tam zamanlı</strong>.</p>
+
+  <h2>Hibrit Ekip Yapısı</h2>
+
+  <table>
+    <thead><tr><th>Rol</th><th>AI mı, İnsan mı?</th><th>Neden?</th></tr></thead>
+    <tbody>
+      <tr><td><strong>İçerik taslağı</strong></td><td>AI (Claude/GPT)</td><td>Hızlı, tutarlı, 7/24</td></tr>
+      <tr><td><strong>İçerik editörlüğü</strong></td><td>İnsan (Freelancer)</td><td>Marka sesi, özgünlük</td></tr>
+      <tr><td><strong>Grafik tasarım</strong></td><td>AI (Midjourney/Canva)</td><td>Hızlı iterasyon</td></tr>
+      <tr><td><strong>Müşteri ilişkileri</strong></td><td>İnsan + AI ajan</td><td>Empati + hız</td></tr>
+      <tr><td><strong>Veri analizi</strong></td><td>AI (Claude + Sheets)</td><td>Büyük veri işleme</td></tr>
+      <tr><td><strong>Strateji</strong></td><td>Sen (Kurucu)</td><td>Vizyon, yön belirleme</td></tr>
+    </tbody>
+  </table>
+
+  <h2>Freelancer Yönetimi</h2>
+
+  <ul>
+    <li><strong>Upwork/Fiverr:</strong> Proje bazlı uzmanlar bul.</li>
+    <li><strong>SOP paylaş:</strong> Her freelancer'a detaylı iş talimatı ver.</li>
+    <li><strong>AI kalite kontrolü:</strong> Claude ile çıktıları değerlendir.</li>
+    <li><strong>Asenkron iletişim:</strong> Loom videoları + Notion görev panosu.</li>
+  </ul>
+
+  <div class="story-box">
+    <p><strong>Ölçeklenmiş Ekip Örneği</strong></p>
+    <p><strong>Solo dönem:</strong> Ayda 4 blog, 20 sosyal medya postu, 2 video. Gelir: 15.000 TL.</p>
+    <p><strong>Hibrit ekip:</strong> AI ajanlar + 2 freelancer. Ayda 16 blog, 90 sosyal medya postu, 8 video. Gelir: 75.000 TL. Ekip maliyeti: 12.000 TL. <strong>Net kâr artışı: 4x.</strong></p>
+  </div>
+
+  <div class="takeaway">
+    <div class="takeaway-head">🎯 Bölüm Çıkarımları</div>
+    <ol>
+      <li>AI + freelancer hibrit modeli, tam zamanlı ekipten daha verimli ve düşük maliyetli.</li>
+      <li>SOP'lar freelancer yönetiminin temelidir.</li>
+      <li>Sen yalnızca strateji ve kalite kontrolüne odaklan.</li>
+    </ol>
+  </div>
+</div>
+
+<!-- BÖLÜM 4 -->
+<div class="ch-open"><div class="ch-open-bg">
+  <div class="ch-num">Bölüm 04</div><div class="ch-title">Gelir Akışlarını<br>Çoğaltma</div>
+  <div class="ch-sub">Tek gelir kaynağından portföy yaklaşımına</div><div class="ch-line"></div>
+  <div class="ch-xp"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#f97316" stroke-width="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>120 XP</div>
+</div></div>
+
+<div class="page">
+  <div class="pg-head"><span>Bölüm 04 · Gelir Akışlarını Çoğaltma</span><span class="brand">DiptenZirveye</span></div>
+
+  <p>Tek gelir kaynağına bağımlılık en büyük risk. Ölçeklenme demek, <strong>birden fazla gelir akışı oluşturmak</strong> demektir.</p>
+
+  <h2>Gelir Portföyü Matrisi</h2>
+
+  <table>
+    <thead><tr><th>Gelir Türü</th><th>Örnek</th><th>Ölçeklenebilirlik</th><th>Başlangıç Zorluğu</th></tr></thead>
+    <tbody>
+      <tr><td><strong>Aktif Gelir</strong></td><td>Danışmanlık, freelance</td><td>Düşük</td><td>Düşük</td></tr>
+      <tr><td><strong>Ürün Geliri</strong></td><td>E-kitap, kurs, şablon</td><td>Yüksek</td><td>Orta</td></tr>
+      <tr><td><strong>Abonelik</strong></td><td>Membership, SaaS</td><td>Çok Yüksek</td><td>Yüksek</td></tr>
+      <tr><td><strong>Lisans/Royalty</strong></td><td>AI şablon lisansı</td><td>Yüksek</td><td>Orta</td></tr>
+      <tr><td><strong>Affiliate</strong></td><td>Araç önerileri</td><td>Orta</td><td>Düşük</td></tr>
+    </tbody>
+  </table>
+
+  <p><strong>Altın kural:</strong> En az 3 farklı gelir akışı oluştur. Hiçbiri toplam gelirin %50'sinden fazla olmasın.</p>
+
+  <div class="panel-task">
+    <div class="panel-task-head">⚡ Eylem Görevi</div>
+    <p>Mevcut gelir kaynaklarınızı listeleyin. Her birinin yanına "aktif/pasif" ve ölçeklenebilirlik puanı (1-5) yazın. En az 1 yeni pasif gelir akışı planı oluşturun.</p>
+  </div>
+
+  <div class="takeaway">
+    <div class="takeaway-head">🎯 Bölüm Çıkarımları</div>
+    <ol>
+      <li>Tek gelir kaynağı = yüksek risk. En az 3 farklı gelir akışı oluştur.</li>
+      <li>Aktif gelirden pasif gelire geçiş, ölçeklenmenin anahtarıdır.</li>
+      <li>Abonelik modeli en yüksek ölçeklenebilirliğe sahiptir.</li>
+    </ol>
+  </div>
+</div>
+
+<!-- BÖLÜM 5-6 -->
+<div class="ch-open"><div class="ch-open-bg">
+  <div class="ch-num">Bölüm 05</div><div class="ch-title">Operasyonel<br>Mükemmellik</div>
+  <div class="ch-sub">Büyürken kaliteden taviz vermemek</div><div class="ch-line"></div>
+  <div class="ch-xp"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#f97316" stroke-width="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>100 XP</div>
+</div></div>
+
+<div class="page">
+  <div class="pg-head"><span>Bölüm 05 · Operasyonel Mükemmellik</span><span class="brand">DiptenZirveye</span></div>
+
+  <p>Ölçeklenirken en büyük risk: kalite düşüşü. Müşteri sayısı arttıkça, her birine aynı seviyede hizmet vermek zorlaşır. Çözüm: <strong>Kalite kontrol sistemleri</strong>.</p>
+
+  <h2>Kalite Kontrol Piramidi</h2>
+  <ol>
+    <li><strong>Giriş Kalitesi:</strong> SOP'lar her işin minimum standartlarını belirler.</li>
+    <li><strong>Süreç Kalitesi:</strong> Checklist'ler her adımda kontrol noktaları oluşturur.</li>
+    <li><strong>Çıktı Kalitesi:</strong> AI ile son kontrol (gramer, tutarlılık, marka uyumu).</li>
+    <li><strong>Müşteri Kalitesi:</strong> NPS (Net Promoter Score) ile müşteri memnuniyeti ölçümü.</li>
+  </ol>
+
+  <h2>AI ile Kalite Kontrolü</h2>
+  <p>Claude'a şu promptu ver: <em>"Bu [blog yazısı/e-posta/rapor] marka rehberimize uygun mu? Şu kriterleri kontrol et: [kriterler]. Sorunları ve düzeltme önerilerini listele."</em></p>
+
+  <div class="takeaway">
+    <div class="takeaway-head">🎯 Bölüm Çıkarımları</div>
+    <ol>
+      <li>Kalite kontrol sistemi = SOP + checklist + AI review + müşteri geri bildirimi.</li>
+      <li>AI ile otomatik kalite kontrolü, insan hatasını %70 azaltır.</li>
+      <li>NPS skoru 50+ hedefle — bu "harika" kategorisi.</li>
+    </ol>
+  </div>
+</div>
+
+<!-- BÖLÜM 6 -->
+<div class="ch-open"><div class="ch-open-bg">
+  <div class="ch-num">Bölüm 06</div><div class="ch-title">Büyüme Metrikleri<br>ve KPI'lar</div>
+  <div class="ch-sub">Ölçemezsen yönetemezsin</div><div class="ch-line"></div>
+  <div class="ch-xp"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#f97316" stroke-width="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>100 XP</div>
+</div></div>
+
+<div class="page">
+  <div class="pg-head"><span>Bölüm 06 · Büyüme Metrikleri ve KPI'lar</span><span class="brand">DiptenZirveye</span></div>
+
+  <p>"Ölçemediğin şeyi yönetemezsin." — Peter Drucker. Ölçeklenme sürecinde takip etmen gereken 5 temel metrik kategorisi:</p>
+
+  <table>
+    <thead><tr><th>Kategori</th><th>Metrik</th><th>Hedef</th></tr></thead>
+    <tbody>
+      <tr><td><strong>Gelir</strong></td><td>MRR (Aylık Tekrarlayan Gelir)</td><td>Aydan aya %10+ büyüme</td></tr>
+      <tr><td><strong>Müşteri</strong></td><td>CAC (Müşteri Edinme Maliyeti)</td><td>LTV'nin %25'inden az</td></tr>
+      <tr><td><strong>Verimlilik</strong></td><td>Gelir/Çalışan (veya saat)</td><td>Sürekli artış</td></tr>
+      <tr><td><strong>Kalite</strong></td><td>NPS (Net Promoter Score)</td><td>50+</td></tr>
+      <tr><td><strong>Otomasyon</strong></td><td>Otomasyon oranı (%)</td><td>%60+ iş otomatik</td></tr>
+    </tbody>
+  </table>
+
+  <h2>AI Dashboard</h2>
+  <p>Google Sheets + Claude API ile otomatik haftalık rapor oluştur. Veriler otomatik çekilir, AI analiz eder, öneriler sunar.</p>
+
+  <div class="takeaway">
+    <div class="takeaway-head">🎯 Bölüm Çıkarımları</div>
+    <ol>
+      <li>5 temel KPI kategorisi: gelir, müşteri, verimlilik, kalite, otomasyon.</li>
+      <li>Haftalık dashboard ile trendleri takip et.</li>
+      <li>AI analizi ile veri arkasındaki hikayeyi anla.</li>
+    </ol>
+  </div>
+</div>
+
+<!-- BÖLÜM 7 -->
+<div class="ch-open"><div class="ch-open-bg">
+  <div class="ch-num">Bölüm 07</div><div class="ch-title">7 Günlük<br>Ölçekleme Planı</div>
+  <div class="ch-sub">Hemen harekete geç</div><div class="ch-line"></div>
+  <div class="ch-xp"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#f97316" stroke-width="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>80 XP</div>
+</div></div>
+
+<div class="page">
+  <div class="pg-head"><span>Bölüm 07 · 7 Günlük Eylem Planı</span><span class="brand">DiptenZirveye</span></div>
+
+  <table>
+    <thead><tr><th>Gün</th><th>Görev</th><th>Çıktı</th></tr></thead>
+    <tbody>
+      <tr><td><strong>1</strong></td><td>Tüm iş süreçlerini haritalandır</td><td>Süreç haritası + darboğazlar</td></tr>
+      <tr><td><strong>2</strong></td><td>En kritik 3 süreç için SOP yaz</td><td>3 adet SOP dokümanı</td></tr>
+      <tr><td><strong>3</strong></td><td>AI + freelancer ihtiyaç analizi</td><td>Hibrit ekip planı</td></tr>
+      <tr><td><strong>4</strong></td><td>Gelir akışı çeşitlendirme planı</td><td>3+ gelir kaynağı yol haritası</td></tr>
+      <tr><td><strong>5</strong></td><td>Kalite kontrol sistemi kur</td><td>Checklist + AI review promptları</td></tr>
+      <tr><td><strong>6</strong></td><td>KPI dashboard oluştur</td><td>Google Sheets + metrik takibi</td></tr>
+      <tr><td><strong>7</strong></td><td>90 günlük ölçeklenme planı yaz</td><td>Milestone'lu yol haritası</td></tr>
+    </tbody>
+  </table>
+
+  <blockquote>"Ölçeklenme bir sprint değil, bir maratondur. Her gün sistemi %1 daha iyi yap. 100 gün sonra tamamen farklı bir işin olacak."</blockquote>
+
+  <div class="takeaway">
+    <div class="takeaway-head">🎯 Kitap Özeti</div>
+    <ol>
+      <li>Ölçeklenme = daha çok çalışmak değil, sistemi yeniden tasarlamak.</li>
+      <li>SOP + Otomasyon + AI Ajan = solo'dan sisteme geçiş.</li>
+      <li>AI + freelancer hibrit modeli en verimli ekip yapısıdır.</li>
+      <li>En az 3 gelir akışı, hiçbiri %50'den fazla ağırlıkta olmasın.</li>
+      <li>5 KPI kategorisi ile büyümeyi ölç ve yönet.</li>
+    </ol>
+  </div>
+</div>
+
+<div class="footer">
+  <div class="logo"><span class="d">Dipten</span><span class="z">Zirveye</span></div>
+  <p>AI USTALIK SERİSİ · KİTAP 08 · AI İLE ÖLÇEK</p>
+  <p style="margin-top:8px">© 2026 DİPTENZİRVEYE · V1.0</p>
+</div>
+
+</body>
+</html>
