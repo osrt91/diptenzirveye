@@ -5,69 +5,69 @@ import { motion, AnimatePresence } from "framer-motion";
 import { useRouter } from "next/navigation";
 import { CheckCircle2, ArrowRight, Brain, Hourglass, Flame, Banknote, User, UserCircle, MinusCircle, CalendarDays, CalendarHeart, CalendarClock, CalendarCheck, GraduationCap, Briefcase, Rocket, Search, MapPin, AlertCircle, Compass, Timer, Clock, Infinity as InfinityIcon } from "lucide-react";
 
-// Test Sorular? Veri Yap?s?
+// Test Soruları Veri Yapısı
 const testSorulari = [
     {
         id: "cinsiyet",
-        soru: "Cinsiyetini se?er misin?",
-        aciklama: "Sana daha ki?isel bir deneyim sunmam?za yard?mc? olur.",
+        soru: "Cinsiyetini seçer misin?",
+        aciklama: "Sana daha kişisel bir deneyim sunmamıza yardımcı olur.",
         secenekler: [
             { id: "erkek", baslik: "Erkek", icon: <User className="w-5 h-5" /> },
-            { id: "kadin", baslik: "Kad?n", icon: <UserCircle className="w-5 h-5" /> },
-            { id: "belirtmek_istemiyorum", baslik: "Belirtmek ?stemiyorum", icon: <MinusCircle className="w-5 h-5" /> },
+            { id: "kadin", baslik: "Kadın", icon: <UserCircle className="w-5 h-5" /> },
+            { id: "belirtmek_istemiyorum", baslik: "Belirtmek İstemiyorum", icon: <MinusCircle className="w-5 h-5" /> },
         ],
     },
     {
         id: "yas",
-        soru: "Ya? aral???n nedir?",
-        aciklama: "??renme plan?n? ya??na uygun hale getirmek istiyoruz.",
+        soru: "Yaş aralığın nedir?",
+        aciklama: "Öğrenme planını yaşına uygun hale getirmek istiyoruz.",
         secenekler: [
-            { id: "18_24", baslik: "18 ? 24", icon: <CalendarDays className="w-5 h-5" /> },
-            { id: "25_34", baslik: "25 ? 34", icon: <CalendarHeart className="w-5 h-5" /> },
-            { id: "35_44", baslik: "35 ? 44", icon: <CalendarClock className="w-5 h-5" /> },
-            { id: "45_plus", baslik: "45 ve ?zeri", icon: <CalendarCheck className="w-5 h-5" /> },
+            { id: "18_24", baslik: "18 – 24", icon: <CalendarDays className="w-5 h-5" /> },
+            { id: "25_34", baslik: "25 – 34", icon: <CalendarHeart className="w-5 h-5" /> },
+            { id: "35_44", baslik: "35 – 44", icon: <CalendarClock className="w-5 h-5" /> },
+            { id: "45_plus", baslik: "45 ve Üzeri", icon: <CalendarCheck className="w-5 h-5" /> },
         ],
     },
     {
         id: "meslek",
-        soru: "?u an ne yap?yorsun?",
-        aciklama: "Mevcut durumuna g?re en uygun ba?lang?? noktas?n? belirleyelim.",
+        soru: "Şu an ne yapıyorsun?",
+        aciklama: "Mevcut durumuna göre en uygun başlangıç noktasını belirleyelim.",
         secenekler: [
-            { id: "ogrenci", baslik: "??renci", icon: <GraduationCap className="w-5 h-5" /> },
-            { id: "calisan", baslik: "?al??an / Profesyonel", icon: <Briefcase className="w-5 h-5" /> },
-            { id: "girisimci", baslik: "Giri?imci / Freelancer", icon: <Rocket className="w-5 h-5" /> },
-            { id: "is_arayan", baslik: "?? Ar?yor / Kariyer De?i?tiriyor", icon: <Search className="w-5 h-5" /> },
+            { id: "ogrenci", baslik: "Öğrenci", icon: <GraduationCap className="w-5 h-5" /> },
+            { id: "calisan", baslik: "Çalışan / Profesyonel", icon: <Briefcase className="w-5 h-5" /> },
+            { id: "girisimci", baslik: "Girişimci / Freelancer", icon: <Rocket className="w-5 h-5" /> },
+            { id: "is_arayan", baslik: "İş Arıyor / Kariyer Değiştiriyor", icon: <Search className="w-5 h-5" /> },
         ],
     },
     {
         id: "hedef",
-        soru: "DiptenZirveye ser?venindeki temel hedefin ne?",
-        aciklama: "Sana en uygun yol haritas?n? ?izebilmemiz i?in en b?y?k ?nceli?ini se?.",
+        soru: "DiptenZirveye serüvenindeki temel hedefin ne?",
+        aciklama: "Sana en uygun yol haritasını çizebilmemiz için en büyük önceliğini seç.",
         secenekler: [
-            { id: "erteleme", baslik: "Erteleme Al??kanl???n? Yenmek", icon: <Hourglass className="w-5 h-5" /> },
-            { id: "odak", baslik: "Odaklanma ve Derin ?al??ma", icon: <Brain className="w-5 h-5" /> },
-            { id: "motivasyon", baslik: "S?rekli Motivasyon Kazanmak", icon: <Flame className="w-5 h-5" /> },
+            { id: "erteleme", baslik: "Erteleme Alışkanlığını Yenmek", icon: <Hourglass className="w-5 h-5" /> },
+            { id: "odak", baslik: "Odaklanma ve Derin Çalışma", icon: <Brain className="w-5 h-5" /> },
+            { id: "motivasyon", baslik: "Sürekli Motivasyon Kazanmak", icon: <Flame className="w-5 h-5" /> },
             { id: "gelir", baslik: "AI ile Gelir Elde Etmek", icon: <Banknote className="w-5 h-5" /> },
         ],
     },
     {
         id: "durum",
-        soru: "?u anki durumunu nas?l tan?mlars?n?",
-        aciklama: "Kendi analizinde d?r?st olmak ba?lang?c?n yar?s?d?r.",
+        soru: "Şu anki durumunu nasıl tanımlarsın?",
+        aciklama: "Kendi analizinde dürüst olmak başlangıcın yarısıdır.",
         secenekler: [
-            { id: "baslangic", baslik: "Nereden ba?layaca??m? bilmiyorum", icon: <MapPin className="w-5 h-5" /> },
-            { id: "yarim_birakma", baslik: "Ba?l?yorum ama hep yar?m kal?yor", icon: <AlertCircle className="w-5 h-5" /> },
-            { id: "tikanma", baslik: "Belirli bir noktaya geldim ama t?kand?m", icon: <Compass className="w-5 h-5" /> },
+            { id: "baslangic", baslik: "Nereden başlayacağımı bilmiyorum", icon: <MapPin className="w-5 h-5" /> },
+            { id: "yarim_birakma", baslik: "Başlıyorum ama hep yarım kalıyor", icon: <AlertCircle className="w-5 h-5" /> },
+            { id: "tikanma", baslik: "Belirli bir noktaya geldim ama tıkandım", icon: <Compass className="w-5 h-5" /> },
         ],
     },
     {
         id: "zaman",
-        soru: "G?nde kendine ne kadar zaman ay?rabilirsin?",
-        aciklama: "Program? senin h?z?na g?re ayarlayaca??z.",
+        soru: "Günde kendine ne kadar zaman ayırabilirsin?",
+        aciklama: "Programı senin hızına göre ayarlayacağız.",
         secenekler: [
             { id: "15_dk", baslik: "Sadece 15-20 Dakika", icon: <Timer className="w-5 h-5" /> },
-            { id: "1_saat", baslik: "1 Saat civar?", icon: <Clock className="w-5 h-5" /> },
-            { id: "sinirsiz", baslik: "Gerekti?i kadar ay?rabilirim", icon: <InfinityIcon className="w-5 h-5" /> },
+            { id: "1_saat", baslik: "1 Saat civarı", icon: <Clock className="w-5 h-5" /> },
+            { id: "sinirsiz", baslik: "Gerektiği kadar ayırabilirim", icon: <InfinityIcon className="w-5 h-5" /> },
         ],
     },
 ];
@@ -79,14 +79,14 @@ export default function TestAkisi() {
     const [analizEdiliyor, setAnalizEdiliyor] = useState(false);
     const [analizTamamlandi, setAnalizTamamlandi] = useState(false);
 
-    // ?lerleme y?zdesi
+    // İlerleme yüzdesi
     const progress = ((mevcutSoruIndex) / testSorulari.length) * 100;
 
     const handleSecim = (soruId: string, secenekId: string) => {
-        // Cevab? kaydet
+        // Cevabı kaydet
         setCevaplar((prev) => ({ ...prev, [soruId]: secenekId }));
 
-        // Biraz bekletip di?er soruya ge? (G?zel bir hissiyat i?in)
+        // Biraz bekletip diğer soruya geç (Güzel bir hissiyat için)
         setTimeout(() => {
             sonrakiSoru();
         }, 400); // 400ms delay
@@ -96,7 +96,7 @@ export default function TestAkisi() {
         if (mevcutSoruIndex < testSorulari.length - 1) {
             setMevcutSoruIndex((prev) => prev + 1);
         } else {
-            // Test bitti, analiz ekran?na ge?
+            // Test bitti, analiz ekranına geç
             testiBitir();
         }
     };
@@ -116,7 +116,7 @@ export default function TestAkisi() {
                 sessionStorage.setItem("ai_analysis", data.analysis);
             }
         } catch (error) {
-            console.error("Analiz ?a?r?s? ba?ar?s?z:", error);
+            console.error("Analiz çağrısı başarısız:", error);
         }
 
         setAnalizTamamlandi(true);
@@ -163,7 +163,7 @@ export default function TestAkisi() {
                         >
                             <h2 className="text-2xl font-bold font-display tracking-tight text-dz-black dark:text-white mb-2">Yapay Zeka Seni Analiz Ediyor</h2>
                             <p className="text-dz-grey-600 dark:text-dz-grey-400 font-mono text-sm max-w-sm mx-auto">
-                                ??renme h?z? hesaplan?yor... Profil e?le?tiriliyor... ?zel m?fredat derleniyor...
+                                Öğrenme hızı hesaplanıyor... Profil eşleştiriliyor... Özel müfredat derleniyor...
                             </p>
                         </motion.div>
                     </motion.div>
@@ -180,7 +180,7 @@ export default function TestAkisi() {
             {/* Background Glow */}
             <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-lg h-32 bg-dz-orange-500/10 blur-[64px] rounded-full pointer-events-none" />
 
-            {/* ?st Bar - Geri ve ?lerleme */}
+            {/* Üst Bar - Geri ve İlerleme */}
             <div className="flex items-center justify-between mb-8 relative z-10">
                 <button
                     onClick={() => setMevcutSoruIndex((prev) => Math.max(0, prev - 1))}
@@ -190,7 +190,7 @@ export default function TestAkisi() {
                     &larr; Geri
                 </button>
                 <span className="text-xs font-bold tracking-widest text-dz-orange-600 dark:text-dz-orange-500 uppercase bg-dz-orange-50 dark:bg-dz-orange-500/10 px-3 py-1 rounded-full border border-dz-orange-200 dark:border-transparent">
-                    Ad?m {mevcutSoruIndex + 1} / {testSorulari.length}
+                    Adım {mevcutSoruIndex + 1} / {testSorulari.length}
                 </span>
             </div>
 
@@ -204,7 +204,7 @@ export default function TestAkisi() {
                 />
             </div>
 
-            {/* Soru Alan? */}
+            {/* Soru Alanı */}
             <div className="min-h-[300px] relative z-10">
                 <AnimatePresence mode="wait">
                     <motion.div
@@ -221,7 +221,7 @@ export default function TestAkisi() {
                             {mevcutSoru.aciklama}
                         </p>
 
-                        {/* Se?enekler */}
+                        {/* Seçenekler */}
                         <div className="flex flex-col gap-4">
                             {mevcutSoru.secenekler.map((secenek) => {
                                 const seciliMi = cevaplar[mevcutSoru.id] === secenek.id;

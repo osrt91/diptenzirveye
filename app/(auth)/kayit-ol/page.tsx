@@ -1,10 +1,9 @@
-﻿"use client";
+"use client";
 
 import { useActionState } from "react";
 import Link from "next/link";
 import { signUpAction, type SignUpState } from "@/app/auth/actions";
 import GoogleSignInButton from "@/components/auth/GoogleSignInButton";
-import FacebookSignInButton from "@/components/auth/FacebookSignInButton";
 
 export default function SignupPage() {
   const [state, formAction, isPending] = useActionState<SignUpState, FormData>(signUpAction, null);
@@ -106,7 +105,6 @@ export default function SignupPage() {
       </div>
       <div className="flex flex-col gap-3">
         <GoogleSignInButton />
-        <FacebookSignInButton />
       </div>
       <p className="text-center text-sm text-dz-grey-600 dark:text-dz-grey-400">
         Zaten hesabın var mı?{" "}

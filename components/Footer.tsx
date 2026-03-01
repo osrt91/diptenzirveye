@@ -132,7 +132,7 @@ export default function Footer() {
           <div className="lg:col-span-5 pr-0 md:pr-12">
             <Link href="/" className="font-display text-3xl font-black text-dz-white tracking-tighter inline-flex items-center gap-3 mb-6">
               <DZLogo size="lg" />
-              Dipten<span className="text-transparent bg-clip-text bg-gradient-to-r from-dz-orange-400 to-dz-orange-600">Zirveye</span>
+              Dipten<span className="text-dz-orange-500">Zirveye</span>
             </Link>
             <p className="text-dz-grey-500 leading-relaxed mb-8 max-w-sm">
               Sadece bilgiyi tüketen değil, yapay zekayı bir asistan olarak kullanarak geleceği üreten liderlerin buluşma noktası.
@@ -180,7 +180,7 @@ export default function Footer() {
       <div className="border-t border-dz-white/10 bg-dz-black">
         <div className="max-w-7xl mx-auto px-8 py-6 flex flex-col md:flex-row items-center justify-between gap-4">
           <p className="text-sm text-dz-grey-600 font-medium">
-            © {new Date().getFullYear()} DiptenZirveye. Tüm hakları saklıdır.
+            © {new Date().getFullYear()} Dipten<span className="text-dz-orange-500">Zirveye</span>. Tüm hakları saklıdır.
           </p>
           <div className="flex items-center gap-6 text-sm text-dz-grey-600 font-medium">
             <span>Türkiye&apos;de Tasarlandı 🇹🇷</span>

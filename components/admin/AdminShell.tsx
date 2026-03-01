@@ -48,7 +48,7 @@ export default function AdminShell({
                             <h1 className="font-display font-bold text-dz-black dark:text-white text-sm tracking-tight">
                                 Admin Paneli
                             </h1>
-                            <p className="text-[10px] text-dz-grey-500 dark:text-white/40 font-mono">DiptenZirveye</p>
+                            <p className="text-[10px] text-dz-grey-500 dark:text-white/40 font-mono">Dipten<span className="text-dz-orange-500">Zirveye</span></p>
                         </div>
                     </div>
                 </div>

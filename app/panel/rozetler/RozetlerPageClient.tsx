@@ -83,7 +83,7 @@ export default function RozetlerPageClient({
                             Rozet Koleksiyonu
                         </h1>
                         <p className="text-dz-grey-400 mt-2 font-medium max-w-lg">
-                            Yapay zeka araçlarında ustalaş, görevleri tamamla, sınırlarını zorla ve DiptenZirveye ekosistemindeki seçkin rozetleri profiline ekle.
+                            Yapay zeka araçlarında ustalaş, görevleri tamamla, sınırlarını zorla ve Dipten<span className="text-dz-orange-500">Zirveye</span> ekosistemindeki seçkin rozetleri profiline ekle.
                         </p>
                     </div>
                     <div className="flex items-center gap-4 bg-white/5 border border-white/10 rounded-2xl p-4 backdrop-blur-sm">

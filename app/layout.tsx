@@ -61,6 +61,9 @@ export const metadata: Metadata = {
       "max-snippet": -1,
     },
   },
+  alternates: {
+    canonical: siteUrl,
+  },
 };
 
 export default function RootLayout({
@@ -77,6 +80,8 @@ export default function RootLayout({
       <head>
         <meta charSet="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+        <link rel="preconnect" href="https://bcelltvotdqqhkqbcuib.supabase.co" />
+        <link rel="dns-prefetch" href="https://bcelltvotdqqhkqbcuib.supabase.co" />
         <meta name="theme-color" content="#f97316" media="(prefers-color-scheme: light)" />
         <meta name="theme-color" content="#0a0a0c" media="(prefers-color-scheme: dark)" />
         <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -96,6 +101,24 @@ export default function RootLayout({
         <script
           dangerouslySetInnerHTML={{
             __html: `(function(){try{var t=localStorage.getItem("dz-theme");if(t==="dark"||(t!=="light"&&matchMedia("(prefers-color-scheme:dark)").matches))document.documentElement.classList.add("dark")}catch(e){}})();if("serviceWorker"in navigator)window.addEventListener("load",function(){navigator.serviceWorker.register("/sw.js")})`,
+          }}
+        />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "WebSite",
+              name: "DiptenZirveye",
+              url: "https://diptenzirveye.com",
+              description: "10 kitap. 1 platform. Sıfırdan liderliğe.",
+              publisher: { "@type": "Organization", name: "DiptenZirveye" },
+              potentialAction: {
+                "@type": "SearchAction",
+                target: "https://diptenzirveye.com/blog?q={search_term_string}",
+                "query-input": "required name=search_term_string",
+              },
+            }),
           }}
         />
       </head>

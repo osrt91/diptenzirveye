@@ -15,6 +15,7 @@ type BlogPost = {
     read_time: string;
     published: boolean;
     created_at: string;
+    cover_image?: string;
 };
 
 const CATEGORIES = ["Verimlilik", "Odaklanma", "Psikoloji", "AI", "Alışkanlıklar", "Kariyer"];
@@ -40,12 +41,13 @@ export default function AdminBlogClient({ initialPosts }: { initialPosts: BlogPo
         category: "Verimlilik",
         read_time: "3 Dk Okuma",
         published: false,
+        cover_image: "",
     });
 
     const supabase = createClient();
 
     const resetForm = () => {
-        setForm({ title: "", slug: "", excerpt: "", content: "", category: "Verimlilik", read_time: "3 Dk Okuma", published: false });
+        setForm({ title: "", slug: "", excerpt: "", content: "", category: "Verimlilik", read_time: "3 Dk Okuma", published: false, cover_image: "" });
         setEditing(null);
         setCreating(false);
     };
@@ -91,6 +93,7 @@ export default function AdminBlogClient({ initialPosts }: { initialPosts: BlogPo
             category: post.category,
             read_time: post.read_time,
             published: post.published,
+            cover_image: post.cover_image || "",
         });
     };
 
@@ -151,6 +154,25 @@ export default function AdminBlogClient({ initialPosts }: { initialPosts: BlogPo
                             className="w-full rounded-lg border border-dz-grey-200 dark:border-white/10 bg-dz-grey-50 dark:bg-black px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-dz-orange-500/30"
                             placeholder="Kısa özet (blog listesinde görünür)"
                         />
+                    </div>
+
+                    <div>
+                        <label className="block text-xs font-bold mb-1 text-dz-grey-500">Kapak Görseli URL</label>
+                        <div className="flex gap-3">
+                            <input
+                                value={form.cover_image}
+                                onChange={(e) => setForm({ ...form, cover_image: e.target.value })}
+                                className="w-full rounded-lg border border-dz-grey-200 dark:border-white/10 bg-dz-grey-50 dark:bg-black px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-dz-orange-500/30"
+                                placeholder="https://ornek.com/gorsel.jpg"
+                            />
+                            {form.cover_image && (
+                                <img
+                                    src={form.cover_image}
+                                    alt="Önizleme"
+                                    className="w-16 h-10 object-cover rounded-lg border border-dz-grey-200 dark:border-white/10 shrink-0"
+                                />
+                            )}
+                        </div>
                     </div>
 
                     <div>

@@ -25,7 +25,7 @@ export default function EarningSection() {
             initial={{ opacity: 0, y: 10 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-green-500/30 bg-green-500/10 text-green-600 dark:text-green-400 text-sm font-bold tracking-wide uppercase mb-6"
+            className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-dz-orange-500/30 bg-dz-orange-500/10 text-dz-orange-500 text-sm font-bold tracking-wide uppercase mb-6 shadow-[0_0_15px_rgba(249,115,22,0.15)]"
           >
             <Banknote className="w-4 h-4" /> Gelir Kapıları
           </motion.div>
@@ -36,7 +36,7 @@ export default function EarningSection() {
             viewport={{ once: true }}
             className="font-display text-4xl md:text-5xl font-black text-dz-black dark:text-dz-white mb-6 tracking-tight"
           >
-            Öğren. Uygula. <span className="text-transparent bg-clip-text bg-gradient-to-r from-green-500 to-emerald-400">Kazan.</span>
+            Öğren. Uygula. <span className="text-transparent bg-clip-text bg-gradient-to-r from-dz-orange-500 to-dz-amber-400">Kazan.</span>
           </motion.h2>
 
           <motion.p
@@ -58,13 +58,13 @@ export default function EarningSection() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: i * 0.08 }}
-              className="bg-dz-white dark:bg-dz-white/[0.03] border border-dz-grey-200 dark:border-dz-white/10 rounded-2xl p-6 group hover:border-green-300 dark:hover:border-green-500/30 hover:-translate-y-1 transition-all duration-300"
+              className="bg-dz-white dark:bg-dz-white/[0.03] border border-dz-grey-200 dark:border-dz-white/10 rounded-2xl p-6 group hover:border-dz-orange-300 dark:hover:border-dz-orange-500/30 hover:-translate-y-1 transition-all duration-300"
             >
-              <div className="w-12 h-12 rounded-xl bg-green-500/10 dark:bg-green-500/5 flex items-center justify-center text-green-500 mb-4 group-hover:bg-green-500 group-hover:text-white transition-colors">
+              <div className="w-12 h-12 rounded-xl bg-dz-orange-500/10 dark:bg-dz-orange-500/5 flex items-center justify-center text-dz-orange-500 mb-4 group-hover:bg-dz-orange-500 group-hover:text-white transition-colors">
                 {path.icon}
               </div>
               <h3 className="font-display font-bold text-dz-black dark:text-dz-white mb-1">{path.title}</h3>
-              <p className="text-green-600 dark:text-green-400 font-bold text-sm mb-2">{path.range}</p>
+              <p className="text-dz-orange-500 font-bold text-sm mb-2">{path.range}</p>
               <p className="text-sm text-dz-grey-500 dark:text-dz-grey-400">{path.desc}</p>
             </motion.div>
           ))}

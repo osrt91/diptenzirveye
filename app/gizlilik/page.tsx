@@ -3,8 +3,8 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 
 export const metadata: Metadata = {
-    title: "Gizlilik Politikasi | DiptenZirveye",
-    description: "DiptenZirveye gizlilik politikasi ve kisisel verilerin korunmasi hakkinda bilgi.",
+    title: "Gizlilik Politikası | DiptenZirveye",
+    description: "DiptenZirveye gizlilik politikası ve kişisel verilerin korunması hakkında bilgi.",
 };
 
 export default function GizlilikPage() {
@@ -51,6 +51,16 @@ export default function GizlilikPage() {
                     <section>
                         <h2 className="font-display text-xl font-bold text-dz-black dark:text-dz-white mb-3">5. Haklarınız</h2>
                         <p>KVKK kapsamında verilerinize erişim, düzeltme ve silme talebinde bulunabilirsiniz. Talepleriniz için <a href="/iletisim" className="text-dz-orange-500 hover:underline">iletişim sayfamızı</a> kullanabilirsiniz.</p>
+                    </section>
+
+                    <section>
+                        <h2 className="font-display text-xl font-bold text-dz-black dark:text-dz-white mb-3">6. Dijital Ürün İade Politikası</h2>
+                        <p>6502 sayılı Tüketicinin Korunması Hakkında Kanun ve Mesafeli Sözleşmeler Yönetmeliği&apos;nin 15/g maddesi gereği, anında ifa edilen dijital içerik ve hizmetlerde cayma hakkı bulunmamaktadır.</p>
+                        <ul className="list-disc pl-6 mt-2 space-y-1">
+                            <li>Platformumuzda sunulan tüm dijital içerikler (e-kitaplar, eğitim materyalleri, promptlar ve çalışma dokümanları) anında erişime açılan dijital ürünlerdir.</li>
+                            <li>Satın alma işlemi tamamlandığında dijital içeriğe erişim anında sağlanır; bu nedenle cayma hakkı kullanılamaz ve iade yapılmaz.</li>
+                            <li>Kullanıcı, satın alma işlemini gerçekleştirerek dijital içeriğin anında ifa edilmesine onay verdiğini ve cayma hakkından feragat ettiğini kabul eder.</li>
+                        </ul>
                     </section>
                 </div>
             </div>

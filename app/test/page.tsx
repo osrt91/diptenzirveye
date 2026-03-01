@@ -1,8 +1,8 @@
-﻿import TestAkisi from "@/components/test/TestAkisi";
+import TestAkisi from "@/components/test/TestAkisi";
 
 export const metadata = {
     title: "Özel Planını Oluştur | DiptenZirveye",
-    description: "Dipten Zirveye serüvenin için sana özel çalışma planını hazırlanıyor.",
+    description: "DiptenZirveye serüvenin için sana özel çalışma planını hazırlanıyor.",
 };
 
 export default function TestPage() {

@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 import { ArrowRight, Clock } from "lucide-react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
@@ -55,8 +56,14 @@ export default async function BlogIndeksSayfasi() {
                         return (
                             <Link href={`/blog/${post.slug}`} key={post.id} className="group flex flex-col bg-dz-grey-50 dark:bg-dz-grey-900 border border-dz-grey-200 dark:border-dz-grey-800 rounded-2xl overflow-hidden hover:border-dz-orange-500/30 transition-all duration-300">
                                 <div className="w-full h-48 bg-gradient-to-br from-dz-grey-800 to-dz-black relative overflow-hidden flex items-center justify-center">
-                                    <div className="absolute inset-0 bg-black/20 group-hover:bg-transparent transition-colors duration-300" />
-                                    <span className="text-white/20 font-display font-bold text-4xl uppercase tracking-widest">{post.category}</span>
+                                    {post.cover_image ? (
+                                        <Image src={post.cover_image} alt={post.title} fill className="object-cover group-hover:scale-105 transition-transform duration-500" sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw" loading="lazy" />
+                                    ) : (
+                                        <>
+                                            <div className="absolute inset-0 bg-black/20 group-hover:bg-transparent transition-colors duration-300" />
+                                            <span className="text-white/20 font-display font-bold text-4xl uppercase tracking-widest">{post.category}</span>
+                                        </>
+                                    )}
                                 </div>
 
                                 <div className="p-6 flex flex-col flex-grow">

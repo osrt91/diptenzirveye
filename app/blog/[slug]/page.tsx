@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 import { ArrowLeft, ArrowRight, Clock } from "lucide-react";
 import { notFound } from "next/navigation";
 import { getBlogPost, getBlogPosts } from "@/lib/blog";
@@ -84,9 +85,15 @@ export default async function BlogPostSayfasi({ params }: { params: Promise<{ sl
                     <p className="text-lg text-dz-grey-500">{date}</p>
                 </header>
 
-                <div className="w-full h-64 md:h-96 bg-gradient-to-br from-dz-grey-200 dark:from-dz-grey-800 to-dz-grey-100 dark:to-dz-black rounded-3xl mb-12 border border-dz-grey-200 dark:border-dz-grey-800 flex items-center justify-center">
-                    <span className="text-dz-grey-300 dark:text-dz-grey-600 font-display font-bold text-6xl uppercase tracking-widest opacity-30">{post.category}</span>
-                </div>
+                {post.cover_image ? (
+                    <div className="w-full h-64 md:h-96 rounded-3xl mb-12 border border-dz-grey-200 dark:border-dz-grey-800 overflow-hidden relative">
+                        <Image src={post.cover_image} alt={post.title} fill className="object-cover" sizes="(max-width: 768px) 100vw, 768px" priority />
+                    </div>
+                ) : (
+                    <div className="w-full h-64 md:h-96 bg-gradient-to-br from-dz-grey-200 dark:from-dz-grey-800 to-dz-grey-100 dark:to-dz-black rounded-3xl mb-12 border border-dz-grey-200 dark:border-dz-grey-800 flex items-center justify-center">
+                        <span className="text-dz-grey-300 dark:text-dz-grey-600 font-display font-bold text-6xl uppercase tracking-widest opacity-30">{post.category}</span>
+                    </div>
+                )}
 
                 {paragraphs.length > 0 ? (
                     <div className="prose prose-lg dark:prose-invert max-w-none prose-headings:font-display prose-headings:font-bold prose-a:text-dz-orange-500 mb-16 space-y-4">

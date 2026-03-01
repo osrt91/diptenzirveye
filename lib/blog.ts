@@ -11,6 +11,7 @@ export type BlogPost = {
   published: boolean;
   created_at: string;
   updated_at: string;
+  cover_image?: string;
 };
 
 const FALLBACK_POSTS: BlogPost[] = [
@@ -25,6 +26,7 @@ const FALLBACK_POSTS: BlogPost[] = [
     published: true,
     created_at: "2026-02-24T00:00:00Z",
     updated_at: "2026-02-24T00:00:00Z",
+    cover_image: undefined,
   },
   {
     id: "2",
@@ -37,6 +39,7 @@ const FALLBACK_POSTS: BlogPost[] = [
     published: true,
     created_at: "2026-02-20T00:00:00Z",
     updated_at: "2026-02-20T00:00:00Z",
+    cover_image: undefined,
   },
   {
     id: "3",
@@ -49,6 +52,7 @@ const FALLBACK_POSTS: BlogPost[] = [
     published: true,
     created_at: "2026-02-15T00:00:00Z",
     updated_at: "2026-02-15T00:00:00Z",
+    cover_image: undefined,
   },
 ];
 

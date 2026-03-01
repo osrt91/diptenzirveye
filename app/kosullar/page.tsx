@@ -3,8 +3,8 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 
 export const metadata: Metadata = {
-    title: "Kullanim Kosullari | DiptenZirveye",
-    description: "DiptenZirveye platformu kullanim kosullari ve sartlari.",
+    title: "Kullanım Koşulları | DiptenZirveye",
+    description: "DiptenZirveye platformu kullanım koşulları ve şartları.",
 };
 
 export default function KosullarPage() {
@@ -40,13 +40,22 @@ export default function KosullarPage() {
                         <h2 className="font-display text-xl font-bold text-dz-black dark:text-dz-white mb-3">4. Ödeme ve İade</h2>
                         <ul className="list-disc pl-6 space-y-1">
                             <li>Ücretli içerikler için online ödeme sistemi kullanılır</li>
-                            <li>İlk 7 gün içinde koşulsuz iade garantisi sunulur</li>
                             <li>Fiyatlar önceden haber verilmeden değiştirilebilir</li>
                         </ul>
                     </section>
 
                     <section>
-                        <h2 className="font-display text-xl font-bold text-dz-black dark:text-dz-white mb-3">5. Sorumluluk Sınırı</h2>
+                        <h2 className="font-display text-xl font-bold text-dz-black dark:text-dz-white mb-3">5. Dijital Ürün İade Politikası</h2>
+                        <p>6502 sayılı Tüketicinin Korunması Hakkında Kanun ve Mesafeli Sözleşmeler Yönetmeliği&apos;nin 15/g maddesi gereği, anında ifa edilen dijital içerik ve hizmetlerde cayma hakkı bulunmamaktadır.</p>
+                        <ul className="list-disc pl-6 mt-2 space-y-1">
+                            <li>Platformumuzda sunulan tüm dijital içerikler (e-kitaplar, eğitim materyalleri, promptlar ve çalışma dokümanları) anında erişime açılan dijital ürünlerdir.</li>
+                            <li>Satın alma işlemi tamamlandığında dijital içeriğe erişim anında sağlanır; bu nedenle cayma hakkı kullanılamaz ve iade yapılmaz.</li>
+                            <li>Kullanıcı, satın alma işlemini gerçekleştirerek dijital içeriğin anında ifa edilmesine onay verdiğini ve cayma hakkından feragat ettiğini kabul eder.</li>
+                        </ul>
+                    </section>
+
+                    <section>
+                        <h2 className="font-display text-xl font-bold text-dz-black dark:text-dz-white mb-3">6. Sorumluluk Sınırı</h2>
                         <p>Platform &quot;olduğu gibi&quot; sunulur. Belirli bir sonuç garantisi verilmez. Kullanıcının platformu kullanarak elde ettiği sonuçlardan DiptenZirveye sorumlu tutulamaz.</p>
                     </section>
                 </div>

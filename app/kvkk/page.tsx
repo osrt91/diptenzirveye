@@ -1,4 +1,6 @@
 import { Metadata } from "next";
+import Navbar from "@/components/Navbar";
+import Footer from "@/components/Footer";
 
 export const metadata: Metadata = {
     title: "KVKK Aydınlatma Metni | DiptenZirveye",
@@ -7,8 +9,9 @@ export const metadata: Metadata = {
 
 export default function KVKKPage() {
     return (
-        <main className="min-h-screen bg-dz-white dark:bg-dz-black text-dz-black dark:text-dz-white py-32 px-4">
-            <div className="max-w-3xl mx-auto">
+        <main className="min-h-screen bg-dz-white dark:bg-dz-black text-dz-black dark:text-dz-white">
+            <Navbar />
+            <div className="max-w-3xl mx-auto pt-32 pb-20 px-4">
                 <h1 className="font-display text-4xl font-bold mb-8 tracking-tight">KVKK Aydınlatma Metni</h1>
                 <p className="text-dz-grey-500 text-sm mb-12">6698 Sayılı Kişisel Verilerin Korunması Kanunu</p>
 
@@ -66,6 +69,7 @@ export default function KVKKPage() {
                     </section>
                 </div>
             </div>
+            <Footer />
         </main>
     );
 }

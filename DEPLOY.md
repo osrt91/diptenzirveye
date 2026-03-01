@@ -41,7 +41,7 @@ Vercel Dashboard → Project → Settings → Environment Variables
 
 | Değişken | Değer | Zorunlu |
 |----------|-------|---------|
-| `NEXT_PUBLIC_SUPABASE_URL` | `https://xaxwdyinefikqrosodjl.supabase.co` | ✅ |
+| `NEXT_PUBLIC_SUPABASE_URL` | `https://bcelltvotdqqhkqbcuib.supabase.co` | ✅ |
 | `NEXT_PUBLIC_SUPABASE_ANON_KEY` | Supabase anon key | ✅ |
 | `NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY` | Supabase publishable key | ✅ |
 | `SUPABASE_SERVICE_ROLE_KEY` | Supabase service role key | ✅ |
@@ -96,7 +96,7 @@ https://*.vercel.app/auth/callback
 1. [Google Cloud Console](https://console.cloud.google.com) → APIs & Services → Credentials
 2. OAuth 2.0 Client → Authorized redirect URIs:
    ```
-   https://xaxwdyinefikqrosodjl.supabase.co/auth/v1/callback
+   https://bcelltvotdqqhkqbcuib.supabase.co/auth/v1/callback
    ```
 3. Authorized JavaScript origins:
    ```
@@ -108,7 +108,7 @@ https://*.vercel.app/auth/callback
 1. [Meta Developers](https://developers.facebook.com) → App → Facebook Login → Settings
 2. Valid OAuth Redirect URIs:
    ```
-   https://xaxwdyinefikqrosodjl.supabase.co/auth/v1/callback
+   https://bcelltvotdqqhkqbcuib.supabase.co/auth/v1/callback
    ```
 
 ---
@@ -144,7 +144,7 @@ https://*.vercel.app/auth/callback
 - [ ] E-posta doğrulama (Confirm email) açık
 
 ### Google Cloud Console
-- [ ] Authorized redirect URI: `https://xaxwdyinefikqrosodjl.supabase.co/auth/v1/callback`
+- [ ] Authorized redirect URI: `https://bcelltvotdqqhkqbcuib.supabase.co/auth/v1/callback`
 - [ ] Authorized JavaScript origins: `https://diptenzirveye.com`
 
 ### Polar

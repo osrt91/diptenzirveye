@@ -51,7 +51,7 @@ const pricingTiers = [
 
 export default function Benefits() {
   return (
-    <section className="px-4 py-24 md:py-32 bg-dz-grey-50 dark:bg-background relative overflow-hidden">
+    <section className="px-4 pt-24 md:pt-32 pb-8 bg-dz-grey-50 dark:bg-background relative overflow-hidden">
 
       <div className="absolute top-0 right-0 w-full h-px bg-gradient-to-l from-transparent via-dz-orange-500/20 to-transparent" />
       <div className="absolute left-[10%] bottom-[10%] w-[600px] h-[600px] bg-dz-orange-500/5 blur-[120px] rounded-full pointer-events-none" />
@@ -66,21 +66,22 @@ export default function Benefits() {
             viewport={{ once: true }}
             className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-dz-orange-500/30 bg-dz-orange-500/10 text-dz-orange-500 text-sm font-bold tracking-wide uppercase mb-6 shadow-[0_0_15px_rgba(249,115,22,0.15)]"
           >
-            Neden DiptenZirveye?
+            Neden Dipten<span className="text-dz-orange-500">Zirveye</span>?
           </motion.div>
           <motion.h2
-            initial={{ opacity: 0, y: 20 }}
+            initial={{ opacity: 0, y: 8 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
+            transition={{ duration: 0.6, ease: "easeOut" }}
             className="font-display text-4xl md:text-5xl lg:text-6xl font-black text-dz-black dark:text-dz-white mb-6 uppercase tracking-tight"
           >
             Önce Dene, <span className="text-transparent bg-clip-text bg-gradient-to-r from-dz-orange-500 to-dz-amber-400">Sonra Karar Ver.</span>
           </motion.h2>
           <motion.p
-            initial={{ opacity: 0, y: 20 }}
+            initial={{ opacity: 0, y: 8 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            transition={{ delay: 0.1 }}
+            transition={{ duration: 0.6, delay: 0.1, ease: "easeOut" }}
             className="text-center text-dz-grey-600 dark:text-dz-grey-400 max-w-2xl mx-auto text-lg/relaxed"
           >
             İlk kitabımız tamamen ücretsiz. Platformu tanı, değerini gör, beğenirsen devam et. Seni ikna etmek bizim işimiz.
@@ -92,10 +93,10 @@ export default function Benefits() {
           {features.map((f, i) => (
             <motion.div
               key={f.title}
-              initial={{ opacity: 0, y: 20 }}
+              initial={{ opacity: 0, y: 8 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ delay: i * 0.1 }}
+              transition={{ duration: 0.6, delay: i * 0.1, ease: "easeOut" }}
               className="bg-dz-white dark:bg-dz-white/[0.03] border border-dz-grey-200 dark:border-dz-white/10 rounded-2xl p-6 text-center group hover:border-dz-orange-300 dark:hover:border-dz-orange-500/30 hover:-translate-y-1 transition-all duration-300"
             >
               <div className="w-12 h-12 rounded-xl bg-dz-orange-500/10 flex items-center justify-center text-dz-orange-500 mx-auto mb-4 group-hover:bg-dz-orange-500 group-hover:text-white transition-colors">
@@ -112,11 +113,11 @@ export default function Benefits() {
           {pricingTiers.map((tier, i) => (
             <motion.div
               key={tier.name}
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
+              initial={{ opacity: 0 }}
+              whileInView={{ opacity: 1 }}
               viewport={{ once: true, margin: "-50px" }}
-              transition={{ duration: 0.6, delay: i * 0.15 }}
-              className={`relative rounded-3xl p-8 md:p-10 flex flex-col transition-all duration-300 hover:-translate-y-2 ${tier.highlight
+              transition={{ duration: 0.6, delay: i * 0.15, ease: "easeOut" }}
+              className={`relative rounded-3xl p-8 md:p-10 flex flex-col h-full min-h-[520px] transition-all duration-300 hover:-translate-y-2 ${tier.highlight
                 ? "border-2 border-dz-orange-500 bg-dz-orange-500/5 shadow-[0_0_30px_rgba(249,115,22,0.15)] hover:shadow-[0_0_50px_rgba(249,115,22,0.25)]"
                 : "border border-dz-grey-200 dark:border-dz-white/5 bg-dz-white dark:bg-dz-white/[0.02] backdrop-blur-md hover:border-dz-grey-300 dark:hover:border-dz-white/10"
                 }`}
@@ -174,10 +175,10 @@ export default function Benefits() {
 
         {/* Trust Badges */}
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
+          initial={{ opacity: 0, y: 8 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ delay: 0.8 }}
+          transition={{ duration: 0.6, delay: 0.8, ease: "easeOut" }}
           className="mt-16 flex flex-wrap justify-center items-center gap-8 md:gap-12 opacity-60"
         >
           <div className="flex items-center gap-3 group">
