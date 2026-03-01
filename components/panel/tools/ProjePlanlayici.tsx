@@ -579,7 +579,7 @@ export default function ProjePlanlayici() {
         </div>
         <Lbl t="Teknik Seviye" />
         <div style={{ display: "flex", gap: 7, flexWrap: "wrap" }}>
-          {["Teknik değil", "Temel", "Orta", "Geliştirici"].map(s => <button key={s} onClick={() => set("audienceTech", s)} style={C(a.audienceTech === s)}>{s}</button>)}
+          {["Teknik değil", "Temel", "Orta", "Geliştirici"].map(s => <button key={s} onClick={() => set("audienceTech", s)} className={C(a.audienceTech === s)}>{s}</button>)}
         </div>
         <InlineRecs />
       </div>
