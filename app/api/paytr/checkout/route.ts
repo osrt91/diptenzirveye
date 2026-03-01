@@ -48,7 +48,7 @@ export async function POST(req: NextRequest) {
         const response = await fetch("https://www.paytr.com/odeme/api/get-token", {
             method: "POST",
             headers: { "Content-Type": "application/x-www-form-urlencoded" },
-            body: new URLSearchParams({ ...params, paytr_token: token } as any),
+            body: new URLSearchParams(Object.fromEntries(Object.entries({ ...params, paytr_token: token }).map(([k, v]) => [k, String(v)]))),
         });
 
         const data = await response.json();
@@ -61,7 +61,6 @@ export async function POST(req: NextRequest) {
 
     } catch (error: unknown) {
         const message = error instanceof Error ? error.message : String(error);
-        console.error("Ödeme Hatası:", message);
         return NextResponse.json({ error: "Ödeme başlatılamadı." }, { status: 500 });
     }
 }

@@ -53,8 +53,6 @@ Kurallar:
         return NextResponse.json({ response: responseText });
     } catch (error: unknown) {
         const message = error instanceof Error ? error.message : String(error);
-        console.error("Coach API Hatası:", message);
-
         return NextResponse.json({
             response:
                 "Koçun şu an meşgul, ama sana bir ipucu bırakayım: Bugün tek bir mikro-görev tamamla. Sadece bir tane. O momentum her şeyi değiştirir.",

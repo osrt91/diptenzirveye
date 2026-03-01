@@ -1,4 +1,4 @@
-﻿import { createClient } from "@/lib/supabase/server";
+import { createClient } from "@/lib/supabase/server";
 import NotDefteriListe from "@/components/panel/notebook/NotDefteriListe";
 
 export default async function NotDefteriPage() {
@@ -22,7 +22,7 @@ export default async function NotDefteriPage() {
     .eq("user_id", user.id);
 
   const userBooks = (userBooksRes ?? []).map(ub => {
-    const bookObj = ub.book as any;
+    const bookObj = ub.book as { title?: string } | { title?: string }[] | null;
     const title = Array.isArray(bookObj) ? bookObj[0]?.title : bookObj?.title;
     return {
       id: ub.book_id,

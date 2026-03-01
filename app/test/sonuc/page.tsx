@@ -2,9 +2,8 @@
 
 import { motion } from "framer-motion";
 import Link from "next/link";
-import { ArrowRight, CheckCircle2, TrendingUp } from "lucide-react";
+import { ArrowRight, CheckCircle2, TrendingUp, MessageCircle, Send, Sparkles } from "lucide-react";
 import { useEffect, useState } from "react";
-import { MessageCircle, Send, Sparkles } from "lucide-react";
 
 export default function TestSonucPage() {
     const [aiAnalysis, setAiAnalysis] = useState<string | null>(null);

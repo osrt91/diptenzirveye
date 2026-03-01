@@ -70,7 +70,6 @@ export async function POST(request: Request) {
 
     return NextResponse.json({ position: nextPosition });
   } catch (e) {
-    console.error("Waitlist error:", e);
     return NextResponse.json(
       { error: "Beklenmeyen hata." },
       { status: 500 }

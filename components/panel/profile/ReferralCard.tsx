@@ -56,12 +56,14 @@ export default function ReferralCard({ userId }: { userId: string }) {
         </div>
         <button
           onClick={copyLink}
+          aria-label={copied ? "Kopyalandı" : "Linki kopyala"}
           className={`px-3 rounded-lg transition-all ${copied ? "bg-green-500 text-white" : "bg-dz-orange-500 text-white hover:bg-dz-orange-600"}`}
         >
           {copied ? <CheckCircle2 className="w-4 h-4" /> : <Copy className="w-4 h-4" />}
         </button>
         <button
           onClick={shareLink}
+          aria-label="Referans linkini paylaş"
           className="px-3 rounded-lg bg-dz-grey-100 dark:bg-dz-grey-800 text-dz-grey-600 dark:text-dz-grey-400 hover:bg-dz-grey-200 dark:hover:bg-dz-grey-700 transition-colors"
         >
           <Share2 className="w-4 h-4" />

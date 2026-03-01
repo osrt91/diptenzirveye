@@ -5,6 +5,8 @@ import { motion } from "framer-motion";
 import { Trash2, ThumbsUp, Lightbulb } from "lucide-react";
 import { createClient } from "@/lib/supabase/client";
 
+type ProfileData = { display_name?: string } | { display_name?: string }[] | null;
+
 type Prompt = {
     id: string;
     title: string;
@@ -13,10 +15,10 @@ type Prompt = {
     upvote_count: number;
     created_at: string;
     user_id: string;
-    profiles: any;
+    profiles: ProfileData;
 };
 
-function getDisplayName(profiles: any) {
+function getDisplayName(profiles: ProfileData) {
     if (!profiles) return "Anonim";
     if (Array.isArray(profiles)) return profiles[0]?.display_name || "Anonim";
     return profiles.display_name || "Anonim";

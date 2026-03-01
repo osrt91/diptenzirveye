@@ -81,8 +81,6 @@ Kurallar:
         return NextResponse.json({ analysis: responseText });
     } catch (error: unknown) {
         const message = error instanceof Error ? error.message : String(error);
-        console.error("AI Analiz Hatası:", message);
-
         // Fallback: AI başarısız olursa statik analiz
         try {
             const body = await req.clone().json();

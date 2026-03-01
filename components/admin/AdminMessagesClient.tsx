@@ -5,23 +5,26 @@ import { motion } from "framer-motion";
 import { Trash2, MessageSquare } from "lucide-react";
 import { createClient } from "@/lib/supabase/client";
 
+type ProfileData = { display_name?: string } | { display_name?: string }[] | null;
+type RoomData = { name?: string } | { name?: string }[] | null;
+
 type Message = {
     id: string;
     content: string;
     created_at: string;
     user_id: string;
     room_id: string;
-    chat_rooms: any;
-    profiles: any;
+    chat_rooms: RoomData;
+    profiles: ProfileData;
 };
 
-function getDisplayName(profiles: any) {
+function getDisplayName(profiles: ProfileData) {
     if (!profiles) return "Anonim";
     if (Array.isArray(profiles)) return profiles[0]?.display_name || "Anonim";
     return profiles.display_name || "Anonim";
 }
 
-function getRoomName(chat_rooms: any) {
+function getRoomName(chat_rooms: RoomData) {
     if (!chat_rooms) return "—";
     if (Array.isArray(chat_rooms)) return chat_rooms[0]?.name || "—";
     return chat_rooms.name || "—";

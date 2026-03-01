@@ -26,12 +26,14 @@ interface AdminChartsProps {
 
 const BAR_COLORS = ["#f97316", "#f59e0b", "#22c55e", "#8b5cf6", "#ec4899"];
 
-function CustomTooltip({ active, payload, label }: any) {
+interface TooltipPayloadItem { name: string; value: number; color: string }
+
+function CustomTooltip({ active, payload, label }: { active?: boolean; payload?: TooltipPayloadItem[]; label?: string }) {
   if (!active || !payload?.length) return null;
   return (
     <div className="rounded-xl bg-dz-black/90 text-white px-4 py-3 shadow-xl text-xs">
       <p className="font-bold mb-1">{label}</p>
-      {payload.map((item: any, i: number) => (
+      {payload.map((item, i) => (
         <p key={i} style={{ color: item.color }}>
           {item.name}: {item.value}
         </p>

@@ -115,8 +115,8 @@ export default function TestAkisi() {
                 // Save to sessionStorage for the next page to use
                 sessionStorage.setItem("ai_analysis", data.analysis);
             }
-        } catch (error) {
-            console.error("Analiz çağrısı başarısız:", error);
+        } catch {
+            // silent fail - analysis is optional
         }
 
         setAnalizTamamlandi(true);

@@ -29,7 +29,7 @@ async function generateCertificatePDF(
   const QRCode = (await import("qrcode")).default;
 
   const qrDataUrl = await QRCode.toDataURL(
-    `https://diptenzirveye.com/sertifika/dogrula/${certId}`,
+    `${typeof window !== "undefined" ? window.location.origin : "https://diptenzirveye.com"}/sertifika/dogrula/${certId}`,
     { width: 120, margin: 1, color: { dark: "#f97316" } }
   );
 

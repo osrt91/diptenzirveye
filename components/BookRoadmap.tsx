@@ -5,7 +5,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { ArrowRight, Brain, Bot, Filter, Hourglass, Banknote, PenTool, Settings, TrendingUp, Crown, Globe, Lock, FileText, Target, Zap } from "lucide-react";
 
-type BookStep = { n: string; verb: string; title: string; desc: string; icon: any; color: string; free?: boolean; pages: string; prompts: string; cover: string };
+type BookStep = { n: string; verb: string; title: string; desc: string; icon: React.ReactNode; color: string; free?: boolean; pages: string; prompts: string; cover: string };
 
 const books: BookStep[] = [
   { n: "01", verb: "Anlarsın", title: "AI Devrimini Anlamak", desc: "Yapay zekanın temellerini ve dünyayı nasıl değiştirdiğini kavramak.", icon: <Brain />, color: "from-dz-orange-600 to-dz-orange-900", free: true, pages: "85 Sayfa", prompts: "15+ Prompt", cover: "https://images.unsplash.com/photo-1620712943543-bcc4688e7485?q=80&w=600&auto=format&fit=crop" },
