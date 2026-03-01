@@ -8,10 +8,13 @@ export async function POST(req: NextRequest) {
         // 1. Plan verilerini al (Normalde DB'den gelir)
         const price = planId === "masterclass" ? 249000 : 39000; // Kuruş cinsinden
 
-        // 2. PayTR Ayarları (ENV'den gelmeli)
-        const merchant_id = process.env.PAYTR_MERCHANT_ID || "TEST_ID";
-        const merchant_key = process.env.PAYTR_MERCHANT_KEY || "TEST_KEY";
-        const merchant_salt = process.env.PAYTR_MERCHANT_SALT || "TEST_SALT";
+        const merchant_id = process.env.PAYTR_MERCHANT_ID;
+        const merchant_key = process.env.PAYTR_MERCHANT_KEY;
+        const merchant_salt = process.env.PAYTR_MERCHANT_SALT;
+
+        if (!merchant_id || !merchant_key || !merchant_salt) {
+            return NextResponse.json({ error: "Ödeme altyapısı yapılandırılmamış." }, { status: 503 });
+        }
 
         const merchant_oid = "DZ" + Date.now(); // Benzersiz sipariş ID
         const user_ip = req.headers.get("x-forwarded-for") || "127.0.0.1";
@@ -26,7 +29,7 @@ export async function POST(req: NextRequest) {
             email: email || "test@test.com",
             payment_amount: price,
             user_basket,
-            debug_on: 1,
+            debug_on: process.env.NODE_ENV === "production" ? 0 : 1,
             no_shipping: 1,
             merchant_ok_url: `${process.env.NEXT_PUBLIC_BASE_URL}/panel?status=success`,
             merchant_fail_url: `${process.env.NEXT_PUBLIC_BASE_URL}/fiyatlar?status=fail`,
@@ -34,7 +37,7 @@ export async function POST(req: NextRequest) {
             user_address: "AI Ecosystem",
             user_phone: phone || "05555555555",
             currency: "TL",
-            test_mode: 1,
+            test_mode: process.env.NODE_ENV === "production" ? 0 : 1,
             merchant_salt,
             merchant_key,
         };

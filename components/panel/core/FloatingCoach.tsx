@@ -72,11 +72,11 @@ export default function FloatingCoach() {
                         animate={{ opacity: 1, y: 0, scale: 1 }}
                         exit={{ opacity: 0, y: 20, scale: 0.9 }}
                         transition={{ type: "spring", stiffness: 300, damping: 25 }}
-                        className="mb-4 w-80 sm:w-96 bg-dz-white dark:bg-dz-grey-100 border border-dz-grey-200 dark:border-dz-grey-300 rounded-3xl shadow-2xl overflow-hidden flex flex-col max-h-[70vh]"
+                        className="mb-4 w-80 sm:w-96 bg-dz-white dark:bg-dz-grey-900 border border-dz-grey-200 dark:border-dz-grey-800 rounded-3xl shadow-2xl overflow-hidden flex flex-col max-h-[70vh]"
                     >
                         <div className="p-4 bg-gradient-to-r from-dz-orange-500 to-dz-amber-500 flex items-center justify-between text-white shrink-0">
                             <div className="flex items-center gap-2 font-bold text-sm">
-                                <Sparkles className="w-5 h-5" /> AI Egitim Kocu
+                                <Sparkles className="w-5 h-5" /> AI Eğitim Koçu
                             </div>
                             <button
                                 onClick={() => setIsOpen(false)}
@@ -86,7 +86,7 @@ export default function FloatingCoach() {
                             </button>
                         </div>
 
-                        <div className="flex-1 overflow-y-auto p-4 space-y-3 min-h-[200px] max-h-[400px] bg-dz-grey-50 dark:bg-dz-grey-50">
+                        <div className="flex-1 overflow-y-auto p-4 space-y-3 min-h-[200px] max-h-[400px] bg-dz-grey-50 dark:bg-dz-grey-900/50">
                             {messages.map((msg) => (
                                 <motion.div
                                     key={msg.id}
@@ -97,7 +97,7 @@ export default function FloatingCoach() {
                                     <div
                                         className={`max-w-[85%] px-3.5 py-2.5 rounded-2xl text-sm leading-relaxed ${
                                             msg.isAi
-                                                ? "bg-dz-white dark:bg-dz-grey-200 text-dz-black dark:text-dz-black border border-dz-grey-200 dark:border-dz-grey-300 rounded-tl-sm"
+                                                ? "bg-dz-white dark:bg-dz-grey-800 text-dz-black dark:text-dz-white border border-dz-grey-200 dark:border-dz-grey-700 rounded-tl-sm"
                                                 : "bg-dz-orange-500 text-white rounded-tr-sm"
                                         }`}
                                     >
@@ -112,16 +112,16 @@ export default function FloatingCoach() {
                                     animate={{ opacity: 1 }}
                                     className="flex justify-start"
                                 >
-                                    <div className="bg-dz-white dark:bg-dz-grey-200 border border-dz-grey-200 dark:border-dz-grey-300 rounded-2xl rounded-tl-sm px-4 py-3 flex items-center gap-2">
+                                    <div className="bg-dz-white dark:bg-dz-grey-800 border border-dz-grey-200 dark:border-dz-grey-700 rounded-2xl rounded-tl-sm px-4 py-3 flex items-center gap-2">
                                         <Loader2 className="w-4 h-4 animate-spin text-dz-orange-500" />
-                                        <span className="text-xs text-dz-grey-500">Dusunuyor...</span>
+                                        <span className="text-xs text-dz-grey-500 dark:text-dz-grey-400">Düşünüyor...</span>
                                     </div>
                                 </motion.div>
                             )}
                             <div ref={bottomRef} />
                         </div>
 
-                        <div className="p-3 border-t border-dz-grey-200 dark:border-dz-grey-300 bg-dz-white dark:bg-dz-grey-100 shrink-0">
+                        <div className="p-3 border-t border-dz-grey-200 dark:border-dz-grey-800 bg-dz-white dark:bg-dz-grey-900 shrink-0">
                             <div className="flex gap-2">
                                 <input
                                     type="text"
@@ -129,7 +129,7 @@ export default function FloatingCoach() {
                                     onChange={(e) => setInput(e.target.value)}
                                     onKeyDown={(e) => e.key === "Enter" && handleSend()}
                                     placeholder="Bir şeyler sor..."
-                                    className="flex-1 text-sm bg-dz-grey-50 dark:bg-dz-grey-200 border border-dz-grey-200 dark:border-dz-grey-300 rounded-xl px-3 py-2.5 outline-none focus:border-dz-orange-500 transition-colors text-dz-black dark:text-dz-black"
+                                    className="flex-1 text-sm bg-dz-grey-50 dark:bg-dz-grey-800 border border-dz-grey-200 dark:border-dz-grey-700 rounded-xl px-3 py-2.5 outline-none focus:border-dz-orange-500 transition-colors text-dz-black dark:text-dz-white"
                                 />
                                 <button
                                     onClick={handleSend}

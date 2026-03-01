@@ -92,9 +92,16 @@ export default async function AdminDashboardPage() {
     weekStart.setDate(weekStart.getDate() - (i * 7 + 6));
     const weekEnd = new Date();
     weekEnd.setDate(weekEnd.getDate() - i * 7);
+
+    const { count: weekCount } = await supabase
+      .from("daily_tasks")
+      .select("user_id", { count: "exact", head: true })
+      .gte("task_date", weekStart.toISOString().slice(0, 10))
+      .lte("task_date", weekEnd.toISOString().slice(0, 10));
+
     weeklyActive.push({
-      week: `${weekStart.toLocaleDateString("tr-TR", { day: "2-digit", month: "short" })}`,
-      active: Math.round((stats.active_today ?? 0) * (1 + Math.random() * 0.5)),
+      week: weekStart.toLocaleDateString("tr-TR", { day: "2-digit", month: "short" }),
+      active: weekCount ?? 0,
     });
   }
 

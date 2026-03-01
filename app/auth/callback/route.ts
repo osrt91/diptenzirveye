@@ -13,7 +13,6 @@ export async function GET(request: Request) {
     if (!error) {
       return NextResponse.redirect(`${origin}${next}`);
     }
-    console.error("Auth callback error:", error.message);
   }
 
   return NextResponse.redirect(`${origin}/giris?error=auth`);

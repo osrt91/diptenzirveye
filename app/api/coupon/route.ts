@@ -1,11 +1,8 @@
 import { NextResponse } from "next/server";
-import { getSupabase } from "@/lib/supabase";
+import { createClient } from "@/lib/supabase/server";
 
 export async function POST(request: Request) {
-  const supabase = getSupabase();
-  if (!supabase) {
-    return NextResponse.json({ error: "Sistem hazır değil." }, { status: 503 });
-  }
+  const supabase = await createClient();
 
   try {
     const { code } = await request.json();

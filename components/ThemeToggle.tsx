@@ -1,5 +1,6 @@
-﻿"use client";
+"use client";
 
+import { Sun, Moon, Monitor } from "lucide-react";
 import { useTheme } from "./ThemeProvider";
 
 export default function ThemeToggle() {
@@ -11,8 +12,8 @@ export default function ThemeToggle() {
     setTheme(order[(idx + 1) % order.length]);
   }
 
-  const icon = theme === "light" ? "\u2600" : theme === "dark" ? "\u263E" : "\u25D1";
   const label = theme === "light" ? "Açık" : theme === "dark" ? "Koyu" : "Sistem";
+  const Icon = theme === "light" ? Sun : theme === "dark" ? Moon : Monitor;
 
   return (
     <button
@@ -22,7 +23,7 @@ export default function ThemeToggle() {
       aria-label={`Tema değiştir. Şu an: ${label}`}
       title={`Tema: ${label}`}
     >
-      <span className="text-base leading-none">{icon}</span>
+      <Icon className="w-4 h-4" />
       <span className="hidden sm:inline text-xs">{label}</span>
     </button>
   );

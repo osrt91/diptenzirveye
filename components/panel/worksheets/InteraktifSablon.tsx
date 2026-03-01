@@ -6,8 +6,16 @@ import { Target, Gauge, Zap, Sparkles } from "lucide-react";
 import NexusProtocol from "./NexusProtocol";
 import MomentumSpectrum from "./MomentumSpectrum";
 import ChaosFilterPlanner from "./ChaosFilterPlanner";
+import { useSupabase } from "@/lib/hooks/useSupabase";
+import { useToast } from "@/components/ui/Toast";
 
 type TemplateKey = "nexus" | "momentum" | "chaos" | null;
+
+const TEMPLATE_TITLES: Record<Exclude<TemplateKey, null>, string> = {
+    nexus: "Nexus Protocol",
+    momentum: "Momentum Spectrum",
+    chaos: "Chaos Filter",
+};
 
 const templates = [
     {
@@ -44,9 +52,26 @@ const templates = [
 
 export default function InteraktifSablon() {
     const [active, setActive] = useState<TemplateKey>(null);
+    const supabase = useSupabase();
+    const { addToast } = useToast();
 
-    const handleSave = (_data: unknown) => {
-        // TODO: Supabase'e kaydet
+    const handleSave = async (data: unknown) => {
+        const { data: { user } } = await supabase.auth.getUser();
+        if (!user || !active) return;
+
+        const title = `${TEMPLATE_TITLES[active]} — ${new Date().toLocaleDateString("tr-TR")}`;
+
+        const { error } = await supabase.from("study_sheets").insert({
+            user_id: user.id,
+            title,
+            content: JSON.stringify(data),
+        });
+
+        if (error) {
+            addToast("Kaydetme başarısız oldu.", "error");
+        } else {
+            addToast("Şablon başarıyla kaydedildi!", "success");
+        }
     };
 
     if (active === "nexus") {

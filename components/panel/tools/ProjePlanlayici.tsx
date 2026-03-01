@@ -410,20 +410,16 @@ export default function ProjePlanlayici() {
   const doneC = a.checkedItems.length;
   const recs = generateRecs(a);
 
-  // ─── Styles ─────
-  const C = (active: boolean, opts?: { col?: boolean }): React.CSSProperties => ({
-    display: "flex", flexDirection: opts?.col ? "column" : "row",
-    alignItems: opts?.col ? "flex-start" : "center", justifyContent: opts?.col ? "flex-start" : "center",
-    gap: opts?.col ? 2 : 0, padding: opts?.col ? "12px 16px" : "10px 16px",
-    borderRadius: 8, fontSize: 13, fontWeight: active ? 700 : 500, cursor: "pointer",
-    fontFamily: "'DM Sans',sans-serif", transition: "all .18s", border: "none",
-    background: active ? "#f97316" : "#f5f0eb", color: active ? "#fdfaf7" : "#4a4540",
-    boxShadow: active ? "0 2px 12px rgba(249,115,22,.3)" : "none", textAlign: "left" as const,
-  });
-  const inp = { width: "100%", padding: "11px 14px", borderRadius: 8, border: "1.5px solid #e8e2da", fontSize: 14, fontFamily: "'DM Sans'", outline: "none", marginBottom: 16, boxSizing: "border-box" as const, background: "#fdfaf7", color: "#0d0d0d" };
-  const H2 = ({ t, d }: { t: string; d: string }) => (<><h2 style={{ fontSize: 26, fontWeight: 800, color: "#0d0d0d", fontFamily: "'Syne'", letterSpacing: "-.02em", marginBottom: 4 }}>{t}</h2><p style={{ fontSize: 14, color: "#9a9590", marginBottom: 22, fontFamily: "'DM Sans'", lineHeight: 1.7 }}>{d}</p></>);
-  const Lbl = ({ t }: { t: string }) => <div style={{ fontWeight: 700, fontSize: 11, color: "#4a4540", marginBottom: 7, fontFamily: "'DM Mono'", letterSpacing: ".07em", textTransform: "uppercase" }}>{t}</div>;
-  const Tip = ({ s, children }: { s: string; children: React.ReactNode }) => <div style={{ padding: "12px 14px", background: "#fff7ed", borderRadius: 8, border: "1px solid #fed7aa", borderLeft: "3px solid #f97316", fontSize: 13, color: "#7c2d12", fontFamily: "'DM Sans'", lineHeight: 1.6, marginTop: 14 }}><strong style={{ color: "#c05500" }}>{s} </strong>{children}</div>;
+  const C = (active: boolean, opts?: { col?: boolean }): string => {
+    const base = `flex ${opts?.col ? "flex-col items-start gap-0.5 p-3" : "items-center justify-center px-4 py-2.5"} rounded-lg text-[13px] cursor-pointer font-sans transition-all border-none text-left`;
+    return active
+      ? `${base} font-bold bg-dz-orange-500 text-white shadow-lg shadow-dz-orange-500/30`
+      : `${base} font-medium bg-dz-grey-100 dark:bg-dz-grey-800 text-dz-grey-600 dark:text-dz-grey-300 hover:bg-dz-grey-200 dark:hover:bg-dz-grey-700`;
+  };
+  const inpCls = "w-full px-3.5 py-2.5 rounded-lg border-[1.5px] border-dz-grey-200 dark:border-dz-grey-700 text-sm font-sans outline-none mb-4 bg-dz-white dark:bg-dz-grey-900 text-dz-black dark:text-dz-white focus:border-dz-orange-500 transition-colors";
+  const H2 = ({ t, d }: { t: string; d: string }) => (<><h2 className="text-2xl font-extrabold text-dz-black dark:text-dz-white font-display tracking-tight mb-1">{t}</h2><p className="text-sm text-dz-grey-500 dark:text-dz-grey-400 mb-5 font-sans leading-relaxed">{d}</p></>);
+  const Lbl = ({ t }: { t: string }) => <div className="font-bold text-[11px] text-dz-grey-600 dark:text-dz-grey-400 mb-1.5 font-mono tracking-widest uppercase">{t}</div>;
+  const Tip = ({ s, children }: { s: string; children: React.ReactNode }) => <div className="p-3 bg-dz-orange-500/10 dark:bg-dz-orange-500/5 rounded-lg border border-dz-orange-200 dark:border-dz-orange-500/20 border-l-[3px] border-l-dz-orange-500 text-[13px] text-dz-grey-700 dark:text-dz-grey-300 font-sans leading-relaxed mt-3.5"><strong className="text-dz-orange-600 dark:text-dz-orange-500">{s} </strong>{children}</div>;
 
   const priBadge = (p: string) => {
     const m: Record<string, { bg: string; c: string; border: string }> = { kritik: { bg: "#fef2f2", c: "#dc2626", border: "#fca5a5" }, yüksek: { bg: "#fff7ed", c: "#c05500", border: "#fed7aa" }, orta: { bg: "#f5f0eb", c: "#4a4540", border: "#e8e2da" } };
@@ -510,7 +506,7 @@ export default function ProjePlanlayici() {
       <div>
         <H2 t="Mevcut Projen" d="Projende ne kullanıyorsun? Ne kadar çok bilgi verirsen o kadar iyi öneri alırsın." />
         <Lbl t="Projeyi kısaca anlat" />
-        <textarea style={{ ...inp, minHeight: 80, resize: "vertical" }} placeholder="Örn: React ile bir e-ticaret sitesi yapıyorum, ödeme kısmı sorunlu, mobilde kötü görünüyor..." value={a.existingDesc} onChange={e => set("existingDesc", e.target.value)} />
+        <textarea className={`${inpCls} min-h-[80px] resize-y`} placeholder="Örn: React ile bir e-ticaret sitesi yapıyorum, ödeme kısmı sorunlu, mobilde kötü görünüyor..." value={a.existingDesc} onChange={e => set("existingDesc", e.target.value)} />
         <Lbl t="Hangi teknolojileri kullanıyorsun?" />
         <div style={{ display: "flex", flexWrap: "wrap", gap: 7, marginBottom: 18 }}>
           {[
@@ -520,7 +516,7 @@ export default function ProjePlanlayici() {
             { v: "supabase", l: "Supabase" }, { v: "firebase", l: "Firebase" }, { v: "mongodb", l: "MongoDB" }, { v: "postgresql", l: "PostgreSQL" },
             { v: "jquery", l: "jQuery" }, { v: "bootstrap", l: "Bootstrap" },
           ].map(t => (
-            <button key={t.v} onClick={() => toggleArr("existingTech", t.v)} style={C(a.existingTech.includes(t.v))}>{t.l}</button>
+            <button key={t.v} onClick={() => toggleArr("existingTech", t.v)} className={C(a.existingTech.includes(t.v))}>{t.l}</button>
           ))}
         </div>
       </div>
@@ -555,15 +551,15 @@ export default function ProjePlanlayici() {
     if (sid === "vision") return (
       <div>
         <H2 t="Proje Vizyonu" d="Büyük resmi çizelim." />
-        <Lbl t="Proje Adı" /><input style={inp} placeholder="örn: TaskFlow, ShopEase..." value={a.projectName} onChange={e => set("projectName", e.target.value)} />
+        <Lbl t="Proje Adı" /><input className={inpCls} placeholder="örn: TaskFlow, ShopEase..." value={a.projectName} onChange={e => set("projectName", e.target.value)} />
         <Lbl t="Proje Türü" />
         <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 7, marginBottom: 16 }}>
           {["SaaS Uygulama", "E-Ticaret", "Portfolio / Blog", "Dashboard / Panel", "Mobil Uygulama", "Landing Page", "Sosyal Platform", "Diğer"].map(t => (
-            <button key={t} onClick={() => set("projectType", t)} style={C(a.projectType === t)}>{t}</button>
+            <button key={t} onClick={() => set("projectType", t)} className={C(a.projectType === t)}>{t}</button>
           ))}
         </div>
         <Lbl t="Tek cümlede anlat" />
-        <textarea style={{ ...inp, minHeight: 70, resize: "vertical" }} placeholder="Freelancer'ların projelerini yönettiği bir SaaS uygulaması..." value={a.projectDesc} onChange={e => set("projectDesc", e.target.value)} />
+        <textarea className={`${inpCls} min-h-[70px] resize-y`} placeholder="Freelancer'ların projelerini yönettiği bir SaaS uygulaması..." value={a.projectDesc} onChange={e => set("projectDesc", e.target.value)} />
         <InlineRecs />
       </div>
     );
@@ -574,12 +570,12 @@ export default function ProjePlanlayici() {
         <Lbl t="Kullanıcı Tipi" />
         <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 7, marginBottom: 16 }}>
           {[{ v: "B2C", d: "Son kullanıcı" }, { v: "B2B", d: "Şirketler" }, { v: "Dahili", d: "Kendi ekibin" }, { v: "Geliştirici", d: "Teknik kullanıcılar" }].map(t => (
-            <button key={t.v} onClick={() => set("audienceType", t.v)} style={C(a.audienceType === t.v, { col: true })}><span style={{ fontWeight: 700 }}>{t.v}</span><span style={{ fontSize: 11, opacity: .7 }}>{t.d}</span></button>
+            <button key={t.v} onClick={() => set("audienceType", t.v)} className={C(a.audienceType === t.v, { col: true })}><span className="font-bold">{t.v}</span><span className="text-[11px] opacity-70">{t.d}</span></button>
           ))}
         </div>
         <Lbl t="Beklenen Kullanıcı" />
         <div style={{ display: "flex", gap: 7, marginBottom: 16, flexWrap: "wrap" }}>
-          {["1-50", "50-500", "500-5K", "5K+"].map(s => <button key={s} onClick={() => set("audienceSize", s)} style={C(a.audienceSize === s)}>{s}</button>)}
+          {["1-50", "50-500", "500-5K", "5K+"].map(s => <button key={s} onClick={() => set("audienceSize", s)} className={C(a.audienceSize === s)}>{s}</button>)}
         </div>
         <Lbl t="Teknik Seviye" />
         <div style={{ display: "flex", gap: 7, flexWrap: "wrap" }}>
@@ -596,7 +592,7 @@ export default function ProjePlanlayici() {
         {FEATURE_CATS.map(cat => (
           <div key={cat.cat} style={{ marginBottom: 18 }}>
             <div style={{ fontWeight: 700, fontSize: 11, color: "#4a4540", fontFamily: "'DM Mono'", letterSpacing: ".06em", textTransform: "uppercase", borderBottom: "1px solid #e8e2da", paddingBottom: 5, marginBottom: 8 }}>{cat.cat}</div>
-            <div style={{ display: "flex", flexWrap: "wrap", gap: 6 }}>{cat.items.map(i => <button key={i} onClick={() => toggleArr("selectedFeatures", i)} style={C(a.selectedFeatures.includes(i))}>{i}</button>)}</div>
+            <div className="flex flex-wrap gap-1.5">{cat.items.map(i => <button key={i} onClick={() => toggleArr("selectedFeatures", i)} className={C(a.selectedFeatures.includes(i))}>{i}</button>)}</div>
           </div>
         ))}
         <InlineRecs />

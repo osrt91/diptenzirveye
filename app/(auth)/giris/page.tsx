@@ -65,6 +65,11 @@ function LoginForm() {
         >
           {isPending ? "Giriş yapılıyor…" : "Giriş yap"}
         </button>
+        <div className="text-right">
+          <Link href="/sifremi-unuttum" className="text-xs text-dz-orange-500 hover:underline">
+            Şifremi unuttum
+          </Link>
+        </div>
       </form>
       <div className="relative my-6">
         <div className="absolute inset-0 flex items-center">

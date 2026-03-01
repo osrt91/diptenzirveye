@@ -36,14 +36,16 @@ async function StreakSection() {
       .single(),
   ]);
 
-  const days = (historyRes.data ?? []).map((d: any) => ({
+  type StreakDay = { date: string; xp_earned: number; tasks_completed: number };
+
+  const days: StreakDay[] = (historyRes.data ?? []).map((d: { activity_date: string; xp_earned: number | null; tasks_completed: number | null }) => ({
     date: d.activity_date,
     xp_earned: d.xp_earned ?? 0,
     tasks_completed: d.tasks_completed ?? 0,
   }));
 
   const currentStreak = progressRes.data?.current_streak_days ?? 0;
-  const totalActiveDays = days.filter((d: any) => d.xp_earned > 0 || d.tasks_completed > 0).length;
+  const totalActiveDays = days.filter((d) => d.xp_earned > 0 || d.tasks_completed > 0).length;
 
   let longestStreak = 0;
   let tempStreak = 0;
@@ -54,7 +56,7 @@ async function StreakSection() {
     d.setDate(d.getDate() - i);
     allDays.push(d.toISOString().slice(0, 10));
   }
-  const activeSet = new Set(days.filter((d: any) => d.xp_earned > 0 || d.tasks_completed > 0).map((d: any) => d.date));
+  const activeSet = new Set(days.filter((d) => d.xp_earned > 0 || d.tasks_completed > 0).map((d) => d.date));
   for (const day of allDays) {
     if (activeSet.has(day)) {
       tempStreak++;

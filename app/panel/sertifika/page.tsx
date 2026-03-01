@@ -31,7 +31,13 @@ export default async function SertifikaPage() {
   const totalXp = progressRes.data?.total_xp ?? 0;
   const level = xpToLevel(totalXp);
 
-  const completedBooks = (completedBooksRes.data ?? []).map((item: any) => {
+  type UserBookRow = {
+    book_id: string;
+    completed_at: string;
+    book: { id: string; title: string } | { id: string; title: string }[] | null;
+  };
+
+  const completedBooks = (completedBooksRes.data ?? []).map((item: UserBookRow) => {
     const book = Array.isArray(item.book) ? item.book[0] : item.book;
     return {
       id: book?.id ?? item.book_id,

@@ -11,7 +11,7 @@ export default function TestSonucPage() {
     const [coachQuestion, setCoachQuestion] = useState("");
     const [coachResponse, setCoachResponse] = useState<string | null>(null);
     const [coachLoading, setCoachLoading] = useState(false);
-    const [showCoach, setShowCoach] = useState(false);
+    const [showCoach, setShowCoach] = useState(true);
 
     useEffect(() => {
         const storedAnalysis = sessionStorage.getItem("ai_analysis");
@@ -185,11 +185,8 @@ export default function TestSonucPage() {
                     </button>
 
                     {showCoach && (
-                        <motion.div
-                            initial={{ opacity: 0, height: 0 }}
-                            animate={{ opacity: 1, height: "auto" }}
-                            className="mt-4 space-y-3"
-                        >
+                        <div className="mt-4 space-y-3">
+
                             <div className="flex gap-2">
                                 <input
                                     type="text"
@@ -216,17 +213,13 @@ export default function TestSonucPage() {
                             )}
 
                             {coachResponse && (
-                                <motion.div
-                                    initial={{ opacity: 0, y: 5 }}
-                                    animate={{ opacity: 1, y: 0 }}
-                                    className="bg-purple-50 dark:bg-purple-500/10 border border-purple-200 dark:border-purple-500/20 rounded-lg p-4"
-                                >
+                                <div className="bg-purple-50 dark:bg-purple-500/10 border border-purple-200 dark:border-purple-500/20 rounded-lg p-4">
                                     <p className="text-sm text-dz-grey-800 dark:text-dz-grey-200 leading-relaxed">
                                         {coachResponse}
                                     </p>
-                                </motion.div>
+                                </div>
                             )}
-                        </motion.div>
+                        </div>
                     )}
                 </motion.div>
             </div>

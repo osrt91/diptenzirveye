@@ -65,8 +65,8 @@ const testSorulari = [
         soru: "Günde kendine ne kadar zaman ayırabilirsin?",
         aciklama: "Programı senin hızına göre ayarlayacağız.",
         secenekler: [
-            { id: "15_dk", baslik: "Sadece 15-20 Dakika", icon: <Timer className="w-5 h-5" /> },
-            { id: "1_saat", baslik: "1 Saat civarı", icon: <Clock className="w-5 h-5" /> },
+            { id: "15_dk", baslik: "Sadece 15–20 dakika", icon: <Timer className="w-5 h-5" /> },
+            { id: "1_saat", baslik: "1 saat civarı", icon: <Clock className="w-5 h-5" /> },
             { id: "sinirsiz", baslik: "Gerektiği kadar ayırabilirim", icon: <InfinityIcon className="w-5 h-5" /> },
         ],
     },

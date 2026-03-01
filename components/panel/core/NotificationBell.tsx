@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect, useCallback } from "react";
+import { useRouter } from "next/navigation";
 import { Bell, X, Trophy, Zap, Flame, BookOpen, MessageSquare } from "lucide-react";
 import { useSupabase } from "@/lib/hooks/useSupabase";
 import { motion, AnimatePresence } from "framer-motion";
@@ -26,6 +27,7 @@ const ICONS: Record<string, React.ReactNode> = {
 
 export default function NotificationBell() {
   const supabase = useSupabase();
+  const router = useRouter();
   const [notifications, setNotifications] = useState<Notification[]>([]);
   const [open, setOpen] = useState(false);
   const [unreadCount, setUnreadCount] = useState(0);
@@ -156,7 +158,7 @@ export default function NotificationBell() {
                       onClick={() => {
                         markRead(notif.id);
                         if (notif.action_url) {
-                          window.location.href = notif.action_url;
+                          router.push(notif.action_url);
                         }
                         setOpen(false);
                       }}

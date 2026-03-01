@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-import { getSupabase } from "@/lib/supabase";
+import { createClient } from "@/lib/supabase/server";
 import { waitlistSchema, validateInput } from "@/lib/schemas";
 import { sanitizeEmail, sanitizeTextInput } from "@/lib/sanitize";
 import { checkWaitlistRateLimit } from "@/lib/rate-limit";
@@ -22,13 +22,7 @@ export async function POST(request: Request) {
     );
   }
 
-  const supabase = getSupabase();
-  if (!supabase) {
-    return NextResponse.json(
-      { error: "Supabase yapılandırılmamış." },
-      { status: 503 }
-    );
-  }
+  const supabase = await createClient();
 
   try {
     const body = await request.json();

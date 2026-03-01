@@ -49,6 +49,9 @@ const AI_CERT_TOOLS = [
   { name: "Windsurf", slug: "windsurf", desc: "AI IDE Mastery", Icon: WindsurfIcon },
   { name: "Zapier", slug: "zapier", desc: "Automated Workflows", Icon: ZapierIcon },
   { name: "Kaggle", slug: "kaggle", desc: "Data Science", Icon: KaggleIcon },
+  { name: "HuggingFace", slug: "huggingface", desc: "ML Models Hub", Icon: HuggingFaceIcon },
+  { name: "Figma", slug: "figma", desc: "UI/UX Design", Icon: FigmaIcon },
+  { name: "Kaggle", slug: "kaggle", desc: "Data Science", Icon: KaggleIcon },
   { name: "HuggingFace", slug: "huggingface", desc: "ML Models", Icon: HuggingFaceIcon },
   { name: "Figma", slug: "figma", desc: "Design & Prototyping", Icon: FigmaIcon },
 ];

@@ -162,9 +162,9 @@ https://*.vercel.app/auth/callback
 
 ---
 
-## 7. Middleware (Auth Koruması)
+## 7. Proxy (Auth Koruması — Next.js 16)
 
-Root `middleware.ts` dosyası tüm sayfa isteklerinde çalışır:
+Root `proxy.ts` dosyası tüm sayfa isteklerinde çalışır (Next.js 16'da `middleware.ts` yerine `proxy.ts` kullanılır):
 
 - Auth oturumunu otomatik yeniler
 - `/panel/*` ve `/admin/*` giriş yapmamış kullanıcıları `/giris`'e yönlendirir
@@ -178,7 +178,7 @@ Root `middleware.ts` dosyası tüm sayfa isteklerinde çalışır:
 - **E-posta doğrulama:** Supabase → Authentication → Email → Confirm email açık
 - **Rate limiting:** `lib/rate-limit.ts` — IP başına sınırlı (prod'da Upstash Redis / Vercel KV önerilir)
 - **Güvenlik başlıkları:** `next.config.ts` — X-Frame-Options, CSP, HSTS, X-Content-Type-Options
-- **Middleware koruması:** `middleware.ts` — korumalı rotalar için auth kontrolü
+- **Proxy koruması:** `proxy.ts` — korumalı rotalar için auth kontrolü (Next.js 16)
 
 ---
 

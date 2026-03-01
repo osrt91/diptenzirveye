@@ -6,12 +6,23 @@ import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { FaGoogle } from "react-icons/fa";
 import DZLogo from "@/components/DZLogo";
+import { createClient } from "@/lib/supabase/client";
 
 export default function Navbar() {
     const { theme, setTheme, resolvedTheme } = useTheme();
     const [menuOpen, setMenuOpen] = useState(false);
 
     const isDark = resolvedTheme === "dark";
+
+    const handleGoogleSignIn = async () => {
+        const supabase = createClient();
+        await supabase.auth.signInWithOAuth({
+            provider: "google",
+            options: {
+                redirectTo: `${window.location.origin}/auth/callback`,
+            },
+        });
+    };
 
     return (
         <nav className="fixed top-0 left-0 right-0 z-50 px-4 py-3" aria-label="Ana navigasyon">
@@ -57,9 +68,9 @@ export default function Navbar() {
                         <Link href="/giris" className="text-sm font-bold bg-dz-orange-500 text-white px-5 py-2 rounded-xl hover:bg-dz-orange-600 transition-colors shadow-sm shadow-dz-orange-500/20">
                             Giriş Yap
                         </Link>
-                        <Link href="/giris" className="w-9 h-9 flex items-center justify-center rounded-xl bg-dz-grey-100 dark:bg-dz-grey-800 border border-dz-grey-200 dark:border-dz-white/10 hover:bg-dz-grey-200 dark:hover:bg-dz-grey-700 transition-colors text-dz-black dark:text-dz-white" aria-label="Google ile Giriş Yap">
+                        <button onClick={handleGoogleSignIn} className="w-9 h-9 flex items-center justify-center rounded-xl bg-dz-grey-100 dark:bg-dz-grey-800 border border-dz-grey-200 dark:border-dz-white/10 hover:bg-dz-grey-200 dark:hover:bg-dz-grey-700 transition-colors text-dz-black dark:text-dz-white" aria-label="Google ile Giriş Yap">
                             <FaGoogle className="w-4 h-4" />
-                        </Link>
+                        </button>
                     </div>
                 </div>
 
@@ -120,10 +131,10 @@ export default function Navbar() {
                                 <Link href="/giris" onClick={() => setMenuOpen(false)} className="text-sm font-bold text-center flex items-center justify-center bg-dz-orange-500 text-white py-3 px-4 rounded-xl hover:bg-dz-orange-600 transition-colors">
                                     Giriş Yap
                                 </Link>
-                                <Link href="/giris" onClick={() => setMenuOpen(false)} className="text-sm font-bold text-center flex items-center justify-center gap-2 bg-dz-grey-100 dark:bg-dz-grey-800 text-dz-black dark:text-dz-white border border-dz-grey-200 dark:border-dz-white/10 py-3 px-4 rounded-xl hover:bg-dz-grey-200 dark:hover:bg-dz-grey-700 transition-colors">
+                                <button onClick={() => { setMenuOpen(false); handleGoogleSignIn(); }} className="text-sm font-bold text-center flex items-center justify-center gap-2 bg-dz-grey-100 dark:bg-dz-grey-800 text-dz-black dark:text-dz-white border border-dz-grey-200 dark:border-dz-white/10 py-3 px-4 rounded-xl hover:bg-dz-grey-200 dark:hover:bg-dz-grey-700 transition-colors">
                                     <FaGoogle className="w-4 h-4" />
                                     Google
-                                </Link>
+                                </button>
                             </div>
                         </div>
                     </motion.div>

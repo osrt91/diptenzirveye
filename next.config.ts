@@ -28,7 +28,6 @@ const nextConfig: NextConfig = {
       "lucide-react",
       "framer-motion",
       "recharts",
-      "date-fns",
     ],
   },
   async redirects() {

@@ -9,6 +9,7 @@ import { redirect } from "next/navigation";
 
 export type AuthState = { error?: string } | null;
 export type SignUpState = { error?: string; success?: boolean } | null;
+export type ResetPasswordState = { error?: string; success?: boolean } | null;
 
 async function getClientIp(): Promise<string> {
   const h = await headers();
@@ -94,6 +95,34 @@ export async function signUpAction(_prev: SignUpState, formData: FormData): Prom
 
   if (error) {
     return { error: `Kayıt oluşturulamadı: ${error.message}` };
+  }
+
+  return { success: true };
+}
+
+export async function resetPasswordAction(_prev: ResetPasswordState, formData: FormData): Promise<ResetPasswordState> {
+  const ip = await getClientIp();
+  const limit = checkAuthRateLimit(ip);
+  if (!limit.ok) {
+    return {
+      error: `Çok fazla deneme. ${limit.retryAfter ? `${Math.ceil(limit.retryAfter / 60)} dakika sonra tekrar dene.` : "Daha sonra tekrar dene."}`,
+    };
+  }
+
+  const rawEmail = formData.get("email");
+  if (!rawEmail || typeof rawEmail !== "string") {
+    return { error: "E-posta adresi gerekli." };
+  }
+
+  const email = sanitizeEmail(rawEmail);
+
+  const supabase = await createClient();
+  const { error } = await supabase.auth.resetPasswordForEmail(email, {
+    redirectTo: `${process.env.NEXT_PUBLIC_SITE_URL ?? ""}/auth/callback?next=/panel/profil`,
+  });
+
+  if (error) {
+    return { error: "Şifre sıfırlama e-postası gönderilemedi. Lütfen tekrar deneyin." };
   }
 
   return { success: true };

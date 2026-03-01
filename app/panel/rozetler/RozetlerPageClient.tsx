@@ -26,6 +26,8 @@ const AI_TOOL_BADGES: Badge[] = [
     { id: "ai-perplexity", slug: "perplexity-kullanici", name: "Perplexity Araştırmacısı", description: "Perplexity ile derinlemesine yapay zeka araştırması yap", icon_emoji: "🔍", xp_required: 0 },
     { id: "ai-notion", slug: "notion-kullanici", name: "Notion AI Lideri", description: "Notion AI ile çalışma alanını zenginleştir", icon_emoji: "📝", xp_required: 0 },
     { id: "ai-github", slug: "copilot-kullanici", name: "GitHub Copilot", description: "Copilot ile kod yazım hızını ikiye katla", icon_emoji: "🐙", xp_required: 0 },
+    { id: "ai-deepseek", slug: "deepseek-kullanici", name: "DeepSeek Analisti", description: "DeepSeek ile ileri seviye kod analizi ve muhakeme yap", icon_emoji: "🔬", xp_required: 0 },
+    { id: "ai-grok", slug: "grok-kullanici", name: "Grok Kullanıcısı", description: "Grok ile gerçek zamanlı bilgiye eriş ve analiz yap", icon_emoji: "⚡", xp_required: 0 },
 ];
 
 const BOOK_BADGES: Badge[] = [

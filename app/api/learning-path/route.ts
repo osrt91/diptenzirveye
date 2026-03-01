@@ -28,8 +28,14 @@ export async function POST(request: Request) {
   const xp = progressRes.data?.total_xp ?? 0;
   const level = progressRes.data?.level ?? 1;
   const streak = progressRes.data?.current_streak_days ?? 0;
-  const completedBooks = (booksRes.data ?? []).filter((b: any) => b.completed_at != null).length;
-  const activeBooks = (booksRes.data ?? []).filter((b: any) => b.completed_at == null);
+  type UserBookEntry = {
+    book: { title: string; slug: string; sort_order: number } | { title: string; slug: string; sort_order: number }[] | null;
+    current_chapter: number;
+    completed_at: string | null;
+  };
+
+  const completedBooks = (booksRes.data ?? []).filter((b: UserBookEntry) => b.completed_at != null).length;
+  const activeBooks = (booksRes.data ?? []).filter((b: UserBookEntry) => b.completed_at == null);
 
   const apiKey = process.env.GOOGLE_API_KEY;
   if (!apiKey) {
@@ -49,7 +55,7 @@ Kullanıcı bilgileri:
 - Seviye: ${level} (Toplam XP: ${xp})
 - Seri: ${streak} gün
 - Tamamlanan kitap: ${completedBooks}/10
-- Aktif kitaplar: ${activeBooks.map((b: any) => {
+- Aktif kitaplar: ${activeBooks.map((b: UserBookEntry) => {
   const book = Array.isArray(b.book) ? b.book[0] : b.book;
   return book?.title ?? "Bilinmeyen";
 }).join(", ") || "Yok"}

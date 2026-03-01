@@ -122,24 +122,7 @@ export default function NotDefteriListe({
           </button>
         </div>
 
-        <h3 className="text-xs font-bold text-dz-grey-500 uppercase tracking-wider mt-8 mb-3 px-2 flex items-center justify-between">
-          <span>AI Modül Bağlamı</span>
-          <span className="w-2 h-2 rounded-full bg-green-500 animate-pulse" title="AI devrede"></span>
-        </h3>
-
-        <div className="space-y-1 overflow-y-auto flex-1 pb-4" style={{ scrollbarWidth: 'none' }}>
-          {userBooks.map(book => (
-            <button
-              key={book.id}
-              onClick={() => setActiveTab(book.id)}
-              className={`w-full flex items-center gap-3 px-3 py-2 rounded-xl text-sm font-medium transition-colors text-left ${activeTab === book.id ? "bg-dz-orange-500/10 text-dz-orange-600 dark:text-dz-orange-400 border border-dz-orange-500/20 shadow-sm" : "hover:bg-dz-grey-100 dark:hover:bg-dz-white/5 text-dz-grey-600 dark:text-gray-400"
-                }`}
-            >
-              <BookOpen className="w-4 h-4 shrink-0" />
-              <span className="truncate">{book.title}</span>
-            </button>
-          ))}
-        </div>
+        <div className="flex-1" />
       </div>
 
       {/* --- SAĞ TARAF (NOT LİSTESİ) --- */}

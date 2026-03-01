@@ -58,8 +58,13 @@ export default async function ProfilPage() {
     member_since: user.created_at,
   };
 
+  type UserBadgeRow = {
+    badge_id: string;
+    badges: { slug: string } | null;
+  };
+
   const earnedBadgeSlugs = (badgesRes.data ?? [])
-    .map((b: any) => (b.badges as any)?.slug)
+    .map((b: UserBadgeRow) => b.badges?.slug)
     .filter(Boolean) as string[];
 
   return (

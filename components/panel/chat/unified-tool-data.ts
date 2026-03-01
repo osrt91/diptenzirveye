@@ -24,6 +24,7 @@ export const topTierTools: AITool[] = [
     { name: "Figma", category: "Tasarım", Icon: FigmaIcon, description: "Arayüz tasarımında dünya standardı tartışılmaz lider." },
     { name: "Gemini", category: "Pazarlama", Icon: GeminiIcon, description: "Google'ın ekosistemiyle derin entegre yapay zeka devi." },
     { name: "GitHub Copilot", category: "Yazılım", Icon: CopilotIcon, description: "Dünyanın en çok kullanılan kod tamamlama asistanı." },
+    { name: "Grok", category: "Pazarlama", Icon: GrokIcon, description: "xAI'nin güçlü ve gerçek zamanlı bilgi sunan yapay zeka modeli." },
     { name: "HuggingFace", category: "SEO", Icon: HuggingFaceIcon, description: "Binlerce açık kaynak modelin bulunduğu makine öğrenimi merkezi." },
     { name: "Kaggle", category: "SEO", Icon: KaggleIcon, description: "Veri bilimi yarışmaları ve devasa veri setleriyle içgörü çıkarımı." },
     { name: "Kimi", category: "Pazarlama", Icon: KimiIcon, description: "Uzun bağlamları anlama konusunda iddialı araştırma asistanı." },

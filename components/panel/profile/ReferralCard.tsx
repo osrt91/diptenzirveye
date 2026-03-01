@@ -6,7 +6,8 @@ import { Copy, CheckCircle2, Share2, Gift } from "lucide-react";
 export default function ReferralCard({ userId }: { userId: string }) {
   const [copied, setCopied] = useState(false);
   const code = userId.slice(0, 8).toUpperCase();
-  const link = `${typeof window !== "undefined" ? window.location.origin : ""}/kayit-ol?ref=${code}`;
+  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "https://diptenzirveye.com";
+  const link = `${siteUrl}/kayit-ol?ref=${code}`;
 
   const copyLink = async () => {
     try {

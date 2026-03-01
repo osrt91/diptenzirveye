@@ -5,7 +5,7 @@ import { useSupabase } from "@/lib/hooks/useSupabase";
 import { BookOpen, CheckCircle2, Lock } from "lucide-react";
 import { useState } from "react";
 import { useToast } from "@/components/ui/Toast";
-import PaywallModal from "./PaywallModal";
+import PaywallModal from "@/components/panel/core/PaywallModal";
 
 type Book = {
   id: string;
@@ -58,7 +58,7 @@ export default function KitapListesi({
       { onConflict: "user_id,book_id" }
     );
     if (error) {
-      console.error("user_books upsert failed:", error);
+      void error;
       addToast("Kitap başlatılırken bir hata oluştu.", "error");
       return;
     }

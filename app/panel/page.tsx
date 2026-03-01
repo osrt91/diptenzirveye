@@ -15,23 +15,19 @@ import DailyPromptChallenge from "@/components/panel/dashboard/DailyPromptChalle
 import BookEcosystem from "@/components/panel/dashboard/BookEcosystem";
 import { CardSkeleton, Skeleton } from "@/components/ui/Skeleton";
 
-async function StatsCards() {
+async function StatsCards({ userId }: { userId: string }) {
   const supabase = await createClient();
-  const {
-    data: { user },
-  } = await supabase.auth.getUser();
-  if (!user) return null;
 
   const [progressRes, userBooksRes] = await Promise.all([
     supabase
       .from("user_progress")
       .select("*")
-      .eq("user_id", user.id)
+      .eq("user_id", userId)
       .single(),
     supabase
       .from("user_books")
       .select("*, book:books(*)")
-      .eq("user_id", user.id)
+      .eq("user_id", userId)
       .is("completed_at", null)
       .order("updated_at", { ascending: false })
       .limit(1),
@@ -53,12 +49,8 @@ async function StatsCards() {
   );
 }
 
-async function WeeklyChartSection() {
+async function WeeklyChartSection({ userId }: { userId: string }) {
   const supabase = await createClient();
-  const {
-    data: { user },
-  } = await supabase.auth.getUser();
-  if (!user) return null;
 
   const days = [];
   const today = new Date();
@@ -71,7 +63,7 @@ async function WeeklyChartSection() {
   const { data: tasks } = await supabase
     .from("daily_tasks")
     .select("task_date, completed, xp_reward")
-    .eq("user_id", user.id)
+    .eq("user_id", userId)
     .in("task_date", days);
 
   const dayMap = new Map(days.map((d) => [d, { date: d, xp: 0, tasks_completed: 0 }]));
@@ -86,12 +78,8 @@ async function WeeklyChartSection() {
   return <DashboardWeeklyChart days={Array.from(dayMap.values())} />;
 }
 
-async function StreakCalendarSection() {
+async function StreakCalendarSection({ userId }: { userId: string }) {
   const supabase = await createClient();
-  const {
-    data: { user },
-  } = await supabase.auth.getUser();
-  if (!user) return null;
 
   const calendarDays = [];
   const today = new Date();
@@ -104,7 +92,7 @@ async function StreakCalendarSection() {
   const { data: tasks } = await supabase
     .from("daily_tasks")
     .select("task_date, completed")
-    .eq("user_id", user.id)
+    .eq("user_id", userId)
     .eq("completed", true)
     .in("task_date", calendarDays);
 
@@ -113,7 +101,7 @@ async function StreakCalendarSection() {
   const progressRes = await supabase
     .from("user_progress")
     .select("current_streak_days")
-    .eq("user_id", user.id)
+    .eq("user_id", userId)
     .single();
 
   return (
@@ -124,30 +112,23 @@ async function StreakCalendarSection() {
   );
 }
 
-async function DailyTasksSection() {
+async function DailyTasksSection({ userId }: { userId: string }) {
   const supabase = await createClient();
-  const {
-    data: { user },
-  } = await supabase.auth.getUser();
-  if (!user) return null;
 
   const taskDate = new Date().toISOString().slice(0, 10);
 
-  // 1. Önce bugünün görevlerini çek
   let { data: tasks } = await supabase
     .from("daily_tasks")
     .select("*")
-    .eq("user_id", user.id)
+    .eq("user_id", userId)
     .eq("task_date", taskDate)
     .order("created_at", { ascending: true });
 
-  // 2. Eğer hiç görev yoksa, otomatik şablondan görev ata
   if (!tasks || tasks.length === 0) {
-    // Aktif kitabı bul
     const { data: activeBookData } = await supabase
       .from("user_books")
       .select("book:books(title, content_url)")
-      .eq("user_id", user.id)
+      .eq("user_id", userId)
       .is("completed_at", null)
       .order("updated_at", { ascending: false })
       .limit(1)
@@ -170,20 +151,18 @@ async function DailyTasksSection() {
       ];
 
     const tasksToInsert = defaultTasksStr.map(t => ({
-      user_id: user.id,
+      user_id: userId,
       title: t.title,
       task_date: taskDate,
       xp_reward: t.xp_reward,
     }));
 
-    // Veritabanına yaz
     await supabase.from("daily_tasks").insert(tasksToInsert);
 
-    // Yeniden çek
     const { data: newTasks } = await supabase
       .from("daily_tasks")
       .select("*")
-      .eq("user_id", user.id)
+      .eq("user_id", userId)
       .eq("task_date", taskDate)
       .order("created_at", { ascending: true });
 
@@ -193,16 +172,14 @@ async function DailyTasksSection() {
   return (
     <DashboardDailyTasks
       initialTasks={tasks ?? []}
-      userId={user.id}
+      userId={userId}
       taskDate={taskDate}
     />
   );
 }
 
-async function BookEcosystemSection() {
+async function BookEcosystemSection({ userId }: { userId: string }) {
   const supabase = await createClient();
-  const { data: { user } } = await supabase.auth.getUser();
-  if (!user) return null;
 
   const [booksRes, userBooksRes] = await Promise.all([
     supabase
@@ -212,7 +189,7 @@ async function BookEcosystemSection() {
     supabase
       .from("user_books")
       .select("book_id, current_chapter, completed_at")
-      .eq("user_id", user.id),
+      .eq("user_id", userId),
   ]);
 
   const userBookMap = new Map(
@@ -236,10 +213,8 @@ async function BookEcosystemSection() {
   return <BookEcosystem books={books} />;
 }
 
-async function PromptChallengeSection() {
+async function PromptChallengeSection({ userId }: { userId: string }) {
   const supabase = await createClient();
-  const { data: { user } } = await supabase.auth.getUser();
-  if (!user) return null;
 
   const dayOfYear = Math.floor(
     (Date.now() - new Date(new Date().getFullYear(), 0, 0).getTime()) / 86400000
@@ -249,13 +224,13 @@ async function PromptChallengeSection() {
   const { data: submission } = await supabase
     .from("prompt_challenge_submissions")
     .select("content")
-    .eq("user_id", user.id)
+    .eq("user_id", userId)
     .eq("challenge_day", challengeDay)
     .maybeSingle();
 
   return (
     <DailyPromptChallenge
-      userId={user.id}
+      userId={userId}
       initialSubmission={submission?.content ?? null}
     />
   );
@@ -264,20 +239,20 @@ async function PromptChallengeSection() {
 export default async function PanelDashboardPage() {
   const supabase = await createClient();
   const { data: { user } } = await supabase.auth.getUser();
+  if (!user) redirect("/giris");
 
-  if (user) {
-    const { data: profile } = await supabase
-      .from("profiles")
-      .select("onboarding_completed")
-      .eq("id", user.id)
-      .single();
+  const { data: profile } = await supabase
+    .from("profiles")
+    .select("onboarding_completed")
+    .eq("id", user.id)
+    .single();
 
-    if (profile && !profile.onboarding_completed) {
-      redirect("/panel/onboarding");
-    }
+  if (profile && !profile.onboarding_completed) {
+    redirect("/panel/onboarding");
   }
 
-  const userName = user?.user_metadata?.full_name || user?.email?.split("@")[0] || "Zirveci";
+  const userId = user.id;
+  const userName = user.user_metadata?.full_name || user.email?.split("@")[0] || "Zirveci";
 
   return (
     <div className="space-y-8">
@@ -298,7 +273,7 @@ export default async function PanelDashboardPage() {
             </>
           }
         >
-          <StatsCards />
+          <StatsCards userId={userId} />
           <DashboardCoins />
         </Suspense>
       </div>
@@ -313,10 +288,9 @@ export default async function PanelDashboardPage() {
           </div>
         }
       >
-        <BookEcosystemSection />
+        <BookEcosystemSection userId={userId} />
       </Suspense>
 
-      {/* Charts row */}
       <div className="grid gap-6 lg:grid-cols-2">
         <Suspense
           fallback={
@@ -326,7 +300,7 @@ export default async function PanelDashboardPage() {
             </div>
           }
         >
-          <WeeklyChartSection />
+          <WeeklyChartSection userId={userId} />
         </Suspense>
         <Suspense
           fallback={
@@ -336,7 +310,7 @@ export default async function PanelDashboardPage() {
             </div>
           }
         >
-          <StreakCalendarSection />
+          <StreakCalendarSection userId={userId} />
         </Suspense>
       </div>
 
@@ -355,7 +329,7 @@ export default async function PanelDashboardPage() {
               </div>
             }
           >
-            <DailyTasksSection />
+            <DailyTasksSection userId={userId} />
           </Suspense>
         </section>
 
@@ -367,7 +341,7 @@ export default async function PanelDashboardPage() {
             </div>
           }
         >
-          <PromptChallengeSection />
+          <PromptChallengeSection userId={userId} />
         </Suspense>
       </div>
     </div>

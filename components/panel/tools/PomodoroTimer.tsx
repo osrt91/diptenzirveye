@@ -133,7 +133,7 @@ export default function PomodoroTimer() {
   type TaskItem = { id: string; text: string; done: boolean };
   const [tasks, setTasks] = useState<TaskItem[]>([]);
   const [newTask, setNewTask] = useState("");
-  const [showTasks, setShowTasks] = useState(false);
+  const [showTasks, setShowTasks] = useState(true);
 
   const completedTaskCount = tasks.filter(t => t.done).length;
   const currentPhaseNum = Math.floor(completedTaskCount / 2) + 1;

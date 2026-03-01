@@ -5,7 +5,7 @@ import { useRouter } from "next/navigation";
 import { useSupabase } from "@/lib/hooks/useSupabase";
 import { sanitizeTextInput } from "@/lib/sanitize";
 import { motion, AnimatePresence } from "framer-motion";
-import { MessageSquarePlus, Pin, Check } from "lucide-react";
+import { MessageSquarePlus, Pin, Check, Share2, Trash2, Copy } from "lucide-react";
 import { useToast } from "@/components/ui/Toast";
 
 export type ChatMessage = {
@@ -42,6 +42,7 @@ export default function SohbetClient({
   const [reportingId, setReportingId] = useState<string | null>(null);
   const [reportReason, setReportReason] = useState("");
   const [savedPromptId, setSavedPromptId] = useState<string | null>(null);
+  const [copiedId, setCopiedId] = useState<string | null>(null);
   const bottomRef = useRef<HTMLDivElement>(null);
   const supabase = useSupabase();
   const { addToast } = useToast();
@@ -132,7 +133,6 @@ export default function SohbetClient({
       reason: reportReason.trim() || null,
     });
     if (err) {
-      console.error("chat_reports insert failed:", err);
       addToast("Rapor gönderilirken bir hata oluştu.", "error");
       return;
     }
@@ -154,6 +154,30 @@ export default function SohbetClient({
       setSavedPromptId(msgId);
       setTimeout(() => setSavedPromptId(null), 3000);
     }
+  }
+
+  async function handleShare(content: string, msgId: string) {
+    try {
+      await navigator.clipboard.writeText(content);
+      setCopiedId(msgId);
+      addToast("Mesaj panoya kopyalandı!", "success");
+      setTimeout(() => setCopiedId(null), 2000);
+    } catch {
+      addToast("Kopyalama başarısız oldu.", "error");
+    }
+  }
+
+  async function handleDelete(msgId: string) {
+    const { error: err } = await supabase
+      .from("chat_messages")
+      .delete()
+      .eq("id", msgId);
+    if (err) {
+      addToast("Mesaj silinemedi.", "error");
+      return;
+    }
+    setMessages((prev) => prev.filter((m) => m.id !== msgId));
+    addToast("Mesaj silindi.", "success");
   }
 
   function formatTime(iso: string) {
@@ -214,11 +238,27 @@ export default function SohbetClient({
                     <span className="text-[10px] text-dz-grey-400">· {formatTime(msg.created_at)}</span>
                     <button
                       type="button"
+                      onClick={() => handleShare(msg.content, msg.id)}
+                      className={`opacity-0 group-hover:opacity-100 text-[10px] font-bold transition-opacity uppercase flex items-center gap-1 ${copiedId === msg.id ? 'text-green-500' : 'text-dz-grey-500 hover:text-dz-orange-500'}`}
+                    >
+                      {copiedId === msg.id ? (<><Check className="w-3 h-3" /> Kopyalandı</>) : (<><Share2 className="w-3 h-3" /> Paylaş</>)}
+                    </button>
+                    <button
+                      type="button"
                       onClick={() => saveToPromptHub(msg.id, msg.content)}
                       className={`opacity-0 group-hover:opacity-100 text-[10px] font-bold transition-opacity uppercase flex items-center gap-1 ${savedPromptId === msg.id ? 'text-green-500' : 'text-dz-orange-500 hover:text-dz-orange-600'}`}
                     >
                       {savedPromptId === msg.id ? (<><Check className="w-3 h-3" /> Kaydedildi</>) : (<><Pin className="w-3 h-3" /> Hub'a Kaydet</>)}
                     </button>
+                    {msg.user_id === currentUserId && (
+                      <button
+                        type="button"
+                        onClick={() => handleDelete(msg.id)}
+                        className="opacity-0 group-hover:opacity-100 text-[10px] font-bold text-dz-grey-400 hover:text-red-500 transition-opacity uppercase flex items-center gap-1"
+                      >
+                        <Trash2 className="w-3 h-3" /> Sil
+                      </button>
+                    )}
                     <button
                       type="button"
                       onClick={() => setReportingId((id) => (id === msg.id ? null : msg.id))}
