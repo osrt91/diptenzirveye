@@ -45,9 +45,8 @@ const templates = [
 export default function InteraktifSablon() {
     const [active, setActive] = useState<TemplateKey>(null);
 
-    const handleSave = (data: unknown) => {
-        // Gelecekte Supabase'e kaydedilecek. Şimdilik console.
-        console.log("Şablon verisi:", data);
+    const handleSave = (_data: unknown) => {
+        // TODO: Supabase'e kaydet
     };
 
     if (active === "nexus") {

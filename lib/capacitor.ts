@@ -13,12 +13,12 @@ export async function initPushNotifications() {
 
   await PushNotifications.register();
 
-  PushNotifications.addListener("registration", (token) => {
-    console.log("[Push] Token:", token.value);
+  PushNotifications.addListener("registration", (_token) => {
+    // Token server'a gonderilecek
   });
 
-  PushNotifications.addListener("pushNotificationReceived", (notification) => {
-    console.log("[Push] Received:", notification);
+  PushNotifications.addListener("pushNotificationReceived", (_notification) => {
+    // Bildirim alindi
   });
 
   PushNotifications.addListener(

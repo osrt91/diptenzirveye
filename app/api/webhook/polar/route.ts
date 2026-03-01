@@ -24,8 +24,6 @@ async function upgradeToPremium(
 
     if (error) {
         console.error("Failed to update user to premium", error);
-    } else {
-        console.log(`User ${userId} upgraded to Premium!`);
     }
 }
 
@@ -34,15 +32,10 @@ export const POST = Webhooks({
 
     onOrderPaid: async (payload) => {
         const supabaseAdmin = getSupabaseAdmin();
-        if (!supabaseAdmin) {
-            console.warn("Polar webhook: Supabase env not configured, skipping DB update");
-            return;
-        }
+        if (!supabaseAdmin) return;
 
         const customerId = payload.data.customerId;
         const supabaseUserId = payload.data.customer?.externalId;
-
-        console.log("Polar Order Paid Event Received", { customerId, supabaseUserId });
 
         if (supabaseUserId) {
             await upgradeToPremium(supabaseAdmin, supabaseUserId, customerId);
