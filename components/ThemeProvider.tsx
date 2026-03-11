@@ -2,7 +2,7 @@
 
 import { createContext, useCallback, useContext, useEffect, useState } from "react";
 
-type Theme = "light" | "dark" | "system";
+type Theme = "light" | "dark";
 
 type ThemeContextType = {
   theme: Theme;
@@ -11,7 +11,7 @@ type ThemeContextType = {
 };
 
 const ThemeContext = createContext<ThemeContextType>({
-  theme: "system",
+  theme: "light",
   resolvedTheme: "light",
   setTheme: () => {},
 });
@@ -20,39 +20,22 @@ export function useTheme() {
   return useContext(ThemeContext);
 }
 
-function getSystemTheme(): "light" | "dark" {
-  if (typeof window === "undefined") return "light";
-  return window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
-}
-
 export default function ThemeProvider({ children }: { children: React.ReactNode }) {
-  const [theme, setThemeState] = useState<Theme>("system");
-  const [resolvedTheme, setResolvedTheme] = useState<"light" | "dark">("light");
+  const [theme, setThemeState] = useState<Theme>("light");
 
   useEffect(() => {
     const stored = localStorage.getItem("dz-theme") as Theme | null;
-    if (stored && ["light", "dark", "system"].includes(stored)) {
+    if (stored && (stored === "light" || stored === "dark")) {
       setThemeState(stored);
+    } else {
+      // Migrate old "system" value to "light"
+      localStorage.setItem("dz-theme", "light");
     }
   }, []);
 
   useEffect(() => {
-    const resolved = theme === "system" ? getSystemTheme() : theme;
-    setResolvedTheme(resolved);
-
     const root = document.documentElement;
-    root.classList.toggle("dark", resolved === "dark");
-
-    const mq = window.matchMedia("(prefers-color-scheme: dark)");
-    function handleChange() {
-      if (theme === "system") {
-        const sys = getSystemTheme();
-        setResolvedTheme(sys);
-        root.classList.toggle("dark", sys === "dark");
-      }
-    }
-    mq.addEventListener("change", handleChange);
-    return () => mq.removeEventListener("change", handleChange);
+    root.classList.toggle("dark", theme === "dark");
   }, [theme]);
 
   const setTheme = useCallback((t: Theme) => {
@@ -61,7 +44,7 @@ export default function ThemeProvider({ children }: { children: React.ReactNode 
   }, []);
 
   return (
-    <ThemeContext.Provider value={{ theme, resolvedTheme, setTheme }}>
+    <ThemeContext.Provider value={{ theme, resolvedTheme: theme, setTheme }}>
       {children}
     </ThemeContext.Provider>
   );

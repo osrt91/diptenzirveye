@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useRef, useEffect } from "react";
 import { createClient } from "@/lib/supabase/client";
 import { motion, AnimatePresence } from "framer-motion";
 import {
@@ -111,10 +111,16 @@ export default function PromptHub({
         setSaving(false);
     }
 
+    const copyTimerRef = useRef<ReturnType<typeof setTimeout>>(null);
+    useEffect(() => {
+        return () => { if (copyTimerRef.current) clearTimeout(copyTimerRef.current); };
+    }, []);
+
     function handleCopy(id: string, content: string) {
         navigator.clipboard.writeText(content);
         setCopiedId(id);
-        setTimeout(() => setCopiedId(null), 2000);
+        if (copyTimerRef.current) clearTimeout(copyTimerRef.current);
+        copyTimerRef.current = setTimeout(() => setCopiedId(null), 2000);
     }
 
     function categoryLabel(key: string) {

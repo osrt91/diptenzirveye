@@ -10,12 +10,20 @@ type Message = {
     isAi: boolean;
 };
 
-export default function FloatingCoach() {
+type FloatingCoachProps = {
+    chatbotEnabled?: boolean;
+    welcomeMessage?: string;
+};
+
+export default function FloatingCoach({
+    chatbotEnabled = true,
+    welcomeMessage,
+}: FloatingCoachProps) {
     const [isOpen, setIsOpen] = useState(false);
     const [messages, setMessages] = useState<Message[]>([
         {
             id: "welcome",
-            text: "Merhaba! Ben DiptenZirveye AI Kocu. Bugün sana nasıl yardımcı olabilirim? Hedeflerini, motivasyonunu veya AI araçlarını sorabilirsin.",
+            text: welcomeMessage || "Merhaba! Ben DiptenZirveye AI Danışmanın. Sana nasıl yardımcı olabilirim? AI öğrenme yolculuğun, hedeflerin veya platformumuz hakkında her şeyi sorabilirsin.",
             isAi: true,
         },
     ]);
@@ -26,6 +34,8 @@ export default function FloatingCoach() {
     useEffect(() => {
         bottomRef.current?.scrollIntoView({ behavior: "smooth" });
     }, [messages]);
+
+    if (!chatbotEnabled) return null;
 
     async function handleSend() {
         const text = input.trim();
@@ -40,12 +50,18 @@ export default function FloatingCoach() {
             const res = await fetch("/api/coach", {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({ question: text }),
+                body: JSON.stringify({
+                    question: text,
+                    history: messages.slice(-6).map((m) => ({
+                        role: m.isAi ? "model" : "user",
+                        text: m.text,
+                    })),
+                }),
             });
             const data = await res.json();
             const aiMsg: Message = {
                 id: crypto.randomUUID(),
-                text: data.response || "Bir hata olustu, tekrar dene.",
+                text: data.response || "Bir hata oluştu, tekrar dene.",
                 isAi: true,
             };
             setMessages((prev) => [...prev, aiMsg]);
@@ -54,7 +70,7 @@ export default function FloatingCoach() {
                 ...prev,
                 {
                     id: crypto.randomUUID(),
-                    text: "Baglanti hatasi. Lutfen tekrar dene.",
+                    text: "Bağlantı hatası. Lütfen tekrar dene.",
                     isAi: true,
                 },
             ]);
@@ -76,11 +92,12 @@ export default function FloatingCoach() {
                     >
                         <div className="p-4 bg-gradient-to-r from-dz-orange-500 to-dz-amber-500 flex items-center justify-between text-white shrink-0">
                             <div className="flex items-center gap-2 font-bold text-sm">
-                                <Sparkles className="w-5 h-5" /> AI Eğitim Koçu
+                                <Sparkles className="w-5 h-5" /> AI Danışman
                             </div>
                             <button
                                 onClick={() => setIsOpen(false)}
                                 className="p-1 hover:bg-white/20 rounded-full transition-colors"
+                                aria-label="Chatbotu kapat"
                             >
                                 <X className="w-4 h-4" />
                             </button>
@@ -135,6 +152,7 @@ export default function FloatingCoach() {
                                     onClick={handleSend}
                                     disabled={loading || !input.trim()}
                                     className="bg-dz-orange-500 text-white p-2.5 flex items-center justify-center rounded-xl hover:bg-dz-orange-600 transition-colors disabled:opacity-40"
+                                    aria-label="Mesaj gönder"
                                 >
                                     <Send className="w-4 h-4" />
                                 </button>
@@ -149,6 +167,7 @@ export default function FloatingCoach() {
                 whileTap={{ scale: 0.95 }}
                 onClick={() => setIsOpen(!isOpen)}
                 className="w-14 h-14 bg-gradient-to-br from-dz-orange-500 to-dz-amber-500 text-white font-bold rounded-full flex items-center justify-center shadow-[0_10px_25px_rgba(249,115,22,0.4)] border border-white/20"
+                aria-label={isOpen ? "Chatbotu kapat" : "AI Danışmanı aç"}
             >
                 {isOpen ? <X className="w-6 h-6" /> : <Bot className="w-7 h-7" />}
             </motion.button>

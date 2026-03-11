@@ -44,7 +44,7 @@ const STEPS_NEW = [
   { id: "vision", title: "Proje Vizyonu", tag: "02" },
   { id: "audience", title: "Hedef Kitle", tag: "03" },
   { id: "features", title: "Özellikler", tag: "04" },
-  { id: "techstack", title: "Tech Stack", tag: "05" },
+  { id: "techstack", title: "Teknoloji Seçimi", tag: "05" },
   { id: "architecture", title: "Mimari", tag: "06" },
   { id: "checklist", title: "Kontrol Listesi", tag: "07" },
   { id: "report", title: "Zirve Raporu", tag: "08" },
@@ -128,7 +128,7 @@ const CHECKLIST = [
     { text: "Auth yöntemi seçildi", tip: "JWT, Session, OAuth" },
     { text: "Hata yönetimi planlandı", tip: "Try-catch, error boundary" },
   ]},
-  { section: "Deploy", items: [
+  { section: "Yayınlama", items: [
     { text: "Platform seçildi", tip: "Vercel, Railway, Netlify" },
     { text: "Domain bağlandı", tip: "Cloudflare, Namecheap" },
     { text: "HTTPS aktif", tip: "Çoğu platform otomatik sağlar" },
@@ -589,9 +589,9 @@ export default function ProjePlanlayici() {
 
     if (sid === "techstack") return (
       <div>
-        <H2 t="Tech Stack" d="Her katman için en uygun aracı seç." />
+        <H2 t="Teknoloji Seçimi" d="Her katman için en uygun aracı seç." />
         {Object.entries(TECH_OPTIONS).map(([cat, opts]) => {
-          const names: Record<string, string> = { frontend: "Frontend", backend: "Backend", database: "Veritabanı", styling: "UI / Styling", deploy: "Deploy" };
+          const names: Record<string, string> = { frontend: "Frontend", backend: "Backend", database: "Veritabanı", styling: "UI / Stil", deploy: "Yayınlama" };
           return (
             <div key={cat} className="mb-5">
               <Lbl t={names[cat]} />

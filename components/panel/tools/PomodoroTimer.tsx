@@ -135,6 +135,7 @@ export default function PomodoroTimer() {
   const [newTask, setNewTask] = useState("");
   const [showTasks, setShowTasks] = useState(true);
 
+  const [taskMinutes, setTaskMinutes] = useState(10);
   const completedTaskCount = tasks.filter(t => t.done).length;
   const currentPhaseNum = Math.floor(completedTaskCount / 2) + 1;
 
@@ -142,6 +143,10 @@ export default function PomodoroTimer() {
     if (!newTask.trim()) return;
     setTasks(prev => [...prev, { id: Date.now().toString(), text: newTask.trim(), done: false }]);
     setNewTask("");
+    // Auto-increase timer by taskMinutes for each task added (only when not running)
+    if (!isRunning && !isBreak) {
+      setRemaining(prev => prev + taskMinutes * 60);
+    }
   }
 
   function toggleTask(id: string) {
@@ -149,7 +154,12 @@ export default function PomodoroTimer() {
   }
 
   function removeTask(id: string) {
+    const task = tasks.find(t => t.id === id);
     setTasks(prev => prev.filter(t => t.id !== id));
+    // If removing an incomplete task and not running, decrease timer
+    if (task && !task.done && !isRunning && !isBreak) {
+      setRemaining(prev => Math.max(60, prev - taskMinutes * 60));
+    }
   }
 
   const supabase = useSupabase();
@@ -479,6 +489,21 @@ export default function PomodoroTimer() {
                       >
                         +
                       </button>
+                    </div>
+                    <div className="flex items-center gap-2 pt-2 border-t border-dz-grey-200 dark:border-dz-grey-700">
+                      <span className="text-xs text-dz-grey-500 shrink-0">Görev başına:</span>
+                      <div className="flex items-center gap-1">
+                        {[5, 10, 15, 20, 30].map(m => (
+                          <button
+                            key={m}
+                            type="button"
+                            onClick={() => setTaskMinutes(m)}
+                            className={`px-2 py-1 rounded text-xs font-medium transition-colors ${taskMinutes === m ? "bg-dz-orange-500 text-white" : "bg-dz-grey-100 dark:bg-dz-grey-800 text-dz-grey-600 dark:text-dz-grey-400 hover:bg-dz-grey-200 dark:hover:bg-dz-grey-700"}`}
+                          >
+                            {m}dk
+                          </button>
+                        ))}
+                      </div>
                     </div>
                   </div>
                 </motion.div>

@@ -3,6 +3,7 @@ import { outfit, dmSans, dmMono } from "@/lib/fonts";
 import ThemeProvider from "@/components/ThemeProvider";
 import { ToastProvider } from "@/components/ui/Toast";
 import InstallPrompt from "@/components/InstallPrompt";
+import TrackingScripts, { TrackingNoscript } from "@/components/TrackingScripts";
 import "./globals.css";
 
 const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "https://diptenzirveye.com";
@@ -88,16 +89,11 @@ export default function RootLayout({
         <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
         <meta name="apple-mobile-web-app-title" content="DiptenZirveye" />
         <link rel="apple-touch-icon" href="/icons/icon-192.svg" />
-        {process.env.NEXT_PUBLIC_GA_ID && (
-          <>
-            <script async src={`https://www.googletagmanager.com/gtag/js?id=${process.env.NEXT_PUBLIC_GA_ID}`} />
-            <script
-              dangerouslySetInnerHTML={{
-                __html: `window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','${process.env.NEXT_PUBLIC_GA_ID}',{page_path:window.location.pathname});`,
-              }}
-            />
-          </>
-        )}
+
+        {/* Dynamic tracking scripts from admin settings */}
+        <TrackingScripts />
+
+        {/* Theme detection + Service Worker registration */}
         <script
           dangerouslySetInnerHTML={{
             __html: `(function(){try{var t=localStorage.getItem("dz-theme");if(t==="dark"||(t!=="light"&&matchMedia("(prefers-color-scheme:dark)").matches))document.documentElement.classList.add("dark")}catch(e){}})();if("serviceWorker"in navigator)window.addEventListener("load",function(){navigator.serviceWorker.register("/sw.js")})`,
@@ -123,6 +119,8 @@ export default function RootLayout({
         />
       </head>
       <body className="antialiased font-sans bg-background text-foreground min-h-screen flex flex-col">
+        {/* GTM noscript fallback */}
+        <TrackingNoscript />
         <a
           href="#main-content"
           className="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-[100] focus:bg-dz-orange-500 focus:text-white focus:px-4 focus:py-2 focus:rounded-lg focus:font-bold focus:shadow-lg"

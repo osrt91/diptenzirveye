@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { Home, BookOpen, FileText, Medal, Clock, CalendarCheck, StickyNote, MessageSquare, Trophy, FlaskConical, User, Lightbulb, Rocket, Coins, Award, Target, GraduationCap, ClipboardList, Map, Star } from "lucide-react";
+import { Home, BookOpen, FileText, Medal, Clock, CalendarCheck, StickyNote, MessageSquare, Trophy, FlaskConical, User, Lightbulb, Rocket, Coins, Award, Target, GraduationCap, Map, Star } from "lucide-react";
 
 type NavItem = {
   href: string;
@@ -20,13 +20,12 @@ const links: NavItem[] = [
   { href: "/panel/proje-planlayici", label: "Proje Planlayıcı", icon: <Rocket className="w-4 h-4" /> },
   { href: "/panel/not-defteri", label: "Not Defteri", icon: <StickyNote className="w-4 h-4" /> },
   { href: "/panel/sohbet", label: "Sohbet", icon: <MessageSquare className="w-4 h-4" /> },
-  { href: "/panel/prompt-hub", label: "Prompt Hub", icon: <Lightbulb className="w-4 h-4" /> },
-  { href: "/panel/prompt-challenge", label: "Prompt Challenge", icon: <Target className="w-4 h-4" /> },
+  { href: "/panel/prompt-hub", label: "Prompt Kütüphanesi", icon: <Lightbulb className="w-4 h-4" /> },
+  { href: "/panel/prompt-challenge", label: "Günlük Görev", icon: <Target className="w-4 h-4" /> },
   { href: "/panel/kaynaklar", label: "Kaynaklar", icon: <FlaskConical className="w-4 h-4" /> },
   { href: "/panel/coin-shop", label: "DZ Coin Mağazası", icon: <Coins className="w-4 h-4" /> },
   { href: "/panel/motivasyon", label: "Günlük Motivasyon", icon: <Star className="w-4 h-4" /> },
   { href: "/panel/siralama", label: "Liderlik Tablosu", icon: <Trophy className="w-4 h-4" /> },
-  { href: "/panel/test", label: "Test", icon: <ClipboardList className="w-4 h-4" /> },
   { href: "/panel/quiz", label: "AI Bilgi Quiz", icon: <GraduationCap className="w-4 h-4" /> },
   { href: "/panel/ogrenme-yolu", label: "Öğrenme Yolu", icon: <Map className="w-4 h-4" /> },
   { href: "/panel/sertifika", label: "Sertifikalarım", icon: <Award className="w-4 h-4" /> },

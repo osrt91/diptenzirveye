@@ -4,7 +4,7 @@ import { useState } from "react";
 import type { User } from "@supabase/supabase-js";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { Users, BookOpen, Medal, MessageSquare, Lightbulb, ArrowLeft, Shield, Flag, PenTool, Ticket, Star, Menu, X } from "lucide-react";
+import { Users, BookOpen, Medal, MessageSquare, Lightbulb, ArrowLeft, Shield, Flag, PenTool, Ticket, Star, Menu, X, Settings, ClipboardList } from "lucide-react";
 import { FaChartBar } from "react-icons/fa";
 
 type NavItem = {
@@ -24,6 +24,8 @@ const links: NavItem[] = [
     { href: "/admin/blog", label: "Blog Yazıları", icon: <PenTool className="w-4 h-4" /> },
     { href: "/admin/kuponlar", label: "Kuponlar", icon: <Ticket className="w-4 h-4" /> },
     { href: "/admin/testimonials", label: "Yorumlar", icon: <Star className="w-4 h-4" /> },
+    { href: "/admin/test", label: "Sistem Testi", icon: <ClipboardList className="w-4 h-4" /> },
+    { href: "/admin/ayarlar", label: "Site Ayarları", icon: <Settings className="w-4 h-4" /> },
 ];
 
 export default function AdminShell({

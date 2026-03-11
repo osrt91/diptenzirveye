@@ -44,8 +44,17 @@ export default function SohbetClient({
   const [savedPromptId, setSavedPromptId] = useState<string | null>(null);
   const [copiedId, setCopiedId] = useState<string | null>(null);
   const bottomRef = useRef<HTMLDivElement>(null);
+  const savedTimerRef = useRef<ReturnType<typeof setTimeout>>(null);
+  const copiedTimerRef = useRef<ReturnType<typeof setTimeout>>(null);
   const supabase = useSupabase();
   const { addToast } = useToast();
+
+  useEffect(() => {
+    return () => {
+      if (savedTimerRef.current) clearTimeout(savedTimerRef.current);
+      if (copiedTimerRef.current) clearTimeout(copiedTimerRef.current);
+    };
+  }, []);
 
   useEffect(() => {
     setMessages(initialMessages);
@@ -152,7 +161,8 @@ export default function SohbetClient({
     });
     if (!error) {
       setSavedPromptId(msgId);
-      setTimeout(() => setSavedPromptId(null), 3000);
+      if (savedTimerRef.current) clearTimeout(savedTimerRef.current);
+      savedTimerRef.current = setTimeout(() => setSavedPromptId(null), 3000);
     }
   }
 
@@ -161,7 +171,8 @@ export default function SohbetClient({
       await navigator.clipboard.writeText(content);
       setCopiedId(msgId);
       addToast("Mesaj panoya kopyalandı!", "success");
-      setTimeout(() => setCopiedId(null), 2000);
+      if (copiedTimerRef.current) clearTimeout(copiedTimerRef.current);
+      copiedTimerRef.current = setTimeout(() => setCopiedId(null), 2000);
     } catch {
       addToast("Kopyalama başarısız oldu.", "error");
     }

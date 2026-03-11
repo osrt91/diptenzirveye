@@ -77,8 +77,7 @@ export async function POST(req: NextRequest) {
             return NextResponse.json({ error: data.reason }, { status: 400 });
         }
 
-    } catch (error: unknown) {
-        const message = error instanceof Error ? error.message : String(error);
+    } catch {
         return NextResponse.json({ error: "Ödeme başlatılamadı." }, { status: 500 });
     }
 }

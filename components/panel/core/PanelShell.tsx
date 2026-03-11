@@ -32,9 +32,11 @@ function CoinBalance() {
 export default function PanelShell({
   user,
   children,
+  chatbotConfig,
 }: {
   user: User;
   children: React.ReactNode;
+  chatbotConfig?: { chatbotEnabled: boolean; welcomeMessage: string };
 }) {
   const [sidebarOpen, setSidebarOpen] = useState(false);
 
@@ -95,7 +97,10 @@ export default function PanelShell({
 
         <main id="panel-main" className="flex-1 overflow-auto p-6 pt-16 lg:pt-6">{children}</main>
 
-        <FloatingCoach />
+        <FloatingCoach
+          chatbotEnabled={chatbotConfig?.chatbotEnabled ?? true}
+          welcomeMessage={chatbotConfig?.welcomeMessage}
+        />
       </div>
     </XPAnimationProvider>
   );

@@ -48,12 +48,48 @@ const jsonLd = {
   },
 };
 
+const faqJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  mainEntity: [
+    {
+      "@type": "Question",
+      name: "DiptenZirveye bana nasıl para kazandıracak?",
+      acceptedAnswer: { "@type": "Answer", text: "Serideki 10 kitap ve sunduğumuz özel araçlar, teorik bilgiden ziyade pratik yeteneklere odaklanır. Prompt mühendisliği, AI ile içerik üretimi ve otomasyon stratejileriyle kendi işini kurabilir, mevcut işinde yükselip maaşını katlayabilir veya küresel pazarda yüksek ücretli bir Freelancer olabilirsin." },
+    },
+    {
+      "@type": "Question",
+      name: "Platformu kullanmak ücretsiz mi?",
+      acceptedAnswer: { "@type": "Answer", text: "Evet! Kurucu üye olarak kayıt olduğunda giriş modülü (Kitap 1), temel çalışma kağıtları ve AI odaklanma seanslarımız gibi birçok özellikten kalıcı olarak ÜCRETSİZ faydalanırsın." },
+    },
+    {
+      "@type": "Question",
+      name: "XP, Rozetler ve Seviye sistemi ne işe yarıyor?",
+      acceptedAnswer: { "@type": "Answer", text: "Kitapları tamamladıkça, Zihin Motoru seansları yaptıkça XP ve rozetler kazanırsın. Üst seviyelere çıkarak özel çekilişlere katılma, sürpriz Premium içeriklere erişme ve gizli discord yetkileri kazanma şansı yakalarsın." },
+    },
+    {
+      "@type": "Question",
+      name: "Mobil cihazdan kullanabilir miyim?",
+      acceptedAnswer: { "@type": "Answer", text: "Evet! DiptenZirveye tam anlamıyla mobil uyumlu bir PWA (Progressive Web App) olarak çalışıyor. Telefonunun tarayıcısından ana ekrana ekleyerek uygulama gibi kullanabilir, çevrimdışı bile erişebilirsin." },
+    },
+    {
+      "@type": "Question",
+      name: "Ödeme yöntemleri nelerdir?",
+      acceptedAnswer: { "@type": "Answer", text: "PayTR altyapısı ile kredi kartı, banka kartı ve havale/EFT ile ödeme yapabilirsin. Tüm ödemelerin SSL ile şifrelenmiş güvenli altyapıda gerçekleşir. İlk 7 gün koşulsuz iade garantisi vardır." },
+    },
+  ],
+};
+
 export default function Home() {
   return (
     <main className="min-h-screen bg-background">
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }}
       />
       <Navbar />
       <Hero />
