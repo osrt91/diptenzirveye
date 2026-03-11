@@ -21,10 +21,10 @@ export default function AdminDashboardClient({ stats }: { stats: AdminStats }) {
         <div className="space-y-8">
             {/* Header */}
             <div>
-                <h1 className="font-display text-3xl font-bold text-white tracking-tight">
+                <h1 className="font-display text-3xl font-bold text-dz-black dark:text-white tracking-tight">
                     Genel Bakış
                 </h1>
-                <p className="text-white/40 text-sm mt-1">
+                <p className="text-dz-grey-500 dark:text-white/40 text-sm mt-1">
                     Platformun genel durumu — Gerçek zamanlı istatistikler
                 </p>
             </div>
@@ -41,7 +41,7 @@ export default function AdminDashboardClient({ stats }: { stats: AdminStats }) {
                             initial={{ opacity: 0, y: 20 }}
                             animate={{ opacity: 1, y: 0 }}
                             transition={{ delay: i * 0.05 }}
-                            className="group relative rounded-2xl border border-white/5 bg-white/[0.02] p-5 overflow-hidden hover:border-white/10 transition-all duration-300"
+                            className="group relative rounded-2xl border border-dz-grey-200 dark:border-white/5 bg-white dark:bg-white/[0.02] p-5 overflow-hidden hover:border-dz-grey-300 dark:hover:border-white/10 transition-all duration-300"
                         >
                             {/* Glow */}
                             <div
@@ -50,17 +50,17 @@ export default function AdminDashboardClient({ stats }: { stats: AdminStats }) {
 
                             <div className="relative z-10 flex items-start justify-between">
                                 <div>
-                                    <p className="text-white/40 text-xs font-medium uppercase tracking-wider mb-2">
+                                    <p className="text-dz-grey-500 dark:text-white/40 text-xs font-medium uppercase tracking-wider mb-2">
                                         {card.label}
                                     </p>
-                                    <p className="text-3xl font-black text-white font-display">
+                                    <p className="text-3xl font-black text-dz-black dark:text-white font-display">
                                         {typeof value === "number" ? value.toLocaleString("tr-TR") : value}
                                     </p>
                                 </div>
                                 <div
                                     className={`w-10 h-10 rounded-xl bg-gradient-to-br ${card.color} bg-opacity-20 flex items-center justify-center`}
                                 >
-                                    <Icon className="w-5 h-5 text-white/80" />
+                                    <Icon className="w-5 h-5 text-dz-grey-700 dark:text-white/80" />
                                 </div>
                             </div>
                         </motion.div>
@@ -69,8 +69,8 @@ export default function AdminDashboardClient({ stats }: { stats: AdminStats }) {
             </div>
 
             {/* Quick Actions */}
-            <div className="rounded-2xl border border-white/5 bg-white/[0.02] p-6">
-                <h2 className="font-display text-lg font-bold text-white mb-4">
+            <div className="rounded-2xl border border-dz-grey-200 dark:border-white/5 bg-white dark:bg-white/[0.02] p-6">
+                <h2 className="font-display text-lg font-bold text-dz-black dark:text-white mb-4">
                     Hızlı İşlemler
                 </h2>
                 <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
@@ -85,7 +85,7 @@ export default function AdminDashboardClient({ stats }: { stats: AdminStats }) {
                         <a
                             key={action.href}
                             href={action.href}
-                            className="flex items-center gap-3 rounded-xl border border-white/5 bg-white/[0.02] px-4 py-3 text-sm text-white/60 hover:text-white hover:bg-white/5 hover:border-white/10 transition-all"
+                            className="flex items-center gap-3 rounded-xl border border-dz-grey-200 dark:border-white/5 bg-white dark:bg-white/[0.02] px-4 py-3 text-sm text-dz-grey-600 dark:text-white/60 hover:text-dz-black dark:hover:text-white hover:bg-dz-grey-100 dark:hover:bg-white/5 hover:border-dz-grey-300 dark:hover:border-white/10 transition-all"
                         >
                             <action.icon className="w-4 h-4" />
                             {action.label}

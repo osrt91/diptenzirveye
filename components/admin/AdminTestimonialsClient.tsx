@@ -36,7 +36,7 @@ export default function AdminTestimonialsClient({ initialTestimonials }: { initi
     return (
         <div className="space-y-8">
             <div>
-                <h1 className="text-2xl font-display font-bold">Kullanıcı Yorumları</h1>
+                <h1 className="text-2xl font-display font-bold text-dz-black dark:text-white">Kullanıcı Yorumları</h1>
                 <p className="text-sm text-dz-grey-500 mt-1">
                     {items.length} yorum · {pending.length} onay bekliyor · {approved.length} yayında
                 </p>
@@ -86,16 +86,16 @@ function ReviewCard({ item, onApprove, onDelete }: { item: Testimonial & { appro
             </div>
             <div className="flex-1 min-w-0">
                 <div className="flex items-center gap-2 mb-1">
-                    <span className="font-bold text-sm">{item.name}</span>
-                    <span className="text-xs text-dz-grey-500">{item.role}</span>
+                    <span className="font-bold text-sm text-dz-black dark:text-white">{item.name}</span>
+                    <span className="text-xs text-dz-grey-500 dark:text-white/40">{item.role}</span>
                 </div>
                 <div className="flex gap-0.5 mb-2">
                     {[1, 2, 3, 4, 5].map((i) => (
-                        <Star key={i} className={`w-3 h-3 ${i <= item.rating ? "text-dz-amber-400 fill-dz-amber-400" : "text-dz-grey-300"}`} />
+                        <Star key={i} className={`w-3 h-3 ${i <= item.rating ? "text-dz-amber-400 fill-dz-amber-400" : "text-dz-grey-300 dark:text-white/20"}`} />
                     ))}
                 </div>
-                <p className="text-sm text-dz-grey-600 dark:text-dz-grey-400 line-clamp-3">{item.text}</p>
-                <p className="text-[10px] text-dz-grey-400 mt-2">{new Date(item.created_at).toLocaleDateString("tr-TR")}</p>
+                <p className="text-sm text-dz-grey-600 dark:text-white/60 line-clamp-3">{item.text}</p>
+                <p className="text-[10px] text-dz-grey-400 dark:text-white/30 mt-2">{new Date(item.created_at).toLocaleDateString("tr-TR")}</p>
             </div>
             <div className="flex flex-col gap-1 shrink-0">
                 <button

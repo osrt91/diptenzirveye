@@ -58,7 +58,7 @@ export default function AdminCouponsClient({ initialCoupons }: { initialCoupons:
         <div>
             <div className="flex items-center justify-between mb-8">
                 <div>
-                    <h1 className="text-2xl font-display font-bold">Kuponlar</h1>
+                    <h1 className="text-2xl font-display font-bold text-dz-black dark:text-white">Kuponlar</h1>
                     <p className="text-sm text-dz-grey-500 mt-1">{coupons.length} kupon · {coupons.filter((c) => c.active).length} aktif</p>
                 </div>
                 <button
@@ -73,10 +73,10 @@ export default function AdminCouponsClient({ initialCoupons }: { initialCoupons:
                 <motion.div
                     initial={{ opacity: 0, y: -10 }}
                     animate={{ opacity: 1, y: 0 }}
-                    className="bg-dz-white dark:bg-dz-grey-900 border border-dz-grey-200 dark:border-white/10 rounded-2xl p-6 mb-8 space-y-4"
+                    className="bg-dz-white dark:bg-dz-grey-900 border border-dz-grey-200 dark:border-dz-grey-700 rounded-2xl p-6 mb-8 space-y-4"
                 >
                     <div className="flex items-center justify-between">
-                        <h2 className="font-display font-bold text-lg">Yeni Kupon Oluştur</h2>
+                        <h2 className="font-display font-bold text-lg text-dz-black dark:text-white">Yeni Kupon Oluştur</h2>
                         <button onClick={() => setCreating(false)} className="text-dz-grey-400 hover:text-dz-black dark:hover:text-white">
                             <X className="w-5 h-5" />
                         </button>
@@ -88,7 +88,7 @@ export default function AdminCouponsClient({ initialCoupons }: { initialCoupons:
                             <input
                                 value={form.code}
                                 onChange={(e) => setForm({ ...form, code: e.target.value.toUpperCase() })}
-                                className="w-full rounded-lg border border-dz-grey-200 dark:border-white/10 bg-dz-grey-50 dark:bg-black px-3 py-2 text-sm font-mono uppercase focus:outline-none focus:ring-2 focus:ring-dz-orange-500/30"
+                                className="w-full rounded-lg border border-dz-grey-200 dark:border-dz-grey-700 bg-dz-grey-50 dark:bg-dz-grey-800 px-3 py-2 text-sm text-dz-black dark:text-white font-mono uppercase focus:outline-none focus:ring-2 focus:ring-dz-orange-500/30"
                                 placeholder="HOSGELDIN"
                             />
                         </div>
@@ -100,7 +100,7 @@ export default function AdminCouponsClient({ initialCoupons }: { initialCoupons:
                                 max={100}
                                 value={form.discount_percent}
                                 onChange={(e) => setForm({ ...form, discount_percent: parseInt(e.target.value) || 0 })}
-                                className="w-full rounded-lg border border-dz-grey-200 dark:border-white/10 bg-dz-grey-50 dark:bg-black px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-dz-orange-500/30"
+                                className="w-full rounded-lg border border-dz-grey-200 dark:border-dz-grey-700 bg-dz-grey-50 dark:bg-dz-grey-800 px-3 py-2 text-sm text-dz-black dark:text-white focus:outline-none focus:ring-2 focus:ring-dz-orange-500/30"
                             />
                         </div>
                         <div>
@@ -110,7 +110,7 @@ export default function AdminCouponsClient({ initialCoupons }: { initialCoupons:
                                 min={1}
                                 value={form.max_uses}
                                 onChange={(e) => setForm({ ...form, max_uses: e.target.value })}
-                                className="w-full rounded-lg border border-dz-grey-200 dark:border-white/10 bg-dz-grey-50 dark:bg-black px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-dz-orange-500/30"
+                                className="w-full rounded-lg border border-dz-grey-200 dark:border-dz-grey-700 bg-dz-grey-50 dark:bg-dz-grey-800 px-3 py-2 text-sm text-dz-black dark:text-white focus:outline-none focus:ring-2 focus:ring-dz-orange-500/30"
                                 placeholder="Sınırsız"
                             />
                         </div>
@@ -120,7 +120,7 @@ export default function AdminCouponsClient({ initialCoupons }: { initialCoupons:
                                 type="date"
                                 value={form.expires_at}
                                 onChange={(e) => setForm({ ...form, expires_at: e.target.value })}
-                                className="w-full rounded-lg border border-dz-grey-200 dark:border-white/10 bg-dz-grey-50 dark:bg-black px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-dz-orange-500/30"
+                                className="w-full rounded-lg border border-dz-grey-200 dark:border-dz-grey-700 bg-dz-grey-50 dark:bg-dz-grey-800 px-3 py-2 text-sm text-dz-black dark:text-white focus:outline-none focus:ring-2 focus:ring-dz-orange-500/30"
                             />
                         </div>
                     </div>
@@ -142,15 +142,15 @@ export default function AdminCouponsClient({ initialCoupons }: { initialCoupons:
                 {coupons.map((coupon) => (
                     <div
                         key={coupon.id}
-                        className={`flex items-center justify-between bg-dz-white dark:bg-dz-grey-900 border rounded-xl px-5 py-4 transition-opacity ${coupon.active ? "border-dz-grey-200 dark:border-white/10" : "border-dz-grey-100 dark:border-white/5 opacity-50"}`}
+                        className={`flex items-center justify-between bg-dz-white dark:bg-dz-grey-900 border rounded-xl px-5 py-4 transition-opacity ${coupon.active ? "border-dz-grey-200 dark:border-dz-grey-700" : "border-dz-grey-100 dark:border-dz-grey-800 opacity-50"}`}
                     >
                         <div className="flex items-center gap-4 flex-1 min-w-0">
-                            <div className={`w-10 h-10 rounded-lg flex items-center justify-center shrink-0 ${coupon.active ? "bg-dz-orange-500/10 text-dz-orange-500" : "bg-dz-grey-100 dark:bg-white/5 text-dz-grey-400"}`}>
+                            <div className={`w-10 h-10 rounded-lg flex items-center justify-center shrink-0 ${coupon.active ? "bg-dz-orange-500/10 text-dz-orange-500" : "bg-dz-grey-100 dark:bg-dz-grey-800 text-dz-grey-400"}`}>
                                 <Ticket className="w-5 h-5" />
                             </div>
                             <div className="min-w-0">
                                 <div className="flex items-center gap-3">
-                                    <span className="font-mono font-bold text-sm tracking-wider">{coupon.code}</span>
+                                    <span className="font-mono font-bold text-sm tracking-wider text-dz-black dark:text-white">{coupon.code}</span>
                                     <span className="text-xs px-2 py-0.5 rounded-full bg-green-100 dark:bg-green-500/10 text-green-700 dark:text-green-400 font-bold">%{coupon.discount_percent}</span>
                                 </div>
                                 <p className="text-xs text-dz-grey-500 mt-0.5">
@@ -162,7 +162,7 @@ export default function AdminCouponsClient({ initialCoupons }: { initialCoupons:
                         <div className="flex items-center gap-2 shrink-0">
                             <button
                                 onClick={() => toggleActive(coupon)}
-                                className={`p-2 rounded-lg transition-colors ${coupon.active ? "text-green-500 hover:bg-green-500/10" : "text-dz-grey-400 hover:bg-dz-grey-100 dark:hover:bg-white/5"}`}
+                                className={`p-2 rounded-lg transition-colors ${coupon.active ? "text-green-500 hover:bg-green-500/10" : "text-dz-grey-400 hover:bg-dz-grey-100 dark:hover:bg-dz-grey-800"}`}
                                 title={coupon.active ? "Devre Dışı Bırak" : "Aktif Et"}
                             >
                                 {coupon.active ? <ToggleRight className="w-5 h-5" /> : <ToggleLeft className="w-5 h-5" />}

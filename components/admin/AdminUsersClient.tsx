@@ -59,10 +59,10 @@ export default function AdminUsersClient({
         <div className="space-y-6">
             <div className="flex items-center justify-between">
                 <div>
-                    <h1 className="font-display text-3xl font-bold text-white tracking-tight">
+                    <h1 className="font-display text-3xl font-bold text-dz-black dark:text-white tracking-tight">
                         Kullanıcılar
                     </h1>
-                    <p className="text-white/40 text-sm mt-1">
+                    <p className="text-dz-grey-500 dark:text-white/40 text-sm mt-1">
                         {users.length} kullanıcı listeleniyor
                     </p>
                 </div>
@@ -71,14 +71,14 @@ export default function AdminUsersClient({
             {/* Search */}
             <div className="flex gap-3">
                 <div className="relative flex-1">
-                    <Search className="absolute left-4 top-1/2 -translate-y-1/2 text-white/20 w-4 h-4" />
+                    <Search className="absolute left-4 top-1/2 -translate-y-1/2 text-dz-grey-400 dark:text-white/20 w-4 h-4" />
                     <input
                         type="text"
                         value={search}
                         onChange={(e) => setSearch(e.target.value)}
                         onKeyDown={(e) => e.key === "Enter" && handleSearch()}
                         placeholder="Kullanıcı adı ile ara..."
-                        className="w-full rounded-xl border border-white/10 bg-white/5 text-white placeholder:text-white/30 pl-11 pr-4 py-3 text-sm focus:outline-none focus:border-red-500/30 focus:ring-1 focus:ring-red-500/20 transition-all"
+                        className="w-full rounded-xl border border-dz-grey-200 dark:border-white/10 bg-dz-grey-50 dark:bg-dz-grey-800 text-dz-black dark:text-white placeholder:text-dz-grey-400 dark:placeholder:text-white/20 pl-11 pr-4 py-3 text-sm focus:outline-none focus:border-red-500/30 focus:ring-1 focus:ring-red-500/20 transition-all"
                     />
                 </div>
                 <button
@@ -91,39 +91,39 @@ export default function AdminUsersClient({
             </div>
 
             {/* Users Table */}
-            <div className="rounded-2xl border border-white/5 overflow-hidden">
+            <div className="rounded-2xl border border-dz-grey-200 dark:border-white/5 overflow-hidden">
                 <div className="overflow-x-auto">
                     <table className="w-full table-fixed">
                         <thead>
-                            <tr className="border-b border-white/5 bg-white/[0.02]">
-                                <th className="text-left text-xs font-bold text-white/40 uppercase tracking-wider px-5 py-3 w-[30%]">
+                            <tr className="border-b border-dz-grey-200 dark:border-white/5 bg-white dark:bg-white/[0.02]">
+                                <th className="text-left text-xs font-bold text-dz-grey-500 dark:text-white/40 uppercase tracking-wider px-5 py-3 w-[30%]">
                                     Kullanıcı
                                 </th>
-                                <th className="text-left text-xs font-bold text-white/40 uppercase tracking-wider px-5 py-3 w-[20%]">
+                                <th className="text-left text-xs font-bold text-dz-grey-500 dark:text-white/40 uppercase tracking-wider px-5 py-3 w-[20%]">
                                     Seviye / XP
                                 </th>
-                                <th className="text-left text-xs font-bold text-white/40 uppercase tracking-wider px-5 py-3 w-[12%]">
+                                <th className="text-left text-xs font-bold text-dz-grey-500 dark:text-white/40 uppercase tracking-wider px-5 py-3 w-[12%]">
                                     Seri
                                 </th>
-                                <th className="text-left text-xs font-bold text-white/40 uppercase tracking-wider px-5 py-3 w-[10%]">
+                                <th className="text-left text-xs font-bold text-dz-grey-500 dark:text-white/40 uppercase tracking-wider px-5 py-3 w-[10%]">
                                     Rozetler
                                 </th>
-                                <th className="text-left text-xs font-bold text-white/40 uppercase tracking-wider px-5 py-3 w-[18%]">
+                                <th className="text-left text-xs font-bold text-dz-grey-500 dark:text-white/40 uppercase tracking-wider px-5 py-3 w-[18%]">
                                     Rol
                                 </th>
-                                <th className="text-right text-xs font-bold text-white/40 uppercase tracking-wider px-5 py-3 w-[10%]">
+                                <th className="text-right text-xs font-bold text-dz-grey-500 dark:text-white/40 uppercase tracking-wider px-5 py-3 w-[10%]">
                                     İşlem
                                 </th>
                             </tr>
                         </thead>
-                        <tbody className="divide-y divide-white/5">
+                        <tbody className="divide-y divide-dz-grey-200 dark:divide-white/5">
                             {users.map((user, i) => (
                                 <motion.tr
                                     key={user.id}
                                     initial={{ opacity: 0 }}
                                     animate={{ opacity: 1 }}
                                     transition={{ delay: i * 0.02 }}
-                                    className="hover:bg-white/[0.02] transition-colors"
+                                    className="hover:bg-dz-grey-100 dark:hover:bg-white/[0.02] transition-colors"
                                 >
                                     <td className="px-5 py-4">
                                         <div className="flex items-center gap-3 min-w-0">
@@ -131,10 +131,10 @@ export default function AdminUsersClient({
                                                 {(user.display_name || "?")[0].toUpperCase()}
                                             </div>
                                             <div className="min-w-0">
-                                                <p className="text-sm font-medium text-white truncate">
+                                                <p className="text-sm font-medium text-dz-black dark:text-white truncate">
                                                     {user.display_name || "Anonim"}
                                                 </p>
-                                                <p className="text-xs text-white/30 font-mono truncate">
+                                                <p className="text-xs text-dz-grey-400 dark:text-white/30 font-mono truncate">
                                                     {user.id.slice(0, 8)}...
                                                 </p>
                                             </div>
@@ -147,7 +147,7 @@ export default function AdminUsersClient({
                                                     type="number"
                                                     value={editXp}
                                                     onChange={(e) => setEditXp(Number(e.target.value))}
-                                                    className="w-24 rounded-lg bg-white/5 border border-white/10 text-white text-sm px-3 py-1.5 focus:outline-none focus:border-red-500/30"
+                                                    className="w-24 rounded-lg bg-dz-grey-50 dark:bg-dz-grey-800 border border-dz-grey-200 dark:border-white/10 text-dz-black dark:text-white text-sm px-3 py-1.5 focus:outline-none focus:border-red-500/30"
                                                 />
                                                 <button
                                                     onClick={() => handleUpdateXp(user.id)}
@@ -164,8 +164,8 @@ export default function AdminUsersClient({
                                             </div>
                                         ) : (
                                             <div>
-                                                <span className="text-sm font-bold text-white">Lv.{user.level}</span>
-                                                <span className="text-xs text-white/30 ml-2">{user.total_xp} XP</span>
+                                                <span className="text-sm font-bold text-dz-black dark:text-white">Lv.{user.level}</span>
+                                                <span className="text-xs text-dz-grey-400 dark:text-white/30 ml-2">{user.total_xp} XP</span>
                                             </div>
                                         )}
                                     </td>
@@ -176,7 +176,7 @@ export default function AdminUsersClient({
                                         </span>
                                     </td>
                                     <td className="px-5 py-4">
-                                        <span className="flex items-center gap-1 text-sm text-white/60">
+                                        <span className="flex items-center gap-1 text-sm text-dz-grey-600 dark:text-white/60">
                                             <Medal className="w-3 h-3" />
                                             {user.badge_count}
                                         </span>
@@ -191,7 +191,7 @@ export default function AdminUsersClient({
                                                     ? "text-red-400 bg-red-500/10 border-red-500/20"
                                                     : (user.role === "moderator")
                                                     ? "text-purple-400 bg-purple-500/10 border-purple-500/20"
-                                                    : "text-white/40 bg-white/5 border-white/10"
+                                                    : "text-dz-grey-500 dark:text-white/40 bg-dz-grey-50 dark:bg-white/5 border-dz-grey-200 dark:border-white/10"
                                             } disabled:opacity-40`}
                                         >
                                             <option value="user">Kullanıcı</option>
@@ -205,7 +205,7 @@ export default function AdminUsersClient({
                                                 setEditingId(user.id);
                                                 setEditXp(user.total_xp);
                                             }}
-                                            className="text-white/30 hover:text-white/70 transition-colors"
+                                            className="text-dz-grey-400 dark:text-white/30 hover:text-dz-grey-700 dark:hover:text-white/70 transition-colors"
                                             title="XP Düzenle"
                                         >
                                             <Edit className="w-4 h-4" />

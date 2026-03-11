@@ -378,6 +378,15 @@ function generateRecs(a: PlannerState): Recs {
     }
   }
 
+  // Genel ipuclari (her iki mod icin de)
+  if (tips.length === 0) {
+    tips.push("Bu raporu bir AI asistanina (Claude, ChatGPT) yapistirarak detayli yol haritasi isteyebilirsin.");
+    if (lvl <= 1) {
+      tips.push("Projeye baslamadan once README.md dosyasi yaz — amaci, kurulumu ve kullanimi acikla.");
+    }
+    tips.push("Her hafta projenin durumunu degerlendir — kucuk adimlar buyuk sonuclar yaratir.");
+  }
+
   const seen = new Set<string>();
   const dedup = (arr: RecItem[]) => arr.filter((x) => { if (seen.has(x.tool)) return false; seen.add(x.tool); return true; });
 
@@ -402,6 +411,14 @@ export default function ProjePlanlayici() {
   const STEPS = a.mode === "existing" ? STEPS_EXISTING : STEPS_NEW;
   useEffect(() => { ref.current?.scrollTo({ top: 0, behavior: "smooth" }); }, [step]);
 
+  // Reset report tab to the first available tab when reaching the report step
+  useEffect(() => {
+    if (STEPS[step]?.id === "report") {
+      const firstTab = a.mode === "existing" ? "fixes" : "use";
+      setRTab(firstTab);
+    }
+  }, [step, a.mode, STEPS]);
+
   const set = (k: keyof PlannerState, v: string | number | string[] | TechChoices) => setA((p) => ({ ...p, [k]: v }));
   const toggleArr = (k: "selectedFeatures" | "checkedItems" | "existingTech" | "existingProblems", v: string) => { const s = a[k]; set(k, s.includes(v) ? s.filter((x) => x !== v) : [...s, v]); };
 
@@ -416,7 +433,7 @@ export default function ProjePlanlayici() {
       ? `${base} font-bold bg-dz-orange-500 text-white shadow-lg shadow-dz-orange-500/30`
       : `${base} font-medium bg-dz-grey-100 dark:bg-dz-grey-800 text-dz-grey-600 dark:text-dz-grey-300 hover:bg-dz-grey-200 dark:hover:bg-dz-grey-700`;
   };
-  const inpCls = "w-full px-3.5 py-2.5 rounded-lg border-[1.5px] border-dz-grey-200 dark:border-dz-grey-700 text-sm font-sans outline-none mb-4 bg-dz-white dark:bg-dz-grey-900 text-dz-black dark:text-dz-white focus:border-dz-orange-500 transition-colors";
+  const inpCls = "w-full min-w-0 px-3.5 py-2.5 rounded-lg border-[1.5px] border-dz-grey-200 dark:border-dz-grey-700 text-sm font-sans outline-none mb-4 bg-dz-white dark:bg-dz-grey-900 text-dz-black dark:text-dz-white focus:border-dz-orange-500 transition-colors overflow-hidden text-ellipsis";
   const H2 = ({ t, d }: { t: string; d: string }) => (<><h2 className="text-2xl font-extrabold text-dz-black dark:text-dz-white font-display tracking-tight mb-1">{t}</h2><p className="text-sm text-dz-grey-500 dark:text-dz-grey-400 mb-5 font-sans leading-relaxed">{d}</p></>);
   const Lbl = ({ t }: { t: string }) => <div className="font-bold text-[11px] text-dz-grey-600 dark:text-dz-grey-400 mb-1.5 font-mono tracking-widest uppercase">{t}</div>;
   const Tip = ({ s, children }: { s: string; children: React.ReactNode }) => <div className="p-3 bg-dz-orange-500/10 dark:bg-dz-orange-500/5 rounded-lg border border-dz-orange-200 dark:border-dz-orange-500/20 border-l-[3px] border-l-dz-orange-500 text-[13px] text-dz-grey-700 dark:text-dz-grey-300 font-sans leading-relaxed mt-3.5"><strong className="text-dz-orange-600 dark:text-dz-orange-500">{s} </strong>{children}</div>;
@@ -456,7 +473,7 @@ export default function ProjePlanlayici() {
         <div className="font-mono text-[10px] tracking-[.16em] uppercase text-dz-grey-500 mb-7">sistematik proje planlama</div>
         <p className="text-[15px] text-dz-grey-600 dark:text-dz-grey-400 max-w-[480px] mx-auto mb-8 leading-relaxed font-sans">Yeni bir projeye mi başlıyorsun, yoksa mevcut projeni mi düzeltmek istiyorsun? Sana özel <strong>KULLAN / KULLANMA</strong> raporu çıkaralım.</p>
 
-        <div className="flex gap-3.5 justify-center max-w-[500px] mx-auto">
+        <div className="flex flex-col sm:flex-row gap-3.5 justify-center max-w-[500px] mx-auto">
           <button onClick={() => { set("mode", "new"); setStep(1); }} className="flex-1 p-5 rounded-xl border-2 border-dz-grey-200 dark:border-dz-grey-700 bg-dz-grey-50 dark:bg-dz-grey-900 text-left transition-all hover:border-dz-orange-400 cursor-pointer">
             <div className="text-[28px] mb-1.5">🚀</div>
             <div className="font-display text-base font-bold text-dz-black dark:text-dz-white mb-1">Yeni Proje</div>
@@ -498,9 +515,9 @@ export default function ProjePlanlayici() {
       <div>
         <H2 t="Mevcut Projen" d="Projende ne kullanıyorsun? Ne kadar çok bilgi verirsen o kadar iyi öneri alırsın." />
         <Lbl t="Projeyi kısaca anlat" />
-        <textarea className={`${inpCls} min-h-[80px] resize-y`} placeholder="Örn: React ile bir e-ticaret sitesi yapıyorum, ödeme kısmı sorunlu, mobilde kötü görünüyor..." value={a.existingDesc} onChange={e => set("existingDesc", e.target.value)} />
+        <textarea className={`${inpCls} min-h-[80px] max-h-[200px] resize-y overflow-auto`} placeholder="Örn: React ile bir e-ticaret sitesi yapıyorum, ödeme kısmı sorunlu, mobilde kötü görünüyor..." value={a.existingDesc} onChange={e => set("existingDesc", e.target.value)} />
         <Lbl t="Hangi teknolojileri kullanıyorsun?" />
-        <div className="flex flex-wrap gap-1.5 mb-4">
+        <div className="flex flex-wrap gap-1.5 mb-4 min-w-0">
           {[
             { v: "html_css", l: "HTML / CSS" }, { v: "javascript", l: "JavaScript" }, { v: "react", l: "React" }, { v: "nextjs", l: "Next.js" },
             { v: "vue", l: "Vue.js" }, { v: "svelte", l: "Svelte" }, { v: "typescript", l: "TypeScript" }, { v: "tailwind", l: "Tailwind CSS" },
@@ -508,7 +525,7 @@ export default function ProjePlanlayici() {
             { v: "supabase", l: "Supabase" }, { v: "firebase", l: "Firebase" }, { v: "mongodb", l: "MongoDB" }, { v: "postgresql", l: "PostgreSQL" },
             { v: "jquery", l: "jQuery" }, { v: "bootstrap", l: "Bootstrap" },
           ].map(t => (
-            <button key={t.v} onClick={() => toggleArr("existingTech", t.v)} className={C(a.existingTech.includes(t.v))}>{t.l}</button>
+            <button key={t.v} onClick={() => toggleArr("existingTech", t.v)} className={`${C(a.existingTech.includes(t.v))} shrink-0`}>{t.l}</button>
           ))}
         </div>
       </div>
@@ -541,13 +558,13 @@ export default function ProjePlanlayici() {
         <H2 t="Proje Vizyonu" d="Büyük resmi çizelim." />
         <Lbl t="Proje Adı" /><input className={inpCls} placeholder="örn: TaskFlow, ShopEase..." value={a.projectName} onChange={e => set("projectName", e.target.value)} />
         <Lbl t="Proje Türü" />
-        <div className="grid grid-cols-2 gap-1.5 mb-4">
+        <div className="grid grid-cols-2 gap-1.5 mb-4 min-w-0">
           {["SaaS Uygulama", "E-Ticaret", "Portfolio / Blog", "Dashboard / Panel", "Mobil Uygulama", "Landing Page", "Sosyal Platform", "Diğer"].map(t => (
-            <button key={t} onClick={() => set("projectType", t)} className={C(a.projectType === t)}>{t}</button>
+            <button key={t} onClick={() => set("projectType", t)} className={`${C(a.projectType === t)} truncate`}>{t}</button>
           ))}
         </div>
         <Lbl t="Tek cümlede anlat" />
-        <textarea className={`${inpCls} min-h-[70px] resize-y`} placeholder="Freelancer'ların projelerini yönettiği bir SaaS uygulaması..." value={a.projectDesc} onChange={e => set("projectDesc", e.target.value)} />
+        <textarea className={`${inpCls} min-h-[70px] max-h-[200px] resize-y overflow-auto`} placeholder="Freelancer'ların projelerini yönettiği bir SaaS uygulaması..." value={a.projectDesc} onChange={e => set("projectDesc", e.target.value)} />
         <InlineRecs />
       </div>
     );
@@ -556,9 +573,9 @@ export default function ProjePlanlayici() {
       <div>
         <H2 t="Hedef Kitle" d="Kim kullanacak?" />
         <Lbl t="Kullanıcı Tipi" />
-        <div className="grid grid-cols-2 gap-1.5 mb-4">
+        <div className="grid grid-cols-2 gap-1.5 mb-4 min-w-0">
           {[{ v: "B2C", d: "Son kullanıcı" }, { v: "B2B", d: "Şirketler" }, { v: "Dahili", d: "Kendi ekibin" }, { v: "Geliştirici", d: "Teknik kullanıcılar" }].map(t => (
-            <button key={t.v} onClick={() => set("audienceType", t.v)} className={C(a.audienceType === t.v, { col: true })}><span className="font-bold">{t.v}</span><span className="text-[11px] opacity-70">{t.d}</span></button>
+            <button key={t.v} onClick={() => set("audienceType", t.v)} className={C(a.audienceType === t.v, { col: true })}><span className="font-bold">{t.v}</span><span className="text-[11px] opacity-70 truncate max-w-full">{t.d}</span></button>
           ))}
         </div>
         <Lbl t="Beklenen Kullanıcı" />
@@ -580,7 +597,7 @@ export default function ProjePlanlayici() {
         {FEATURE_CATS.map(cat => (
           <div key={cat.cat} className="mb-4">
             <div className="font-bold text-[11px] text-dz-grey-600 dark:text-dz-grey-400 font-mono tracking-wider uppercase border-b border-dz-grey-200 dark:border-dz-grey-700 pb-1 mb-2">{cat.cat}</div>
-            <div className="flex flex-wrap gap-1.5">{cat.items.map(i => <button key={i} onClick={() => toggleArr("selectedFeatures", i)} className={C(a.selectedFeatures.includes(i))}>{i}</button>)}</div>
+            <div className="flex flex-wrap gap-1.5 min-w-0">{cat.items.map(i => <button key={i} onClick={() => toggleArr("selectedFeatures", i)} className={`${C(a.selectedFeatures.includes(i))} shrink-0`}>{i}</button>)}</div>
           </div>
         ))}
         <InlineRecs />
@@ -682,11 +699,11 @@ export default function ProjePlanlayici() {
         <div>
           <H2 t="Zirve Raporu" d={isExisting ? "Mevcut projendeki sorunların analizi ve çözüm önerileri." : "Seçimlerine göre kişiselleştirilmiş proje analizi."} />
 
-          <div className={`grid gap-2 mb-4`} style={{ gridTemplateColumns: `repeat(${tabs.length}, 1fr)` }}>
+          <div className="flex gap-2 mb-4 overflow-x-auto pb-1">
             {tabs.map(t => (
-              <button key={t.id} onClick={() => setRTab(t.id)} className={`p-3 rounded-xl cursor-pointer text-center transition-all ${activeTab === t.id ? "border-2 border-dz-orange-500 bg-orange-50 dark:bg-dz-orange-500/10" : "border-[1.5px] border-dz-grey-200 dark:border-dz-grey-700 bg-dz-grey-50 dark:bg-dz-grey-900 hover:border-dz-orange-400"}`}>
+              <button key={t.id} onClick={() => setRTab(t.id)} className={`flex-1 min-w-[70px] shrink-0 p-3 rounded-xl cursor-pointer text-center transition-all ${activeTab === t.id ? "border-2 border-dz-orange-500 bg-orange-50 dark:bg-dz-orange-500/10" : "border-[1.5px] border-dz-grey-200 dark:border-dz-grey-700 bg-dz-grey-50 dark:bg-dz-grey-900 hover:border-dz-orange-400"}`}>
                 <div className={`text-[22px] font-extrabold font-display ${activeTab === t.id ? "text-dz-orange-500" : "text-dz-black dark:text-dz-white"}`}>{t.c}</div>
-                <div className={`text-[11px] font-semibold font-sans ${activeTab === t.id ? "text-dz-orange-600 dark:text-dz-orange-400" : "text-dz-grey-500"}`}>{t.l}</div>
+                <div className={`text-[11px] font-semibold font-sans truncate ${activeTab === t.id ? "text-dz-orange-600 dark:text-dz-orange-400" : "text-dz-grey-500"}`}>{t.l}</div>
               </button>
             ))}
           </div>
@@ -717,10 +734,12 @@ export default function ProjePlanlayici() {
                 <div className="font-display font-bold text-sm text-green-700 dark:text-green-400 mb-0.5">Projende Kullan</div>
                 <div className="text-xs text-green-800 dark:text-green-300">Seçimlerine göre önerilen araç ve teknolojiler.</div>
               </div>
-              {recs.use.map((r, i) => (
+              {recs.use.length === 0 ? (
+                <div className="text-center p-7 text-dz-grey-500">Onceki adimlarda secim yaparak kisisellestirilmis oneriler al.</div>
+              ) : recs.use.map((r, i) => (
                 <div key={i} className={`flex gap-3 px-3.5 py-2.5 rounded-lg items-start mb-0.5 ${i % 2 === 0 ? "bg-dz-grey-50 dark:bg-dz-grey-900" : "bg-dz-grey-100 dark:bg-dz-grey-800"}`}>
                   <div className="w-[22px] h-[22px] rounded shrink-0 mt-0.5 bg-green-500 text-white flex items-center justify-center text-[13px] font-bold">✓</div>
-                  <div className="flex-1">
+                  <div className="flex-1 min-w-0">
                     <div className="font-bold text-[13.5px] text-dz-black dark:text-dz-white">{r.tool}</div>
                     <div className="text-xs text-dz-grey-600 dark:text-dz-grey-400 leading-relaxed">{r.why}</div>
                   </div>
@@ -736,10 +755,12 @@ export default function ProjePlanlayici() {
                 <div className="font-display font-bold text-sm text-red-600 dark:text-red-400 mb-0.5">Projende Kullanma</div>
                 <div className="text-xs text-red-900 dark:text-red-300">Bu araçlar uyumsuz, modası geçmiş veya riskli.</div>
               </div>
-              {recs.avoid.map((r, i) => (
+              {recs.avoid.length === 0 ? (
+                <div className="text-center p-7 text-dz-grey-500">Secimlerine gore kacinman gereken bir sey bulunamadi.</div>
+              ) : recs.avoid.map((r, i) => (
                 <div key={i} className={`flex gap-3 px-3.5 py-2.5 rounded-lg items-start mb-0.5 ${i % 2 === 0 ? "bg-dz-grey-50 dark:bg-dz-grey-900" : "bg-dz-grey-100 dark:bg-dz-grey-800"}`}>
                   <div className="w-[22px] h-[22px] rounded shrink-0 mt-0.5 bg-red-500 text-white flex items-center justify-center text-[13px] font-bold">✗</div>
-                  <div>
+                  <div className="min-w-0">
                     <div className="font-bold text-[13.5px] text-dz-black dark:text-dz-white">{r.tool}</div>
                     <div className="text-xs text-dz-grey-600 dark:text-dz-grey-400 leading-relaxed">{r.why}</div>
                   </div>
@@ -785,7 +806,7 @@ export default function ProjePlanlayici() {
     <div className="flex h-screen font-sans bg-background overflow-hidden">
 
       {/* Sidebar */}
-      <div className="w-56 bg-dz-grey-900 dark:bg-dz-black flex flex-col shrink-0 border-r border-dz-grey-800 hidden md:flex">
+      <div className="hidden md:flex w-56 bg-dz-grey-900 dark:bg-dz-black flex-col shrink-0 border-r border-dz-grey-800">
         <div className="px-4 py-4 border-b border-dz-grey-800">
           <div className="font-display text-sm font-bold tracking-wide text-dz-white">
             Dipten<span className="text-dz-orange-500">Zirveye</span><sup className="text-[8px] text-dz-orange-500">™</sup>
@@ -830,7 +851,24 @@ export default function ProjePlanlayici() {
       </div>
 
       {/* Main */}
-      <div className="flex-1 flex flex-col overflow-hidden">
+      <div className="flex-1 flex flex-col overflow-hidden min-w-0">
+        {/* Mobile progress bar */}
+        {step > 0 && (
+          <div className="md:hidden px-4 pt-3 pb-1 bg-dz-white dark:bg-dz-grey-900 border-b border-dz-grey-200 dark:border-dz-grey-800">
+            <div className="flex items-center justify-between mb-1.5">
+              <span className="font-mono text-[10px] text-dz-grey-500 uppercase tracking-wider">
+                {STEPS[step]?.title}
+              </span>
+              <span className="font-mono text-[10px] text-dz-orange-500 font-semibold">{progress}%</span>
+            </div>
+            <div className="h-1 bg-dz-grey-200 dark:bg-dz-grey-700 rounded-full overflow-hidden">
+              <div
+                className="h-full bg-gradient-to-r from-dz-orange-500 to-dz-amber-400 rounded-full transition-all duration-300"
+                style={{ width: `${progress}%` }}
+              />
+            </div>
+          </div>
+        )}
         <div ref={ref} className="flex-1 overflow-y-auto px-4 sm:px-8 py-6 pb-20">
           <div className={`mx-auto ${isReport ? "max-w-4xl" : "max-w-xl"}`}>{renderStep()}</div>
         </div>

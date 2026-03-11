@@ -12,6 +12,12 @@ import {
     Copy,
     Check,
     MessageSquare,
+    TrendingUp,
+    ScrollText,
+    Scale,
+    Megaphone,
+    ChevronDown,
+    ChevronUp,
 } from "lucide-react";
 
 type Prompt = {
@@ -54,7 +60,21 @@ export default function PromptHub({
 
     const [votedIds, setVotedIds] = useState<Set<string>>(new Set(userVotedIds));
     const [copiedId, setCopiedId] = useState<string | null>(null);
+    const [expandedId, setExpandedId] = useState<string | null>(null);
+    const [showRules, setShowRules] = useState(false);
+    const [showGuidelines, setShowGuidelines] = useState(false);
+    const [showFeedback, setShowFeedback] = useState(false);
     const supabase = createClient();
+
+    // Compute real category counts from prompts data
+    const categoryCounts = CATEGORIES.reduce<Record<string, number>>((acc, cat) => {
+        if (cat.key === "all") {
+            acc[cat.key] = prompts.length;
+        } else {
+            acc[cat.key] = prompts.filter((p) => p.category === cat.key).length;
+        }
+        return acc;
+    }, {});
 
     const filtered = prompts
         .filter((p) => activeCategory === "all" || p.category === activeCategory)
@@ -112,6 +132,8 @@ export default function PromptHub({
     }
 
     const copyTimerRef = useRef<ReturnType<typeof setTimeout>>(null);
+    const promptGridRef = useRef<HTMLDivElement>(null);
+    const feedbackRef = useRef<HTMLTextAreaElement>(null);
     useEffect(() => {
         return () => { if (copyTimerRef.current) clearTimeout(copyTimerRef.current); };
     }, []);
@@ -283,29 +305,188 @@ export default function PromptHub({
                             {CATEGORIES.map((cat) => (
                                 <button
                                     key={cat.key}
-                                    onClick={() => setActiveCategory(cat.key)}
-                                    className={`w-full flex items-center gap-3 px-3 py-2.5 rounded-xl text-left transition-all ${activeCategory === cat.key
+                                    onClick={() => {
+                                        setActiveCategory(cat.key);
+                                        promptGridRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
+                                    }}
+                                    aria-pressed={activeCategory === cat.key}
+                                    className={`w-full flex items-center gap-3 px-3 py-2.5 rounded-xl text-left transition-all cursor-pointer select-none ${activeCategory === cat.key
                                             ? "bg-dz-orange-500/10 text-dz-orange-600 dark:text-dz-orange-500 font-bold"
                                             : "text-dz-grey-600 dark:text-dz-grey-400 hover:bg-dz-grey-50 dark:hover:bg-dz-white/5 font-medium"
                                         }`}
                                 >
                                     <span className="text-lg">{cat.emoji}</span>
-                                    <div className="flex-1">
-                                        <div className="text-sm">{cat.label}</div>
-                                        {activeCategory === cat.key && (
-                                            <div className="text-[10px] text-dz-orange-500/80 font-normal leading-none mt-1">
-                                                {cat.desc}
-                                            </div>
-                                        )}
+                                    <div className="flex-1 flex items-center justify-between">
+                                        <div>
+                                            <div className="text-sm">{cat.label}</div>
+                                            {activeCategory === cat.key && (
+                                                <div className="text-[10px] text-dz-orange-500/80 font-normal leading-none mt-1">
+                                                    {cat.desc}
+                                                </div>
+                                            )}
+                                        </div>
+                                        <span className={`text-[10px] font-bold px-1.5 py-0.5 rounded-full ${activeCategory === cat.key
+                                            ? "bg-dz-orange-500/20 text-dz-orange-600 dark:text-dz-orange-400"
+                                            : "bg-dz-grey-100 dark:bg-dz-white/10 text-dz-grey-400"
+                                        }`}>
+                                            {categoryCounts[cat.key] ?? 0}
+                                        </span>
                                     </div>
                                 </button>
                             ))}
                         </div>
                     </div>
+
+                    {/* Trending Prompt Categories */}
+                    <div className="bg-dz-white dark:bg-dz-grey-900 border border-dz-grey-200 dark:border-dz-white/10 rounded-2xl p-2 shadow-sm">
+                        <div className="p-3 flex items-center gap-2 text-xs font-bold text-dz-grey-400 uppercase tracking-widest mb-1">
+                            <TrendingUp className="w-3.5 h-3.5" /> Trend Kategoriler
+                        </div>
+                        <div className="space-y-1">
+                            {CATEGORIES.filter((c) => c.key !== "all")
+                                .map((cat) => ({
+                                    ...cat,
+                                    count: categoryCounts[cat.key] ?? 0,
+                                    totalVotes: prompts
+                                        .filter((p) => p.category === cat.key)
+                                        .reduce((sum, p) => sum + p.upvote_count, 0),
+                                }))
+                                .sort((a, b) => b.totalVotes - a.totalVotes || b.count - a.count)
+                                .map((cat) => (
+                                    <button
+                                        key={cat.key}
+                                        onClick={() => {
+                                            setActiveCategory(cat.key);
+                                            promptGridRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
+                                        }}
+                                        className={`w-full flex items-center gap-3 px-3 py-2.5 rounded-xl text-left transition-all cursor-pointer select-none ${activeCategory === cat.key
+                                            ? "bg-dz-orange-500/10 text-dz-orange-600 dark:text-dz-orange-500 font-bold"
+                                            : "text-dz-grey-600 dark:text-dz-grey-400 hover:bg-dz-grey-50 dark:hover:bg-dz-white/5 font-medium"
+                                        }`}
+                                    >
+                                        <span className="text-lg">{cat.emoji}</span>
+                                        <div className="flex-1 min-w-0">
+                                            <div className="text-sm truncate">{cat.label}</div>
+                                        </div>
+                                        <div className="flex items-center gap-1.5 shrink-0">
+                                            <span className="text-[10px] font-bold text-dz-grey-400">
+                                                ({cat.count})
+                                            </span>
+                                            {cat.totalVotes > 0 && (
+                                                <span className="flex items-center gap-0.5 text-[10px] text-dz-orange-500 font-bold">
+                                                    <ArrowBigUp className="w-3 h-3" />{cat.totalVotes}
+                                                </span>
+                                            )}
+                                        </div>
+                                    </button>
+                                ))}
+                        </div>
+                    </div>
+
+                    {/* Quick Shortcuts */}
+                    <div className="bg-dz-white dark:bg-dz-grey-900 border border-dz-grey-200 dark:border-dz-white/10 rounded-2xl p-2 shadow-sm">
+                        <div className="p-3 text-xs font-bold text-dz-grey-400 uppercase tracking-widest mb-1">
+                            Hizli Kisayollar
+                        </div>
+                        <div className="space-y-1">
+                            <button
+                                onClick={() => setShowRules((prev) => !prev)}
+                                className="w-full flex items-center gap-3 px-3 py-2.5 rounded-xl text-left transition-all cursor-pointer select-none text-dz-grey-600 dark:text-dz-grey-400 hover:bg-dz-grey-50 dark:hover:bg-dz-white/5 font-medium"
+                            >
+                                <ScrollText className="w-4 h-4 shrink-0" />
+                                <span className="text-sm flex-1">Prompt Kurallari</span>
+                                {showRules ? <ChevronUp className="w-3.5 h-3.5 shrink-0" /> : <ChevronDown className="w-3.5 h-3.5 shrink-0" />}
+                            </button>
+                            <AnimatePresence>
+                                {showRules && (
+                                    <motion.div
+                                        initial={{ height: 0, opacity: 0 }}
+                                        animate={{ height: "auto", opacity: 1 }}
+                                        exit={{ height: 0, opacity: 0 }}
+                                        className="overflow-hidden"
+                                    >
+                                        <div className="px-3 pb-3 text-xs text-dz-grey-500 dark:text-dz-grey-400 space-y-1.5 leading-relaxed">
+                                            <p>1. Baslik acik ve anlasilir olmali.</p>
+                                            <p>2. [Degisken] seklinde yer tutucular kullan.</p>
+                                            <p>3. Prompt en az 20 karakter olmali.</p>
+                                            <p>4. Kopyala-yapistir mantigi ile calismali.</p>
+                                            <p>5. Spam veya alakasiz icerik paylasilmamali.</p>
+                                        </div>
+                                    </motion.div>
+                                )}
+                            </AnimatePresence>
+
+                            <button
+                                onClick={() => setShowGuidelines((prev) => !prev)}
+                                className="w-full flex items-center gap-3 px-3 py-2.5 rounded-xl text-left transition-all cursor-pointer select-none text-dz-grey-600 dark:text-dz-grey-400 hover:bg-dz-grey-50 dark:hover:bg-dz-white/5 font-medium"
+                            >
+                                <Scale className="w-4 h-4 shrink-0" />
+                                <span className="text-sm flex-1">Topluluk Ilkeleri</span>
+                                {showGuidelines ? <ChevronUp className="w-3.5 h-3.5 shrink-0" /> : <ChevronDown className="w-3.5 h-3.5 shrink-0" />}
+                            </button>
+                            <AnimatePresence>
+                                {showGuidelines && (
+                                    <motion.div
+                                        initial={{ height: 0, opacity: 0 }}
+                                        animate={{ height: "auto", opacity: 1 }}
+                                        exit={{ height: 0, opacity: 0 }}
+                                        className="overflow-hidden"
+                                    >
+                                        <div className="px-3 pb-3 text-xs text-dz-grey-500 dark:text-dz-grey-400 space-y-1.5 leading-relaxed">
+                                            <p>- Saygiyla yaklasalim, yapici olalim.</p>
+                                            <p>- Baskalarina ait promptlari oy ile destekleyelim.</p>
+                                            <p>- Zararli veya yaniltici icerikler paylasilmamali.</p>
+                                            <p>- En iyi promptlar topluluk oylamasiyla one cikar.</p>
+                                        </div>
+                                    </motion.div>
+                                )}
+                            </AnimatePresence>
+
+                            <button
+                                onClick={() => setShowFeedback((prev) => !prev)}
+                                className="w-full flex items-center gap-3 px-3 py-2.5 rounded-xl text-left transition-all cursor-pointer select-none text-dz-grey-600 dark:text-dz-grey-400 hover:bg-dz-grey-50 dark:hover:bg-dz-white/5 font-medium"
+                            >
+                                <Megaphone className="w-4 h-4 shrink-0" />
+                                <span className="text-sm flex-1">Geri Bildirim</span>
+                                {showFeedback ? <ChevronUp className="w-3.5 h-3.5 shrink-0" /> : <ChevronDown className="w-3.5 h-3.5 shrink-0" />}
+                            </button>
+                            <AnimatePresence>
+                                {showFeedback && (
+                                    <motion.div
+                                        initial={{ height: 0, opacity: 0 }}
+                                        animate={{ height: "auto", opacity: 1 }}
+                                        exit={{ height: 0, opacity: 0 }}
+                                        className="overflow-hidden"
+                                    >
+                                        <div className="px-3 pb-3 space-y-2">
+                                            <textarea
+                                                ref={feedbackRef}
+                                                placeholder="Hub hakkinda dusuncelerini paylas..."
+                                                rows={3}
+                                                className="w-full rounded-lg border border-dz-grey-200 dark:border-dz-white/10 bg-dz-grey-50 dark:bg-background px-3 py-2 text-xs resize-none focus:outline-none focus:ring-1 focus:ring-dz-orange-500/50 text-dz-black dark:text-white"
+                                            />
+                                            <button
+                                                onClick={async () => {
+                                                    const text = feedbackRef.current?.value?.trim();
+                                                    if (!text) return;
+                                                    await supabase.from("feedback").insert({ user_id: userId, message: text, source: "prompt_hub" });
+                                                    if (feedbackRef.current) feedbackRef.current.value = "";
+                                                    setShowFeedback(false);
+                                                }}
+                                                className="w-full py-2 rounded-lg bg-dz-orange-500 text-white text-xs font-bold hover:bg-dz-orange-600 transition-colors"
+                                            >
+                                                Gonder
+                                            </button>
+                                        </div>
+                                    </motion.div>
+                                )}
+                            </AnimatePresence>
+                        </div>
+                    </div>
                 </div>
 
                 {/* --- PROMPT GRID --- */}
-                <div className="flex-1">
+                <div className="flex-1" ref={promptGridRef}>
                     {filtered.length === 0 ? (
                         <div className="bg-dz-white dark:bg-dz-grey-900 border border-dz-grey-200 dark:border-dz-white/10 rounded-3xl p-12 text-center shadow-lg">
                             <div className="w-20 h-20 mx-auto rounded-full bg-dz-grey-100 dark:bg-dz-white/5 flex items-center justify-center mb-4">
@@ -363,10 +544,28 @@ export default function PromptHub({
                                         </div>
 
                                         {/* Prompt Display (Fake Code Editor Look) */}
-                                        <div className="flex-1 p-5 bg-dz-grey-50/50 dark:bg-background/50">
-                                            <div className="relative text-sm text-dz-grey-600 dark:text-dz-grey-400 font-mono leading-relaxed line-clamp-4 group-hover:line-clamp-none transition-all duration-300">
+                                        <div
+                                            className="flex-1 p-5 bg-dz-grey-50/50 dark:bg-background/50 cursor-pointer"
+                                            onClick={() => setExpandedId(expandedId === prompt.id ? null : prompt.id)}
+                                        >
+                                            <div className={`relative text-sm text-dz-grey-600 dark:text-dz-grey-400 font-mono leading-relaxed ${expandedId === prompt.id ? "max-h-80 overflow-y-auto" : "line-clamp-4"}`}>
                                                 {renderPromptContent(prompt.content)}
                                             </div>
+                                            {prompt.content.length > 200 && (
+                                                <button
+                                                    onClick={(e) => {
+                                                        e.stopPropagation();
+                                                        setExpandedId(expandedId === prompt.id ? null : prompt.id);
+                                                    }}
+                                                    className="mt-2 flex items-center gap-1 text-[11px] font-bold text-dz-orange-500 hover:text-dz-orange-600 transition-colors"
+                                                >
+                                                    {expandedId === prompt.id ? (
+                                                        <><ChevronUp className="w-3.5 h-3.5" /> Daralt</>
+                                                    ) : (
+                                                        <><ChevronDown className="w-3.5 h-3.5" /> Devamini Gor</>
+                                                    )}
+                                                </button>
+                                            )}
                                         </div>
 
                                         {/* Footer Controls */}

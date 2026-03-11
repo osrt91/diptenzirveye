@@ -41,18 +41,18 @@ export default function AdminPromptsClient({
     return (
         <div className="space-y-6">
             <div>
-                <h1 className="font-display text-3xl font-bold text-white tracking-tight">
+                <h1 className="font-display text-3xl font-bold text-dz-black dark:text-white tracking-tight">
                     Promptlar
                 </h1>
-                <p className="text-white/40 text-sm mt-1">
+                <p className="text-dz-grey-500 dark:text-white/40 text-sm mt-1">
                     {prompts.length} prompt — moderasyon paneli
                 </p>
             </div>
 
             {prompts.length === 0 ? (
-                <div className="rounded-2xl border border-white/5 bg-white/[0.02] p-12 text-center">
-                    <Lightbulb className="w-8 h-8 text-white/10 mx-auto mb-4" />
-                    <p className="text-white/30 text-sm">Henüz prompt bulunmuyor</p>
+                <div className="rounded-2xl border border-dz-grey-200 dark:border-white/5 bg-white dark:bg-white/[0.02] p-12 text-center">
+                    <Lightbulb className="w-8 h-8 text-dz-grey-300 dark:text-white/10 mx-auto mb-4" />
+                    <p className="text-dz-grey-400 dark:text-white/30 text-sm">Henüz prompt bulunmuyor</p>
                 </div>
             ) : (
                 <div className="space-y-3">
@@ -62,13 +62,13 @@ export default function AdminPromptsClient({
                             initial={{ opacity: 0, y: 10 }}
                             animate={{ opacity: 1, y: 0 }}
                             transition={{ delay: i * 0.02 }}
-                            className="rounded-2xl border border-white/5 bg-white/[0.02] p-5 hover:border-white/10 transition-all"
+                            className="rounded-2xl border border-dz-grey-200 dark:border-white/5 bg-white dark:bg-white/[0.02] p-5 hover:border-dz-grey-300 dark:hover:border-white/10 transition-all"
                         >
                             <div className="flex items-start justify-between gap-4">
                                 <div className="flex-1 min-w-0">
                                     <div className="flex items-center gap-3 mb-2">
-                                        <h3 className="font-bold text-white text-sm">{prompt.title}</h3>
-                                        <span className="text-[10px] bg-white/5 text-white/30 px-2 py-0.5 rounded font-mono">
+                                        <h3 className="font-bold text-dz-black dark:text-white text-sm">{prompt.title}</h3>
+                                        <span className="text-[10px] bg-dz-grey-50 dark:bg-white/5 text-dz-grey-400 dark:text-white/30 px-2 py-0.5 rounded font-mono">
                                             {prompt.category}
                                         </span>
                                         <span className="flex items-center gap-1 text-xs text-amber-400/60">
@@ -76,8 +76,8 @@ export default function AdminPromptsClient({
                                             {prompt.upvote_count}
                                         </span>
                                     </div>
-                                    <p className="text-xs text-white/40 line-clamp-2 mb-2">{prompt.content}</p>
-                                    <div className="flex items-center gap-3 text-[10px] text-white/20">
+                                    <p className="text-xs text-dz-grey-500 dark:text-white/40 line-clamp-2 mb-2">{prompt.content}</p>
+                                    <div className="flex items-center gap-3 text-[10px] text-dz-grey-400 dark:text-white/20">
                                         <span>{getDisplayName(prompt.profiles)}</span>
                                         <span>•</span>
                                         <span>{new Date(prompt.created_at).toLocaleString("tr-TR")}</span>

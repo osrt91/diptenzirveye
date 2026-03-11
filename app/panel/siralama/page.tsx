@@ -1,6 +1,8 @@
-﻿import { createClient } from "@/lib/supabase/server";
+import { createClient } from "@/lib/supabase/server";
 import { redirect } from "next/navigation";
 import SiralamaListe from "@/components/panel/gamification/SiralamaListe";
+
+export const dynamic = "force-dynamic";
 
 const LIMIT = 50;
 
@@ -15,23 +17,36 @@ export default async function SiralamaPage() {
 
   if (error) {
     return (
-      <div className="rounded-xl border border-dz-grey-200 dark:border-dz-grey-800 p-6 text-center text-dz-grey-600 dark:text-dz-grey-400">
-        Sıralama yüklenemedi. Supabase’de supabase-leaderboard-chat-extras.sql çalıştırıldı mı?
+      <div className="space-y-6">
+        <h1 className="font-display text-2xl font-bold text-dz-black dark:text-dz-white">
+          Liderlik Tablosu
+        </h1>
+        <div className="rounded-xl border border-dz-grey-200 dark:border-dz-grey-800 p-6 text-center text-dz-grey-600 dark:text-dz-grey-400">
+          Sıralama yüklenemedi. Lütfen daha sonra tekrar deneyin.
+        </div>
       </div>
     );
   }
 
-  const list = (rows ?? []) as { rank: number; user_id: string; display_name: string; total_xp: number; level: number }[];
+  const list = (rows ?? []) as {
+    rank: number;
+    user_id: string;
+    display_name: string;
+    total_xp: number;
+    level: number;
+  }[];
   const currentUserId = user.id;
 
   return (
     <div className="space-y-6">
-      <h1 className="font-display text-2xl font-bold text-dz-black dark:text-dz-white">
-        Liderlik Tablosu
-      </h1>
-      <p className="text-dz-grey-600 dark:text-dz-grey-400">
-        En çok XP toplayan öğrenciler. Motive ol, kitapları bitir, görevleri tamamla.
-      </p>
+      <div>
+        <h1 className="font-display text-2xl font-bold text-dz-black dark:text-dz-white">
+          Liderlik Tablosu
+        </h1>
+        <p className="mt-1 text-dz-grey-600 dark:text-dz-grey-400">
+          En çok XP toplayan öğrenciler. Motive ol, kitapları bitir, görevleri tamamla.
+        </p>
+      </div>
       <SiralamaListe list={list} currentUserId={currentUserId} />
     </div>
   );

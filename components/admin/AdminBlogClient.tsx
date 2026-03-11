@@ -101,7 +101,7 @@ export default function AdminBlogClient({ initialPosts }: { initialPosts: BlogPo
         <div>
             <div className="flex items-center justify-between mb-8">
                 <div>
-                    <h1 className="text-2xl font-display font-bold">Blog Yazıları</h1>
+                    <h1 className="text-2xl font-display font-bold text-dz-black dark:text-white">Blog Yazıları</h1>
                     <p className="text-sm text-dz-grey-500 mt-1">{posts.length} yazı</p>
                 </div>
                 <button
@@ -116,10 +116,10 @@ export default function AdminBlogClient({ initialPosts }: { initialPosts: BlogPo
                 <motion.div
                     initial={{ opacity: 0, y: -10 }}
                     animate={{ opacity: 1, y: 0 }}
-                    className="bg-dz-white dark:bg-dz-grey-900 border border-dz-grey-200 dark:border-white/10 rounded-2xl p-6 mb-8 space-y-4"
+                    className="bg-dz-white dark:bg-dz-grey-900 border border-dz-grey-200 dark:border-dz-grey-700 rounded-2xl p-6 mb-8 space-y-4"
                 >
                     <div className="flex items-center justify-between mb-2">
-                        <h2 className="font-display font-bold text-lg">{editing ? "Yazıyı Düzenle" : "Yeni Yazı"}</h2>
+                        <h2 className="font-display font-bold text-lg text-dz-black dark:text-white">{editing ? "Yazıyı Düzenle" : "Yeni Yazı"}</h2>
                         <button onClick={resetForm} className="text-dz-grey-400 hover:text-dz-black dark:hover:text-white">
                             <X className="w-5 h-5" />
                         </button>
@@ -131,7 +131,7 @@ export default function AdminBlogClient({ initialPosts }: { initialPosts: BlogPo
                             <input
                                 value={form.title}
                                 onChange={(e) => setForm({ ...form, title: e.target.value, slug: generateSlug(e.target.value) })}
-                                className="w-full rounded-lg border border-dz-grey-200 dark:border-white/10 bg-dz-grey-50 dark:bg-black px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-dz-orange-500/30"
+                                className="w-full rounded-lg border border-dz-grey-200 dark:border-dz-grey-700 bg-dz-grey-50 dark:bg-dz-grey-800 px-3 py-2 text-sm text-dz-black dark:text-white focus:outline-none focus:ring-2 focus:ring-dz-orange-500/30"
                                 placeholder="Yazı başlığı"
                             />
                         </div>
@@ -140,7 +140,7 @@ export default function AdminBlogClient({ initialPosts }: { initialPosts: BlogPo
                             <input
                                 value={form.slug}
                                 onChange={(e) => setForm({ ...form, slug: e.target.value })}
-                                className="w-full rounded-lg border border-dz-grey-200 dark:border-white/10 bg-dz-grey-50 dark:bg-black px-3 py-2 text-sm font-mono focus:outline-none focus:ring-2 focus:ring-dz-orange-500/30"
+                                className="w-full rounded-lg border border-dz-grey-200 dark:border-dz-grey-700 bg-dz-grey-50 dark:bg-dz-grey-800 px-3 py-2 text-sm text-dz-black dark:text-white font-mono focus:outline-none focus:ring-2 focus:ring-dz-orange-500/30"
                                 placeholder="url-slug"
                             />
                         </div>
@@ -151,7 +151,7 @@ export default function AdminBlogClient({ initialPosts }: { initialPosts: BlogPo
                         <input
                             value={form.excerpt}
                             onChange={(e) => setForm({ ...form, excerpt: e.target.value })}
-                            className="w-full rounded-lg border border-dz-grey-200 dark:border-white/10 bg-dz-grey-50 dark:bg-black px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-dz-orange-500/30"
+                            className="w-full rounded-lg border border-dz-grey-200 dark:border-dz-grey-700 bg-dz-grey-50 dark:bg-dz-grey-800 px-3 py-2 text-sm text-dz-black dark:text-white focus:outline-none focus:ring-2 focus:ring-dz-orange-500/30"
                             placeholder="Kısa özet (blog listesinde görünür)"
                         />
                     </div>
@@ -162,14 +162,14 @@ export default function AdminBlogClient({ initialPosts }: { initialPosts: BlogPo
                             <input
                                 value={form.cover_image}
                                 onChange={(e) => setForm({ ...form, cover_image: e.target.value })}
-                                className="w-full rounded-lg border border-dz-grey-200 dark:border-white/10 bg-dz-grey-50 dark:bg-black px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-dz-orange-500/30"
+                                className="w-full rounded-lg border border-dz-grey-200 dark:border-dz-grey-700 bg-dz-grey-50 dark:bg-dz-grey-800 px-3 py-2 text-sm text-dz-black dark:text-white focus:outline-none focus:ring-2 focus:ring-dz-orange-500/30"
                                 placeholder="https://ornek.com/gorsel.jpg"
                             />
                             {form.cover_image && (
                                 <img
                                     src={form.cover_image}
                                     alt="Önizleme"
-                                    className="w-16 h-10 object-cover rounded-lg border border-dz-grey-200 dark:border-white/10 shrink-0"
+                                    className="w-16 h-10 object-cover rounded-lg border border-dz-grey-200 dark:border-dz-grey-700 shrink-0"
                                 />
                             )}
                         </div>
@@ -181,7 +181,7 @@ export default function AdminBlogClient({ initialPosts }: { initialPosts: BlogPo
                             value={form.content}
                             onChange={(e) => setForm({ ...form, content: e.target.value })}
                             rows={12}
-                            className="w-full rounded-lg border border-dz-grey-200 dark:border-white/10 bg-dz-grey-50 dark:bg-black px-3 py-2 text-sm font-mono focus:outline-none focus:ring-2 focus:ring-dz-orange-500/30 resize-none"
+                            className="w-full rounded-lg border border-dz-grey-200 dark:border-dz-grey-700 bg-dz-grey-50 dark:bg-dz-grey-800 px-3 py-2 text-sm text-dz-black dark:text-white font-mono focus:outline-none focus:ring-2 focus:ring-dz-orange-500/30 resize-none"
                             placeholder="## Başlık&#10;&#10;Paragraf metni...&#10;&#10;- Madde 1&#10;- Madde 2"
                         />
                     </div>
@@ -192,7 +192,7 @@ export default function AdminBlogClient({ initialPosts }: { initialPosts: BlogPo
                             <select
                                 value={form.category}
                                 onChange={(e) => setForm({ ...form, category: e.target.value })}
-                                className="w-full rounded-lg border border-dz-grey-200 dark:border-white/10 bg-dz-grey-50 dark:bg-black px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-dz-orange-500/30"
+                                className="w-full rounded-lg border border-dz-grey-200 dark:border-dz-grey-700 bg-dz-grey-50 dark:bg-dz-grey-800 px-3 py-2 text-sm text-dz-black dark:text-white focus:outline-none focus:ring-2 focus:ring-dz-orange-500/30"
                             >
                                 {CATEGORIES.map((c) => <option key={c} value={c}>{c}</option>)}
                             </select>
@@ -202,7 +202,7 @@ export default function AdminBlogClient({ initialPosts }: { initialPosts: BlogPo
                             <input
                                 value={form.read_time}
                                 onChange={(e) => setForm({ ...form, read_time: e.target.value })}
-                                className="w-full rounded-lg border border-dz-grey-200 dark:border-white/10 bg-dz-grey-50 dark:bg-black px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-dz-orange-500/30"
+                                className="w-full rounded-lg border border-dz-grey-200 dark:border-dz-grey-700 bg-dz-grey-50 dark:bg-dz-grey-800 px-3 py-2 text-sm text-dz-black dark:text-white focus:outline-none focus:ring-2 focus:ring-dz-orange-500/30"
                                 placeholder="3 Dk Okuma"
                             />
                         </div>
@@ -214,7 +214,7 @@ export default function AdminBlogClient({ initialPosts }: { initialPosts: BlogPo
                                     onChange={(e) => setForm({ ...form, published: e.target.checked })}
                                     className="w-4 h-4 rounded accent-dz-orange-500"
                                 />
-                                <span className="text-sm font-bold">Yayınla</span>
+                                <span className="text-sm font-bold text-dz-black dark:text-white">Yayınla</span>
                             </label>
                         </div>
                     </div>
@@ -238,12 +238,12 @@ export default function AdminBlogClient({ initialPosts }: { initialPosts: BlogPo
                 {posts.map((post) => (
                     <div
                         key={post.id}
-                        className="flex items-center justify-between bg-dz-white dark:bg-dz-grey-900 border border-dz-grey-200 dark:border-white/10 rounded-xl px-5 py-4"
+                        className="flex items-center justify-between bg-dz-white dark:bg-dz-grey-900 border border-dz-grey-200 dark:border-dz-grey-700 rounded-xl px-5 py-4"
                     >
                         <div className="flex items-center gap-4 flex-1 min-w-0">
                             <div className={`w-2 h-2 rounded-full shrink-0 ${post.published ? "bg-green-500" : "bg-dz-grey-300"}`} />
                             <div className="min-w-0">
-                                <h3 className="font-bold text-sm truncate">{post.title}</h3>
+                                <h3 className="font-bold text-sm truncate text-dz-black dark:text-white">{post.title}</h3>
                                 <p className="text-xs text-dz-grey-500 mt-0.5">
                                     {post.category} · {post.read_time} · {new Date(post.created_at).toLocaleDateString("tr-TR")}
                                 </p>
@@ -252,7 +252,7 @@ export default function AdminBlogClient({ initialPosts }: { initialPosts: BlogPo
                         <div className="flex items-center gap-2 shrink-0">
                             <button
                                 onClick={() => togglePublish(post)}
-                                className={`p-2 rounded-lg transition-colors ${post.published ? "text-green-500 hover:bg-green-500/10" : "text-dz-grey-400 hover:bg-dz-grey-100 dark:hover:bg-white/5"}`}
+                                className={`p-2 rounded-lg transition-colors ${post.published ? "text-green-500 hover:bg-green-500/10" : "text-dz-grey-400 hover:bg-dz-grey-100 dark:hover:bg-dz-grey-800"}`}
                                 title={post.published ? "Yayından Kaldır" : "Yayınla"}
                             >
                                 {post.published ? <Eye className="w-4 h-4" /> : <EyeOff className="w-4 h-4" />}

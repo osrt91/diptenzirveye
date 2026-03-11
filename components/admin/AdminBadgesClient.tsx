@@ -95,7 +95,7 @@ export default function AdminBadgesClient({
                             isNew: true,
                         } as Badge & { isNew: boolean })
                     }
-                    className="flex items-center gap-2 px-4 py-2.5 rounded-xl bg-red-500/10 border border-red-500/20 text-red-400 text-sm font-medium hover:bg-red-500/20 transition-all"
+                    className="flex items-center gap-2 px-4 py-2.5 rounded-xl bg-dz-orange-500 text-white text-sm font-bold hover:bg-dz-orange-600 transition-all"
                 >
                     <Plus className="w-3 h-3" /> Yeni Rozet
                 </button>
@@ -144,49 +144,49 @@ export default function AdminBadgesClient({
                             animate={{ scale: 1, y: 0 }}
                             exit={{ scale: 0.95, y: 20 }}
                             onClick={(e) => e.stopPropagation()}
-                            className="w-full max-w-md rounded-2xl border border-white/10 bg-dz-grey-900 p-6 space-y-4"
+                            className="w-full max-w-md rounded-2xl border border-dz-grey-200 dark:border-dz-grey-700 bg-white dark:bg-dz-grey-900 p-6 space-y-4"
                         >
-                            <h2 className="font-display text-xl font-bold text-white">
+                            <h2 className="font-display text-xl font-bold text-dz-black dark:text-white">
                                 {editing.isNew ? "Yeni Rozet" : "Rozet Düzenle"}
                             </h2>
 
                             <div className="grid gap-4">
                                 <div className="grid grid-cols-3 gap-4">
                                     <div className="col-span-2">
-                                        <label className="text-xs text-white/40 font-medium block mb-1">Ad</label>
+                                        <label className="text-xs text-dz-grey-500 dark:text-white/40 font-medium block mb-1">Ad</label>
                                         <input
                                             value={editing.name}
                                             onChange={(e) => setEditing({ ...editing, name: e.target.value })}
-                                            className="w-full rounded-xl bg-white/5 border border-white/10 text-white text-sm px-4 py-2.5 focus:outline-none focus:border-red-500/30"
+                                            className="w-full rounded-xl bg-dz-grey-50 dark:bg-dz-grey-800 border border-dz-grey-200 dark:border-dz-grey-700 text-dz-black dark:text-white text-sm px-4 py-2.5 focus:outline-none focus:border-dz-orange-500/30"
                                         />
                                     </div>
                                     <div>
-                                        <label className="text-xs text-white/40 font-medium block mb-1">Emoji</label>
+                                        <label className="text-xs text-dz-grey-500 dark:text-white/40 font-medium block mb-1">Emoji</label>
                                         <input
                                             value={editing.icon_emoji}
                                             onChange={(e) => setEditing({ ...editing, icon_emoji: e.target.value })}
-                                            className="w-full rounded-xl bg-white/5 border border-white/10 text-white text-center text-2xl px-4 py-1.5 focus:outline-none focus:border-red-500/30"
+                                            className="w-full rounded-xl bg-dz-grey-50 dark:bg-dz-grey-800 border border-dz-grey-200 dark:border-dz-grey-700 text-dz-black dark:text-white text-center text-2xl px-4 py-1.5 focus:outline-none focus:border-dz-orange-500/30"
                                         />
                                     </div>
                                 </div>
                                 <div className="grid grid-cols-2 gap-4">
                                     <div>
-                                        <label className="text-xs text-white/40 font-medium block mb-1">Slug</label>
+                                        <label className="text-xs text-dz-grey-500 dark:text-white/40 font-medium block mb-1">Slug</label>
                                         <input
                                             value={editing.slug}
                                             onChange={(e) => setEditing({ ...editing, slug: e.target.value })}
-                                            className="w-full rounded-xl bg-white/5 border border-white/10 text-white text-sm px-4 py-2.5 focus:outline-none focus:border-red-500/30"
+                                            className="w-full rounded-xl bg-dz-grey-50 dark:bg-dz-grey-800 border border-dz-grey-200 dark:border-dz-grey-700 text-dz-black dark:text-white text-sm px-4 py-2.5 focus:outline-none focus:border-dz-orange-500/30"
                                         />
                                     </div>
                                     <div>
-                                        <label className="text-xs text-white/40 font-medium block mb-1">Kategori</label>
+                                        <label className="text-xs text-dz-grey-500 dark:text-white/40 font-medium block mb-1">Kategori</label>
                                         <select
                                             value={editing.category ?? "general"}
                                             onChange={(e) => setEditing({ ...editing, category: e.target.value })}
-                                            className="w-full rounded-xl bg-white/5 border border-white/10 text-white text-sm px-4 py-2.5 focus:outline-none focus:border-red-500/30"
+                                            className="w-full rounded-xl bg-dz-grey-50 dark:bg-dz-grey-800 border border-dz-grey-200 dark:border-dz-grey-700 text-dz-black dark:text-white text-sm px-4 py-2.5 focus:outline-none focus:border-dz-orange-500/30"
                                         >
                                             {categories.map((c) => (
-                                                <option key={c.value} value={c.value} className="bg-dz-grey-900">
+                                                <option key={c.value} value={c.value} className="bg-white dark:bg-dz-grey-900">
                                                     {c.label}
                                                 </option>
                                             ))}
@@ -194,20 +194,20 @@ export default function AdminBadgesClient({
                                     </div>
                                 </div>
                                 <div>
-                                    <label className="text-xs text-white/40 font-medium block mb-1">Açıklama</label>
+                                    <label className="text-xs text-dz-grey-500 dark:text-white/40 font-medium block mb-1">Açıklama</label>
                                     <textarea
                                         value={editing.description ?? ""}
                                         onChange={(e) => setEditing({ ...editing, description: e.target.value })}
-                                        className="w-full rounded-xl bg-white/5 border border-white/10 text-white text-sm px-4 py-2.5 focus:outline-none focus:border-red-500/30 h-16 resize-none"
+                                        className="w-full rounded-xl bg-dz-grey-50 dark:bg-dz-grey-800 border border-dz-grey-200 dark:border-dz-grey-700 text-dz-black dark:text-white text-sm px-4 py-2.5 focus:outline-none focus:border-dz-orange-500/30 h-16 resize-none"
                                     />
                                 </div>
                                 <div>
-                                    <label className="text-xs text-white/40 font-medium block mb-1">Gerekli XP</label>
+                                    <label className="text-xs text-dz-grey-500 dark:text-white/40 font-medium block mb-1">Gerekli XP</label>
                                     <input
                                         type="number"
                                         value={editing.xp_required}
                                         onChange={(e) => setEditing({ ...editing, xp_required: Number(e.target.value) })}
-                                        className="w-full rounded-xl bg-white/5 border border-white/10 text-white text-sm px-4 py-2.5 focus:outline-none focus:border-red-500/30"
+                                        className="w-full rounded-xl bg-dz-grey-50 dark:bg-dz-grey-800 border border-dz-grey-200 dark:border-dz-grey-700 text-dz-black dark:text-white text-sm px-4 py-2.5 focus:outline-none focus:border-dz-orange-500/30"
                                     />
                                 </div>
                             </div>
@@ -215,14 +215,14 @@ export default function AdminBadgesClient({
                             <div className="flex justify-end gap-3 pt-2">
                                 <button
                                     onClick={() => setEditing(null)}
-                                    className="px-4 py-2 rounded-xl text-white/50 hover:text-white text-sm transition-colors"
+                                    className="px-4 py-2 rounded-xl text-dz-grey-500 dark:text-white/50 hover:text-dz-black dark:hover:text-white text-sm transition-colors"
                                 >
                                     <X className="w-3 h-3 inline mr-1" /> İptal
                                 </button>
                                 <button
                                     onClick={handleSave}
                                     disabled={loading || !editing.name || !editing.slug}
-                                    className="px-5 py-2 rounded-xl bg-red-500 text-white text-sm font-medium hover:bg-red-600 transition-colors disabled:opacity-50"
+                                    className="px-5 py-2 rounded-xl bg-dz-orange-500 text-white text-sm font-medium hover:bg-dz-orange-600 transition-colors disabled:opacity-50"
                                 >
                                     <Save className="w-3 h-3 inline mr-1" /> {loading ? "..." : "Kaydet"}
                                 </button>
@@ -242,9 +242,9 @@ export default function AdminBadgesClient({
                             initial={{ opacity: 0, y: 10 }}
                             animate={{ opacity: 1, y: 0 }}
                             transition={{ delay: i * 0.03 }}
-                            className="group rounded-2xl border border-dz-grey-200 dark:border-white/5 bg-dz-white dark:bg-white/[0.02] p-4 hover:border-dz-grey-300 dark:hover:border-white/10 transition-all flex items-start gap-4 shadow-sm dark:shadow-none"
+                            className="group rounded-2xl border border-dz-grey-200 dark:border-dz-grey-800 bg-dz-white dark:bg-dz-grey-900 p-4 hover:border-dz-grey-300 dark:hover:border-dz-grey-700 transition-all flex items-start gap-4 shadow-sm dark:shadow-none"
                         >
-                            <div className="w-12 h-12 rounded-xl bg-dz-grey-100 dark:bg-white/5 flex items-center justify-center text-2xl shrink-0">
+                            <div className="w-12 h-12 rounded-xl bg-dz-grey-100 dark:bg-dz-grey-800 flex items-center justify-center text-2xl shrink-0">
                                 {AiIcon ? <AiIcon className="w-7 h-7 drop-shadow-md text-dz-black dark:text-white" /> : badge.icon_emoji}
                             </div>
                             <div className="flex-1 min-w-0">
@@ -254,7 +254,7 @@ export default function AdminBadgesClient({
                                     <span className="text-[10px] text-dz-grey-500 dark:text-white/20 font-mono">{badge.slug}</span>
                                     <span className="text-[10px] text-orange-500 dark:text-orange-400/40">{badge.xp_required} XP</span>
                                     {badge.category && (
-                                        <span className="text-[10px] text-dz-grey-600 dark:text-white/20 bg-dz-grey-100 dark:bg-white/5 px-1.5 py-0.5 rounded">
+                                        <span className="text-[10px] text-dz-grey-600 dark:text-white/20 bg-dz-grey-100 dark:bg-dz-grey-800 px-1.5 py-0.5 rounded">
                                             {badge.category}
                                         </span>
                                     )}
@@ -263,7 +263,7 @@ export default function AdminBadgesClient({
                             <div className="flex gap-1 shrink-0">
                                 <button
                                     onClick={() => setEditing(badge)}
-                                    className="p-2 rounded-lg text-dz-grey-400 dark:text-white/20 hover:text-dz-black dark:hover:text-white/60 hover:bg-dz-grey-100 dark:hover:bg-white/5 transition-all"
+                                    className="p-2 rounded-lg text-dz-grey-400 dark:text-white/20 hover:text-dz-black dark:hover:text-white/60 hover:bg-dz-grey-100 dark:hover:bg-dz-grey-800 transition-all"
                                 >
                                     <Edit className="w-3 h-3" />
                                 </button>

@@ -74,10 +74,10 @@ export default function AdminBooksClient({
         <div className="space-y-6">
             <div className="flex items-center justify-between">
                 <div>
-                    <h1 className="font-display text-3xl font-bold text-white tracking-tight">
+                    <h1 className="font-display text-3xl font-bold text-dz-black dark:text-white tracking-tight">
                         Kitaplar
                     </h1>
-                    <p className="text-white/40 text-sm mt-1">{books.length} kitap</p>
+                    <p className="text-dz-grey-500 dark:text-white/40 text-sm mt-1">{books.length} kitap</p>
                 </div>
                 <button
                     onClick={() =>
@@ -101,7 +101,7 @@ export default function AdminBooksClient({
                         initial={{ opacity: 0 }}
                         animate={{ opacity: 1 }}
                         exit={{ opacity: 0 }}
-                        className="fixed inset-0 z-50 bg-black/70 flex items-center justify-center p-4"
+                        className="fixed inset-0 z-50 bg-black/50 flex items-center justify-center p-4"
                         onClick={() => setEditing(null)}
                     >
                         <motion.div
@@ -109,74 +109,74 @@ export default function AdminBooksClient({
                             animate={{ scale: 1, y: 0 }}
                             exit={{ scale: 0.95, y: 20 }}
                             onClick={(e) => e.stopPropagation()}
-                            className="w-full max-w-lg rounded-2xl border border-white/10 bg-dz-grey-900 p-6 space-y-4"
+                            className="w-full max-w-lg rounded-2xl border border-dz-grey-300 dark:border-white/10 bg-white dark:bg-dz-grey-900 p-6 space-y-4"
                         >
-                            <h2 className="font-display text-xl font-bold text-white">
+                            <h2 className="font-display text-xl font-bold text-dz-black dark:text-white">
                                 {editing.isNew ? "Yeni Kitap" : "Kitap Düzenle"}
                             </h2>
 
                             <div className="grid gap-4">
                                 <div>
-                                    <label className="text-xs text-white/40 font-medium block mb-1">Başlık</label>
+                                    <label className="text-xs text-dz-grey-500 dark:text-white/40 font-medium block mb-1">Başlık</label>
                                     <input
                                         value={editing.title}
                                         onChange={(e) => setEditing({ ...editing, title: e.target.value })}
-                                        className="w-full rounded-xl bg-white/5 border border-white/10 text-white text-sm px-4 py-2.5 focus:outline-none focus:border-red-500/30"
+                                        className="w-full rounded-xl bg-dz-grey-50 dark:bg-dz-grey-800 border border-dz-grey-300 dark:border-white/10 text-dz-black dark:text-white text-sm px-4 py-2.5 focus:outline-none focus:border-red-500/30"
                                     />
                                 </div>
                                 <div className="grid grid-cols-2 gap-4">
                                     <div>
-                                        <label className="text-xs text-white/40 font-medium block mb-1">Slug</label>
+                                        <label className="text-xs text-dz-grey-500 dark:text-white/40 font-medium block mb-1">Slug</label>
                                         <input
                                             value={editing.slug}
                                             onChange={(e) => setEditing({ ...editing, slug: e.target.value })}
-                                            className="w-full rounded-xl bg-white/5 border border-white/10 text-white text-sm px-4 py-2.5 focus:outline-none focus:border-red-500/30"
+                                            className="w-full rounded-xl bg-dz-grey-50 dark:bg-dz-grey-800 border border-dz-grey-300 dark:border-white/10 text-dz-black dark:text-white text-sm px-4 py-2.5 focus:outline-none focus:border-red-500/30"
                                         />
                                     </div>
                                     <div>
-                                        <label className="text-xs text-white/40 font-medium block mb-1">Sıra</label>
+                                        <label className="text-xs text-dz-grey-500 dark:text-white/40 font-medium block mb-1">Sıra</label>
                                         <input
                                             type="number"
                                             value={editing.sort_order}
                                             onChange={(e) => setEditing({ ...editing, sort_order: Number(e.target.value) })}
-                                            className="w-full rounded-xl bg-white/5 border border-white/10 text-white text-sm px-4 py-2.5 focus:outline-none focus:border-red-500/30"
+                                            className="w-full rounded-xl bg-dz-grey-50 dark:bg-dz-grey-800 border border-dz-grey-300 dark:border-white/10 text-dz-black dark:text-white text-sm px-4 py-2.5 focus:outline-none focus:border-red-500/30"
                                         />
                                     </div>
                                 </div>
                                 <div>
-                                    <label className="text-xs text-white/40 font-medium block mb-1">Açıklama</label>
+                                    <label className="text-xs text-dz-grey-500 dark:text-white/40 font-medium block mb-1">Açıklama</label>
                                     <textarea
                                         value={editing.description ?? ""}
                                         onChange={(e) => setEditing({ ...editing, description: e.target.value })}
-                                        className="w-full rounded-xl bg-white/5 border border-white/10 text-white text-sm px-4 py-2.5 focus:outline-none focus:border-red-500/30 h-20 resize-none"
+                                        className="w-full rounded-xl bg-dz-grey-50 dark:bg-dz-grey-800 border border-dz-grey-300 dark:border-white/10 text-dz-black dark:text-white text-sm px-4 py-2.5 focus:outline-none focus:border-red-500/30 h-20 resize-none"
                                     />
                                 </div>
                                 <div className="grid grid-cols-2 gap-4">
                                     <div>
-                                        <label className="text-xs text-white/40 font-medium block mb-1">Fiil (verb)</label>
+                                        <label className="text-xs text-dz-grey-500 dark:text-white/40 font-medium block mb-1">Fiil (verb)</label>
                                         <input
                                             value={editing.verb ?? ""}
                                             onChange={(e) => setEditing({ ...editing, verb: e.target.value })}
-                                            className="w-full rounded-xl bg-white/5 border border-white/10 text-white text-sm px-4 py-2.5 focus:outline-none focus:border-red-500/30"
+                                            className="w-full rounded-xl bg-dz-grey-50 dark:bg-dz-grey-800 border border-dz-grey-300 dark:border-white/10 text-dz-black dark:text-white text-sm px-4 py-2.5 focus:outline-none focus:border-red-500/30"
                                             placeholder="Örn: Anlarsın"
                                         />
                                     </div>
                                     <div>
-                                        <label className="text-xs text-white/40 font-medium block mb-1">İkon Adı</label>
+                                        <label className="text-xs text-dz-grey-500 dark:text-white/40 font-medium block mb-1">İkon Adı</label>
                                         <input
                                             value={editing.icon_name ?? ""}
                                             onChange={(e) => setEditing({ ...editing, icon_name: e.target.value })}
-                                            className="w-full rounded-xl bg-white/5 border border-white/10 text-white text-sm px-4 py-2.5 focus:outline-none focus:border-red-500/30"
+                                            className="w-full rounded-xl bg-dz-grey-50 dark:bg-dz-grey-800 border border-dz-grey-300 dark:border-white/10 text-dz-black dark:text-white text-sm px-4 py-2.5 focus:outline-none focus:border-red-500/30"
                                             placeholder="Örn: FaBrain"
                                         />
                                     </div>
                                 </div>
                                 <div>
-                                    <label className="text-xs text-white/40 font-medium block mb-1">Kapak URL</label>
+                                    <label className="text-xs text-dz-grey-500 dark:text-white/40 font-medium block mb-1">Kapak URL</label>
                                     <input
                                         value={editing.cover_url ?? ""}
                                         onChange={(e) => setEditing({ ...editing, cover_url: e.target.value })}
-                                        className="w-full rounded-xl bg-white/5 border border-white/10 text-white text-sm px-4 py-2.5 focus:outline-none focus:border-red-500/30"
+                                        className="w-full rounded-xl bg-dz-grey-50 dark:bg-dz-grey-800 border border-dz-grey-300 dark:border-white/10 text-dz-black dark:text-white text-sm px-4 py-2.5 focus:outline-none focus:border-red-500/30"
                                         placeholder="https://..."
                                     />
                                 </div>
@@ -185,7 +185,7 @@ export default function AdminBooksClient({
                             <div className="flex justify-end gap-3 pt-2">
                                 <button
                                     onClick={() => setEditing(null)}
-                                    className="px-4 py-2 rounded-xl text-white/50 hover:text-white text-sm transition-colors"
+                                    className="px-4 py-2 rounded-xl text-dz-grey-500 dark:text-white/50 hover:text-dz-black dark:hover:text-white text-sm transition-colors"
                                 >
                                     <X className="w-3 h-3 inline mr-1" /> İptal
                                 </button>
@@ -210,7 +210,7 @@ export default function AdminBooksClient({
                         initial={{ opacity: 0, y: 20 }}
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ delay: i * 0.03 }}
-                        className="group relative rounded-2xl border border-white/5 bg-white/[0.02] overflow-hidden hover:border-white/10 transition-all"
+                        className="group relative rounded-2xl border border-dz-grey-200 dark:border-white/5 bg-white dark:bg-white/[0.02] overflow-hidden hover:border-dz-grey-300 dark:hover:border-white/10 transition-all"
                     >
                         {/* Cover */}
                         <div className="h-32 bg-gradient-to-br from-orange-500/20 to-amber-500/10 relative overflow-hidden">
@@ -225,7 +225,7 @@ export default function AdminBooksClient({
                                 />
                             ) : (
                                 <div className="flex items-center justify-center h-full">
-                                    <Image className="w-8 h-8 text-white/10" />
+                                    <Image className="w-8 h-8 text-dz-grey-300 dark:text-white/10" />
                                 </div>
                             )}
                             <div className="absolute top-3 left-3 bg-black/60 text-white text-xs font-bold px-2 py-1 rounded-lg">
@@ -234,9 +234,9 @@ export default function AdminBooksClient({
                         </div>
 
                         <div className="p-4 space-y-2">
-                            <h3 className="font-display font-bold text-white text-sm">{book.title}</h3>
-                            <p className="text-xs text-white/40 line-clamp-2">{book.description}</p>
-                            <div className="flex items-center gap-2 text-[10px] text-white/20 font-mono">
+                            <h3 className="font-display font-bold text-dz-black dark:text-white text-sm">{book.title}</h3>
+                            <p className="text-xs text-dz-grey-500 dark:text-white/40 line-clamp-2">{book.description}</p>
+                            <div className="flex items-center gap-2 text-[10px] text-dz-grey-400 dark:text-white/20 font-mono">
                                 <span>{book.slug}</span>
                                 {book.verb && (
                                     <>
@@ -249,7 +249,7 @@ export default function AdminBooksClient({
                             <div className="flex gap-2 pt-2">
                                 <button
                                     onClick={() => setEditing(book)}
-                                    className="flex-1 flex items-center justify-center gap-1 px-3 py-2 rounded-lg bg-white/5 text-white/50 text-xs hover:bg-white/10 hover:text-white transition-all"
+                                    className="flex-1 flex items-center justify-center gap-1 px-3 py-2 rounded-lg bg-dz-grey-50 dark:bg-white/5 text-dz-grey-500 dark:text-white/50 text-xs hover:bg-dz-grey-100 dark:hover:bg-white/10 hover:text-dz-black dark:hover:text-white transition-all"
                                 >
                                     <Edit className="w-3 h-3" /> Düzenle
                                 </button>

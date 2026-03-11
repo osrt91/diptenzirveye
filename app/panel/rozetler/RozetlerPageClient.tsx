@@ -31,26 +31,26 @@ const AI_TOOL_BADGES: Badge[] = [
 ];
 
 const BOOK_BADGES: Badge[] = [
-    { id: "book-1", slug: "book-1-tamamla", name: "Ilk Adim", description: "AI Devrimini Anlamak kitabini tamamla", icon_emoji: "📖", xp_required: 100 },
-    { id: "book-3", slug: "book-3-tamamla", name: "Arac Ustasi", description: "3 kitabi tamamla", icon_emoji: "📚", xp_required: 300 },
-    { id: "book-5", slug: "book-5-tamamla", name: "Bilgi Savaschisi", description: "5 kitabi tamamla", icon_emoji: "⚔️", xp_required: 500 },
-    { id: "book-10", slug: "book-10-tamamla", name: "Zirve Fatihi", description: "Tum 10 kitabi tamamla - Tam sertifika", icon_emoji: "🏆", xp_required: 1000 },
+    { id: "book-1", slug: "book-1-tamamla", name: "İlk Adım", description: "AI Devrimini Anlamak kitabını tamamla", icon_emoji: "📖", xp_required: 100 },
+    { id: "book-3", slug: "book-3-tamamla", name: "Araç Ustası", description: "3 kitabı tamamla", icon_emoji: "📚", xp_required: 300 },
+    { id: "book-5", slug: "book-5-tamamla", name: "Bilgi Savaşçısı", description: "5 kitabı tamamla", icon_emoji: "⚔️", xp_required: 500 },
+    { id: "book-10", slug: "book-10-tamamla", name: "Zirve Fatihi", description: "Tüm 10 kitabı tamamla - Tam sertifika", icon_emoji: "🏆", xp_required: 1000 },
 ];
 
 const COMMUNITY_BADGES: Badge[] = [
-    { id: "comm-first-msg", slug: "ilk-mesaj", name: "Ses Ver", description: "Sohbette ilk mesajini gonder", icon_emoji: "💬", xp_required: 0 },
-    { id: "comm-10-msg", slug: "10-mesaj", name: "Aktif Uye", description: "10 mesaj paylas", icon_emoji: "🗣️", xp_required: 0 },
-    { id: "comm-prompt", slug: "ilk-prompt-hub", name: "Prompt Paylasici", description: "Prompt Hub'a ilk paylaşımını yap", icon_emoji: "💡", xp_required: 0 },
+    { id: "comm-first-msg", slug: "ilk-mesaj", name: "Ses Ver", description: "Sohbette ilk mesajını gönder", icon_emoji: "💬", xp_required: 0 },
+    { id: "comm-10-msg", slug: "10-mesaj", name: "Aktif Üye", description: "10 mesaj paylaş", icon_emoji: "🗣️", xp_required: 0 },
+    { id: "comm-prompt", slug: "ilk-prompt-hub", name: "Prompt Paylaşıcı", description: "Prompt Hub'a ilk paylaşımını yap", icon_emoji: "💡", xp_required: 0 },
     { id: "comm-pomodoro-10", slug: "pomodoro-10", name: "Odak Makinesi", description: "10 Pomodoro oturumu tamamla", icon_emoji: "🎯", xp_required: 0 },
     { id: "comm-pomodoro-50", slug: "pomodoro-50", name: "Zihin Motoru", description: "50 Pomodoro oturumu tamamla", icon_emoji: "🧠", xp_required: 0 },
-    { id: "comm-note-10", slug: "note-10", name: "Not Ustasi", description: "10 not olustur", icon_emoji: "📝", xp_required: 0 },
+    { id: "comm-note-10", slug: "note-10", name: "Not Ustası", description: "10 not oluştur", icon_emoji: "📝", xp_required: 0 },
 ];
 
 const categories = [
-    { key: undefined as string | undefined, label: "Tum Rozetler", icon: LayoutGrid },
-    { key: "ai-tool", label: "AI Araclari", icon: Bot },
+    { key: undefined as string | undefined, label: "Tüm Rozetler", icon: LayoutGrid },
+    { key: "ai-tool", label: "AI Araçları", icon: Bot },
     { key: "xp", label: "XP & Seviye", icon: Zap },
-    { key: "streak", label: "Seri Ustasi", icon: Flame },
+    { key: "streak", label: "Seri Ustası", icon: Flame },
     { key: "book", label: "Kitap", icon: LayoutGrid },
     { key: "community", label: "Topluluk", icon: Bot },
 ];

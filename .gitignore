@@ -49,6 +49,9 @@ setup-google.mjs
 # claude
 .claude/
 
+# kaynak (reference materials, not part of the app)
+kaynak/
+
 # typescript
 *.tsbuildinfo
 next-env.d.ts
