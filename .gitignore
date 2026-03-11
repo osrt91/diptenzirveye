@@ -42,6 +42,13 @@ yarn-error.log*
 # vercel
 .vercel
 
+# google oauth tokens & setup
+google-token.json
+setup-google.mjs
+
+# claude
+.claude/
+
 # typescript
 *.tsbuildinfo
 next-env.d.ts
