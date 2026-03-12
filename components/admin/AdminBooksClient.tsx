@@ -88,7 +88,7 @@ export default function AdminBooksClient({
                             isNew: true,
                         } as Book & { isNew: boolean })
                     }
-                    className="flex items-center gap-2 px-4 py-2.5 rounded-xl bg-red-500/10 border border-red-500/20 text-red-400 text-sm font-medium hover:bg-red-500/20 transition-all"
+                    className="flex items-center gap-2 px-4 py-2.5 min-h-[44px] rounded-xl bg-red-500/10 border border-red-500/20 text-red-400 text-sm font-medium hover:bg-red-500/20 transition-all"
                 >
                     <Plus className="w-3 h-3" /> Yeni Kitap
                 </button>
@@ -124,7 +124,7 @@ export default function AdminBooksClient({
                                         className="w-full rounded-xl bg-dz-grey-50 dark:bg-dz-grey-800 border border-dz-grey-300 dark:border-white/10 text-dz-black dark:text-white text-sm px-4 py-2.5 focus:outline-none focus:border-red-500/30"
                                     />
                                 </div>
-                                <div className="grid grid-cols-2 gap-4">
+                                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                                     <div>
                                         <label className="text-xs text-dz-grey-500 dark:text-white/40 font-medium block mb-1">Slug</label>
                                         <input
@@ -151,7 +151,7 @@ export default function AdminBooksClient({
                                         className="w-full rounded-xl bg-dz-grey-50 dark:bg-dz-grey-800 border border-dz-grey-300 dark:border-white/10 text-dz-black dark:text-white text-sm px-4 py-2.5 focus:outline-none focus:border-red-500/30 h-20 resize-none"
                                     />
                                 </div>
-                                <div className="grid grid-cols-2 gap-4">
+                                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                                     <div>
                                         <label className="text-xs text-dz-grey-500 dark:text-white/40 font-medium block mb-1">Fiil (verb)</label>
                                         <input
@@ -185,14 +185,14 @@ export default function AdminBooksClient({
                             <div className="flex justify-end gap-3 pt-2">
                                 <button
                                     onClick={() => setEditing(null)}
-                                    className="px-4 py-2 rounded-xl text-dz-grey-500 dark:text-white/50 hover:text-dz-black dark:hover:text-white text-sm transition-colors"
+                                    className="px-4 py-2.5 min-h-[44px] rounded-xl text-dz-grey-500 dark:text-white/50 hover:text-dz-black dark:hover:text-white text-sm transition-colors"
                                 >
-                                    <X className="w-3 h-3 inline mr-1" /> İptal
+                                    <X className="w-3.5 h-3.5 inline mr-1" /> İptal
                                 </button>
                                 <button
                                     onClick={handleSave}
                                     disabled={loading || !editing.title || !editing.slug}
-                                    className="px-5 py-2 rounded-xl bg-red-500 text-white text-sm font-medium hover:bg-red-600 transition-colors disabled:opacity-50"
+                                    className="px-5 py-2.5 min-h-[44px] rounded-xl bg-red-500 text-white text-sm font-medium hover:bg-red-600 transition-colors disabled:opacity-50"
                                 >
                                     <Save className="w-3 h-3 inline mr-1" /> {loading ? "Kaydediliyor..." : "Kaydet"}
                                 </button>
@@ -218,7 +218,7 @@ export default function AdminBooksClient({
                                 <img
                                     src={book.cover_url}
                                     alt={book.title}
-                                    className="w-full h-full object-cover opacity-40"
+                                    className="w-full h-full object-cover"
                                     width={280}
                                     height={128}
                                     loading="lazy"
@@ -249,15 +249,15 @@ export default function AdminBooksClient({
                             <div className="flex gap-2 pt-2">
                                 <button
                                     onClick={() => setEditing(book)}
-                                    className="flex-1 flex items-center justify-center gap-1 px-3 py-2 rounded-lg bg-dz-grey-50 dark:bg-white/5 text-dz-grey-500 dark:text-white/50 text-xs hover:bg-dz-grey-100 dark:hover:bg-white/10 hover:text-dz-black dark:hover:text-white transition-all"
+                                    className="flex-1 flex items-center justify-center gap-1 px-3 min-h-[44px] rounded-lg bg-dz-grey-50 dark:bg-white/5 text-dz-grey-500 dark:text-white/50 text-xs hover:bg-dz-grey-100 dark:hover:bg-white/10 hover:text-dz-black dark:hover:text-white transition-all"
                                 >
-                                    <Edit className="w-3 h-3" /> Düzenle
+                                    <Edit className="w-3.5 h-3.5" /> Düzenle
                                 </button>
                                 <button
                                     onClick={() => handleDelete(book.id)}
-                                    className="px-3 py-2 rounded-lg bg-red-500/5 text-red-400/50 text-xs hover:bg-red-500/10 hover:text-red-400 transition-all"
+                                    className="w-11 min-h-[44px] flex items-center justify-center rounded-lg bg-red-500/5 text-red-400/50 text-xs hover:bg-red-500/10 hover:text-red-400 transition-all"
                                 >
-                                    <Trash2 className="w-3 h-3" />
+                                    <Trash2 className="w-3.5 h-3.5" />
                                 </button>
                             </div>
                         </div>

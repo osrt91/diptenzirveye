@@ -120,7 +120,7 @@ export default function KitapListesi({
             </div>
 
             {/* Alt Detaylar */}
-            <div className="mt-4 flex flex-col flex-1">
+            <div className="mt-4 flex flex-col flex-1 min-w-0">
               {book.description && (
                 <p className="text-sm text-dz-grey-600 dark:text-dz-grey-400 line-clamp-2 mb-4 font-medium flex-1">
                   {book.description}

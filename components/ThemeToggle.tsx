@@ -17,12 +17,11 @@ export default function ThemeToggle() {
     <button
       type="button"
       onClick={toggle}
-      className="flex items-center gap-1.5 rounded-lg border border-dz-grey-200 dark:border-dz-grey-700 px-2.5 py-1.5 text-sm text-dz-grey-600 dark:text-dz-grey-400 hover:bg-dz-grey-100 dark:hover:bg-dz-grey-800 transition-colors"
+      className="w-9 h-9 rounded-xl flex items-center justify-center text-dz-grey-600 dark:text-dz-grey-400 hover:bg-dz-grey-100 dark:hover:bg-dz-grey-800 transition-colors"
       aria-label={`Tema değiştir. Şu an: ${label}`}
       title={`Tema: ${label}`}
     >
       <Icon className="w-4 h-4" />
-      <span className="hidden sm:inline text-xs">{label}</span>
     </button>
   );
 }

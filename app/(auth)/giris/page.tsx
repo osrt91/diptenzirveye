@@ -42,7 +42,8 @@ function LoginForm() {
             type="email"
             required
             autoComplete="email"
-            className="w-full rounded-lg border border-dz-grey-200 bg-dz-grey-100 px-3 py-2 text-foreground dark:border-dz-grey-600 dark:bg-dz-grey-800"
+            placeholder="ornek@email.com"
+            className="w-full rounded-lg border border-dz-grey-200 bg-dz-grey-100 px-3 py-3 text-foreground dark:border-dz-grey-600 dark:bg-dz-grey-800"
           />
         </div>
         <div>
@@ -55,18 +56,19 @@ function LoginForm() {
             type="password"
             required
             autoComplete="current-password"
-            className="w-full rounded-lg border border-dz-grey-200 bg-dz-grey-100 px-3 py-2 text-foreground dark:border-dz-grey-600 dark:bg-dz-grey-800"
+            placeholder="En az 6 karakter"
+            className="w-full rounded-lg border border-dz-grey-200 bg-dz-grey-100 px-3 py-3 text-foreground dark:border-dz-grey-600 dark:bg-dz-grey-800"
           />
         </div>
         <button
           type="submit"
           disabled={isPending}
-          className="w-full rounded-lg bg-dz-orange-500 px-4 py-2 font-medium text-white hover:bg-dz-orange-600 disabled:opacity-50"
+          className="w-full min-h-[44px] rounded-lg bg-dz-orange-500 px-4 py-3 font-medium text-white hover:bg-dz-orange-600 disabled:opacity-50"
         >
           {isPending ? "Giriş yapılıyor…" : "Giriş yap"}
         </button>
         <div className="text-right">
-          <Link href="/sifremi-unuttum" className="text-xs text-dz-orange-500 hover:underline">
+          <Link href="/sifremi-unuttum" className="text-sm text-dz-orange-500 hover:underline inline-block min-h-[44px] leading-[44px]">
             Şifremi unuttum
           </Link>
         </div>

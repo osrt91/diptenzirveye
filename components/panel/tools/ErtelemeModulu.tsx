@@ -10,6 +10,7 @@ export default function ErtelemeModulu() {
     <div className="space-y-6">
       <div className="flex flex-wrap gap-2 border-b border-dz-grey-200 dark:border-dz-grey-800 pb-2">
         <button
+          type="button"
           onClick={() => setActiveTab("5saniye")}
           className={`px-4 py-2 rounded-t-lg font-medium transition-colors ${activeTab === "5saniye"
             ? "bg-dz-orange-500 text-white"
@@ -19,6 +20,7 @@ export default function ErtelemeModulu() {
           AI Aktivasyon (5s)
         </button>
         <button
+          type="button"
           onClick={() => setActiveTab("2dakika")}
           className={`px-4 py-2 rounded-t-lg font-medium transition-colors ${activeTab === "2dakika"
             ? "bg-dz-orange-500 text-white"
@@ -28,6 +30,7 @@ export default function ErtelemeModulu() {
           Mikro-Momentum (2dk)
         </button>
         <button
+          type="button"
           onClick={() => setActiveTab("parcala")}
           className={`px-4 py-2 rounded-t-lg font-medium transition-colors ${activeTab === "parcala"
             ? "bg-dz-orange-500 text-white"
@@ -38,7 +41,7 @@ export default function ErtelemeModulu() {
         </button>
       </div>
 
-      <div className="bg-white dark:bg-dz-grey-900 rounded-2xl p-6 border border-dz-grey-200 dark:border-dz-grey-800 min-h-[300px]">
+      <div className="bg-dz-white dark:bg-dz-grey-900 rounded-2xl p-6 border border-dz-grey-200 dark:border-dz-grey-800 min-h-[300px]">
         <AnimatePresence mode="wait">
           {activeTab === "5saniye" && <BesSaniyeKurali key="5s" />}
           {activeTab === "2dakika" && <IkiDakikaKurali key="2m" />}
@@ -234,7 +237,7 @@ function GoreviParcala() {
           value={taskName}
           onChange={(e) => setTaskName(e.target.value)}
           placeholder="Küçük bir adım yaz... (Örn: Sadece Word belgesini aç)"
-          className="flex-1 rounded-lg border border-dz-grey-200 dark:border-dz-grey-700 bg-dz-grey-50 dark:bg-dz-grey-800 px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-dz-orange-500"
+          className="flex-1 min-w-0 rounded-lg border border-dz-grey-200 dark:border-dz-grey-700 bg-dz-grey-50 dark:bg-dz-grey-800 px-3 py-2 text-sm text-dz-black dark:text-dz-white focus:outline-none focus:ring-2 focus:ring-dz-orange-500"
         />
         <button
           type="submit"
@@ -268,7 +271,7 @@ function GoreviParcala() {
                 key={task.id}
                 className={`flex items-start gap-3 p-3 rounded-lg border transition-colors cursor-pointer ${task.done
                   ? "bg-dz-green-50/50 border-dz-green-200 dark:bg-dz-green-900/10 dark:border-dz-green-900"
-                  : "bg-white border-dz-grey-200 dark:bg-dz-grey-800 dark:border-dz-grey-700 hover:border-dz-orange-300"
+                  : "bg-dz-white border-dz-grey-200 dark:bg-dz-grey-800 dark:border-dz-grey-700 hover:border-dz-orange-300"
                   }`}
               >
                 <div className="mt-0.5">

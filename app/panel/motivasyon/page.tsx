@@ -223,6 +223,7 @@ export default function MotivasyonPage() {
       {/* Calendar - Left (1 col, rendered first on desktop via order) */}
       <div className="lg:col-span-1 lg:order-first space-y-4">
         <button
+          type="button"
           onClick={() => setShowFullYear(!showFullYear)}
           className="w-full flex items-center justify-center gap-2 py-2.5 rounded-xl border border-dz-grey-200 dark:border-dz-grey-800 text-sm font-bold text-dz-grey-600 dark:text-dz-grey-300 hover:border-dz-orange-400 hover:text-dz-orange-500 transition-all lg:hidden"
         >
@@ -233,6 +234,7 @@ export default function MotivasyonPage() {
 
         <div className="hidden lg:block">
           <button
+            type="button"
             onClick={() => setShowFullYear(!showFullYear)}
             className="w-full flex items-center justify-center gap-2 py-2.5 rounded-xl border border-dz-orange-500/30 bg-dz-orange-500/5 text-sm font-bold text-dz-orange-500 hover:bg-dz-orange-500/10 transition-all mb-4"
           >
@@ -244,8 +246,10 @@ export default function MotivasyonPage() {
         <div className="rounded-2xl border border-dz-grey-200 dark:border-dz-grey-800 bg-dz-white dark:bg-dz-grey-900 p-6">
         <div className="flex items-center justify-between mb-6">
           <button
+            type="button"
             onClick={() => setSelectedMonth((m) => Math.max(0, m - 1))}
             disabled={selectedMonth === 0}
+            aria-label="Önceki ay"
             className="p-2 rounded-lg hover:bg-dz-grey-100 dark:hover:bg-dz-grey-800 disabled:opacity-30 transition-colors"
           >
             <ChevronLeft className="w-5 h-5 text-dz-grey-600 dark:text-dz-grey-400" />
@@ -259,8 +263,10 @@ export default function MotivasyonPage() {
             </p>
           </div>
           <button
+            type="button"
             onClick={() => setSelectedMonth((m) => Math.min(11, m + 1))}
             disabled={selectedMonth === 11}
+            aria-label="Sonraki ay"
             className="p-2 rounded-lg hover:bg-dz-grey-100 dark:hover:bg-dz-grey-800 disabled:opacity-30 transition-colors"
           >
             <ChevronRight className="w-5 h-5 text-dz-grey-600 dark:text-dz-grey-400" />
@@ -269,7 +275,7 @@ export default function MotivasyonPage() {
 
         {/* Day headers */}
         <div className="grid grid-cols-7 gap-1 mb-2">
-          {["Pzt", "Sal", "Car", "Per", "Cum", "Cmt", "Paz"].map((d) => (
+          {["Pzt", "Sal", "Çar", "Per", "Cum", "Cmt", "Paz"].map((d) => (
             <div key={d} className="text-center text-[10px] font-bold text-dz-grey-400 uppercase py-1">{d}</div>
           ))}
         </div>

@@ -92,7 +92,7 @@ export default function BookRoadmap() {
                   <div className="relative w-full h-[160px] overflow-hidden rounded-t-2xl shrink-0">
                     <Image
                       src={b.cover}
-                      alt={b.title}
+                      alt={`${b.title} kitap kapağı görseli`}
                       fill
                       className="object-cover transition-transform duration-700 group-hover:scale-110"
                       sizes="(max-width: 768px) 100vw, 300px"
@@ -100,7 +100,7 @@ export default function BookRoadmap() {
                     <div className="absolute inset-0 bg-gradient-to-t from-dz-white dark:from-[#0a0a0a] via-transparent to-transparent" />
                   </div>
 
-                  <div className="flex flex-col p-6 flex-1 relative">
+                  <div className="flex flex-col p-6 flex-1 min-w-0 relative">
                     {/* Glow Effect */}
                     <div className="absolute top-0 right-0 w-32 h-32 bg-dz-orange-500/20 blur-[50px] opacity-0 group-hover:opacity-100 transition-opacity duration-700" />
 
@@ -161,7 +161,7 @@ export default function BookRoadmap() {
       >
         <Link
           href="/giris"
-          className="group relative inline-flex items-center justify-center gap-3 bg-dz-black dark:bg-dz-white text-dz-white dark:text-dz-black font-bold text-lg py-5 px-10 rounded-2xl overflow-hidden transition-all duration-300 transform hover:scale-[1.03] shadow-lg"
+          className="group relative inline-flex items-center justify-center gap-3 bg-dz-black dark:bg-dz-white text-dz-white dark:text-dz-black font-bold text-base sm:text-lg min-h-[44px] py-4 sm:py-5 px-8 sm:px-10 rounded-2xl overflow-hidden transition-all duration-300 transform hover:scale-[1.03] shadow-lg"
         >
           <span className="relative z-10 flex items-center gap-2">
             Eğitime Katıl ve Önizle

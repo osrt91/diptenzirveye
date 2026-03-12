@@ -25,11 +25,11 @@ export default function Navbar() {
     };
 
     return (
-        <nav className="fixed top-0 left-0 right-0 z-50 px-4 py-3" aria-label="Ana navigasyon">
+        <nav className="fixed top-0 left-0 right-0 z-50 px-4 py-3 pt-[max(0.75rem,env(safe-area-inset-top,0.75rem))]" aria-label="Ana navigasyon">
             <div className="max-w-7xl mx-auto flex items-center justify-between bg-dz-white/80 dark:bg-dz-black/80 backdrop-blur-xl border border-dz-grey-200 dark:border-dz-white/10 rounded-2xl px-5 py-3 shadow-lg shadow-dz-black/5 dark:shadow-dz-black/30">
 
                 {/* Logo */}
-                <Link href="/" className="font-display text-xl font-bold text-dz-black dark:text-dz-white tracking-tight flex items-center gap-1">
+                <Link href="/" className="font-display text-xl font-bold text-dz-black dark:text-dz-white tracking-tight flex items-center gap-1 min-w-0">
                     <DZLogo size="sm" />
                     Dipten<span className="text-dz-orange-500">Zirveye</span>
                 </Link>
@@ -75,7 +75,7 @@ export default function Navbar() {
                 </div>
 
                 {/* Mobile: Theme + Hamburger */}
-                <div className="flex md:hidden items-center gap-2">
+                <div className="flex md:hidden items-center gap-2 shrink-0">
                     <button
                         onClick={() => setTheme(isDark ? "light" : "dark")}
                         className="w-11 h-11 sm:w-9 sm:h-9 rounded-xl bg-dz-grey-100 dark:bg-dz-grey-800 border border-dz-grey-200 dark:border-dz-white/10 flex items-center justify-center"

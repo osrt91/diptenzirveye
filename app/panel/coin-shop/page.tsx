@@ -42,7 +42,7 @@ export default function CoinShopPage() {
 
   return (
     <div className="space-y-8 max-w-5xl mx-auto">
-      <div className="flex items-center justify-between">
+      <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
         <div>
           <h1 className="font-display text-3xl font-black text-dz-black dark:text-dz-white">
             DZ Coin Mağazası
@@ -108,6 +108,7 @@ export default function CoinShopPage() {
                     <span className="font-display font-black text-dz-amber-500">{item.price}</span>
                   </div>
                   <button
+                    type="button"
                     onClick={() => handlePurchase(item.id, item.price, item.name)}
                     disabled={!canAfford || purchasing === item.id}
                     className={`px-4 py-2 rounded-xl text-xs font-bold transition-all ${

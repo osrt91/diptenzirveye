@@ -171,7 +171,7 @@ export default function PricingPage() {
                 </div>
 
                 {/* Pricing Cards */}
-                <div className="max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-8 relative z-10 px-4">
+                <div className="max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-8 relative z-10">
                     {plans.map((plan, i) => (
                         <motion.div
                             key={plan.name}
@@ -200,10 +200,10 @@ export default function PricingPage() {
 
                             <div className="mb-6">
                                 <div className="flex items-baseline gap-1">
-                                    <span className="text-4xl md:text-5xl font-black text-dz-black dark:text-white tracking-tight">{plan.price}</span>
+                                    <span className="text-3xl sm:text-4xl md:text-5xl font-black text-dz-black dark:text-white tracking-tight">{plan.price}</span>
                                     <span className="text-dz-grey-500 font-medium">{plan.period}</span>
                                 </div>
-                                <p className="text-sm text-dz-grey-500 mt-2 h-10">{plan.description}</p>
+                                <p className="text-sm text-dz-grey-500 mt-2 min-h-10">{plan.description}</p>
                             </div>
 
                             <div className="space-y-6 mb-8 flex-1">
@@ -233,15 +233,15 @@ export default function PricingPage() {
                             {plan.popular ? (
                                 <button
                                     onClick={plan.buttonAction}
-                                    className={`w-full py-4 px-6 rounded-xl font-bold text-center transition-all duration-300 flex items-center justify-center gap-2 ${plan.buttonClass}`}
+                                    className={`w-full min-h-[44px] py-4 px-6 rounded-xl font-bold text-center transition-all duration-300 flex items-center justify-center gap-2 ${plan.buttonClass}`}
                                 >
                                     {plan.buttonText}
-                                    <ArrowRight />
+                                    <ArrowRight className="w-5 h-5 shrink-0" />
                                 </button>
                             ) : (
                                 <Link
                                     href={plan.buttonLink}
-                                    className={`w-full py-4 px-6 rounded-xl font-bold text-center transition-all duration-300 flex items-center justify-center gap-2 ${plan.buttonClass}`}
+                                    className={`w-full min-h-[44px] py-4 px-6 rounded-xl font-bold text-center transition-all duration-300 flex items-center justify-center gap-2 ${plan.buttonClass}`}
                                 >
                                     {plan.buttonText}
                                 </Link>
@@ -260,18 +260,20 @@ export default function PricingPage() {
                     <div className="bg-dz-white/80 dark:bg-dz-white/[0.03] border border-dz-grey-200 dark:border-dz-white/10 rounded-2xl p-6 backdrop-blur-md">
                         <p className="text-sm font-bold text-dz-black dark:text-white mb-3">Kupon Kodun Var Mı?</p>
                         <div className="flex gap-2">
+                            <label htmlFor="coupon-input" className="sr-only">Kupon kodu gir</label>
                             <input
+                                id="coupon-input"
                                 type="text"
                                 value={couponCode}
                                 onChange={(e) => setCouponCode(e.target.value.toUpperCase())}
                                 onKeyDown={(e) => e.key === "Enter" && applyCoupon()}
                                 placeholder="KUPON KODU"
-                                className="flex-1 rounded-lg border border-dz-grey-200 dark:border-dz-grey-700 bg-dz-grey-50 dark:bg-dz-black px-4 py-2.5 text-sm font-mono uppercase focus:outline-none focus:ring-2 focus:ring-dz-orange-500/30"
+                                className="flex-1 min-w-0 rounded-lg border border-dz-grey-200 dark:border-dz-grey-700 bg-dz-grey-50 dark:bg-dz-black px-4 py-3 text-sm font-mono uppercase focus:outline-none focus:ring-2 focus:ring-dz-orange-500/30"
                             />
                             <button
                                 onClick={applyCoupon}
                                 disabled={couponLoading || !couponCode.trim()}
-                                className="px-5 py-2.5 rounded-lg bg-dz-orange-500 text-white font-bold text-sm hover:bg-dz-orange-600 transition-colors disabled:opacity-40"
+                                className="px-5 min-h-[44px] py-3 rounded-lg bg-dz-orange-500 text-white font-bold text-sm hover:bg-dz-orange-600 transition-colors disabled:opacity-40"
                             >
                                 {couponLoading ? "..." : "Uygula"}
                             </button>

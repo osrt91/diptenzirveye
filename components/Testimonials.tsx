@@ -105,7 +105,7 @@ export default function Testimonials() {
           </p>
         </motion.div>
 
-        <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-5">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
           {testimonials.map((t, i) => (
             <motion.div
               key={t.name}
@@ -117,7 +117,7 @@ export default function Testimonials() {
             >
               <FaQuoteLeft className="w-5 h-5 text-dz-orange-500/20 mb-3" />
 
-              <p className="text-sm text-dz-grey-600 dark:text-dz-grey-400 leading-relaxed mb-4 line-clamp-4 group-hover:line-clamp-none transition-all">
+              <p className="text-sm text-dz-grey-600 dark:text-dz-grey-400 leading-relaxed mb-4 line-clamp-4 group-hover:line-clamp-none transition-all min-w-0 break-words">
                 {t.text}
               </p>
 

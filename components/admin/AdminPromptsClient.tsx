@@ -85,10 +85,10 @@ export default function AdminPromptsClient({
                                 </div>
                                 <button
                                     onClick={() => handleDelete(prompt.id)}
-                                    className="shrink-0 p-2 rounded-lg text-red-400/20 hover:text-red-400 hover:bg-red-500/5 transition-all"
+                                    className="shrink-0 w-11 h-11 flex items-center justify-center rounded-lg text-red-400/20 hover:text-red-400 hover:bg-red-500/10 transition-all"
                                     title="Promptu Sil"
                                 >
-                                    <Trash2 className="w-3.5 h-3.5" />
+                                    <Trash2 className="w-4 h-4" />
                                 </button>
                             </div>
                         </motion.div>

@@ -2,7 +2,8 @@
 
 import { useState } from "react";
 import { motion } from "framer-motion";
-import { Download, Award, BookOpen, FileText } from "lucide-react";
+import { Download, Award, BookOpen, FileText, Share2 } from "lucide-react";
+import { isNative, shareContent } from "@/lib/capacitor";
 
 interface CompletedBook {
   id: string;
@@ -167,6 +168,31 @@ export default function CertificateClient({
 }: CertificateClientProps) {
   const [generatingId, setGeneratingId] = useState<string | null>(null);
 
+  async function handleShare(book: CompletedBook) {
+    const certId = `DZ-${userId.slice(0, 8).toUpperCase()}-${book.id.slice(0, 8).toUpperCase()}`;
+    const shareUrl = `${typeof window !== "undefined" ? window.location.origin : "https://diptenzirveye.com"}/sertifika/dogrula/${certId}`;
+    const shareTitle = `DiptenZirveye Sertifika - ${book.title}`;
+    const shareText = `${userName}, "${book.title}" kitabını başarıyla tamamladı!`;
+
+    try {
+      if (isNative) {
+        await shareContent(shareTitle, shareText, shareUrl);
+        return;
+      }
+
+      if (typeof navigator !== "undefined" && navigator.share) {
+        await navigator.share({ title: shareTitle, text: shareText, url: shareUrl });
+        return;
+      }
+
+      if (typeof navigator !== "undefined" && navigator.clipboard) {
+        await navigator.clipboard.writeText(shareUrl);
+      }
+    } catch {
+      // User cancelled or share not supported
+    }
+  }
+
   async function handleDownload(book: CompletedBook) {
     setGeneratingId(book.id);
     try {
@@ -258,23 +284,32 @@ export default function CertificateClient({
                 <p className="text-[10px] text-dz-grey-300 dark:text-dz-grey-600 font-mono mb-4">
                   {certId}
                 </p>
-                <button
-                  onClick={() => handleDownload(book)}
-                  disabled={isGenerating}
-                  className="w-full flex items-center justify-center gap-2 bg-gradient-to-r from-dz-orange-500 to-dz-amber-500 text-white font-bold py-2.5 px-4 rounded-xl shadow-lg shadow-dz-orange-500/20 hover:shadow-xl hover:shadow-dz-orange-500/30 transition-all disabled:opacity-50 disabled:cursor-not-allowed text-sm"
-                >
-                  {isGenerating ? (
-                    <>
-                      <div className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin" />
-                      PDF Hazırlanıyor...
-                    </>
-                  ) : (
-                    <>
-                      <Download className="w-4 h-4" />
-                      Sertifika İndir (PDF)
-                    </>
-                  )}
-                </button>
+                <div className="flex gap-2">
+                  <button
+                    onClick={() => handleDownload(book)}
+                    disabled={isGenerating}
+                    className="flex-1 flex items-center justify-center gap-2 bg-gradient-to-r from-dz-orange-500 to-dz-amber-500 text-white font-bold py-2.5 px-4 rounded-xl shadow-lg shadow-dz-orange-500/20 hover:shadow-xl hover:shadow-dz-orange-500/30 transition-all disabled:opacity-50 disabled:cursor-not-allowed text-sm"
+                  >
+                    {isGenerating ? (
+                      <>
+                        <div className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin" />
+                        PDF Hazırlanıyor...
+                      </>
+                    ) : (
+                      <>
+                        <Download className="w-4 h-4" />
+                        Sertifika İndir
+                      </>
+                    )}
+                  </button>
+                  <button
+                    onClick={() => handleShare(book)}
+                    className="flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl border border-dz-grey-200 dark:border-dz-grey-700 text-dz-grey-700 dark:text-dz-grey-300 font-bold text-sm hover:bg-dz-grey-50 dark:hover:bg-dz-grey-800 transition-colors"
+                    aria-label="Sertifika paylaş"
+                  >
+                    <Share2 className="w-4 h-4" />
+                  </button>
+                </div>
               </div>
             </motion.div>
           );

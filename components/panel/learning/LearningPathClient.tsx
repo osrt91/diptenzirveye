@@ -122,6 +122,7 @@ export default function LearningPathClient() {
             onClick={fetchPath}
             className="p-2 rounded-lg text-dz-grey-400 hover:text-dz-orange-500 hover:bg-dz-orange-500/10 transition-all shrink-0"
             title="Yenile"
+            aria-label="Öğrenme yolunu yenile"
           >
             <RefreshCw className="w-4 h-4" />
           </button>

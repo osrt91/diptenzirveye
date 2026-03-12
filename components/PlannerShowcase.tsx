@@ -69,8 +69,8 @@ export default function PlannerShowcase() {
               <span className="mx-auto text-xs font-mono text-dz-grey-500">proje-planlayici</span>
             </div>
 
-            <div className="flex gap-3 flex-1">
-              <div className="w-44 shrink-0 bg-dz-grey-900 dark:bg-dz-grey-900 rounded-xl p-3 flex flex-col justify-between">
+            <div className="flex flex-col sm:flex-row gap-3 flex-1 min-w-0">
+              <div className="w-full sm:w-44 sm:shrink-0 bg-dz-grey-900 dark:bg-dz-grey-900 rounded-xl p-3 flex flex-col justify-between">
                 <div className="space-y-0.5">
                   {mockSteps.map((s) => (
                     <div
@@ -114,7 +114,7 @@ export default function PlannerShowcase() {
                 </div>
               </div>
 
-              <div className="flex-1 p-4 flex flex-col">
+              <div className="flex-1 min-w-0 p-4 flex flex-col">
                 <div className="flex items-center gap-2 mb-2">
                   <div className="text-xs font-mono text-dz-orange-500 tracking-widest uppercase">Adım 03</div>
                   <div className="h-px flex-1 bg-dz-grey-200 dark:bg-dz-grey-800" />
@@ -293,7 +293,7 @@ export default function PlannerShowcase() {
             >
               <Link
                 href="/kayit-ol"
-                className="group w-full flex items-center justify-center gap-3 bg-dz-orange-500 hover:bg-dz-orange-600 text-white font-bold text-lg py-4 px-8 rounded-xl transition-all shadow-lg shadow-dz-orange-500/20"
+                className="group w-full flex items-center justify-center gap-3 bg-dz-orange-500 hover:bg-dz-orange-600 text-white font-bold text-base sm:text-lg min-h-[44px] py-4 px-8 rounded-xl transition-all shadow-lg shadow-dz-orange-500/20"
               >
                 Planlayıcıyı Kullan
                 <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />

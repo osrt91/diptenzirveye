@@ -37,7 +37,7 @@ export default function AdminTestimonialsClient({ initialTestimonials }: { initi
         <div className="space-y-8">
             <div>
                 <h1 className="text-2xl font-display font-bold text-dz-black dark:text-white">Kullanıcı Yorumları</h1>
-                <p className="text-sm text-dz-grey-500 mt-1">
+                <p className="text-sm text-dz-grey-500 dark:text-white/40 mt-1">
                     {items.length} yorum · {pending.length} onay bekliyor · {approved.length} yayında
                 </p>
             </div>
@@ -79,7 +79,7 @@ function ReviewCard({ item, onApprove, onDelete }: { item: Testimonial & { appro
         <motion.div
             initial={{ opacity: 0, y: 5 }}
             animate={{ opacity: 1, y: 0 }}
-            className={`flex items-start gap-4 bg-dz-white dark:bg-dz-grey-900 border rounded-xl p-5 ${item.approved ? "border-green-200 dark:border-green-500/20" : "border-dz-orange-200 dark:border-dz-orange-500/20"}`}
+            className={`flex items-start gap-4 bg-dz-white dark:bg-dz-grey-900 border rounded-xl p-4 sm:p-5 ${item.approved ? "border-green-200 dark:border-green-500/20" : "border-dz-orange-200 dark:border-dz-orange-500/20"}`}
         >
             <div className="w-10 h-10 rounded-full bg-gradient-to-br from-dz-orange-500 to-dz-amber-400 flex items-center justify-center text-white font-bold text-xs shrink-0">
                 {item.name.split(" ").map((n) => n[0]).join("").slice(0, 2)}
@@ -100,12 +100,12 @@ function ReviewCard({ item, onApprove, onDelete }: { item: Testimonial & { appro
             <div className="flex flex-col gap-1 shrink-0">
                 <button
                     onClick={onApprove}
-                    className={`p-2 rounded-lg transition-colors ${item.approved ? "text-dz-orange-500 hover:bg-dz-orange-500/10" : "text-green-500 hover:bg-green-500/10"}`}
+                    className={`w-11 h-11 flex items-center justify-center rounded-lg transition-colors ${item.approved ? "text-dz-orange-500 hover:bg-dz-orange-500/10" : "text-green-500 hover:bg-green-500/10"}`}
                     title={item.approved ? "Yayından Kaldır" : "Onayla"}
                 >
-                    {item.approved ? <XCircle className="w-4 h-4" /> : <CheckCircle2 className="w-4 h-4" />}
+                    {item.approved ? <XCircle className="w-5 h-5" /> : <CheckCircle2 className="w-5 h-5" />}
                 </button>
-                <button onClick={onDelete} className="p-2 rounded-lg text-dz-grey-400 hover:text-red-500 hover:bg-red-500/10 transition-colors" title="Sil">
+                <button onClick={onDelete} className="w-11 h-11 flex items-center justify-center rounded-lg text-dz-grey-400 hover:text-red-500 hover:bg-red-500/10 transition-colors" title="Sil">
                     <Trash2 className="w-4 h-4" />
                 </button>
             </div>

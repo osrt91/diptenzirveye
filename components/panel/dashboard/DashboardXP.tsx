@@ -65,9 +65,9 @@ export default function DashboardXP({
       {/* Glow */}
       <div className="absolute top-0 right-0 w-32 h-32 bg-dz-orange-500/10 blur-[50px] rounded-full opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none" />
 
-      <div className="flex items-center gap-6 relative z-10 w-full mb-4">
+      <div className="flex items-center gap-4 sm:gap-6 relative z-10 w-full mb-4">
         <CircularXP progressPct={progressPct} level={level} size={100} />
-        <div>
+        <div className="min-w-0 flex-1">
           <p className="text-sm font-medium text-dz-grey-500 mb-1">Toplam XP</p>
           <motion.p
             initial={{ scale: 0.8, opacity: 0 }}

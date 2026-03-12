@@ -238,10 +238,10 @@ export default function PomodoroTimer() {
             const xpAmount = Math.min(actualWorkMins * 4, 500);
             awardXP(xpAmount, `${actualWorkMins} dk odaklanma`);
             const sessionName = topic ? `${topic} ${phase ? `(${phase})` : ""}` : "Çalışma";
-            const msg = `${sessionName} icin ${actualWorkMins} dk zihin motoru oturumu tamamlandi! +${xpAmount} XP`;
+            const msg = `${sessionName} için ${actualWorkMins} dk zihin motoru oturumu tamamlandı! +${xpAmount} XP`;
 
             addToast(msg, "xp");
-            sendBrowserNotification("Zihin Motoru Tamamlandi!", msg);
+            sendBrowserNotification("Zihin Motoru Tamamlandı!", msg);
             setIsBreak(true);
             return breakSecs;
           } else {
@@ -307,19 +307,19 @@ export default function PomodoroTimer() {
         className="rounded-2xl border border-dz-grey-200 dark:border-dz-grey-800 bg-dz-grey-100/50 dark:bg-dz-grey-900/50 p-8 text-center"
       >
         {/* Preset selector */}
-        <div className="flex justify-center gap-2 mb-6">
+        <div className="flex flex-wrap justify-center gap-1.5 sm:gap-2 mb-6">
           {PRESETS.map((p, i) => (
             <button
               key={p.label}
               type="button"
               onClick={() => changePreset(i)}
               disabled={isRunning}
-              className={`rounded-lg px-3 py-1.5 text-xs font-medium transition-colors ${presetIdx === i
+              className={`rounded-lg px-2 sm:px-3 py-1.5 text-[11px] sm:text-xs font-medium transition-colors ${presetIdx === i
                 ? "bg-dz-orange-500 text-white"
                 : "border border-dz-grey-300 dark:border-dz-grey-600 text-dz-grey-600 dark:text-dz-grey-400 hover:bg-dz-grey-100 dark:hover:bg-dz-grey-800 disabled:opacity-40"
                 }`}
             >
-              {p.label} ({p.work}dk)
+              {p.label} {p.work > 0 ? `${p.work}dk` : ""}
             </button>
           ))}
         </div>
@@ -391,14 +391,14 @@ export default function PomodoroTimer() {
             <p className="text-sm font-bold text-dz-grey-600 dark:text-dz-grey-400 text-left">
               Ne Üzerinde Çalışacaksın?
             </p>
-            <div className="flex flex-col sm:flex-row gap-3">
+            <div className="flex flex-col sm:flex-row gap-3 min-w-0">
               <input
                 type="text"
-                placeholder="Konu (ör: Kariyer Planı, Kitap Okuma)"
+                placeholder="Konu (ör: Kariyer Planı)"
                 value={topic}
                 onChange={(e) => setTopic(e.target.value)}
                 maxLength={100}
-                className="flex-1 rounded-xl border-2 border-dz-grey-200 dark:border-dz-grey-700 bg-dz-white dark:bg-dz-grey-800 px-4 py-3.5 text-sm font-medium text-dz-black dark:text-dz-white placeholder:text-dz-grey-400 dark:placeholder:text-dz-grey-600 outline-none focus:border-dz-orange-500 transition-colors"
+                className="flex-1 min-w-0 rounded-xl border-2 border-dz-grey-200 dark:border-dz-grey-700 bg-dz-white dark:bg-dz-grey-800 px-3 py-3 text-sm font-medium text-dz-black dark:text-dz-white placeholder:text-dz-grey-400 dark:placeholder:text-dz-grey-600 outline-none focus:border-dz-orange-500 transition-colors"
               />
               <input
                 type="text"
@@ -406,7 +406,7 @@ export default function PomodoroTimer() {
                 value={phase}
                 onChange={(e) => setPhase(e.target.value)}
                 maxLength={50}
-                className="w-full sm:w-1/3 rounded-xl border-2 border-dz-grey-200 dark:border-dz-grey-700 bg-dz-white dark:bg-dz-grey-800 px-4 py-3.5 text-sm font-medium text-dz-black dark:text-dz-white placeholder:text-dz-grey-400 dark:placeholder:text-dz-grey-600 outline-none focus:border-dz-orange-500 transition-colors"
+                className="w-full sm:w-[140px] min-w-0 rounded-xl border-2 border-dz-grey-200 dark:border-dz-grey-700 bg-dz-white dark:bg-dz-grey-800 px-3 py-3 text-sm font-medium text-dz-black dark:text-dz-white placeholder:text-dz-grey-400 dark:placeholder:text-dz-grey-600 outline-none focus:border-dz-orange-500 transition-colors"
               />
             </div>
             {topic && (
@@ -451,7 +451,8 @@ export default function PomodoroTimer() {
                         <button
                           type="button"
                           onClick={() => toggleTask(task.id)}
-                          className={`w-5 h-5 rounded-md border-2 flex items-center justify-center shrink-0 transition-all ${
+                          aria-label={task.done ? "Görevi tamamlanmadı olarak işaretle" : "Görevi tamamlandı olarak işaretle"}
+                          className={`w-7 h-7 min-w-[28px] min-h-[28px] rounded-md border-2 flex items-center justify-center shrink-0 transition-all ${
                             task.done
                               ? "bg-dz-orange-500 border-dz-orange-500 text-white"
                               : "border-dz-grey-300 dark:border-dz-grey-600 hover:border-dz-orange-400"
@@ -459,13 +460,14 @@ export default function PomodoroTimer() {
                         >
                           {task.done && <Activity className="w-3 h-3" />}
                         </button>
-                        <span className={`flex-1 text-sm ${task.done ? "line-through text-dz-grey-400" : "text-dz-black dark:text-dz-white"}`}>
+                        <span className={`flex-1 min-w-0 truncate text-sm ${task.done ? "line-through text-dz-grey-400" : "text-dz-black dark:text-dz-white"}`}>
                           {task.text}
                         </span>
                         <button
                           type="button"
                           onClick={() => removeTask(task.id)}
-                          className="text-dz-grey-400 hover:text-red-500 text-xs transition-colors"
+                          aria-label="Görevi sil"
+                          className="text-dz-grey-400 hover:text-red-500 text-xs transition-colors p-1.5 min-w-[28px] min-h-[28px] flex items-center justify-center"
                         >
                           ✕
                         </button>
@@ -479,7 +481,7 @@ export default function PomodoroTimer() {
                         onChange={(e) => setNewTask(e.target.value)}
                         onKeyDown={(e) => e.key === "Enter" && addTask()}
                         placeholder="Yeni görev ekle..."
-                        className="flex-1 rounded-lg border border-dz-grey-200 dark:border-dz-grey-700 bg-dz-white dark:bg-dz-grey-800 px-3 py-2 text-sm outline-none focus:border-dz-orange-500 transition-colors"
+                        className="flex-1 min-w-0 rounded-lg border border-dz-grey-200 dark:border-dz-grey-700 bg-dz-white dark:bg-dz-grey-800 px-3 py-2 text-sm outline-none focus:border-dz-orange-500 transition-colors"
                       />
                       <button
                         type="button"
@@ -490,9 +492,9 @@ export default function PomodoroTimer() {
                         +
                       </button>
                     </div>
-                    <div className="flex items-center gap-2 pt-2 border-t border-dz-grey-200 dark:border-dz-grey-700">
+                    <div className="flex flex-wrap items-center gap-2 pt-2 border-t border-dz-grey-200 dark:border-dz-grey-700">
                       <span className="text-xs text-dz-grey-500 shrink-0">Görev başına:</span>
-                      <div className="flex items-center gap-1">
+                      <div className="flex flex-wrap items-center gap-1">
                         {[5, 10, 15, 20, 30].map(m => (
                           <button
                             key={m}
@@ -599,7 +601,7 @@ export default function PomodoroTimer() {
         </div>
 
         {/* Sound & Notification Controls */}
-        <div className="mt-8 flex flex-wrap justify-center gap-2">
+        <div className="mt-8 flex flex-wrap justify-center gap-1.5 sm:gap-2 px-2">
           <button
             type="button"
             onClick={() => setSoundEnabled((v) => !v)}

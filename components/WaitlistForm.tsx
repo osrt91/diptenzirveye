@@ -28,7 +28,7 @@ export default function WaitlistForm({ onSuccess, variant = "hero" }: WaitlistFo
       });
       const data = await res.json();
       if (!res.ok) {
-        setMessage(data.error || "Bir hata olu?tu.");
+        setMessage(data.error || "Bir hata oluştu.");
         setStatus("error");
         return;
       }
@@ -36,7 +36,7 @@ export default function WaitlistForm({ onSuccess, variant = "hero" }: WaitlistFo
       setStatus("success");
       onSuccess?.(data.position ?? 0);
     } catch {
-      setMessage("Ba?lant? hatas?. L�tfen tekrar dene.");
+      setMessage("Bağlantı hatası. Lütfen tekrar dene.");
       setStatus("error");
     }
   }
@@ -52,7 +52,7 @@ export default function WaitlistForm({ onSuccess, variant = "hero" }: WaitlistFo
           Listeye eklendin.
         </p>
         <p className="mt-2 text-dz-grey-600 dark:text-dz-grey-400">
-          S?ra numaran: <span className="font-mono font-medium text-dz-orange-500">#{position}</span>
+          Sıra numaran: <span className="font-mono font-medium text-dz-orange-500">#{position}</span>
         </p>
       </motion.div>
     );
@@ -62,33 +62,45 @@ export default function WaitlistForm({ onSuccess, variant = "hero" }: WaitlistFo
   return (
     <form onSubmit={handleSubmit} className={isHero ? "space-y-3" : "space-y-2"}>
       <div className={isHero ? "flex flex-col sm:flex-row gap-3" : "space-y-2"}>
+        <div className="w-full">
+          <label htmlFor="waitlist-email" className="sr-only">E-posta adresi</label>
+          <input
+            id="waitlist-email"
+            type="email"
+            required
+            placeholder="E-posta"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            className="w-full min-w-0 rounded-xl border border-dz-grey-200 dark:border-dz-grey-600 bg-dz-white dark:bg-dz-grey-800 px-4 py-3 font-sans text-dz-black dark:text-dz-white placeholder:text-dz-grey-400 focus:border-dz-orange-400 focus:outline-none focus:ring-2 focus:ring-dz-orange-400/20"
+          />
+        </div>
+        <div className="w-full">
+          <label htmlFor="waitlist-name" className="sr-only">İsim</label>
+          <input
+            id="waitlist-name"
+            type="text"
+            placeholder="İsim (isteğe bağlı)"
+            value={name}
+            onChange={(e) => setName(e.target.value)}
+            className="w-full min-w-0 rounded-xl border border-dz-grey-200 dark:border-dz-grey-600 bg-dz-white dark:bg-dz-grey-800 px-4 py-3 font-sans text-dz-black dark:text-dz-white placeholder:text-dz-grey-400 focus:border-dz-orange-400 focus:outline-none focus:ring-2 focus:ring-dz-orange-400/20"
+          />
+        </div>
+      </div>
+      <div>
+        <label htmlFor="waitlist-interest" className="sr-only">İlgi alanı</label>
         <input
-          type="email"
-          required
-          placeholder="E-posta"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-          className="w-full rounded-xl border border-dz-grey-200 dark:border-dz-grey-600 bg-dz-white dark:bg-dz-grey-800 px-4 py-3 font-sans text-dz-black dark:text-dz-white placeholder:text-dz-grey-400 focus:border-dz-orange-400 focus:outline-none focus:ring-2 focus:ring-dz-orange-400/20"
-        />
-        <input
+          id="waitlist-interest"
           type="text"
-          placeholder="?sim (iste?e ba?l?)"
-          value={name}
-          onChange={(e) => setName(e.target.value)}
+          placeholder="İlgi alanın (Örn: girişimcilik, AI)"
+          value={interest}
+          onChange={(e) => setInterest(e.target.value)}
           className="w-full rounded-xl border border-dz-grey-200 dark:border-dz-grey-600 bg-dz-white dark:bg-dz-grey-800 px-4 py-3 font-sans text-dz-black dark:text-dz-white placeholder:text-dz-grey-400 focus:border-dz-orange-400 focus:outline-none focus:ring-2 focus:ring-dz-orange-400/20"
         />
       </div>
-      <input
-        type="text"
-        placeholder="?lgi alan?n (�rn: giri?imcilik, AI)"
-        value={interest}
-        onChange={(e) => setInterest(e.target.value)}
-        className="w-full rounded-xl border border-dz-grey-200 dark:border-dz-grey-600 bg-dz-white dark:bg-dz-grey-800 px-4 py-3 font-sans text-dz-black dark:text-dz-white placeholder:text-dz-grey-400 focus:border-dz-orange-400 focus:outline-none focus:ring-2 focus:ring-dz-orange-400/20"
-      />
       <button
         type="submit"
         disabled={status === "loading"}
-        className="w-full rounded-xl bg-dz-orange-500 px-6 py-3 font-display font-semibold text-dz-white hover:bg-dz-orange-600 focus:outline-none focus:ring-2 focus:ring-dz-orange-400 focus:ring-offset-2 disabled:opacity-70"
+        className="w-full min-h-[44px] rounded-xl bg-dz-orange-500 px-6 py-3 font-display font-semibold text-dz-white hover:bg-dz-orange-600 focus:outline-none focus:ring-2 focus:ring-dz-orange-400 focus:ring-offset-2 disabled:opacity-70"
       >
         {status === "loading" ? "Ekleniyor\u2026" : "Bekleme listesine kat\u0131l"}
       </button>

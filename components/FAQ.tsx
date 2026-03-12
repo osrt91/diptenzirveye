@@ -137,7 +137,7 @@ export default function FAQ() {
             <button
               key={cat.key}
               onClick={() => { setActiveCategory(cat.key); setOpenIdx(null); }}
-              className={`px-4 py-2 rounded-full text-sm font-bold transition-all duration-200 ${
+              className={`px-4 py-2.5 min-h-[44px] rounded-full text-sm font-bold transition-all duration-200 ${
                 activeCategory === cat.key
                   ? "bg-dz-orange-500 text-white shadow-lg shadow-dz-orange-500/20"
                   : "bg-dz-white dark:bg-dz-grey-800 text-dz-grey-600 dark:text-dz-grey-400 border border-dz-grey-200 dark:border-dz-grey-700 hover:border-dz-orange-300 dark:hover:border-dz-orange-500/30"
@@ -171,7 +171,7 @@ export default function FAQ() {
                       type="button"
                       onClick={() => setOpenIdx(isOpen ? null : realIdx)}
                       aria-expanded={isOpen}
-                      className="w-full flex items-center gap-3 px-5 py-4 text-left group"
+                      className="w-full flex items-center gap-3 px-5 py-4 min-h-[44px] text-left group"
                     >
                       <span className={`w-8 h-8 rounded-lg flex items-center justify-center text-xs font-bold shrink-0 transition-colors ${
                         isOpen
@@ -180,7 +180,7 @@ export default function FAQ() {
                       }`}>
                         {String(realIdx + 1).padStart(2, "0")}
                       </span>
-                      <span className="font-display font-semibold text-dz-black dark:text-dz-white flex-1 pr-2 text-[15px]">
+                      <span className="font-display font-semibold text-dz-black dark:text-dz-white flex-1 min-w-0 pr-2 text-[15px]">
                         {faq.q}
                       </span>
                       <ChevronDown className={`w-5 h-5 shrink-0 text-dz-grey-400 transition-transform duration-300 ${isOpen ? "rotate-180 text-dz-orange-500" : ""}`} />

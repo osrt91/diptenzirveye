@@ -56,14 +56,14 @@ export default function AdminCouponsClient({ initialCoupons }: { initialCoupons:
 
     return (
         <div>
-            <div className="flex items-center justify-between mb-8">
+            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-8">
                 <div>
                     <h1 className="text-2xl font-display font-bold text-dz-black dark:text-white">Kuponlar</h1>
-                    <p className="text-sm text-dz-grey-500 mt-1">{coupons.length} kupon · {coupons.filter((c) => c.active).length} aktif</p>
+                    <p className="text-sm text-dz-grey-500 dark:text-white/40 mt-1">{coupons.length} kupon · {coupons.filter((c) => c.active).length} aktif</p>
                 </div>
                 <button
                     onClick={() => setCreating(true)}
-                    className="flex items-center gap-2 bg-dz-orange-500 text-white px-4 py-2 rounded-xl font-bold text-sm hover:bg-dz-orange-600 transition-colors"
+                    className="flex items-center gap-2 bg-dz-orange-500 text-white px-4 py-2.5 min-h-[44px] rounded-xl font-bold text-sm hover:bg-dz-orange-600 transition-colors"
                 >
                     <Plus className="w-4 h-4" /> Yeni Kupon
                 </button>
@@ -77,7 +77,7 @@ export default function AdminCouponsClient({ initialCoupons }: { initialCoupons:
                 >
                     <div className="flex items-center justify-between">
                         <h2 className="font-display font-bold text-lg text-dz-black dark:text-white">Yeni Kupon Oluştur</h2>
-                        <button onClick={() => setCreating(false)} className="text-dz-grey-400 hover:text-dz-black dark:hover:text-white">
+                        <button onClick={() => setCreating(false)} className="w-11 h-11 flex items-center justify-center rounded-lg text-dz-grey-400 hover:text-dz-black dark:hover:text-white hover:bg-dz-grey-100 dark:hover:bg-white/5 transition-colors">
                             <X className="w-5 h-5" />
                         </button>
                     </div>
@@ -126,11 +126,11 @@ export default function AdminCouponsClient({ initialCoupons }: { initialCoupons:
                     </div>
 
                     <div className="flex justify-end gap-3">
-                        <button onClick={() => setCreating(false)} className="px-4 py-2 text-sm font-medium text-dz-grey-500">İptal</button>
+                        <button onClick={() => setCreating(false)} className="px-4 py-2.5 min-h-[44px] text-sm font-medium text-dz-grey-500 dark:text-white/50 hover:text-dz-black dark:hover:text-white transition-colors">İptal</button>
                         <button
                             onClick={handleCreate}
                             disabled={!form.code.trim() || form.discount_percent < 1}
-                            className="flex items-center gap-2 bg-green-500 text-white px-4 py-2 rounded-xl font-bold text-sm hover:bg-green-600 disabled:opacity-40"
+                            className="flex items-center gap-2 bg-red-500 text-white px-4 py-2.5 min-h-[44px] rounded-xl font-bold text-sm hover:bg-red-600 disabled:opacity-40"
                         >
                             <Save className="w-4 h-4" /> Oluştur
                         </button>
@@ -142,7 +142,7 @@ export default function AdminCouponsClient({ initialCoupons }: { initialCoupons:
                 {coupons.map((coupon) => (
                     <div
                         key={coupon.id}
-                        className={`flex items-center justify-between bg-dz-white dark:bg-dz-grey-900 border rounded-xl px-5 py-4 transition-opacity ${coupon.active ? "border-dz-grey-200 dark:border-dz-grey-700" : "border-dz-grey-100 dark:border-dz-grey-800 opacity-50"}`}
+                        className={`flex flex-col sm:flex-row sm:items-center justify-between gap-3 bg-dz-white dark:bg-dz-grey-900 border rounded-xl px-5 py-4 transition-opacity ${coupon.active ? "border-dz-grey-200 dark:border-dz-grey-700" : "border-dz-grey-100 dark:border-dz-grey-800 opacity-50"}`}
                     >
                         <div className="flex items-center gap-4 flex-1 min-w-0">
                             <div className={`w-10 h-10 rounded-lg flex items-center justify-center shrink-0 ${coupon.active ? "bg-dz-orange-500/10 text-dz-orange-500" : "bg-dz-grey-100 dark:bg-dz-grey-800 text-dz-grey-400"}`}>
@@ -162,14 +162,14 @@ export default function AdminCouponsClient({ initialCoupons }: { initialCoupons:
                         <div className="flex items-center gap-2 shrink-0">
                             <button
                                 onClick={() => toggleActive(coupon)}
-                                className={`p-2 rounded-lg transition-colors ${coupon.active ? "text-green-500 hover:bg-green-500/10" : "text-dz-grey-400 hover:bg-dz-grey-100 dark:hover:bg-dz-grey-800"}`}
+                                className={`w-11 h-11 flex items-center justify-center rounded-lg transition-colors ${coupon.active ? "text-green-500 hover:bg-green-500/10" : "text-dz-grey-400 hover:bg-dz-grey-100 dark:hover:bg-dz-grey-800"}`}
                                 title={coupon.active ? "Devre Dışı Bırak" : "Aktif Et"}
                             >
                                 {coupon.active ? <ToggleRight className="w-5 h-5" /> : <ToggleLeft className="w-5 h-5" />}
                             </button>
                             <button
                                 onClick={() => handleDelete(coupon.id)}
-                                className="p-2 rounded-lg text-dz-grey-400 hover:text-red-500 hover:bg-red-500/10 transition-colors"
+                                className="w-11 h-11 flex items-center justify-center rounded-lg text-dz-grey-400 hover:text-red-500 hover:bg-red-500/10 transition-colors"
                                 title="Sil"
                             >
                                 <Trash2 className="w-4 h-4" />

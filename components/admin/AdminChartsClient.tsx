@@ -31,7 +31,7 @@ interface TooltipPayloadItem { name: string; value: number; color: string }
 function CustomTooltip({ active, payload, label }: { active?: boolean; payload?: TooltipPayloadItem[]; label?: string }) {
   if (!active || !payload?.length) return null;
   return (
-    <div className="rounded-xl bg-dz-black/90 text-white px-4 py-3 shadow-xl text-xs">
+    <div className="rounded-xl bg-dz-grey-900/95 text-white px-4 py-3 shadow-xl text-xs">
       <p className="font-bold mb-1">{label}</p>
       {payload.map((item, i) => (
         <p key={i} style={{ color: item.color }}>
@@ -70,18 +70,18 @@ export default function AdminChartsClient({
                 <stop offset="100%" stopColor="#f97316" stopOpacity={0} />
               </linearGradient>
             </defs>
-            <CartesianGrid strokeDasharray="3 3" stroke="#e8e2da" />
+            <CartesianGrid strokeDasharray="3 3" stroke="var(--dz-grey-200)" />
             <XAxis
               dataKey="date"
-              tick={{ fill: "#6b6560", fontSize: 11 }}
+              tick={{ fill: "var(--dz-grey-500)", fontSize: 11 }}
             />
             <YAxis
-              tick={{ fill: "#6b6560", fontSize: 11 }}
+              tick={{ fill: "var(--dz-grey-500)", fontSize: 11 }}
               label={{
                 value: "Kullanıcı",
                 angle: -90,
                 position: "insideLeft",
-                style: { fill: "#6b6560", fontSize: 11 },
+                style: { fill: "var(--dz-grey-500)", fontSize: 11 },
               }}
             />
             <Tooltip content={<CustomTooltip />} />
@@ -112,12 +112,12 @@ export default function AdminChartsClient({
                 <stop offset="100%" stopColor="#f59e0b" />
               </linearGradient>
             </defs>
-            <CartesianGrid strokeDasharray="3 3" stroke="#e8e2da" />
+            <CartesianGrid strokeDasharray="3 3" stroke="var(--dz-grey-200)" />
             <XAxis
               dataKey="level"
-              tick={{ fill: "#6b6560", fontSize: 11 }}
+              tick={{ fill: "var(--dz-grey-500)", fontSize: 11 }}
             />
-            <YAxis tick={{ fill: "#6b6560", fontSize: 11 }} />
+            <YAxis tick={{ fill: "var(--dz-grey-500)", fontSize: 11 }} />
             <Tooltip content={<CustomTooltip />} />
             <Bar
               dataKey="users"
@@ -144,12 +144,12 @@ export default function AdminChartsClient({
                 <stop offset="100%" stopColor="#22c55e" stopOpacity={0} />
               </linearGradient>
             </defs>
-            <CartesianGrid strokeDasharray="3 3" stroke="#e8e2da" />
+            <CartesianGrid strokeDasharray="3 3" stroke="var(--dz-grey-200)" />
             <XAxis
               dataKey="week"
-              tick={{ fill: "#6b6560", fontSize: 11 }}
+              tick={{ fill: "var(--dz-grey-500)", fontSize: 11 }}
             />
-            <YAxis tick={{ fill: "#6b6560", fontSize: 11 }} />
+            <YAxis tick={{ fill: "var(--dz-grey-500)", fontSize: 11 }} />
             <Tooltip content={<CustomTooltip />} />
             <Area
               type="monotone"
@@ -172,15 +172,15 @@ export default function AdminChartsClient({
         <h3 className={titleClass}>Popüler Kitaplar</h3>
         <ResponsiveContainer width="100%" height={250}>
           <BarChart data={topBooks} layout="vertical">
-            <CartesianGrid strokeDasharray="3 3" stroke="#e8e2da" />
+            <CartesianGrid strokeDasharray="3 3" stroke="var(--dz-grey-200)" />
             <XAxis
               type="number"
-              tick={{ fill: "#6b6560", fontSize: 11 }}
+              tick={{ fill: "var(--dz-grey-500)", fontSize: 11 }}
             />
             <YAxis
               type="category"
               dataKey="name"
-              tick={{ fill: "#6b6560", fontSize: 11 }}
+              tick={{ fill: "var(--dz-grey-500)", fontSize: 11 }}
               width={100}
             />
             <Tooltip content={<CustomTooltip />} />

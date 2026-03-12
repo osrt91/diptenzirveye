@@ -378,13 +378,13 @@ function generateRecs(a: PlannerState): Recs {
     }
   }
 
-  // Genel ipuclari (her iki mod icin de)
+  // Genel ipuçları (her iki mod için de)
   if (tips.length === 0) {
-    tips.push("Bu raporu bir AI asistanina (Claude, ChatGPT) yapistirarak detayli yol haritasi isteyebilirsin.");
+    tips.push("Bu raporu bir AI asistanına (Claude, ChatGPT) yapıştırarak detaylı yol haritası isteyebilirsin.");
     if (lvl <= 1) {
-      tips.push("Projeye baslamadan once README.md dosyasi yaz — amaci, kurulumu ve kullanimi acikla.");
+      tips.push("Projeye başlamadan önce README.md dosyası yaz — amacı, kurulumu ve kullanımı açıkla.");
     }
-    tips.push("Her hafta projenin durumunu degerlendir — kucuk adimlar buyuk sonuclar yaratir.");
+    tips.push("Her hafta projenin durumunu değerlendir — küçük adımlar büyük sonuçlar yaratır.");
   }
 
   const seen = new Set<string>();
@@ -735,7 +735,7 @@ export default function ProjePlanlayici() {
                 <div className="text-xs text-green-800 dark:text-green-300">Seçimlerine göre önerilen araç ve teknolojiler.</div>
               </div>
               {recs.use.length === 0 ? (
-                <div className="text-center p-7 text-dz-grey-500">Onceki adimlarda secim yaparak kisisellestirilmis oneriler al.</div>
+                <div className="text-center p-7 text-dz-grey-500">Önceki adımlarda seçim yaparak kişiselleştirilmiş öneriler al.</div>
               ) : recs.use.map((r, i) => (
                 <div key={i} className={`flex gap-3 px-3.5 py-2.5 rounded-lg items-start mb-0.5 ${i % 2 === 0 ? "bg-dz-grey-50 dark:bg-dz-grey-900" : "bg-dz-grey-100 dark:bg-dz-grey-800"}`}>
                   <div className="w-[22px] h-[22px] rounded shrink-0 mt-0.5 bg-green-500 text-white flex items-center justify-center text-[13px] font-bold">✓</div>
@@ -756,7 +756,7 @@ export default function ProjePlanlayici() {
                 <div className="text-xs text-red-900 dark:text-red-300">Bu araçlar uyumsuz, modası geçmiş veya riskli.</div>
               </div>
               {recs.avoid.length === 0 ? (
-                <div className="text-center p-7 text-dz-grey-500">Secimlerine gore kacinman gereken bir sey bulunamadi.</div>
+                <div className="text-center p-7 text-dz-grey-500">Seçimlerine göre kaçınman gereken bir şey bulunamadı.</div>
               ) : recs.avoid.map((r, i) => (
                 <div key={i} className={`flex gap-3 px-3.5 py-2.5 rounded-lg items-start mb-0.5 ${i % 2 === 0 ? "bg-dz-grey-50 dark:bg-dz-grey-900" : "bg-dz-grey-100 dark:bg-dz-grey-800"}`}>
                   <div className="w-[22px] h-[22px] rounded shrink-0 mt-0.5 bg-red-500 text-white flex items-center justify-center text-[13px] font-bold">✗</div>
@@ -803,12 +803,12 @@ export default function ProjePlanlayici() {
   const isReport = STEPS[step]?.id === "report";
 
   return (
-    <div className="flex h-screen font-sans bg-background overflow-hidden">
+    <div className="flex h-[calc(100vh-4rem)] lg:h-[calc(100vh-1.5rem)] font-sans bg-background overflow-hidden -m-6">
 
       {/* Sidebar */}
-      <div className="hidden md:flex w-56 bg-dz-grey-900 dark:bg-dz-black flex-col shrink-0 border-r border-dz-grey-800">
-        <div className="px-4 py-4 border-b border-dz-grey-800">
-          <div className="font-display text-sm font-bold tracking-wide text-dz-white">
+      <div className="hidden md:flex w-56 bg-dz-grey-100 dark:bg-dz-grey-900 flex-col shrink-0 border-r border-dz-grey-200 dark:border-dz-grey-800">
+        <div className="px-4 py-4 border-b border-dz-grey-200 dark:border-dz-grey-800">
+          <div className="font-display text-sm font-bold tracking-wide text-dz-black dark:text-dz-white">
             Dipten<span className="text-dz-orange-500">Zirveye</span><sup className="text-[8px] text-dz-orange-500">™</sup>
           </div>
           <div className="font-mono text-[9px] tracking-widest uppercase text-dz-grey-500 mt-1">
@@ -826,8 +826,8 @@ export default function ProjePlanlayici() {
                   ac
                     ? "bg-dz-orange-500/15 text-dz-orange-500 font-bold border-dz-orange-500"
                     : dn
-                    ? "text-dz-grey-400 border-transparent hover:bg-dz-grey-800/50"
-                    : "text-dz-grey-500 border-transparent hover:bg-dz-grey-800/50"
+                    ? "text-dz-grey-600 dark:text-dz-grey-400 border-transparent hover:bg-dz-grey-200/50 dark:hover:bg-dz-grey-800/50"
+                    : "text-dz-grey-500 border-transparent hover:bg-dz-grey-200/50 dark:hover:bg-dz-grey-800/50"
                 }`}
               >
                 <span className={`font-mono text-[10px] font-semibold min-w-[14px] ${ac ? "text-dz-orange-500" : dn ? "text-green-500" : "text-dz-grey-500"}`}>
@@ -838,9 +838,9 @@ export default function ProjePlanlayici() {
             );
           })}
         </div>
-        <div className="px-3.5 py-3 border-t border-dz-grey-800">
+        <div className="px-3.5 py-3 border-t border-dz-grey-200 dark:border-dz-grey-800">
           <div className="font-mono text-[9px] tracking-widest uppercase text-dz-grey-500 mb-1.5">ilerleme</div>
-          <div className="h-1 bg-dz-grey-800 rounded-full overflow-hidden">
+          <div className="h-1 bg-dz-grey-200 dark:bg-dz-grey-800 rounded-full overflow-hidden">
             <div
               className="h-full bg-gradient-to-r from-dz-orange-500 to-dz-amber-400 rounded-full transition-all duration-400"
               style={{ width: `${progress}%` }}

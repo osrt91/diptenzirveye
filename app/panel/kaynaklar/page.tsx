@@ -85,6 +85,7 @@ export default function KaynaklarPage() {
       {/* TABS */}
       <div className="flex z-10 relative bg-dz-grey-100 dark:bg-dz-grey-900/50 p-1.5 rounded-2xl w-fit">
         <button
+          type="button"
           onClick={() => setActiveTab("dosyalar")}
           className={`relative px-6 py-2.5 text-sm font-bold rounded-xl transition-all duration-300 ${activeTab === "dosyalar"
             ? "text-dz-white shadow-md bg-dz-orange-500"
@@ -92,11 +93,12 @@ export default function KaynaklarPage() {
             }`}
         >
           <span className="relative z-10 flex items-center gap-2">
-            <FolderOpen />
+            <FolderOpen className="w-4 h-4" />
             Kütüphane & Klasörler
           </span>
         </button>
         <button
+          type="button"
           onClick={() => setActiveTab("araclar")}
           className={`relative px-6 py-2.5 text-sm font-bold rounded-xl transition-all duration-300 ${activeTab === "araclar"
             ? "text-dz-white shadow-md bg-dz-orange-500"
@@ -104,7 +106,7 @@ export default function KaynaklarPage() {
             }`}
         >
           <span className="relative z-10 flex items-center gap-2">
-            <Wrench />
+            <Wrench className="w-4 h-4" />
             Endüstri Araçları & Platformlar
           </span>
         </button>
@@ -177,7 +179,7 @@ export default function KaynaklarPage() {
                   onClick={() => setSelectedCategory(cat as typeof selectedCategory)}
                   className={`px-4 py-2 rounded-xl text-xs font-bold transition-all border ${selectedCategory === cat
                     ? "bg-dz-orange-500 text-white border-dz-orange-500"
-                    : "bg-white dark:bg-dz-grey-900 text-dz-grey-500 border-dz-grey-200 dark:border-dz-grey-800 hover:border-dz-orange-300 dark:hover:border-dz-orange-500/50"
+                    : "bg-dz-white dark:bg-dz-grey-900 text-dz-grey-500 border-dz-grey-200 dark:border-dz-grey-800 hover:border-dz-orange-300 dark:hover:border-dz-orange-500/50"
                     }`}
                 >
                   {cat}
@@ -193,7 +195,7 @@ export default function KaynaklarPage() {
                   initial={{ opacity: 0, scale: 0.9 }}
                   animate={{ opacity: 1, scale: 1 }}
                   transition={{ delay: idx * 0.05 }}
-                  className="group flex flex-col items-center bg-white dark:bg-dz-grey-900 p-6 rounded-2xl border border-dz-grey-200 dark:border-dz-grey-800 hover:border-dz-orange-500 transition-all shadow-sm hover:shadow-lg hover:-translate-y-1"
+                  className="group flex flex-col items-center bg-dz-white dark:bg-dz-grey-900 p-6 rounded-2xl border border-dz-grey-200 dark:border-dz-grey-800 hover:border-dz-orange-500 transition-all shadow-sm hover:shadow-lg hover:-translate-y-1"
                 >
                   <div className="w-16 h-16 flex items-center justify-center mb-4">
                     <tool.Icon className="w-full h-full drop-shadow-sm group-hover:drop-shadow-lg transition-all transform group-hover:scale-110" />

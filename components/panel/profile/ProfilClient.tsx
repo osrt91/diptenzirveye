@@ -6,7 +6,7 @@ import { useRouter } from "next/navigation";
 import { useToast } from "@/components/ui/Toast";
 import { motion } from "framer-motion";
 import { xpToLevel, xpProgressInLevel } from "@/lib/xp";
-import { Camera, Shield, Key, LogOut, Mail, Calendar, User, CheckCircle } from "lucide-react";
+import { Camera, Shield, Key, LogOut, Mail, Calendar, User, CheckCircle, Trash2 } from "lucide-react";
 import {
   ChatGPTIcon,
   ClaudeIcon,
@@ -36,24 +36,21 @@ type UserStats = {
 };
 
 const AI_CERT_TOOLS = [
-  { name: "ChatGPT", slug: "chatgpt", desc: "Advanced Prompting", Icon: ChatGPTIcon },
-  { name: "Claude 3", slug: "claude", desc: "Long-context Analysis", Icon: ClaudeIcon },
-  { name: "Cursor AI", slug: "cursor", desc: "AI-Assisted Coding", Icon: CursorIcon },
-  { name: "DeepSeek", slug: "deepseek", desc: "Reasoning & Logic", Icon: DeepSeekIcon },
-  { name: "Gemini Pro", slug: "gemini", desc: "Multimodal Mastery", Icon: GeminiIcon },
-  { name: "Grok", slug: "grok", desc: "Real-time AI", Icon: GrokIcon },
-  { name: "Kimi", slug: "kimi", desc: "Document Analysis", Icon: KimiIcon },
-  { name: "Midjourney", slug: "midjourney", desc: "Visual Architecture", Icon: MidjourneyIcon },
-  { name: "Perplexity", slug: "perplexity", desc: "AI Search Engine", Icon: PerplexityIcon },
-  { name: "v0 by Vercel", slug: "v0", desc: "Generative UI", Icon: V0Icon },
-  { name: "Windsurf", slug: "windsurf", desc: "AI IDE Mastery", Icon: WindsurfIcon },
-  { name: "Zapier", slug: "zapier", desc: "Automated Workflows", Icon: ZapierIcon },
-  { name: "Kaggle", slug: "kaggle", desc: "Data Science", Icon: KaggleIcon },
-  { name: "HuggingFace", slug: "huggingface", desc: "ML Models Hub", Icon: HuggingFaceIcon },
-  { name: "Figma", slug: "figma", desc: "UI/UX Design", Icon: FigmaIcon },
-  { name: "Kaggle", slug: "kaggle", desc: "Data Science", Icon: KaggleIcon },
-  { name: "HuggingFace", slug: "huggingface", desc: "ML Models", Icon: HuggingFaceIcon },
-  { name: "Figma", slug: "figma", desc: "Design & Prototyping", Icon: FigmaIcon },
+  { name: "ChatGPT", slug: "chatgpt", desc: "İleri Seviye Prompting", Icon: ChatGPTIcon },
+  { name: "Claude 3", slug: "claude", desc: "Uzun Bağlam Analizi", Icon: ClaudeIcon },
+  { name: "Cursor AI", slug: "cursor", desc: "AI Destekli Kodlama", Icon: CursorIcon },
+  { name: "DeepSeek", slug: "deepseek", desc: "Akıl Yürütme & Mantık", Icon: DeepSeekIcon },
+  { name: "Gemini Pro", slug: "gemini", desc: "Çoklu Ortam Ustalığı", Icon: GeminiIcon },
+  { name: "Grok", slug: "grok", desc: "Gerçek Zamanlı AI", Icon: GrokIcon },
+  { name: "Kimi", slug: "kimi", desc: "Doküman Analizi", Icon: KimiIcon },
+  { name: "Midjourney", slug: "midjourney", desc: "Görsel Mimari", Icon: MidjourneyIcon },
+  { name: "Perplexity", slug: "perplexity", desc: "AI Arama Motoru", Icon: PerplexityIcon },
+  { name: "v0 by Vercel", slug: "v0", desc: "Üretken Arayüz", Icon: V0Icon },
+  { name: "Windsurf", slug: "windsurf", desc: "AI IDE Ustalığı", Icon: WindsurfIcon },
+  { name: "Zapier", slug: "zapier", desc: "Otomatik İş Akışları", Icon: ZapierIcon },
+  { name: "Kaggle", slug: "kaggle", desc: "Veri Bilimi", Icon: KaggleIcon },
+  { name: "HuggingFace", slug: "huggingface", desc: "ML Model Merkezi", Icon: HuggingFaceIcon },
+  { name: "Figma", slug: "figma", desc: "UI/UX Tasarım", Icon: FigmaIcon },
 ];
 
 export default function ProfilClient({
@@ -83,6 +80,8 @@ export default function ProfilClient({
   const [passwordSaving, setPasswordSaving] = useState(false);
   const [passwordSaved, setPasswordSaved] = useState(false);
   const [passwordError, setPasswordError] = useState("");
+  const [deleteConfirm, setDeleteConfirm] = useState(false);
+  const [deleting, setDeleting] = useState(false);
 
   const savedTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
   const passwordSavedTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
@@ -125,7 +124,7 @@ export default function ProfilClient({
     const file = e.target.files?.[0];
     if (!file) return;
     if (file.size > 2 * 1024 * 1024) {
-      setError("Dosya boyutu 2MB'den kucuk olmali.");
+      setError("Dosya boyutu 2MB'den küçük olmalı.");
       return;
     }
 
@@ -146,7 +145,7 @@ export default function ProfilClient({
       .upload(filePath, file, { upsert: true });
 
     if (uploadErr) {
-      setError("Yukleme hatasi: " + uploadErr.message);
+      setError("Yükleme hatası: " + uploadErr.message);
       setUploadingAvatar(false);
       return;
     }
@@ -191,6 +190,26 @@ export default function ProfilClient({
     passwordSavedTimeoutRef.current = setTimeout(() => setPasswordSaved(false), 3000);
   }
 
+  async function handleDeleteAccount() {
+    setDeleting(true);
+    try {
+      const res = await fetch("/api/account/delete", { method: "DELETE" });
+      const data = await res.json();
+      if (!res.ok) {
+        addToast(data.error || "Hesap silinemedi", "error");
+        setDeleting(false);
+        setDeleteConfirm(false);
+        return;
+      }
+      await supabase.auth.signOut();
+      router.push("/");
+    } catch {
+      addToast("Hesap silinemedi. Lütfen tekrar deneyin.", "error");
+      setDeleting(false);
+      setDeleteConfirm(false);
+    }
+  }
+
   async function handleSignOut() {
     try {
       const { error: err } = await supabase.auth.signOut();
@@ -209,10 +228,10 @@ export default function ProfilClient({
 
   const statCards = useMemo(() => [
     { label: "Toplam XP", value: `${stats.total_xp} XP`, sub: `Seviye ${level}`, color: "text-dz-orange-500" },
-    { label: "Seri", value: `${stats.current_streak_days} gun`, sub: "Ust uste aktif", color: "text-dz-amber-500" },
+    { label: "Seri", value: `${stats.current_streak_days} gün`, sub: "Üst üste aktif", color: "text-dz-amber-500" },
     { label: "Tamamlanan Kitap", value: String(stats.completed_books), sub: "kitap bitirildi", color: "text-dz-orange-600" },
-    { label: "Zihin Motoru", value: String(stats.completed_pomodoros), sub: "oturum tamamlandi", color: "text-dz-orange-500" },
-    { label: "Notlar", value: String(stats.total_notes), sub: "not olusturuldu", color: "text-dz-grey-600 dark:text-dz-grey-400" },
+    { label: "Zihin Motoru", value: String(stats.completed_pomodoros), sub: "oturum tamamlandı", color: "text-dz-orange-500" },
+    { label: "Notlar", value: String(stats.total_notes), sub: "not oluşturuldu", color: "text-dz-grey-600 dark:text-dz-grey-400" },
     { label: "Çalışma Kağıtları", value: String(stats.total_sheets), sub: "kağıt oluşturuldu", color: "text-dz-grey-600 dark:text-dz-grey-400" },
   ], [stats, level]);
 
@@ -251,16 +270,16 @@ export default function ProfilClient({
 
           <div className="min-w-0 flex-1">
             <h2 className="font-display text-2xl font-bold text-dz-black dark:text-dz-white truncate">
-              {displayName || "Adsiz Kullanici"}
+              {displayName || "Adsız Kullanıcı"}
             </h2>
-            <div className="flex items-center gap-2 mt-1">
-              <Mail className="w-3.5 h-3.5 text-dz-grey-400" />
+            <div className="flex items-center gap-2 mt-1 min-w-0">
+              <Mail className="w-3.5 h-3.5 text-dz-grey-400 shrink-0" />
               <p className="text-sm text-dz-grey-500 truncate">{email}</p>
             </div>
             <div className="flex items-center gap-2 mt-1">
               <Calendar className="w-3.5 h-3.5 text-dz-grey-400" />
               <p className="text-xs text-dz-grey-400">
-                Uye: {new Date(stats.member_since).toLocaleDateString("tr-TR", {
+                Üye: {new Date(stats.member_since).toLocaleDateString("tr-TR", {
                   year: "numeric", month: "long", day: "numeric",
                 })}
               </p>
@@ -286,7 +305,7 @@ export default function ProfilClient({
 
       {/* Stats Grid */}
       <div>
-        <h3 className="font-display text-lg font-semibold text-dz-black dark:text-dz-white mb-4">Istatistikler</h3>
+        <h3 className="font-display text-lg font-semibold text-dz-black dark:text-dz-white mb-4">İstatistikler</h3>
         <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
           {statCards.map((card, i) => (
             <motion.div
@@ -348,7 +367,7 @@ export default function ProfilClient({
       >
         <div className="flex items-center gap-2 mb-4">
           <User className="w-5 h-5 text-dz-orange-500" />
-          <h3 className="font-display text-lg font-semibold text-dz-black dark:text-dz-white">Profili Duzenle</h3>
+          <h3 className="font-display text-lg font-semibold text-dz-black dark:text-dz-white">Profili Düzenle</h3>
         </div>
         <div className="space-y-4">
           <div>
@@ -433,9 +452,9 @@ export default function ProfilClient({
       >
         <div className="flex items-center gap-2 mb-4">
           <Shield className="w-5 h-5 text-red-500" />
-          <h3 className="font-display text-lg font-semibold text-dz-black dark:text-dz-white">Hesap & Guvenlik</h3>
+          <h3 className="font-display text-lg font-semibold text-dz-black dark:text-dz-white">Hesap & Güvenlik</h3>
         </div>
-        <p className="text-sm text-dz-grey-500 mb-4">Hesabinizdan cikis yapmak veya destek almak icin asagidaki secenekleri kullanbilirsiniz.</p>
+        <p className="text-sm text-dz-grey-500 mb-4">Hesabınızdan çıkış yapmak, destek almak veya hesabınızı silmek için aşağıdaki seçenekleri kullanabilirsiniz.</p>
         <div className="flex flex-wrap gap-3">
           <button
             type="button"
@@ -450,6 +469,42 @@ export default function ProfilClient({
           >
             <Mail className="w-4 h-4" /> Destek
           </a>
+        </div>
+
+        {/* Delete Account */}
+        <div className="mt-6 pt-4 border-t border-red-200 dark:border-red-900/30">
+          {!deleteConfirm ? (
+            <button
+              type="button"
+              onClick={() => setDeleteConfirm(true)}
+              className="flex items-center gap-2 text-xs text-dz-grey-400 hover:text-red-500 transition-colors"
+            >
+              <Trash2 className="w-3.5 h-3.5" /> Hesabımı kalıcı olarak sil
+            </button>
+          ) : (
+            <div className="space-y-3">
+              <p className="text-sm text-red-600 dark:text-red-400 font-medium">
+                Bu işlem geri alınamaz. Tüm verileriniz (XP, rozetler, notlar, sohbetler) kalıcı olarak silinecek.
+              </p>
+              <div className="flex gap-2">
+                <button
+                  type="button"
+                  onClick={handleDeleteAccount}
+                  disabled={deleting}
+                  className="flex items-center gap-2 rounded-lg bg-red-500 px-4 py-2 text-sm font-medium text-white hover:bg-red-600 disabled:opacity-50 transition-colors"
+                >
+                  <Trash2 className="w-4 h-4" /> {deleting ? "Siliniyor..." : "Evet, Hesabımı Sil"}
+                </button>
+                <button
+                  type="button"
+                  onClick={() => setDeleteConfirm(false)}
+                  className="rounded-lg border border-dz-grey-200 dark:border-dz-grey-700 px-4 py-2 text-sm font-medium text-dz-grey-600 dark:text-dz-grey-400 hover:bg-dz-grey-100 dark:hover:bg-dz-grey-800 transition-colors"
+                >
+                  İptal
+                </button>
+              </div>
+            </div>
+          )}
         </div>
       </motion.div>
     </div>

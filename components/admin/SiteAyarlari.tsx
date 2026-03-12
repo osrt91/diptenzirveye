@@ -114,7 +114,7 @@ export default function SiteAyarlari() {
 
   return (
     <div className="space-y-6">
-      <div className="flex items-center justify-between">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
         <div>
           <h1 className="text-2xl font-display font-bold text-dz-black dark:text-white">
             Site Ayarları
@@ -125,7 +125,7 @@ export default function SiteAyarlari() {
         </div>
         <button
           onClick={fetchSettings}
-          className="flex items-center gap-2 px-3 py-2 text-sm rounded-xl bg-dz-grey-100 dark:bg-dz-grey-800 hover:bg-dz-grey-200 dark:hover:bg-dz-grey-700 transition-colors"
+          className="flex items-center gap-2 px-3 py-2.5 min-h-[44px] text-sm rounded-xl bg-dz-grey-100 dark:bg-dz-grey-800 hover:bg-dz-grey-200 dark:hover:bg-dz-grey-700 transition-colors shrink-0"
         >
           <RefreshCw className="w-4 h-4" />
           Yenile
@@ -233,7 +233,7 @@ export default function SiteAyarlari() {
                         <button
                           onClick={() => handleSave(s.key)}
                           disabled={!hasChanged || isSaving}
-                          className={`shrink-0 px-3 py-2.5 rounded-xl text-sm font-medium transition-all flex items-center gap-1.5 ${
+                          className={`shrink-0 px-3 py-2.5 min-h-[44px] rounded-xl text-sm font-medium transition-all flex items-center gap-1.5 ${
                             isSaved
                               ? "bg-green-500/10 text-green-600 dark:text-green-400 border border-green-500/20"
                               : hasChanged

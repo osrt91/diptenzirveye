@@ -3,6 +3,7 @@ import { outfit, dmSans, dmMono } from "@/lib/fonts";
 import ThemeProvider from "@/components/ThemeProvider";
 import { ToastProvider } from "@/components/ui/Toast";
 import InstallPrompt from "@/components/InstallPrompt";
+import FloatingCoach from "@/components/panel/core/FloatingCoach";
 import TrackingScripts, { TrackingNoscript } from "@/components/TrackingScripts";
 import "./globals.css";
 
@@ -133,6 +134,10 @@ export default function RootLayout({
               {children}
             </main>
             <InstallPrompt />
+            <FloatingCoach
+              chatbotEnabled={true}
+              welcomeMessage="Merhaba! Ben DiptenZirveye AI Danışmanın. Platformumuz, AI araçları veya eğitim serisi hakkında her şeyi sorabilirsin!"
+            />
           </ToastProvider>
         </ThemeProvider>
       </body>

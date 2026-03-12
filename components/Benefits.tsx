@@ -102,8 +102,8 @@ export default function Benefits() {
               <div className="w-12 h-12 rounded-xl bg-dz-orange-500/10 flex items-center justify-center text-dz-orange-500 mx-auto mb-4 group-hover:bg-dz-orange-500 group-hover:text-white transition-colors">
                 {f.icon}
               </div>
-              <h3 className="font-bold text-dz-black dark:text-dz-white mb-2">{f.title}</h3>
-              <p className="text-sm text-dz-grey-500 dark:text-dz-grey-400">{f.desc}</p>
+              <h3 className="font-bold text-dz-black dark:text-dz-white mb-2 min-w-0 break-words">{f.title}</h3>
+              <p className="text-sm text-dz-grey-500 dark:text-dz-grey-400 min-w-0 break-words">{f.desc}</p>
             </motion.div>
           ))}
         </div>
@@ -153,16 +153,16 @@ export default function Benefits() {
 
               <ul className="space-y-3 mb-8 flex-grow">
                 {tier.features.map((f) => (
-                  <li key={f.text} className={`flex items-start gap-3 ${f.included ? "text-dz-grey-700 dark:text-dz-grey-300" : "text-dz-grey-400 dark:text-dz-grey-600 line-through"}`}>
-                    <CheckCircle2 className={`mt-0.5 shrink-0 ${f.included ? (tier.highlight ? "text-dz-orange-500" : "text-dz-grey-400 dark:text-dz-grey-500") : "text-dz-grey-300 dark:text-dz-grey-700"}`} />
-                    {f.text}
+                  <li key={f.text} className={`flex items-start gap-3 min-w-0 ${f.included ? "text-dz-grey-700 dark:text-dz-grey-300" : "text-dz-grey-400 dark:text-dz-grey-600 line-through"}`}>
+                    <CheckCircle2 className={`w-5 h-5 mt-0.5 shrink-0 ${f.included ? (tier.highlight ? "text-dz-orange-500" : "text-dz-grey-400 dark:text-dz-grey-500") : "text-dz-grey-300 dark:text-dz-grey-700"}`} />
+                    <span className="min-w-0">{f.text}</span>
                   </li>
                 ))}
               </ul>
 
               <Link
                 href={tier.highlight ? "/api/checkout?products=e3157e14-ce82-4a1c-ab27-d60e138e05cd" : "/test"}
-                className={`w-full py-4 rounded-xl font-bold text-center block transition-colors ${tier.highlight
+                className={`w-full min-h-[44px] py-4 rounded-xl font-bold text-center block transition-colors ${tier.highlight
                   ? "bg-dz-orange-500 text-white hover:bg-dz-orange-600 shadow-lg shadow-dz-orange-500/20"
                   : "border border-dz-grey-200 dark:border-dz-white/10 text-dz-black dark:text-dz-white hover:bg-dz-grey-100 dark:hover:bg-dz-white/5"
                   }`}

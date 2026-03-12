@@ -2,9 +2,10 @@
 
 import { useState } from "react";
 import { motion } from "framer-motion";
-import { Search, Shield, Zap, Medal, Edit, Check, X } from "lucide-react";
+import { Search, Shield, Zap, Medal, Edit, Check, X, Trash2 } from "lucide-react";
 import { createClient } from "@/lib/supabase/client";
 import type { AdminUser } from "@/lib/admin";
+import { useToast } from "@/components/ui/Toast";
 
 export default function AdminUsersClient({
     initialUsers,
@@ -17,6 +18,8 @@ export default function AdminUsersClient({
     const [editXp, setEditXp] = useState(0);
     const [loading, setLoading] = useState(false);
     const [roleLoading, setRoleLoading] = useState<string | null>(null);
+    const [deleteConfirm, setDeleteConfirm] = useState<string | null>(null);
+    const { addToast } = useToast();
 
     const handleSearch = async () => {
         setLoading(true);
@@ -42,6 +45,27 @@ export default function AdminUsersClient({
             )
         );
         setEditingId(null);
+    };
+
+    const handleDeleteUser = async (userId: string) => {
+        try {
+            const res = await fetch("/api/admin/users", {
+                method: "DELETE",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ userId }),
+            });
+            const data = await res.json();
+            if (!res.ok) {
+                addToast(data.error || "Silme hatası", "error");
+                return;
+            }
+            setUsers((prev) => prev.filter((u) => u.id !== userId));
+            addToast("Kullanıcı başarıyla silindi", "success");
+        } catch {
+            addToast("Kullanıcı silinemedi", "error");
+        } finally {
+            setDeleteConfirm(null);
+        }
     };
 
     const handleRoleChange = async (userId: string, newRole: string) => {
@@ -84,7 +108,7 @@ export default function AdminUsersClient({
                 <button
                     onClick={handleSearch}
                     disabled={loading}
-                    className="px-6 rounded-xl bg-red-500/10 border border-red-500/20 text-red-400 text-sm font-medium hover:bg-red-500/20 transition-all disabled:opacity-50"
+                    className="px-6 min-h-[44px] rounded-xl bg-red-500/10 border border-red-500/20 text-red-400 text-sm font-medium hover:bg-red-500/20 transition-all disabled:opacity-50"
                 >
                     {loading ? "..." : "Ara"}
                 </button>
@@ -93,25 +117,25 @@ export default function AdminUsersClient({
             {/* Users Table */}
             <div className="rounded-2xl border border-dz-grey-200 dark:border-white/5 overflow-hidden">
                 <div className="overflow-x-auto">
-                    <table className="w-full table-fixed">
+                    <table className="w-full min-w-[700px]">
                         <thead>
                             <tr className="border-b border-dz-grey-200 dark:border-white/5 bg-white dark:bg-white/[0.02]">
-                                <th className="text-left text-xs font-bold text-dz-grey-500 dark:text-white/40 uppercase tracking-wider px-5 py-3 w-[30%]">
+                                <th className="text-left text-xs font-bold text-dz-grey-500 dark:text-white/40 uppercase tracking-wider px-5 py-3 whitespace-nowrap">
                                     Kullanıcı
                                 </th>
-                                <th className="text-left text-xs font-bold text-dz-grey-500 dark:text-white/40 uppercase tracking-wider px-5 py-3 w-[20%]">
+                                <th className="text-left text-xs font-bold text-dz-grey-500 dark:text-white/40 uppercase tracking-wider px-5 py-3 whitespace-nowrap">
                                     Seviye / XP
                                 </th>
-                                <th className="text-left text-xs font-bold text-dz-grey-500 dark:text-white/40 uppercase tracking-wider px-5 py-3 w-[12%]">
+                                <th className="text-left text-xs font-bold text-dz-grey-500 dark:text-white/40 uppercase tracking-wider px-5 py-3 whitespace-nowrap">
                                     Seri
                                 </th>
-                                <th className="text-left text-xs font-bold text-dz-grey-500 dark:text-white/40 uppercase tracking-wider px-5 py-3 w-[10%]">
+                                <th className="text-left text-xs font-bold text-dz-grey-500 dark:text-white/40 uppercase tracking-wider px-5 py-3 whitespace-nowrap">
                                     Rozetler
                                 </th>
-                                <th className="text-left text-xs font-bold text-dz-grey-500 dark:text-white/40 uppercase tracking-wider px-5 py-3 w-[18%]">
+                                <th className="text-left text-xs font-bold text-dz-grey-500 dark:text-white/40 uppercase tracking-wider px-5 py-3 whitespace-nowrap">
                                     Rol
                                 </th>
-                                <th className="text-right text-xs font-bold text-dz-grey-500 dark:text-white/40 uppercase tracking-wider px-5 py-3 w-[10%]">
+                                <th className="text-right text-xs font-bold text-dz-grey-500 dark:text-white/40 uppercase tracking-wider px-5 py-3 whitespace-nowrap">
                                     İşlem
                                 </th>
                             </tr>
@@ -151,15 +175,15 @@ export default function AdminUsersClient({
                                                 />
                                                 <button
                                                     onClick={() => handleUpdateXp(user.id)}
-                                                    className="text-green-400 hover:text-green-300"
+                                                    className="w-9 h-9 flex items-center justify-center rounded-lg text-green-400 hover:text-green-300 hover:bg-green-500/10 transition-colors"
                                                 >
-                                                    <Check className="w-3.5 h-3.5" />
+                                                    <Check className="w-4 h-4" />
                                                 </button>
                                                 <button
                                                     onClick={() => setEditingId(null)}
-                                                    className="text-red-400 hover:text-red-300"
+                                                    className="w-9 h-9 flex items-center justify-center rounded-lg text-red-400 hover:text-red-300 hover:bg-red-500/10 transition-colors"
                                                 >
-                                                    <X className="w-3.5 h-3.5" />
+                                                    <X className="w-4 h-4" />
                                                 </button>
                                             </div>
                                         ) : (
@@ -200,16 +224,46 @@ export default function AdminUsersClient({
                                         </select>
                                     </td>
                                     <td className="px-5 py-4 text-right">
-                                        <button
-                                            onClick={() => {
-                                                setEditingId(user.id);
-                                                setEditXp(user.total_xp);
-                                            }}
-                                            className="text-dz-grey-400 dark:text-white/30 hover:text-dz-grey-700 dark:hover:text-white/70 transition-colors"
-                                            title="XP Düzenle"
-                                        >
-                                            <Edit className="w-4 h-4" />
-                                        </button>
+                                        <div className="flex items-center justify-end gap-2">
+                                            <button
+                                                onClick={() => {
+                                                    setEditingId(user.id);
+                                                    setEditXp(user.total_xp);
+                                                }}
+                                                className="w-11 h-11 flex items-center justify-center rounded-lg text-dz-grey-400 dark:text-white/30 hover:text-dz-grey-700 dark:hover:text-white/70 hover:bg-dz-grey-100 dark:hover:bg-white/5 transition-colors"
+                                                title="XP Düzenle"
+                                            >
+                                                <Edit className="w-4 h-4" />
+                                            </button>
+                                            {!user.is_admin && (
+                                                deleteConfirm === user.id ? (
+                                                    <div className="flex items-center gap-1">
+                                                        <button
+                                                            onClick={() => handleDeleteUser(user.id)}
+                                                            className="w-11 h-11 flex items-center justify-center rounded-lg text-red-500 hover:text-red-400 hover:bg-red-500/10 transition-colors"
+                                                            title="Silmeyi onayla"
+                                                        >
+                                                            <Check className="w-4 h-4" />
+                                                        </button>
+                                                        <button
+                                                            onClick={() => setDeleteConfirm(null)}
+                                                            className="w-11 h-11 flex items-center justify-center rounded-lg text-dz-grey-400 hover:text-dz-grey-600 hover:bg-dz-grey-100 dark:hover:bg-white/5 transition-colors"
+                                                            title="İptal"
+                                                        >
+                                                            <X className="w-4 h-4" />
+                                                        </button>
+                                                    </div>
+                                                ) : (
+                                                    <button
+                                                        onClick={() => setDeleteConfirm(user.id)}
+                                                        className="w-11 h-11 flex items-center justify-center rounded-lg text-dz-grey-400 dark:text-white/20 hover:text-red-500 hover:bg-red-500/10 transition-colors"
+                                                        title="Kullanıcıyı Sil"
+                                                    >
+                                                        <Trash2 className="w-4 h-4" />
+                                                    </button>
+                                                )
+                                            )}
+                                        </div>
                                     </td>
                                 </motion.tr>
                             ))}

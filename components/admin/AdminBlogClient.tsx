@@ -99,14 +99,14 @@ export default function AdminBlogClient({ initialPosts }: { initialPosts: BlogPo
 
     return (
         <div>
-            <div className="flex items-center justify-between mb-8">
+            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-8">
                 <div>
                     <h1 className="text-2xl font-display font-bold text-dz-black dark:text-white">Blog Yazıları</h1>
-                    <p className="text-sm text-dz-grey-500 mt-1">{posts.length} yazı</p>
+                    <p className="text-sm text-dz-grey-500 dark:text-white/40 mt-1">{posts.length} yazı</p>
                 </div>
                 <button
                     onClick={() => { resetForm(); setCreating(true); }}
-                    className="flex items-center gap-2 bg-dz-orange-500 text-white px-4 py-2 rounded-xl font-bold text-sm hover:bg-dz-orange-600 transition-colors"
+                    className="flex items-center gap-2 bg-dz-orange-500 text-white px-4 py-2.5 min-h-[44px] rounded-xl font-bold text-sm hover:bg-dz-orange-600 transition-colors"
                 >
                     <Plus className="w-4 h-4" /> Yeni Yazı
                 </button>
@@ -120,7 +120,7 @@ export default function AdminBlogClient({ initialPosts }: { initialPosts: BlogPo
                 >
                     <div className="flex items-center justify-between mb-2">
                         <h2 className="font-display font-bold text-lg text-dz-black dark:text-white">{editing ? "Yazıyı Düzenle" : "Yeni Yazı"}</h2>
-                        <button onClick={resetForm} className="text-dz-grey-400 hover:text-dz-black dark:hover:text-white">
+                        <button onClick={resetForm} className="w-11 h-11 flex items-center justify-center rounded-lg text-dz-grey-400 hover:text-dz-black dark:hover:text-white hover:bg-dz-grey-100 dark:hover:bg-white/5 transition-colors">
                             <X className="w-5 h-5" />
                         </button>
                     </div>
@@ -220,13 +220,13 @@ export default function AdminBlogClient({ initialPosts }: { initialPosts: BlogPo
                     </div>
 
                     <div className="flex justify-end gap-3 pt-2">
-                        <button onClick={resetForm} className="px-4 py-2 text-sm font-medium text-dz-grey-500 hover:text-dz-black dark:hover:text-white transition-colors">
+                        <button onClick={resetForm} className="px-4 py-2.5 min-h-[44px] text-sm font-medium text-dz-grey-500 dark:text-white/50 hover:text-dz-black dark:hover:text-white transition-colors">
                             İptal
                         </button>
                         <button
                             onClick={handleSave}
                             disabled={!form.title.trim()}
-                            className="flex items-center gap-2 bg-green-500 text-white px-4 py-2 rounded-xl font-bold text-sm hover:bg-green-600 transition-colors disabled:opacity-40"
+                            className="flex items-center gap-2 bg-green-500 text-white px-4 py-2.5 min-h-[44px] rounded-xl font-bold text-sm hover:bg-green-600 transition-colors disabled:opacity-40"
                         >
                             <Save className="w-4 h-4" /> {editing ? "Güncelle" : "Kaydet"}
                         </button>
@@ -238,7 +238,7 @@ export default function AdminBlogClient({ initialPosts }: { initialPosts: BlogPo
                 {posts.map((post) => (
                     <div
                         key={post.id}
-                        className="flex items-center justify-between bg-dz-white dark:bg-dz-grey-900 border border-dz-grey-200 dark:border-dz-grey-700 rounded-xl px-5 py-4"
+                        className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 bg-dz-white dark:bg-dz-grey-900 border border-dz-grey-200 dark:border-dz-grey-700 rounded-xl px-5 py-4"
                     >
                         <div className="flex items-center gap-4 flex-1 min-w-0">
                             <div className={`w-2 h-2 rounded-full shrink-0 ${post.published ? "bg-green-500" : "bg-dz-grey-300"}`} />
@@ -252,21 +252,21 @@ export default function AdminBlogClient({ initialPosts }: { initialPosts: BlogPo
                         <div className="flex items-center gap-2 shrink-0">
                             <button
                                 onClick={() => togglePublish(post)}
-                                className={`p-2 rounded-lg transition-colors ${post.published ? "text-green-500 hover:bg-green-500/10" : "text-dz-grey-400 hover:bg-dz-grey-100 dark:hover:bg-dz-grey-800"}`}
+                                className={`w-11 h-11 flex items-center justify-center rounded-lg transition-colors ${post.published ? "text-green-500 hover:bg-green-500/10" : "text-dz-grey-400 hover:bg-dz-grey-100 dark:hover:bg-dz-grey-800"}`}
                                 title={post.published ? "Yayından Kaldır" : "Yayınla"}
                             >
                                 {post.published ? <Eye className="w-4 h-4" /> : <EyeOff className="w-4 h-4" />}
                             </button>
                             <button
                                 onClick={() => startEdit(post)}
-                                className="p-2 rounded-lg text-dz-grey-400 hover:text-dz-orange-500 hover:bg-dz-orange-500/10 transition-colors"
+                                className="w-11 h-11 flex items-center justify-center rounded-lg text-dz-grey-400 hover:text-dz-orange-500 hover:bg-dz-orange-500/10 transition-colors"
                                 title="Düzenle"
                             >
                                 <PenTool className="w-4 h-4" />
                             </button>
                             <button
                                 onClick={() => handleDelete(post.id)}
-                                className="p-2 rounded-lg text-dz-grey-400 hover:text-red-500 hover:bg-red-500/10 transition-colors"
+                                className="w-11 h-11 flex items-center justify-center rounded-lg text-dz-grey-400 hover:text-red-500 hover:bg-red-500/10 transition-colors"
                                 title="Sil"
                             >
                                 <Trash2 className="w-4 h-4" />

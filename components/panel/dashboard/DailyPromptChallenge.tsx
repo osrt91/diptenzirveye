@@ -5,6 +5,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { Target, Lightbulb, Send, CheckCircle2, Sparkles } from "lucide-react";
 import { useSupabase } from "@/lib/hooks/useSupabase";
 import { useXP } from "@/lib/hooks/useXP";
+import { triggerNotificationHaptic } from "@/lib/capacitor";
 
 const CHALLENGES = [
   {
@@ -196,6 +197,7 @@ export default function DailyPromptChallenge({
       });
 
       await awardXP(challenge.xp, `Challenge: ${challenge.title}`);
+      triggerNotificationHaptic().catch(() => {});
       setSubmitted(true);
     } finally {
       setSubmitting(false);

@@ -199,7 +199,7 @@ export default function SohbetClient({
   return (
     <div className="flex flex-col lg:flex-row gap-6">
       {/* Messages Main Area */}
-      <div className="flex-1 flex flex-col rounded-2xl border border-dz-grey-200 dark:border-dz-grey-800 bg-dz-white/50 dark:bg-dz-black/30 backdrop-blur-sm overflow-hidden min-h-[500px] max-h-[80vh] shadow-xl">
+      <div className="flex-1 flex flex-col rounded-2xl border border-dz-grey-200 dark:border-dz-grey-800 bg-dz-white/50 dark:bg-dz-black/30 backdrop-blur-sm overflow-hidden min-h-[500px] max-h-[80dvh] shadow-xl">
         <div className="px-5 py-4 border-b border-dz-grey-200 dark:border-dz-grey-800 flex flex-wrap items-center justify-between gap-4 bg-dz-white dark:bg-dz-black/40">
           <div className="flex items-center gap-3">
             <div className="w-10 h-10 rounded-xl bg-dz-orange-500/10 flex items-center justify-center text-dz-orange-500">
@@ -240,9 +240,9 @@ export default function SohbetClient({
                   key={msg.id}
                   initial={{ opacity: 0, y: 8 }}
                   animate={{ opacity: 1, y: 0 }}
-                  className="flex flex-col max-w-[90%] group"
+                  className="flex flex-col max-w-[90%] min-w-0 group"
                 >
-                  <div className="flex items-center gap-2 mb-1 pl-1">
+                  <div className="flex items-center gap-2 mb-1 pl-1 min-w-0 flex-wrap">
                     <span className="text-[10px] font-bold text-dz-orange-500 uppercase tracking-tighter">
                       {msg.user_id === currentUserId ? (currentUserName || "Sen") : "AI Yolcusu"}
                     </span>

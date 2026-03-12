@@ -1,14 +1,15 @@
 "use client";
 
-import { useCallback, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import type { User } from "@supabase/supabase-js";
 import PanelNav from "./PanelNav";
 import PanelUserMenu from "./PanelUserMenu";
 import MobileSidebarToggle from "./MobileSidebarToggle";
 import ThemeToggle from "@/components/ThemeToggle";
+import { useTheme } from "@/components/ThemeProvider";
 import { XPAnimationProvider } from "@/components/gamification/XPAnimation";
-import FloatingCoach from "./FloatingCoach";
+
 import NotificationBell from "./NotificationBell";
 import { useCoins } from "@/lib/hooks/useCoins";
 import { Coins } from "lucide-react";
@@ -39,6 +40,41 @@ export default function PanelShell({
   chatbotConfig?: { chatbotEnabled: boolean; welcomeMessage: string };
 }) {
   const [sidebarOpen, setSidebarOpen] = useState(false);
+  const { theme } = useTheme();
+  const pushInitialized = useRef(false);
+
+  // Sync native status bar with theme
+  useEffect(() => {
+    try {
+      const { isNative } = require("@/lib/capacitor");
+      if (!isNative) return;
+
+      if (theme === "dark") {
+        import("@/lib/capacitor").then((m) => m.setStatusBarDark()).catch(() => {});
+      } else {
+        import("@/lib/capacitor").then((m) => m.setStatusBarLight()).catch(() => {});
+      }
+    } catch {
+      // Not on native platform
+    }
+  }, [theme]);
+
+  // One-time push notification registration on native
+  useEffect(() => {
+    if (pushInitialized.current) return;
+    pushInitialized.current = true;
+
+    try {
+      const { isNative } = require("@/lib/capacitor");
+      if (!isNative) return;
+
+      import("@/lib/capacitor")
+        .then((m) => m.initPushNotifications())
+        .catch(() => {});
+    } catch {
+      // Not on native platform
+    }
+  }, []);
 
   const handleToggleSidebar = useCallback(() => {
     setSidebarOpen((o) => !o);
@@ -95,12 +131,7 @@ export default function PanelShell({
           </div>
         </aside>
 
-        <main id="panel-main" className="flex-1 overflow-auto p-6 pt-16 lg:pt-6">{children}</main>
-
-        <FloatingCoach
-          chatbotEnabled={chatbotConfig?.chatbotEnabled ?? true}
-          welcomeMessage={chatbotConfig?.welcomeMessage}
-        />
+        <main id="panel-main" className="flex-1 overflow-auto p-6 pt-16 lg:pt-6 pb-[max(1.5rem,env(safe-area-inset-bottom,1.5rem))]">{children}</main>
       </div>
     </XPAnimationProvider>
   );

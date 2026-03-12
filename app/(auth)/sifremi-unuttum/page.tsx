@@ -19,7 +19,7 @@ export default function SifremiUnuttumPage() {
         </p>
         <Link
           href="/giris"
-          className="inline-block rounded-lg bg-dz-orange-500 px-4 py-2 font-medium text-white hover:bg-dz-orange-600"
+          className="inline-block rounded-lg bg-dz-orange-500 px-4 py-3 min-h-[44px] font-medium text-white hover:bg-dz-orange-600"
         >
           Giriş sayfasına dön
         </Link>
@@ -57,13 +57,13 @@ export default function SifremiUnuttumPage() {
             required
             autoComplete="email"
             placeholder="ornek@email.com"
-            className="w-full rounded-lg border border-dz-grey-200 bg-dz-grey-100 px-3 py-2 text-foreground dark:border-dz-grey-600 dark:bg-dz-grey-800"
+            className="w-full rounded-lg border border-dz-grey-200 bg-dz-grey-100 px-3 py-3 text-foreground dark:border-dz-grey-600 dark:bg-dz-grey-800"
           />
         </div>
         <button
           type="submit"
           disabled={isPending}
-          className="w-full rounded-lg bg-dz-orange-500 px-4 py-2 font-medium text-white hover:bg-dz-orange-600 disabled:opacity-50"
+          className="w-full min-h-[44px] rounded-lg bg-dz-orange-500 px-4 py-3 font-medium text-white hover:bg-dz-orange-600 disabled:opacity-50"
         >
           {isPending ? "Gönderiliyor…" : "Sıfırlama bağlantısı gönder"}
         </button>

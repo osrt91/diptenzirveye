@@ -73,7 +73,7 @@ insert into public.site_settings (key, value, label, category, is_secret) values
   ('recaptcha_site_key', '', 'reCAPTCHA Site Key', 'security', false),
   ('recaptcha_secret_key', '', 'reCAPTCHA Secret Key', 'security', true),
   ('chatbot_enabled', 'true', 'AI Chatbot Aktif', 'chatbot', false),
-  ('chatbot_welcome_message', 'Merhaba! Ben DiptenZirveye AI Danismanin. Sana nasil yardimci olabilirim? AI ogrenme yolculugun, hedeflerin veya platformumuz hakkinda her seyi sorabilirsin.', 'Chatbot Karsilama Mesaji', 'chatbot', false),
+  ('chatbot_welcome_message', 'Merhaba! Ben DiptenZirveye AI Danışmanın. Sana nasıl yardımcı olabilirim? AI öğrenme yolculuğun, hedeflerin veya platformumuz hakkında her şeyi sorabilirsin.', 'Chatbot Karşılama Mesajı', 'chatbot', false),
   ('chatbot_system_prompt', '', 'Chatbot Ozel System Prompt (bos birakilirsa varsayilan kullanilir)', 'chatbot', false)
 on conflict (key) do nothing;
 

@@ -57,22 +57,22 @@ export default function AdminMessagesClient({
 
             <div className="rounded-2xl border border-dz-grey-200 dark:border-white/5 overflow-hidden">
                 <div className="overflow-x-auto">
-                    <table className="w-full table-fixed">
+                    <table className="w-full min-w-[650px]">
                         <thead>
                             <tr className="border-b border-dz-grey-200 dark:border-white/5 bg-white dark:bg-white/[0.02]">
-                                <th className="text-left text-xs font-bold text-dz-grey-500 dark:text-white/40 uppercase tracking-wider px-5 py-3 w-[18%]">
+                                <th className="text-left text-xs font-bold text-dz-grey-500 dark:text-white/40 uppercase tracking-wider px-5 py-3 whitespace-nowrap">
                                     Kullanıcı
                                 </th>
-                                <th className="text-left text-xs font-bold text-dz-grey-500 dark:text-white/40 uppercase tracking-wider px-5 py-3 w-[14%]">
+                                <th className="text-left text-xs font-bold text-dz-grey-500 dark:text-white/40 uppercase tracking-wider px-5 py-3 whitespace-nowrap">
                                     Oda
                                 </th>
-                                <th className="text-left text-xs font-bold text-dz-grey-500 dark:text-white/40 uppercase tracking-wider px-5 py-3 w-[40%]">
+                                <th className="text-left text-xs font-bold text-dz-grey-500 dark:text-white/40 uppercase tracking-wider px-5 py-3 whitespace-nowrap">
                                     Mesaj
                                 </th>
-                                <th className="text-left text-xs font-bold text-dz-grey-500 dark:text-white/40 uppercase tracking-wider px-5 py-3 w-[18%]">
+                                <th className="text-left text-xs font-bold text-dz-grey-500 dark:text-white/40 uppercase tracking-wider px-5 py-3 whitespace-nowrap">
                                     Tarih
                                 </th>
-                                <th className="text-right text-xs font-bold text-dz-grey-500 dark:text-white/40 uppercase tracking-wider px-5 py-3 w-[10%]">
+                                <th className="text-right text-xs font-bold text-dz-grey-500 dark:text-white/40 uppercase tracking-wider px-5 py-3 whitespace-nowrap">
                                     İşlem
                                 </th>
                             </tr>
@@ -108,10 +108,10 @@ export default function AdminMessagesClient({
                                     <td className="px-5 py-3 text-right">
                                         <button
                                             onClick={() => handleDelete(msg.id)}
-                                            className="text-red-400/30 hover:text-red-400 transition-colors"
+                                            className="w-11 h-11 flex items-center justify-center rounded-lg text-red-400/30 hover:text-red-400 hover:bg-red-500/10 transition-colors"
                                             title="Mesajı Sil"
                                         >
-                                            <Trash2 className="w-3.5 h-3.5" />
+                                            <Trash2 className="w-4 h-4" />
                                         </button>
                                     </td>
                                 </motion.tr>

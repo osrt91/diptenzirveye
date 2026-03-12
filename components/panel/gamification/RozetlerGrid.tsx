@@ -3,6 +3,7 @@
 import { motion } from "framer-motion";
 import { getAIToolIcon } from "../chat/ai-tool-badges";
 import { Lock, Award } from "lucide-react";
+import { triggerHaptic } from "@/lib/capacitor";
 
 type Badge = {
   id: string;
@@ -46,9 +47,12 @@ export default function RozetlerGrid({
             initial={{ opacity: 0, scale: 0.95 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ delay: i * 0.05 }}
+            onClick={() => {
+              if (earned) triggerHaptic("light").catch(() => {});
+            }}
             className={`group relative rounded-3xl border p-6 transition-all duration-300 overflow-hidden ${earned
               ? "border-dz-amber-400/60 bg-gradient-to-br from-dz-amber-400/10 via-white/80 to-dz-orange-500/10 dark:from-dz-amber-500/20 dark:via-dz-grey-900/90 dark:to-dz-orange-500/20 shadow-lg shadow-dz-amber-500/10 hover:shadow-xl hover:-translate-y-1 hover:border-dz-amber-400"
-              : "border-dz-grey-200 dark:border-dz-grey-800 bg-dz-grey-50/50 dark:bg-dz-grey-900/50 hover:bg-white dark:hover:bg-dz-grey-800 opacity-80 hover:opacity-100 hover:border-dz-grey-300 dark:hover:border-dz-grey-600"
+              : "border-dz-grey-200 dark:border-dz-grey-800 bg-dz-grey-50/50 dark:bg-dz-grey-900/50 hover:bg-dz-white dark:hover:bg-dz-grey-800 opacity-80 hover:opacity-100 hover:border-dz-grey-300 dark:hover:border-dz-grey-600"
               }`}
           >
             {/* Glossy overlay for earned badges */}

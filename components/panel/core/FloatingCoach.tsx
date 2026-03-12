@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useRef, useEffect } from "react";
+import { useState, useRef, useEffect, useCallback } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Bot, X, Send, Sparkles, Loader2 } from "lucide-react";
 
@@ -30,23 +30,28 @@ export default function FloatingCoach({
     const [input, setInput] = useState("");
     const [loading, setLoading] = useState(false);
     const bottomRef = useRef<HTMLDivElement>(null);
+    const abortRef = useRef<AbortController | null>(null);
 
     useEffect(() => {
         bottomRef.current?.scrollIntoView({ behavior: "smooth" });
     }, [messages]);
 
-    if (!chatbotEnabled) return null;
-
-    async function handleSend() {
+    const handleSend = useCallback(async () => {
         const text = input.trim();
         if (!text || loading) return;
 
         const userMsg: Message = { id: crypto.randomUUID(), text, isAi: false };
+        const aiMsgId = crypto.randomUUID();
+
         setMessages((prev) => [...prev, userMsg]);
         setInput("");
         setLoading(true);
 
         try {
+            abortRef.current?.abort();
+            const controller = new AbortController();
+            abortRef.current = controller;
+
             const res = await fetch("/api/coach", {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
@@ -57,15 +62,60 @@ export default function FloatingCoach({
                         text: m.text,
                     })),
                 }),
+                signal: controller.signal,
             });
-            const data = await res.json();
-            const aiMsg: Message = {
-                id: crypto.randomUUID(),
-                text: data.response || "Bir hata oluştu, tekrar dene.",
-                isAi: true,
-            };
-            setMessages((prev) => [...prev, aiMsg]);
-        } catch {
+
+            if (!res.ok) {
+                const data = await res.json().catch(() => null);
+                throw new Error(data?.response || "API hatası");
+            }
+
+            const contentType = res.headers.get("content-type") || "";
+
+            if (contentType.includes("text/event-stream") && res.body) {
+                // Streaming response
+                setMessages((prev) => [...prev, { id: aiMsgId, text: "", isAi: true }]);
+
+                const reader = res.body.getReader();
+                const decoder = new TextDecoder();
+                let buffer = "";
+
+                while (true) {
+                    const { done, value } = await reader.read();
+                    if (done) break;
+
+                    buffer += decoder.decode(value, { stream: true });
+                    const lines = buffer.split("\n");
+                    buffer = lines.pop() || "";
+
+                    for (const line of lines) {
+                        if (!line.startsWith("data: ")) continue;
+                        const payload = line.slice(6).trim();
+                        if (payload === "[DONE]") break;
+                        try {
+                            const { text: chunk } = JSON.parse(payload);
+                            if (chunk) {
+                                setMessages((prev) =>
+                                    prev.map((m) =>
+                                        m.id === aiMsgId ? { ...m, text: m.text + chunk } : m
+                                    )
+                                );
+                            }
+                        } catch {
+                            // skip malformed JSON
+                        }
+                    }
+                }
+            } else {
+                // Non-streaming fallback (JSON response)
+                const data = await res.json();
+                setMessages((prev) => [
+                    ...prev,
+                    { id: aiMsgId, text: data.response || "Bir hata oluştu, tekrar dene.", isAi: true },
+                ]);
+            }
+        } catch (err) {
+            if (err instanceof Error && err.name === "AbortError") return;
             setMessages((prev) => [
                 ...prev,
                 {
@@ -77,10 +127,12 @@ export default function FloatingCoach({
         } finally {
             setLoading(false);
         }
-    }
+    }, [input, loading, messages]);
+
+    if (!chatbotEnabled) return null;
 
     return (
-        <div className="fixed bottom-6 right-6 z-50 flex flex-col items-end">
+        <div className="fixed bottom-[max(1.5rem,env(safe-area-inset-bottom,1.5rem))] right-4 sm:right-6 z-50 flex flex-col items-end">
             <AnimatePresence>
                 {isOpen && (
                     <motion.div
@@ -88,7 +140,7 @@ export default function FloatingCoach({
                         animate={{ opacity: 1, y: 0, scale: 1 }}
                         exit={{ opacity: 0, y: 20, scale: 0.9 }}
                         transition={{ type: "spring", stiffness: 300, damping: 25 }}
-                        className="mb-4 w-80 sm:w-96 bg-dz-white dark:bg-dz-grey-900 border border-dz-grey-200 dark:border-dz-grey-800 rounded-3xl shadow-2xl overflow-hidden flex flex-col max-h-[70vh]"
+                        className="mb-4 w-[calc(100vw-2rem)] sm:w-96 bg-dz-white dark:bg-dz-grey-900 border border-dz-grey-200 dark:border-dz-grey-800 rounded-3xl shadow-2xl overflow-hidden flex flex-col max-h-[70dvh]"
                     >
                         <div className="p-4 bg-gradient-to-r from-dz-orange-500 to-dz-amber-500 flex items-center justify-between text-white shrink-0">
                             <div className="flex items-center gap-2 font-bold text-sm">
@@ -118,12 +170,12 @@ export default function FloatingCoach({
                                                 : "bg-dz-orange-500 text-white rounded-tr-sm"
                                         }`}
                                     >
-                                        {msg.text}
+                                        {msg.text || (loading && msg.isAi ? "" : msg.text)}
                                     </div>
                                 </motion.div>
                             ))}
 
-                            {loading && (
+                            {loading && messages[messages.length - 1]?.text === "" && (
                                 <motion.div
                                     initial={{ opacity: 0 }}
                                     animate={{ opacity: 1 }}

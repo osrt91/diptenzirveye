@@ -79,18 +79,20 @@ function NewsletterForm() {
       <div className="pl-4 text-dz-grey-500 hidden sm:block">
         <Mail className="w-5 h-5" />
       </div>
+      <label htmlFor="footer-newsletter-email" className="sr-only">E-posta adresin</label>
       <input
+        id="footer-newsletter-email"
         type="email"
         value={email}
         onChange={(e) => setEmail(e.target.value)}
         placeholder="E-posta adresin"
         required
-        className="bg-transparent border-none text-dz-white placeholder:text-dz-grey-600 focus:outline-none focus:ring-0 w-full sm:w-64 px-4 sm:px-2 py-3 sm:py-0"
+        className="bg-transparent border-none text-dz-white placeholder:text-dz-grey-600 focus:outline-none focus:ring-0 w-full sm:w-64 px-4 sm:px-2 py-3 sm:py-0 min-w-0"
       />
       <button
         type="submit"
         disabled={status === "loading"}
-        className="bg-dz-orange-500 hover:bg-dz-orange-600 text-white px-6 py-3 rounded-xl font-bold flex items-center justify-center gap-2 transition-all shadow-[0_0_20px_rgba(249,115,22,0.3)] w-full sm:w-auto disabled:opacity-50"
+        className="bg-dz-orange-500 hover:bg-dz-orange-600 text-white px-6 py-3 min-h-[44px] rounded-xl font-bold flex items-center justify-center gap-2 transition-all shadow-[0_0_20px_rgba(249,115,22,0.3)] w-full sm:w-auto disabled:opacity-50"
       >
         {status === "loading" ? "..." : <>Abone Ol <ArrowRight className="w-4 h-4" /></>}
       </button>
@@ -112,7 +114,7 @@ export default function Footer() {
       <div className="max-w-7xl mx-auto px-4 relative z-10">
 
         {/* Top Newsletter & CTA Section */}
-        <div className="bg-dz-white/5 dark:bg-dz-white/[0.02] border border-dz-white/10 rounded-3xl p-8 md:p-12 mb-16 backdrop-blur-md shadow-2xl relative overflow-hidden group flex flex-col lg:flex-row items-center justify-between gap-10">
+        <div className="bg-dz-white/5 dark:bg-dz-white/[0.02] border border-dz-white/10 rounded-3xl p-6 sm:p-8 md:p-12 mb-16 backdrop-blur-md shadow-2xl relative overflow-hidden group flex flex-col lg:flex-row items-center justify-between gap-10">
           <div className="absolute top-0 right-0 w-64 h-64 bg-dz-orange-500/20 blur-[80px] rounded-full group-hover:bg-dz-orange-500/30 transition-all duration-700 pointer-events-none" />
 
           <div className="max-w-xl relative z-10">
@@ -179,12 +181,12 @@ export default function Footer() {
       </div>
 
       {/* Bottom Bar */}
-      <div className="border-t border-dz-white/10 bg-dz-black">
-        <div className="max-w-7xl mx-auto px-8 py-6 flex flex-col md:flex-row items-center justify-between gap-4">
-          <p className="text-sm text-dz-grey-600 font-medium">
+      <div className="border-t border-dz-white/10 bg-dz-black pb-[env(safe-area-inset-bottom,0px)]">
+        <div className="max-w-7xl mx-auto px-4 sm:px-8 py-6 flex flex-col md:flex-row items-center justify-between gap-4">
+          <p className="text-sm text-dz-grey-600 font-medium text-center md:text-left">
             © {new Date().getFullYear()} Dipten<span className="text-dz-orange-500">Zirveye</span>. Tüm hakları saklıdır.
           </p>
-          <div className="flex items-center gap-6 text-sm text-dz-grey-600 font-medium">
+          <div className="flex flex-wrap items-center justify-center gap-4 sm:gap-6 text-sm text-dz-grey-600 font-medium">
             <span>Türkiye&apos;de Tasarlandı 🇹🇷</span>
             <div className="w-1 h-1 rounded-full bg-dz-grey-700" />
             <span className="flex items-center gap-2 cursor-default" title="Tüm sistemler çalışıyor">

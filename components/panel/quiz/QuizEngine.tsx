@@ -13,6 +13,7 @@ import {
   Sparkles,
 } from "lucide-react";
 import { useXP } from "@/lib/hooks/useXP";
+import { triggerHaptic, triggerNotificationHaptic } from "@/lib/capacitor";
 
 export interface QuizQuestion {
   id: string;
@@ -97,6 +98,7 @@ export default function QuizEngine({
 
       if (earnedXP > 0) {
         await awardXP(earnedXP, `Quiz: ${title}`);
+        triggerNotificationHaptic().catch(() => {});
       }
       onComplete?.(finalScore, total);
     }
@@ -107,7 +109,12 @@ export default function QuizEngine({
     const correct = optionIdx === current.correctIndex;
     setChecked(true);
     setIsCorrect(correct);
-    if (correct) setScore((s) => s + 1);
+    if (correct) {
+      setScore((s) => s + 1);
+      triggerHaptic("light").catch(() => {});
+    } else {
+      triggerHaptic("heavy").catch(() => {});
+    }
     setAnswers((prev) => ({ ...prev, [current.id]: { selected: optionIdx, correct } }));
     setTimeout(advance, 1000);
   };
@@ -129,6 +136,7 @@ export default function QuizEngine({
     setChecked(true);
     setIsCorrect(correct);
     if (correct) setScore((s) => s + 1);
+    triggerHaptic(correct ? "light" : "heavy").catch(() => {});
     setAnswers((prev) => ({ ...prev, [current.id]: { order: orderState, correct } }));
     setTimeout(advance, 1500);
   };
@@ -155,6 +163,7 @@ export default function QuizEngine({
     setChecked(true);
     setIsCorrect(allCorrect);
     if (allCorrect) setScore((s) => s + 1);
+    triggerHaptic(allCorrect ? "light" : "heavy").catch(() => {});
     setAnswers((prev) => ({ ...prev, [current.id]: { values: blankValues, correct: allCorrect } }));
     setTimeout(advance, 1500);
   };
