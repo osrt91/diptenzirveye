@@ -87,18 +87,20 @@ export default function OnboardingWizard({
           await supabase.auth.updateUser({
             data: { full_name: displayName.trim() },
           });
-          await supabase
+          const { error } = await supabase
             .from("profiles")
             .update({ display_name: displayName.trim() })
             .eq("id", userId);
+          if (error) console.error("Onboarding step 0 error:", error);
         }
         setDirection(1);
         setStep(1);
       } else if (step === 1) {
-        await supabase
+        const { error } = await supabase
           .from("profiles")
           .update({ onboarding_goals: selectedGoals })
           .eq("id", userId);
+        if (error) console.error("Onboarding step 1 error:", error);
         setDirection(1);
         setStep(2);
       }
@@ -117,10 +119,20 @@ export default function OnboardingWizard({
     setLoading(true);
 
     try {
-      await supabase
+      const { error } = await supabase
         .from("profiles")
         .update({ onboarding_completed: true })
         .eq("id", userId);
+
+      if (error) {
+        console.error("Onboarding finish error:", error);
+        // Fallback: API route ile dene
+        await fetch("/api/onboarding-complete", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+        });
+      }
+
       router.push("/panel");
       router.refresh();
     } finally {
