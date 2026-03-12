@@ -83,7 +83,7 @@ async function StreakCalendarSection({ userId }: { userId: string }) {
 
   const calendarDays = [];
   const today = new Date();
-  for (let i = 27; i >= 0; i--) {
+  for (let i = 97; i >= 0; i--) {
     const d = new Date(today);
     d.setDate(d.getDate() - i);
     calendarDays.push(d.toISOString().slice(0, 10));
@@ -314,14 +314,14 @@ export default async function PanelDashboardPage() {
         </Suspense>
       </div>
 
-      <div className="grid gap-6 lg:grid-cols-2">
-        <section>
+      <div className="grid gap-6 lg:grid-cols-2 items-start">
+        <section className="flex flex-col">
           <h2 className="font-display text-lg font-semibold mb-4 text-dz-black dark:text-dz-white">
             Günlük Görevler
           </h2>
           <Suspense
             fallback={
-              <div className="rounded-xl border border-dz-grey-200 dark:border-dz-grey-800 p-5">
+              <div className="rounded-xl border border-dz-grey-200 dark:border-dz-grey-800 p-5 flex-1">
                 <div className="animate-pulse space-y-3">
                   <div className="h-10 rounded-lg bg-dz-grey-200 dark:bg-dz-grey-800" />
                   <div className="h-8 w-3/4 rounded-lg bg-dz-grey-200 dark:bg-dz-grey-800" />
@@ -333,16 +333,18 @@ export default async function PanelDashboardPage() {
           </Suspense>
         </section>
 
-        <Suspense
-          fallback={
-            <div className="rounded-2xl border border-dz-grey-200 dark:border-dz-grey-800 p-5 space-y-4">
-              <Skeleton className="h-5 w-48" />
-              <Skeleton className="h-24 w-full" />
-            </div>
-          }
-        >
-          <PromptChallengeSection userId={userId} />
-        </Suspense>
+        <section className="flex flex-col">
+          <Suspense
+            fallback={
+              <div className="rounded-2xl border border-dz-grey-200 dark:border-dz-grey-800 p-5 space-y-4 flex-1">
+                <Skeleton className="h-5 w-48" />
+                <Skeleton className="h-24 w-full" />
+              </div>
+            }
+          >
+            <PromptChallengeSection userId={userId} />
+          </Suspense>
+        </section>
       </div>
     </div>
   );

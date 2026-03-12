@@ -699,9 +699,9 @@ export default function ProjePlanlayici() {
         <div>
           <H2 t="Zirve Raporu" d={isExisting ? "Mevcut projendeki sorunların analizi ve çözüm önerileri." : "Seçimlerine göre kişiselleştirilmiş proje analizi."} />
 
-          <div className="flex gap-2 mb-4 overflow-x-auto pb-1">
+          <div className={`grid gap-2 mb-4 ${tabs.length === 4 ? "grid-cols-4" : "grid-cols-3"}`}>
             {tabs.map(t => (
-              <button key={t.id} onClick={() => setRTab(t.id)} className={`flex-1 min-w-[70px] shrink-0 p-3 rounded-xl cursor-pointer text-center transition-all ${activeTab === t.id ? "border-2 border-dz-orange-500 bg-orange-50 dark:bg-dz-orange-500/10" : "border-[1.5px] border-dz-grey-200 dark:border-dz-grey-700 bg-dz-grey-50 dark:bg-dz-grey-900 hover:border-dz-orange-400"}`}>
+              <button key={t.id} onClick={() => setRTab(t.id)} className={`p-3 rounded-xl cursor-pointer text-center transition-all ${activeTab === t.id ? "border-2 border-dz-orange-500 bg-orange-50 dark:bg-dz-orange-500/10" : "border-[1.5px] border-dz-grey-200 dark:border-dz-grey-700 bg-dz-grey-50 dark:bg-dz-grey-900 hover:border-dz-orange-400"}`}>
                 <div className={`text-[22px] font-extrabold font-display ${activeTab === t.id ? "text-dz-orange-500" : "text-dz-black dark:text-dz-white"}`}>{t.c}</div>
                 <div className={`text-[11px] font-semibold font-sans truncate ${activeTab === t.id ? "text-dz-orange-600 dark:text-dz-orange-400" : "text-dz-grey-500"}`}>{t.l}</div>
               </button>

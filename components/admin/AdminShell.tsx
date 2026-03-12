@@ -3,10 +3,12 @@
 import { useState } from "react";
 import type { User } from "@supabase/supabase-js";
 import Link from "next/link";
-import { usePathname } from "next/navigation";
-import { Users, BookOpen, Medal, MessageSquare, Lightbulb, ArrowLeft, Shield, Flag, PenTool, Ticket, Star, Menu, X, Settings, ClipboardList, Bell } from "lucide-react";
+import { usePathname, useRouter } from "next/navigation";
+import { createBrowserClient } from "@supabase/ssr";
+import { Users, BookOpen, Medal, MessageSquare, Lightbulb, ArrowLeft, Shield, Flag, PenTool, Ticket, Star, Menu, X, Settings, ClipboardList, Bell, LogOut } from "lucide-react";
 import { FaChartBar } from "react-icons/fa";
 import ThemeToggle from "@/components/ThemeToggle";
+import DZLogo from "@/components/DZLogo";
 
 type NavItem = {
     href: string;
@@ -38,7 +40,18 @@ export default function AdminShell({
     children: React.ReactNode;
 }) {
     const pathname = usePathname();
+    const router = useRouter();
     const [sidebarOpen, setSidebarOpen] = useState(false);
+
+    async function handleSignOut() {
+        const supabase = createBrowserClient(
+            process.env.NEXT_PUBLIC_SUPABASE_URL!,
+            process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
+        );
+        await supabase.auth.signOut();
+        router.push("/");
+        router.refresh();
+    }
 
     return (
         <div className="flex min-h-screen bg-dz-grey-50 dark:bg-background text-dz-black dark:text-white">
@@ -69,14 +82,14 @@ export default function AdminShell({
                 {/* Logo */}
                 <div className="p-5 border-b border-dz-grey-200 dark:border-white/5 flex items-center justify-between">
                     <div className="flex items-center gap-3">
-                        <div className="w-9 h-9 rounded-xl bg-gradient-to-br from-dz-orange-500 to-dz-amber-400 flex items-center justify-center">
-                            <Shield className="w-4 h-4 text-white" />
-                        </div>
+                        <DZLogo size="sm" />
                         <div>
                             <h1 className="font-display font-bold text-dz-black dark:text-white text-sm tracking-tight">
-                                Admin Paneli
+                                Dipten<span className="text-dz-orange-500">Zirveye</span>
                             </h1>
-                            <p className="text-[10px] text-dz-grey-500 dark:text-white/40 font-mono">Dipten<span className="text-dz-orange-500">Zirveye</span></p>
+                            <p className="text-[10px] text-dz-grey-500 dark:text-white/40 font-mono flex items-center gap-1">
+                                <Shield className="w-3 h-3" /> Admin Paneli
+                            </p>
                         </div>
                     </div>
                     <button
@@ -127,6 +140,13 @@ export default function AdminShell({
                     <div className="px-3 py-2 text-xs text-dz-grey-400 dark:text-white/20 font-mono truncate">
                         {user.email}
                     </div>
+                    <button
+                        onClick={handleSignOut}
+                        className="flex items-center justify-center gap-2 w-full rounded-xl bg-red-50 dark:bg-red-500/10 text-red-600 dark:text-red-400 px-3 py-2.5 text-xs font-medium hover:bg-red-100 dark:hover:bg-red-500/20 transition-colors min-h-[44px]"
+                    >
+                        <LogOut className="w-4 h-4" />
+                        Çıkış Yap
+                    </button>
                 </div>
             </aside>
 

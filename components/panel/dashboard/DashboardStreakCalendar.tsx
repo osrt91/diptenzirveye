@@ -52,43 +52,45 @@ export default function DashboardStreakCalendar({
         </div>
       </div>
 
-      <div className="flex gap-1">
-        <div className="flex flex-col gap-1 mr-1.5 pt-0.5">
-          {dayLabels.map((label) => (
-            <div key={label} className="w-4 h-4 flex items-center">
-              <span className="text-[8px] font-bold text-dz-grey-400 leading-none">{label[0]}</span>
+      <div className="overflow-x-auto -mx-2 px-2 pb-1">
+        <div className="flex gap-[3px] min-w-fit">
+          <div className="flex flex-col gap-[3px] mr-1 pt-0.5">
+            {dayLabels.map((label) => (
+              <div key={label} className="w-3 h-3 flex items-center">
+                <span className="text-[7px] font-bold text-dz-grey-400 leading-none">{label[0]}</span>
+              </div>
+            ))}
+          </div>
+          {weeks.map((week, wi) => (
+            <div key={wi} className="flex flex-col gap-[3px]">
+              {week.map((day, di) => {
+                const isToday = day.date === today;
+                return (
+                  <motion.div
+                    key={day.date}
+                    initial={{ scale: 0 }}
+                    animate={{ scale: 1 }}
+                    transition={{ delay: (wi * 7 + di) * 0.005 }}
+                    title={`${new Date(day.date).toLocaleDateString("tr-TR", { weekday: "long", day: "numeric", month: "long" })}${day.active ? " — Aktif" : ""}`}
+                    className={`w-3 h-3 rounded-[3px] transition-colors cursor-default ${day.active
+                        ? "bg-gradient-to-br from-dz-orange-400 to-dz-amber-500 shadow-sm shadow-dz-orange-500/20"
+                        : "bg-dz-grey-100 dark:bg-dz-white/5"
+                      } ${isToday ? "ring-1.5 ring-dz-orange-500 ring-offset-1 ring-offset-dz-white dark:ring-offset-[#0a0a0a]" : ""}`}
+                  />
+                );
+              })}
             </div>
           ))}
         </div>
-        {weeks.map((week, wi) => (
-          <div key={wi} className="flex flex-col gap-1">
-            {week.map((day, di) => {
-              const isToday = day.date === today;
-              return (
-                <motion.div
-                  key={day.date}
-                  initial={{ scale: 0 }}
-                  animate={{ scale: 1 }}
-                  transition={{ delay: (wi * 7 + di) * 0.008 }}
-                  title={`${new Date(day.date).toLocaleDateString("tr-TR", { weekday: "long", day: "numeric", month: "long" })}${day.active ? " — Aktif" : ""}`}
-                  className={`w-4 h-4 rounded-md transition-colors cursor-default ${day.active
-                      ? "bg-gradient-to-br from-dz-orange-400 to-dz-amber-500 shadow-sm shadow-dz-orange-500/20"
-                      : "bg-dz-grey-100 dark:bg-dz-white/5"
-                    } ${isToday ? "ring-2 ring-dz-orange-500 ring-offset-2 ring-offset-dz-white dark:ring-offset-[#0a0a0a]" : ""}`}
-                />
-              );
-            })}
-          </div>
-        ))}
       </div>
 
       <div className="flex items-center justify-between mt-5">
         <div className="flex items-center gap-2 text-xs text-dz-grey-500">
           <span>Az</span>
-          <div className="flex gap-1.5">
-            <div className="w-3.5 h-3.5 rounded-sm bg-dz-grey-100 dark:bg-dz-white/5" />
-            <div className="w-3.5 h-3.5 rounded-sm bg-gradient-to-br from-dz-orange-400 to-dz-amber-500 opacity-50" />
-            <div className="w-3.5 h-3.5 rounded-sm bg-gradient-to-br from-dz-orange-400 to-dz-amber-500" />
+          <div className="flex gap-1">
+            <div className="w-3 h-3 rounded-[3px] bg-dz-grey-100 dark:bg-dz-white/5" />
+            <div className="w-3 h-3 rounded-[3px] bg-gradient-to-br from-dz-orange-400 to-dz-amber-500 opacity-50" />
+            <div className="w-3 h-3 rounded-[3px] bg-gradient-to-br from-dz-orange-400 to-dz-amber-500" />
           </div>
           <span>Çok</span>
         </div>

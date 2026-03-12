@@ -32,9 +32,24 @@ export async function requestNotificationPermission(): Promise<string | null> {
     if (permission !== "granted") return null;
 
     const vapidKey = process.env.NEXT_PUBLIC_FIREBASE_VAPID_KEY;
+    const swReg = await navigator.serviceWorker.register("/firebase-messaging-sw.js");
+
+    // Send Firebase config to service worker (avoids hardcoding secrets)
+    if (swReg.active) {
+      swReg.active.postMessage({ type: "FIREBASE_CONFIG", config: firebaseConfig });
+    }
+    swReg.addEventListener("updatefound", () => {
+      const newWorker = swReg.installing;
+      newWorker?.addEventListener("statechange", () => {
+        if (newWorker.state === "activated") {
+          newWorker.postMessage({ type: "FIREBASE_CONFIG", config: firebaseConfig });
+        }
+      });
+    });
+
     const token = await getToken(m, {
       vapidKey,
-      serviceWorkerRegistration: await navigator.serviceWorker.register("/firebase-messaging-sw.js"),
+      serviceWorkerRegistration: swReg,
     });
 
     return token;
