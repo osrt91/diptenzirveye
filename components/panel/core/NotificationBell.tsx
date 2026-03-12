@@ -94,10 +94,11 @@ export default function NotificationBell() {
   function handleToggle() {
     if (!open && bellRef.current) {
       const rect = bellRef.current.getBoundingClientRect();
+      const dropdownWidth = Math.min(320, window.innerWidth - 16);
       setDropdownStyle({
         position: "fixed" as const,
         top: rect.bottom + 8,
-        right: Math.max(8, window.innerWidth - rect.right),
+        left: Math.min(rect.left, window.innerWidth - dropdownWidth - 8),
       });
       fetchNotifications();
     }
