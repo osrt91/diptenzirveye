@@ -71,7 +71,7 @@ export default async function ProfilPage() {
     .filter(Boolean) as string[];
 
   return (
-    <div className="space-y-6 max-w-3xl">
+    <div className="space-y-6">
       <h1 className="font-display text-2xl font-bold text-dz-black dark:text-dz-white">
         Profil
       </h1>

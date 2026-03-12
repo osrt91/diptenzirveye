@@ -166,7 +166,9 @@ export default function PanelShell({
           </div>
         </aside>
 
-        <main id="panel-main" className="flex-1 overflow-auto p-6 pt-16 lg:pt-6 pb-[max(1.5rem,env(safe-area-inset-bottom,1.5rem))]">{children}</main>
+        <main id="panel-main" className="flex-1 overflow-auto p-6 pt-16 lg:pt-6 pb-[max(1.5rem,env(safe-area-inset-bottom,1.5rem))]">
+          <div className="max-w-[1400px] mx-auto">{children}</div>
+        </main>
       </div>
     </XPAnimationProvider>
   );

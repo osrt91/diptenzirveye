@@ -236,7 +236,7 @@ export default function ProfilClient({
   ], [stats, level]);
 
   return (
-    <div className="space-y-8 max-w-4xl">
+    <div className="space-y-6">
       {/* Profile Header with Avatar */}
       <motion.div
         initial={{ opacity: 0, y: 10 }}
@@ -306,7 +306,7 @@ export default function ProfilClient({
       {/* Stats Grid */}
       <div>
         <h3 className="font-display text-lg font-semibold text-dz-black dark:text-dz-white mb-4">İstatistikler</h3>
-        <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+        <div className="grid gap-4 grid-cols-2 sm:grid-cols-3 lg:grid-cols-6">
           {statCards.map((card, i) => (
             <motion.div
               key={card.label}
@@ -331,7 +331,7 @@ export default function ProfilClient({
             Masterclass Yetkinliği
           </span>
         </div>
-        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3">
+        <div className="grid grid-cols-3 sm:grid-cols-5 lg:grid-cols-8 gap-2">
           {AI_CERT_TOOLS.map((tool, idx) => {
             const earned = earnedSet.has(tool.slug);
             return (
@@ -340,108 +340,109 @@ export default function ProfilClient({
                 initial={{ opacity: 0, scale: 0.9 }}
                 animate={{ opacity: 1, scale: 1 }}
                 transition={{ delay: 0.1 + idx * 0.05 }}
-                className={`flex flex-col items-center justify-center p-4 rounded-2xl border transition-all duration-500 bg-dz-white dark:bg-dz-black shadow-sm ${earned
+                className={`flex flex-col items-center justify-center p-3 rounded-xl border transition-all duration-500 bg-dz-white dark:bg-dz-black shadow-sm ${earned
                   ? "border-dz-orange-500/30 text-dz-orange-500 shadow-dz-orange-500/5 ring-1 ring-dz-orange-500/10"
                   : "border-dz-grey-200 dark:border-dz-grey-800 text-dz-grey-300 dark:text-dz-grey-600 grayscale opacity-50"
                   }`}
               >
-                <div className={`mb-3 transition-transform duration-500 ${earned ? "scale-110" : "scale-90"}`}>
-                  <tool.Icon className="w-10 h-10" />
+                <div className={`mb-2 transition-transform duration-500 ${earned ? "scale-110" : "scale-90"}`}>
+                  <tool.Icon className="w-8 h-8" />
                 </div>
-                <span className={`text-[10px] font-black uppercase tracking-widest ${earned ? "text-dz-black dark:text-white" : "text-dz-grey-400 dark:text-dz-grey-600"}`}>
+                <span className={`text-[9px] font-black uppercase tracking-wider ${earned ? "text-dz-black dark:text-white" : "text-dz-grey-400 dark:text-dz-grey-600"}`}>
                   {tool.name}
                 </span>
-                {earned && <span className="mt-1 text-[8px] font-bold text-green-500 uppercase tracking-wider">✓ Kazanıldı</span>}
+                {earned && <span className="mt-0.5 text-[7px] font-bold text-green-500 uppercase tracking-wider">✓ Kazanıldı</span>}
               </motion.div>
             );
           })}
         </div>
       </div>
 
-      {/* Edit Profile */}
-      <motion.div
-        initial={{ opacity: 0, y: 10 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ delay: 0.2 }}
-        className="rounded-2xl border border-dz-grey-200 dark:border-dz-grey-800 bg-dz-white dark:bg-dz-grey-900 p-6"
-      >
-        <div className="flex items-center gap-2 mb-4">
-          <User className="w-5 h-5 text-dz-orange-500" />
-          <h3 className="font-display text-lg font-semibold text-dz-black dark:text-dz-white">Profili Düzenle</h3>
-        </div>
-        <div className="space-y-4">
-          <div>
-            <label htmlFor="display-name" className="block text-sm font-medium text-dz-grey-600 dark:text-dz-grey-400 mb-1">Görünen Ad</label>
-            <input
-              id="display-name"
-              type="text"
-              value={name}
-              onChange={(e) => setName(e.target.value)}
-              className="w-full max-w-sm rounded-lg border border-dz-grey-200 dark:border-dz-grey-700 bg-background px-3 py-2.5 text-sm"
-              placeholder="Adını gir"
-            />
+      {/* Edit Profile + Change Password — side by side */}
+      <div className="grid gap-6 lg:grid-cols-2">
+        <motion.div
+          initial={{ opacity: 0, y: 10 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.2 }}
+          className="rounded-2xl border border-dz-grey-200 dark:border-dz-grey-800 bg-dz-white dark:bg-dz-grey-900 p-6"
+        >
+          <div className="flex items-center gap-2 mb-4">
+            <User className="w-5 h-5 text-dz-orange-500" />
+            <h3 className="font-display text-lg font-semibold text-dz-black dark:text-dz-white">Profili Düzenle</h3>
           </div>
-          <div>
-            <label className="block text-sm font-medium text-dz-grey-600 dark:text-dz-grey-400 mb-1">E-posta</label>
-            <input type="email" value={email} disabled className="w-full max-w-sm rounded-lg border border-dz-grey-200 dark:border-dz-grey-700 bg-dz-grey-100 dark:bg-dz-grey-800 px-3 py-2.5 text-sm text-dz-grey-500 cursor-not-allowed" />
+          <div className="space-y-4">
+            <div>
+              <label htmlFor="display-name" className="block text-sm font-medium text-dz-grey-600 dark:text-dz-grey-400 mb-1">Görünen Ad</label>
+              <input
+                id="display-name"
+                type="text"
+                value={name}
+                onChange={(e) => setName(e.target.value)}
+                className="w-full rounded-lg border border-dz-grey-200 dark:border-dz-grey-700 bg-background px-3 py-2.5 text-sm"
+                placeholder="Adını gir"
+              />
+            </div>
+            <div>
+              <label className="block text-sm font-medium text-dz-grey-600 dark:text-dz-grey-400 mb-1">E-posta</label>
+              <input type="email" value={email} disabled className="w-full rounded-lg border border-dz-grey-200 dark:border-dz-grey-700 bg-dz-grey-100 dark:bg-dz-grey-800 px-3 py-2.5 text-sm text-dz-grey-500 cursor-not-allowed" />
+            </div>
+            {error && <p className="text-sm text-red-600 dark:text-red-400">{error}</p>}
+            {saved && <p className="text-sm text-green-600 dark:text-green-400 flex items-center gap-1"><CheckCircle className="w-4 h-4" /> Kaydedildi.</p>}
+            <button
+              type="button"
+              onClick={handleSaveName}
+              disabled={!hasNameChanged || saving}
+              className="rounded-lg bg-dz-orange-500 px-5 py-2.5 text-sm font-medium text-white hover:bg-dz-orange-600 disabled:opacity-50 transition-colors"
+            >
+              {saving ? "Kaydediliyor..." : "Kaydet"}
+            </button>
           </div>
-          {error && <p className="text-sm text-red-600 dark:text-red-400">{error}</p>}
-          {saved && <p className="text-sm text-green-600 dark:text-green-400 flex items-center gap-1"><CheckCircle className="w-4 h-4" /> Kaydedildi.</p>}
-          <button
-            type="button"
-            onClick={handleSaveName}
-            disabled={!hasNameChanged || saving}
-            className="rounded-lg bg-dz-orange-500 px-5 py-2.5 text-sm font-medium text-white hover:bg-dz-orange-600 disabled:opacity-50 transition-colors"
-          >
-            {saving ? "Kaydediliyor..." : "Kaydet"}
-          </button>
-        </div>
-      </motion.div>
+        </motion.div>
 
-      {/* Change Password */}
-      <motion.div
-        initial={{ opacity: 0, y: 10 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ delay: 0.25 }}
-        className="rounded-2xl border border-dz-grey-200 dark:border-dz-grey-800 bg-dz-white dark:bg-dz-grey-900 p-6"
-      >
-        <div className="flex items-center gap-2 mb-4">
-          <Key className="w-5 h-5 text-dz-orange-500" />
-          <h3 className="font-display text-lg font-semibold text-dz-black dark:text-dz-white">Şifre Değiştir</h3>
-        </div>
-        <div className="space-y-4 max-w-sm">
-          <div>
-            <label className="block text-sm font-medium text-dz-grey-600 dark:text-dz-grey-400 mb-1">Yeni Şifre</label>
-            <input
-              type="password"
-              value={newPassword}
-              onChange={(e) => setNewPassword(e.target.value)}
-              className="w-full rounded-lg border border-dz-grey-200 dark:border-dz-grey-700 bg-background px-3 py-2.5 text-sm"
-              placeholder="En az 6 karakter"
-            />
+        <motion.div
+          initial={{ opacity: 0, y: 10 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.25 }}
+          className="rounded-2xl border border-dz-grey-200 dark:border-dz-grey-800 bg-dz-white dark:bg-dz-grey-900 p-6"
+        >
+          <div className="flex items-center gap-2 mb-4">
+            <Key className="w-5 h-5 text-dz-orange-500" />
+            <h3 className="font-display text-lg font-semibold text-dz-black dark:text-dz-white">Şifre Değiştir</h3>
           </div>
-          <div>
-            <label className="block text-sm font-medium text-dz-grey-600 dark:text-dz-grey-400 mb-1">Şifre Tekrar</label>
-            <input
-              type="password"
-              value={confirmPassword}
-              onChange={(e) => setConfirmPassword(e.target.value)}
-              className="w-full rounded-lg border border-dz-grey-200 dark:border-dz-grey-700 bg-background px-3 py-2.5 text-sm"
-              placeholder="Şifreyi tekrarla"
-            />
+          <div className="space-y-4">
+            <div>
+              <label className="block text-sm font-medium text-dz-grey-600 dark:text-dz-grey-400 mb-1">Yeni Şifre</label>
+              <input
+                type="password"
+                value={newPassword}
+                onChange={(e) => setNewPassword(e.target.value)}
+                className="w-full rounded-lg border border-dz-grey-200 dark:border-dz-grey-700 bg-background px-3 py-2.5 text-sm"
+                placeholder="En az 6 karakter"
+              />
+            </div>
+            <div>
+              <label className="block text-sm font-medium text-dz-grey-600 dark:text-dz-grey-400 mb-1">Şifre Tekrar</label>
+              <input
+                type="password"
+                value={confirmPassword}
+                onChange={(e) => setConfirmPassword(e.target.value)}
+                className="w-full rounded-lg border border-dz-grey-200 dark:border-dz-grey-700 bg-background px-3 py-2.5 text-sm"
+                placeholder="Şifreyi tekrarla"
+              />
+            </div>
+            {passwordError && <p className="text-sm text-red-600 dark:text-red-400">{passwordError}</p>}
+            {passwordSaved && <p className="text-sm text-green-600 dark:text-green-400 flex items-center gap-1"><CheckCircle className="w-4 h-4" /> Şifre değiştirildi.</p>}
+            <button
+              type="button"
+              onClick={handleChangePassword}
+              disabled={passwordSaving || !newPassword}
+              className="rounded-lg bg-dz-orange-500 px-5 py-2.5 text-sm font-medium text-white hover:bg-dz-orange-600 disabled:opacity-50 transition-colors"
+            >
+              {passwordSaving ? "Değiştiriliyor..." : "Şifreyi Değiştir"}
+            </button>
           </div>
-          {passwordError && <p className="text-sm text-red-600 dark:text-red-400">{passwordError}</p>}
-          {passwordSaved && <p className="text-sm text-green-600 dark:text-green-400 flex items-center gap-1"><CheckCircle className="w-4 h-4" /> Şifre değiştirildi.</p>}
-          <button
-            type="button"
-            onClick={handleChangePassword}
-            disabled={passwordSaving || !newPassword}
-            className="rounded-lg bg-dz-orange-500 px-5 py-2.5 text-sm font-medium text-white hover:bg-dz-orange-600 disabled:opacity-50 transition-colors"
-          >
-            {passwordSaving ? "Değiştiriliyor..." : "Şifreyi Değiştir"}
-          </button>
-        </div>
-      </motion.div>
+        </motion.div>
+      </div>
 
       {/* Security & Account */}
       <motion.div

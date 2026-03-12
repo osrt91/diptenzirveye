@@ -9,7 +9,6 @@ import DashboardDailyTasks from "@/components/panel/dashboard/DashboardDailyTask
 import DashboardWeeklyChart from "@/components/panel/dashboard/DashboardWeeklyChart";
 import DashboardStreakCalendar from "@/components/panel/dashboard/DashboardStreakCalendar";
 import DashboardCoins from "@/components/panel/dashboard/DashboardCoins";
-import DashboardQuickAccess from "@/components/panel/dashboard/DashboardQuickAccess";
 import DashboardWelcome from "@/components/panel/dashboard/DashboardWelcome";
 import DailyPromptChallenge from "@/components/panel/dashboard/DailyPromptChallenge";
 import BookEcosystem from "@/components/panel/dashboard/BookEcosystem";
@@ -255,7 +254,7 @@ export default async function PanelDashboardPage() {
   const userName = user.user_metadata?.full_name || user.email?.split("@")[0] || "Zirveci";
 
   return (
-    <div className="space-y-8">
+    <div className="space-y-6">
       <h1 className="font-display text-2xl font-bold text-dz-black dark:text-dz-white">
         Gösterge Paneli
       </h1>
@@ -277,8 +276,6 @@ export default async function PanelDashboardPage() {
           <DashboardCoins />
         </Suspense>
       </div>
-
-      <DashboardQuickAccess />
 
       <Suspense
         fallback={
