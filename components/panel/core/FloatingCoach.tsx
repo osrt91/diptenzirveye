@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useRef, useEffect, useCallback } from "react";
+import { usePathname } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
 import { Bot, X, Send, Sparkles, Loader2 } from "lucide-react";
 
@@ -19,11 +20,12 @@ export default function FloatingCoach({
     chatbotEnabled = true,
     welcomeMessage,
 }: FloatingCoachProps) {
+    const pathname = usePathname();
     const [isOpen, setIsOpen] = useState(false);
     const [messages, setMessages] = useState<Message[]>([
         {
             id: "welcome",
-            text: welcomeMessage || "Merhaba! Ben DiptenZirveye AI Danışmanın. Sana nasıl yardımcı olabilirim? AI öğrenme yolculuğun, hedeflerin veya platformumuz hakkında her şeyi sorabilirsin.",
+            text: welcomeMessage || "Selam! Platformdaki 500+ Prompt'tan hangisini denemek istersin? Ya da bugunku Prompt Challenge'a atla, 25 XP kazan!",
             isAi: true,
         },
     ]);
@@ -57,6 +59,7 @@ export default function FloatingCoach({
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({
                     question: text,
+                    pathname,
                     history: messages.slice(-6).map((m) => ({
                         role: m.isAi ? "model" : "user",
                         text: m.text,
@@ -127,12 +130,12 @@ export default function FloatingCoach({
         } finally {
             setLoading(false);
         }
-    }, [input, loading, messages]);
+    }, [input, loading, messages, pathname]);
 
     if (!chatbotEnabled) return null;
 
     return (
-        <div className="fixed bottom-[max(1.5rem,env(safe-area-inset-bottom,1.5rem))] right-4 sm:right-6 z-50 flex flex-col items-end">
+        <div className="fixed bottom-[max(5.5rem,calc(env(safe-area-inset-bottom,0px)+5.5rem))] right-4 sm:right-6 z-50 flex flex-col items-end">
             <AnimatePresence>
                 {isOpen && (
                     <motion.div

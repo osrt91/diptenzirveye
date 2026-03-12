@@ -4,7 +4,7 @@ import { useState } from "react";
 import type { User } from "@supabase/supabase-js";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { Users, BookOpen, Medal, MessageSquare, Lightbulb, ArrowLeft, Shield, Flag, PenTool, Ticket, Star, Menu, X, Settings, ClipboardList } from "lucide-react";
+import { Users, BookOpen, Medal, MessageSquare, Lightbulb, ArrowLeft, Shield, Flag, PenTool, Ticket, Star, Menu, X, Settings, ClipboardList, Bell } from "lucide-react";
 import { FaChartBar } from "react-icons/fa";
 import ThemeToggle from "@/components/ThemeToggle";
 
@@ -25,6 +25,7 @@ const links: NavItem[] = [
     { href: "/admin/blog", label: "Blog Yazıları", icon: <PenTool className="w-4 h-4" /> },
     { href: "/admin/kuponlar", label: "Kuponlar", icon: <Ticket className="w-4 h-4" /> },
     { href: "/admin/testimonials", label: "Yorumlar", icon: <Star className="w-4 h-4" /> },
+    { href: "/admin/bildirimler", label: "Bildirimler", icon: <Bell className="w-4 h-4" /> },
     { href: "/admin/test", label: "Sistem Testi", icon: <ClipboardList className="w-4 h-4" /> },
     { href: "/admin/ayarlar", label: "Site Ayarları", icon: <Settings className="w-4 h-4" /> },
 ];
@@ -68,7 +69,7 @@ export default function AdminShell({
                 {/* Logo */}
                 <div className="p-5 border-b border-dz-grey-200 dark:border-white/5 flex items-center justify-between">
                     <div className="flex items-center gap-3">
-                        <div className="w-9 h-9 rounded-xl bg-gradient-to-br from-red-500 to-orange-500 flex items-center justify-center">
+                        <div className="w-9 h-9 rounded-xl bg-gradient-to-br from-dz-orange-500 to-dz-amber-400 flex items-center justify-center">
                             <Shield className="w-4 h-4 text-white" />
                         </div>
                         <div>
@@ -98,11 +99,11 @@ export default function AdminShell({
                                 href={href}
                                 onClick={() => setSidebarOpen(false)}
                                 className={`flex items-center gap-3 rounded-xl px-3 py-2.5 text-sm font-medium transition-all duration-200 ${isActive
-                                    ? "bg-red-500/10 text-red-500 dark:text-red-400 border border-red-500/20"
+                                    ? "bg-dz-orange-500/10 text-dz-orange-500 dark:text-dz-orange-400 border border-dz-orange-500/20"
                                     : "text-dz-grey-600 dark:text-white/50 hover:bg-dz-grey-100 dark:hover:bg-white/5 hover:text-dz-black dark:hover:text-white/80 border border-transparent"
                                     }`}
                             >
-                                <span className={isActive ? "text-red-500 dark:text-red-400" : "text-dz-grey-400 dark:text-white/30"}>
+                                <span className={isActive ? "text-dz-orange-500 dark:text-dz-orange-400" : "text-dz-grey-400 dark:text-white/30"}>
                                     {icon}
                                 </span>
                                 {label}
@@ -115,11 +116,11 @@ export default function AdminShell({
                 <div className="p-3 border-t border-dz-grey-200 dark:border-white/5 space-y-2">
                     <div className="flex items-center justify-between px-3 py-1">
                         <Link
-                            href="/panel"
+                            href="/"
                             className="flex items-center gap-2 text-xs text-dz-grey-600 dark:text-white/40 hover:text-dz-black dark:hover:text-white/70 transition-colors"
                         >
                             <ArrowLeft className="w-3 h-3" />
-                            Panele Dön
+                            Ana Sayfaya Dön
                         </Link>
                         <ThemeToggle />
                     </div>

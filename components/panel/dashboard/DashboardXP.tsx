@@ -1,7 +1,7 @@
 ﻿"use client";
 
 import { motion, AnimatePresence } from "framer-motion";
-import { Info, CheckCircle2, Flame, BookOpen, Clock } from "lucide-react";
+import { Info, CheckCircle2, Flame, BookOpen, Clock, Target, HelpCircle } from "lucide-react";
 import { useState } from "react";
 
 function CircularXP({ progressPct, level, size = 90 }: { progressPct: number; level: number; size?: number }) {
@@ -113,11 +113,19 @@ export default function DashboardXP({
               <div className="grid grid-cols-2 gap-3 mt-4 text-xs font-medium">
                 <div className="bg-dz-orange-500/10 dark:bg-dz-orange-500/5 text-dz-orange-700 dark:text-dz-orange-300 p-3 rounded-xl border border-dz-orange-500/20">
                   <Flame className="w-4 h-4 mb-2 text-dz-orange-500" />
-                  Günlük Giriş & Seri Yakalama <span className="block mt-1 text-dz-orange-500 font-bold">+50 XP</span>
+                  Günlük Giriş & Seri <span className="block mt-1 text-dz-orange-500 font-bold">+50 XP</span>
                 </div>
                 <div className="bg-dz-orange-500/10 dark:bg-dz-orange-500/5 text-dz-orange-700 dark:text-dz-orange-300 p-3 rounded-xl border border-dz-orange-500/20">
                   <Clock className="w-4 h-4 mb-2 text-dz-amber-500" />
                   Zihin Motoru Oturumu <span className="block mt-1 text-dz-orange-500 font-bold">+100 XP</span>
+                </div>
+                <div className="bg-dz-orange-500/10 dark:bg-dz-orange-500/5 text-dz-orange-700 dark:text-dz-orange-300 p-3 rounded-xl border border-dz-orange-500/20">
+                  <Target className="w-4 h-4 mb-2 text-purple-500" />
+                  Prompt Challenge <span className="block mt-1 text-dz-orange-500 font-bold">+25-30 XP</span>
+                </div>
+                <div className="bg-dz-orange-500/10 dark:bg-dz-orange-500/5 text-dz-orange-700 dark:text-dz-orange-300 p-3 rounded-xl border border-dz-orange-500/20">
+                  <HelpCircle className="w-4 h-4 mb-2 text-blue-500" />
+                  Quiz Tamamlama <span className="block mt-1 text-dz-orange-500 font-bold">+10-50 XP</span>
                 </div>
                 <div className="col-span-2 bg-dz-orange-500/10 dark:bg-dz-orange-500/5 text-dz-orange-700 dark:text-dz-orange-300 p-3 rounded-xl border border-dz-orange-500/20 flex justify-between items-center">
                   <div className="flex items-center gap-2">

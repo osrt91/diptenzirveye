@@ -136,7 +136,7 @@ export default function RootLayout({
             <InstallPrompt />
             <FloatingCoach
               chatbotEnabled={true}
-              welcomeMessage="Merhaba! Ben DiptenZirveye AI Danışmanın. Platformumuz, AI araçları veya eğitim serisi hakkında her şeyi sorabilirsin!"
+              welcomeMessage="Selam! Bugün sana özel bir şey var — platformdaki 500+ Prompt'tan hangisini denemek istersin? Ya da AI seviyeni test edelim!"
             />
           </ToastProvider>
         </ThemeProvider>

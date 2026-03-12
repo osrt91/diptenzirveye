@@ -88,7 +88,7 @@ export default function AdminBooksClient({
                             isNew: true,
                         } as Book & { isNew: boolean })
                     }
-                    className="flex items-center gap-2 px-4 py-2.5 min-h-[44px] rounded-xl bg-red-500/10 border border-red-500/20 text-red-400 text-sm font-medium hover:bg-red-500/20 transition-all"
+                    className="flex items-center gap-2 px-4 py-2.5 min-h-[44px] rounded-xl bg-dz-orange-500/10 border border-dz-orange-500/20 text-dz-orange-500 text-sm font-medium hover:bg-dz-orange-500/20 transition-all"
                 >
                     <Plus className="w-3 h-3" /> Yeni Kitap
                 </button>
@@ -121,7 +121,7 @@ export default function AdminBooksClient({
                                     <input
                                         value={editing.title}
                                         onChange={(e) => setEditing({ ...editing, title: e.target.value })}
-                                        className="w-full rounded-xl bg-dz-grey-50 dark:bg-dz-grey-800 border border-dz-grey-300 dark:border-white/10 text-dz-black dark:text-white text-sm px-4 py-2.5 focus:outline-none focus:border-red-500/30"
+                                        className="w-full rounded-xl bg-dz-grey-50 dark:bg-dz-grey-800 border border-dz-grey-300 dark:border-white/10 text-dz-black dark:text-white text-sm px-4 py-2.5 focus:outline-none focus:border-dz-orange-500/30"
                                     />
                                 </div>
                                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
@@ -130,7 +130,7 @@ export default function AdminBooksClient({
                                         <input
                                             value={editing.slug}
                                             onChange={(e) => setEditing({ ...editing, slug: e.target.value })}
-                                            className="w-full rounded-xl bg-dz-grey-50 dark:bg-dz-grey-800 border border-dz-grey-300 dark:border-white/10 text-dz-black dark:text-white text-sm px-4 py-2.5 focus:outline-none focus:border-red-500/30"
+                                            className="w-full rounded-xl bg-dz-grey-50 dark:bg-dz-grey-800 border border-dz-grey-300 dark:border-white/10 text-dz-black dark:text-white text-sm px-4 py-2.5 focus:outline-none focus:border-dz-orange-500/30"
                                         />
                                     </div>
                                     <div>
@@ -139,7 +139,7 @@ export default function AdminBooksClient({
                                             type="number"
                                             value={editing.sort_order}
                                             onChange={(e) => setEditing({ ...editing, sort_order: Number(e.target.value) })}
-                                            className="w-full rounded-xl bg-dz-grey-50 dark:bg-dz-grey-800 border border-dz-grey-300 dark:border-white/10 text-dz-black dark:text-white text-sm px-4 py-2.5 focus:outline-none focus:border-red-500/30"
+                                            className="w-full rounded-xl bg-dz-grey-50 dark:bg-dz-grey-800 border border-dz-grey-300 dark:border-white/10 text-dz-black dark:text-white text-sm px-4 py-2.5 focus:outline-none focus:border-dz-orange-500/30"
                                         />
                                     </div>
                                 </div>
@@ -148,7 +148,7 @@ export default function AdminBooksClient({
                                     <textarea
                                         value={editing.description ?? ""}
                                         onChange={(e) => setEditing({ ...editing, description: e.target.value })}
-                                        className="w-full rounded-xl bg-dz-grey-50 dark:bg-dz-grey-800 border border-dz-grey-300 dark:border-white/10 text-dz-black dark:text-white text-sm px-4 py-2.5 focus:outline-none focus:border-red-500/30 h-20 resize-none"
+                                        className="w-full rounded-xl bg-dz-grey-50 dark:bg-dz-grey-800 border border-dz-grey-300 dark:border-white/10 text-dz-black dark:text-white text-sm px-4 py-2.5 focus:outline-none focus:border-dz-orange-500/30 h-20 resize-none"
                                     />
                                 </div>
                                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
@@ -157,7 +157,7 @@ export default function AdminBooksClient({
                                         <input
                                             value={editing.verb ?? ""}
                                             onChange={(e) => setEditing({ ...editing, verb: e.target.value })}
-                                            className="w-full rounded-xl bg-dz-grey-50 dark:bg-dz-grey-800 border border-dz-grey-300 dark:border-white/10 text-dz-black dark:text-white text-sm px-4 py-2.5 focus:outline-none focus:border-red-500/30"
+                                            className="w-full rounded-xl bg-dz-grey-50 dark:bg-dz-grey-800 border border-dz-grey-300 dark:border-white/10 text-dz-black dark:text-white text-sm px-4 py-2.5 focus:outline-none focus:border-dz-orange-500/30"
                                             placeholder="Örn: Anlarsın"
                                         />
                                     </div>
@@ -166,7 +166,7 @@ export default function AdminBooksClient({
                                         <input
                                             value={editing.icon_name ?? ""}
                                             onChange={(e) => setEditing({ ...editing, icon_name: e.target.value })}
-                                            className="w-full rounded-xl bg-dz-grey-50 dark:bg-dz-grey-800 border border-dz-grey-300 dark:border-white/10 text-dz-black dark:text-white text-sm px-4 py-2.5 focus:outline-none focus:border-red-500/30"
+                                            className="w-full rounded-xl bg-dz-grey-50 dark:bg-dz-grey-800 border border-dz-grey-300 dark:border-white/10 text-dz-black dark:text-white text-sm px-4 py-2.5 focus:outline-none focus:border-dz-orange-500/30"
                                             placeholder="Örn: FaBrain"
                                         />
                                     </div>
@@ -176,7 +176,7 @@ export default function AdminBooksClient({
                                     <input
                                         value={editing.cover_url ?? ""}
                                         onChange={(e) => setEditing({ ...editing, cover_url: e.target.value })}
-                                        className="w-full rounded-xl bg-dz-grey-50 dark:bg-dz-grey-800 border border-dz-grey-300 dark:border-white/10 text-dz-black dark:text-white text-sm px-4 py-2.5 focus:outline-none focus:border-red-500/30"
+                                        className="w-full rounded-xl bg-dz-grey-50 dark:bg-dz-grey-800 border border-dz-grey-300 dark:border-white/10 text-dz-black dark:text-white text-sm px-4 py-2.5 focus:outline-none focus:border-dz-orange-500/30"
                                         placeholder="https://..."
                                     />
                                 </div>
@@ -192,7 +192,7 @@ export default function AdminBooksClient({
                                 <button
                                     onClick={handleSave}
                                     disabled={loading || !editing.title || !editing.slug}
-                                    className="px-5 py-2.5 min-h-[44px] rounded-xl bg-red-500 text-white text-sm font-medium hover:bg-red-600 transition-colors disabled:opacity-50"
+                                    className="px-5 py-2.5 min-h-[44px] rounded-xl bg-dz-orange-500 text-white text-sm font-medium hover:bg-dz-orange-600 transition-colors disabled:opacity-50"
                                 >
                                     <Save className="w-3 h-3 inline mr-1" /> {loading ? "Kaydediliyor..." : "Kaydet"}
                                 </button>

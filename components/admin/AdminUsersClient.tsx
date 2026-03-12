@@ -102,13 +102,13 @@ export default function AdminUsersClient({
                         onChange={(e) => setSearch(e.target.value)}
                         onKeyDown={(e) => e.key === "Enter" && handleSearch()}
                         placeholder="Kullanıcı adı ile ara..."
-                        className="w-full rounded-xl border border-dz-grey-200 dark:border-white/10 bg-dz-grey-50 dark:bg-dz-grey-800 text-dz-black dark:text-white placeholder:text-dz-grey-400 dark:placeholder:text-white/20 pl-11 pr-4 py-3 text-sm focus:outline-none focus:border-red-500/30 focus:ring-1 focus:ring-red-500/20 transition-all"
+                        className="w-full rounded-xl border border-dz-grey-200 dark:border-white/10 bg-dz-grey-50 dark:bg-dz-grey-800 text-dz-black dark:text-white placeholder:text-dz-grey-400 dark:placeholder:text-white/20 pl-11 pr-4 py-3 text-sm focus:outline-none focus:border-dz-orange-500/30 focus:ring-1 focus:ring-dz-orange-500/20 transition-all"
                     />
                 </div>
                 <button
                     onClick={handleSearch}
                     disabled={loading}
-                    className="px-6 min-h-[44px] rounded-xl bg-red-500/10 border border-red-500/20 text-red-400 text-sm font-medium hover:bg-red-500/20 transition-all disabled:opacity-50"
+                    className="px-6 min-h-[44px] rounded-xl bg-dz-orange-500/10 border border-dz-orange-500/20 text-dz-orange-500 text-sm font-medium hover:bg-dz-orange-500/20 transition-all disabled:opacity-50"
                 >
                     {loading ? "..." : "Ara"}
                 </button>
@@ -171,7 +171,7 @@ export default function AdminUsersClient({
                                                     type="number"
                                                     value={editXp}
                                                     onChange={(e) => setEditXp(Number(e.target.value))}
-                                                    className="w-24 rounded-lg bg-dz-grey-50 dark:bg-dz-grey-800 border border-dz-grey-200 dark:border-white/10 text-dz-black dark:text-white text-sm px-3 py-1.5 focus:outline-none focus:border-red-500/30"
+                                                    className="w-24 rounded-lg bg-dz-grey-50 dark:bg-dz-grey-800 border border-dz-grey-200 dark:border-white/10 text-dz-black dark:text-white text-sm px-3 py-1.5 focus:outline-none focus:border-dz-orange-500/30"
                                                 />
                                                 <button
                                                     onClick={() => handleUpdateXp(user.id)}
@@ -212,7 +212,7 @@ export default function AdminUsersClient({
                                             disabled={roleLoading === user.id}
                                             className={`text-xs font-bold rounded-full px-3 py-1.5 border cursor-pointer focus:outline-none transition-colors ${
                                                 (user.role || (user.is_admin ? "admin" : "user")) === "admin"
-                                                    ? "text-red-400 bg-red-500/10 border-red-500/20"
+                                                    ? "text-dz-orange-500 bg-dz-orange-500/10 border-dz-orange-500/20"
                                                     : (user.role === "moderator")
                                                     ? "text-purple-400 bg-purple-500/10 border-purple-500/20"
                                                     : "text-dz-grey-500 dark:text-white/40 bg-dz-grey-50 dark:bg-white/5 border-dz-grey-200 dark:border-white/10"

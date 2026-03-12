@@ -13,6 +13,7 @@ import { XPAnimationProvider } from "@/components/gamification/XPAnimation";
 import NotificationBell from "./NotificationBell";
 import { useCoins } from "@/lib/hooks/useCoins";
 import { Coins } from "lucide-react";
+import { useSupabase } from "@/lib/hooks/useSupabase";
 
 function CoinBalance() {
   const { balance, loading } = useCoins();
@@ -42,6 +43,8 @@ export default function PanelShell({
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const { theme } = useTheme();
   const pushInitialized = useRef(false);
+  const fcmInitialized = useRef(false);
+  const supabase = useSupabase();
 
   // Sync native status bar with theme
   useEffect(() => {
@@ -75,6 +78,38 @@ export default function PanelShell({
       // Not on native platform
     }
   }, []);
+
+  // Firebase web push — register token and listen for foreground messages
+  useEffect(() => {
+    if (fcmInitialized.current) return;
+    fcmInitialized.current = true;
+
+    import("@/lib/firebase")
+      .then(async ({ requestNotificationPermission, onForegroundMessage }) => {
+        const token = await requestNotificationPermission();
+        if (token) {
+          // Save FCM token to user profile for server-side push
+          const { data: { user: u } } = await supabase.auth.getUser();
+          if (u) {
+            await supabase
+              .from("profiles")
+              .update({ fcm_token: token })
+              .eq("id", u.id);
+          }
+        }
+
+        // Listen for foreground notifications
+        onForegroundMessage((payload) => {
+          if (Notification.permission === "granted") {
+            new Notification(payload.title, {
+              body: payload.body,
+              icon: "/icons/icon-192.svg",
+            });
+          }
+        });
+      })
+      .catch(() => {});
+  }, [supabase]);
 
   const handleToggleSidebar = useCallback(() => {
     setSidebarOpen((o) => !o);

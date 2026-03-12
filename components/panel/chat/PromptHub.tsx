@@ -386,7 +386,7 @@ export default function PromptHub({
                     {/* Quick Shortcuts */}
                     <div className="bg-dz-white dark:bg-dz-grey-900 border border-dz-grey-200 dark:border-dz-white/10 rounded-2xl p-2 shadow-sm">
                         <div className="p-3 text-xs font-bold text-dz-grey-400 uppercase tracking-widest mb-1">
-                            Hizli Kisayollar
+                            Hızlı Kısayollar
                         </div>
                         <div className="space-y-1">
                             <button
@@ -394,7 +394,7 @@ export default function PromptHub({
                                 className="w-full flex items-center gap-3 px-3 py-2.5 rounded-xl text-left transition-all cursor-pointer select-none text-dz-grey-600 dark:text-dz-grey-400 hover:bg-dz-grey-50 dark:hover:bg-dz-white/5 font-medium"
                             >
                                 <ScrollText className="w-4 h-4 shrink-0" />
-                                <span className="text-sm flex-1">Prompt Kurallari</span>
+                                <span className="text-sm flex-1">Prompt Kuralları</span>
                                 {showRules ? <ChevronUp className="w-3.5 h-3.5 shrink-0" /> : <ChevronDown className="w-3.5 h-3.5 shrink-0" />}
                             </button>
                             <AnimatePresence>
@@ -406,11 +406,11 @@ export default function PromptHub({
                                         className="overflow-hidden"
                                     >
                                         <div className="px-3 pb-3 text-xs text-dz-grey-500 dark:text-dz-grey-400 space-y-1.5 leading-relaxed">
-                                            <p>1. Baslik acik ve anlasilir olmali.</p>
-                                            <p>2. [Degisken] seklinde yer tutucular kullan.</p>
-                                            <p>3. Prompt en az 20 karakter olmali.</p>
-                                            <p>4. Kopyala-yapistir mantigi ile calismali.</p>
-                                            <p>5. Spam veya alakasiz icerik paylasilmamali.</p>
+                                            <p>1. Başlık açık ve anlaşılır olmalı.</p>
+                                            <p>2. [Değişken] şeklinde yer tutucular kullan.</p>
+                                            <p>3. Prompt en az 20 karakter olmalı.</p>
+                                            <p>4. Kopyala-yapıştır mantığı ile çalışmalı.</p>
+                                            <p>5. Spam veya alakasız içerik paylaşılmamalı.</p>
                                         </div>
                                     </motion.div>
                                 )}
@@ -421,7 +421,7 @@ export default function PromptHub({
                                 className="w-full flex items-center gap-3 px-3 py-2.5 rounded-xl text-left transition-all cursor-pointer select-none text-dz-grey-600 dark:text-dz-grey-400 hover:bg-dz-grey-50 dark:hover:bg-dz-white/5 font-medium"
                             >
                                 <Scale className="w-4 h-4 shrink-0" />
-                                <span className="text-sm flex-1">Topluluk Ilkeleri</span>
+                                <span className="text-sm flex-1">Topluluk İlkeleri</span>
                                 {showGuidelines ? <ChevronUp className="w-3.5 h-3.5 shrink-0" /> : <ChevronDown className="w-3.5 h-3.5 shrink-0" />}
                             </button>
                             <AnimatePresence>
@@ -433,10 +433,10 @@ export default function PromptHub({
                                         className="overflow-hidden"
                                     >
                                         <div className="px-3 pb-3 text-xs text-dz-grey-500 dark:text-dz-grey-400 space-y-1.5 leading-relaxed">
-                                            <p>- Saygiyla yaklasalim, yapici olalim.</p>
-                                            <p>- Baskalarina ait promptlari oy ile destekleyelim.</p>
-                                            <p>- Zararli veya yaniltici icerikler paylasilmamali.</p>
-                                            <p>- En iyi promptlar topluluk oylamasiyla one cikar.</p>
+                                            <p>- Saygıyla yaklaşalım, yapıcı olalım.</p>
+                                            <p>- Başkalarına ait promptları oy ile destekleyelim.</p>
+                                            <p>- Zararlı veya yanıltıcı içerikler paylaşılmamalı.</p>
+                                            <p>- En iyi promptlar topluluk oylamasıyla öne çıkar.</p>
                                         </div>
                                     </motion.div>
                                 )}
@@ -461,7 +461,7 @@ export default function PromptHub({
                                         <div className="px-3 pb-3 space-y-2">
                                             <textarea
                                                 ref={feedbackRef}
-                                                placeholder="Hub hakkinda dusuncelerini paylas..."
+                                                placeholder="Hub hakkında düşüncelerini paylaş..."
                                                 rows={3}
                                                 className="w-full rounded-lg border border-dz-grey-200 dark:border-dz-white/10 bg-dz-grey-50 dark:bg-background px-3 py-2 text-xs resize-none focus:outline-none focus:ring-1 focus:ring-dz-orange-500/50 text-dz-black dark:text-white"
                                             />
@@ -475,7 +475,7 @@ export default function PromptHub({
                                                 }}
                                                 className="w-full py-2 rounded-lg bg-dz-orange-500 text-white text-xs font-bold hover:bg-dz-orange-600 transition-colors"
                                             >
-                                                Gonder
+                                                Gönder
                                             </button>
                                         </div>
                                     </motion.div>

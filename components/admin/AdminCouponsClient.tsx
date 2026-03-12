@@ -130,7 +130,7 @@ export default function AdminCouponsClient({ initialCoupons }: { initialCoupons:
                         <button
                             onClick={handleCreate}
                             disabled={!form.code.trim() || form.discount_percent < 1}
-                            className="flex items-center gap-2 bg-red-500 text-white px-4 py-2.5 min-h-[44px] rounded-xl font-bold text-sm hover:bg-red-600 disabled:opacity-40"
+                            className="flex items-center gap-2 bg-dz-orange-500 text-white px-4 py-2.5 min-h-[44px] rounded-xl font-bold text-sm hover:bg-dz-orange-600 disabled:opacity-40"
                         >
                             <Save className="w-4 h-4" /> Oluştur
                         </button>

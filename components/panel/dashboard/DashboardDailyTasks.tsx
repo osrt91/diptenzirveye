@@ -101,8 +101,8 @@ export default function DashboardDailyTasks({
       if (!completed) {
         const task = tasks.find((t) => t.id === id);
         const xp = task?.xp_reward ?? 10;
-        await awardXP(xp, task?.title ?? "Gorev tamamlandi");
-        addToast(`Mukemmel! +${xp} XP hesabinda!`, "xp");
+        await awardXP(xp, task?.title ?? "Görev tamamlandı");
+        addToast(`Mükemmel! +${xp} XP hesabında!`, "xp");
       }
       router.refresh();
     } else {
