@@ -35,7 +35,8 @@ export async function DELETE(req: NextRequest) {
   // Delete from Supabase Auth
   const { error } = await supabaseAdmin.auth.admin.deleteUser(userId);
   if (error) {
-    return NextResponse.json({ error: error.message }, { status: 500 });
+    console.error("User delete error:", error.message);
+    return NextResponse.json({ error: "İşlem başarısız" }, { status: 500 });
   }
 
   return NextResponse.json({ success: true });

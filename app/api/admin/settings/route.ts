@@ -12,7 +12,8 @@ export async function GET() {
   const { data, error } = await supabase.rpc("admin_get_all_settings");
 
   if (error) {
-    return NextResponse.json({ error: error.message }, { status: 500 });
+    console.error("Settings fetch error:", error.message);
+    return NextResponse.json({ error: "İşlem başarısız" }, { status: 500 });
   }
 
   return NextResponse.json({ settings: data ?? [] });
@@ -36,7 +37,8 @@ export async function PUT(req: NextRequest) {
     .eq("key", key);
 
   if (error) {
-    return NextResponse.json({ error: error.message }, { status: 500 });
+    console.error("Settings update error:", error.message);
+    return NextResponse.json({ error: "İşlem başarısız" }, { status: 500 });
   }
 
   return NextResponse.json({ ok: true });

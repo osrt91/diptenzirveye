@@ -144,7 +144,7 @@ export default function DashboardDailyTasks({
 
       <div className={`shrink-0 text-xs font-bold px-2 py-1 rounded border ${task.completed
           ? "bg-green-50 dark:bg-green-500/10 text-green-600 border-green-200 dark:border-green-500/20"
-          : "bg-dz-orange-50 dark:bg-dz-orange-500/10 text-dz-orange-600 border-dz-orange-200 dark:border-dz-orange-500/20"
+          : "bg-dz-orange-500/10 dark:bg-dz-orange-500/10 text-dz-orange-600 border-dz-orange-200 dark:border-dz-orange-500/20"
         }`}>
         +{task.xp_reward} XP
       </div>

@@ -32,7 +32,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
             modifiedTime: post.updated_at || post.created_at,
             url: `${siteUrl}/blog/${slug}`,
             siteName: "DiptenZirveye",
-            ...(post.cover_image ? { images: [{ url: post.cover_image, width: 1200, height: 630, alt: post.title }] } : {}),
+            images: [post.cover_image ? { url: post.cover_image, width: 1200, height: 630, alt: post.title } : { url: "/og-default.png", width: 1200, height: 630, alt: post.title }],
         },
     };
 }

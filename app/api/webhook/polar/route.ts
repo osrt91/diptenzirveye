@@ -27,8 +27,18 @@ async function upgradeToPremium(
     }
 }
 
-export const POST = Webhooks({
-    webhookSecret: process.env.POLAR_WEBHOOK_SECRET ?? "",
+const secret = process.env.POLAR_WEBHOOK_SECRET ?? "";
+
+export const POST = !secret
+  ? async () => {
+      console.error("POLAR_WEBHOOK_SECRET is not configured");
+      return new Response(JSON.stringify({ error: "Server configuration error" }), {
+        status: 500,
+        headers: { "Content-Type": "application/json" },
+      });
+    }
+  : Webhooks({
+    webhookSecret: secret,
 
     onOrderPaid: async (payload) => {
         const supabaseAdmin = getSupabaseAdmin();

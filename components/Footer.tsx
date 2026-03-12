@@ -18,6 +18,8 @@ const footerLinks = [
     ],
   },
   {
+    // NOTE: /panel/* routes require authentication; unauthenticated users
+    // will be redirected to /giris by the auth middleware.
     title: "Kariyer & Eğitim",
     links: [
       { label: "Eylem İvmesi Serisi", href: "/panel/erteleme" },

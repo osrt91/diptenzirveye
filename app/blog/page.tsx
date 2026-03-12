@@ -8,6 +8,9 @@ import { getBlogPosts } from "@/lib/blog";
 export const metadata = {
     title: "Blog | DiptenZirveye Düşünce Ekosistemi",
     description: "Erteleme, odaklanma ve kişisel verimlilik üzerine güncel makaleler ve rehberler.",
+    alternates: {
+        canonical: "https://diptenzirveye.com/blog",
+    },
 };
 
 export const revalidate = 60;

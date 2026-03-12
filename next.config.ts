@@ -48,6 +48,8 @@ const nextConfig: NextConfig = {
           { key: "Permissions-Policy", value: "camera=(), microphone=(), geolocation=()" },
           {
             key: "Content-Security-Policy",
+            // NOTE: 'unsafe-eval' in script-src is required by Framer Motion
+            // which uses dynamic code evaluation for animations at runtime.
             value: [
               "default-src 'self'",
               "script-src 'self' 'unsafe-inline' 'unsafe-eval' https://www.googletagmanager.com https://www.clarity.ms https://connect.facebook.net https://analytics.tiktok.com https://www.google.com https://www.gstatic.com",

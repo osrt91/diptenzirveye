@@ -19,7 +19,10 @@ export const GET = CustomerPortal({
             .eq("id", user.id)
             .single();
 
-        return profile?.polar_customer_id || "";
+        if (!profile?.polar_customer_id) {
+            throw new Error("No Polar customer ID found");
+        }
+        return profile.polar_customer_id;
     },
 
     returnUrl: `${process.env.NEXT_PUBLIC_SITE_URL ?? process.env.NEXT_PUBLIC_BASE_URL ?? "http://localhost:3000"}/panel`,

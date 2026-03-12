@@ -22,7 +22,7 @@ const books: BookStep[] = [
 
 export default function BookRoadmap() {
   return (
-    <section className="py-24 md:py-32 bg-dz-white dark:bg-dz-black relative">
+    <section id="mufredat" className="py-24 md:py-32 bg-dz-white dark:bg-dz-black relative">
 
       {/* Background Deep Glows */}
       <div className="absolute top-1/4 left-1/4 w-[500px] h-[500px] bg-dz-orange-500/5 blur-[120px] rounded-full pointer-events-none" />

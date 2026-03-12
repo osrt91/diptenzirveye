@@ -27,7 +27,8 @@ export async function POST(req: NextRequest) {
       action_url: actionUrl || null,
     });
     if (error) {
-      return NextResponse.json({ error: error.message }, { status: 500 });
+      console.error("Notification insert error:", error.message);
+      return NextResponse.json({ error: "İşlem başarısız" }, { status: 500 });
     }
     return NextResponse.json({ sent: 1 });
   }
@@ -55,7 +56,8 @@ export async function POST(req: NextRequest) {
 
   const { error } = await supabase.from("notifications").insert(rows);
   if (error) {
-    return NextResponse.json({ error: error.message }, { status: 500 });
+    console.error("Bulk notification insert error:", error.message);
+    return NextResponse.json({ error: "İşlem başarısız" }, { status: 500 });
   }
 
   return NextResponse.json({ sent: rows.length });

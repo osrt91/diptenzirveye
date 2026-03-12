@@ -38,7 +38,9 @@ export async function signInAction(_prev: AuthState, formData: FormData): Promis
   const parsed = validateInput(signInSchema, raw);
   if ("error" in parsed) return { error: parsed.error };
 
-  const { email: rawEmail, password, next: nextUrl } = parsed.data;
+  const { email: rawEmail, password, next: rawNext } = parsed.data;
+  // Only allow relative paths starting with /
+  const nextUrl = rawNext?.startsWith("/") && !rawNext.startsWith("//") ? rawNext : "/panel";
   const email = sanitizeEmail(rawEmail);
 
   const supabase = await createClient();

@@ -53,7 +53,7 @@ export default function PanelPreview() {
             <div className="w-3 h-3 rounded-full bg-amber-400/80"></div>
             <div className="w-3 h-3 rounded-full bg-green-400/80"></div>
             <div className="mx-auto text-xs font-mono text-dz-grey-500 dark:text-dz-grey-600 flex items-center gap-2">
-              <Lock className="w-3 h-3" /> akademi.diptenzirveye.com
+              <Lock className="w-3 h-3" /> diptenzirveye.com
             </div>
           </div>
 

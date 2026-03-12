@@ -206,7 +206,7 @@ export default function PomodoroTimer() {
       .select("id")
       .single();
     if (data) setSessionId(data.id);
-  }, [supabase, preset.work]);
+  }, [supabase, actualWorkMins]);
 
   const completeSession = useCallback(async () => {
     if (sessionId) {
@@ -259,7 +259,7 @@ export default function PomodoroTimer() {
     return () => {
       if (intervalRef.current) clearInterval(intervalRef.current);
     };
-  }, [isRunning, isPaused, isBreak, completeSession, soundEnabled, workSecs, breakSecs]);
+  }, [isRunning, isPaused, isBreak, completeSession, soundEnabled, workSecs, breakSecs, actualWorkMins, awardXP, addToast, topic, phase]);
 
   function handleStart() {
     if (!isRunning && !sessionId && !isBreak) startSession();

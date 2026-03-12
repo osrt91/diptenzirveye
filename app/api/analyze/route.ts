@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import { GoogleGenerativeAI } from "@google/generative-ai";
+import { createClient } from "@/lib/supabase/server";
 
 const API_KEY = process.env.GOOGLE_API_KEY ?? "";
 
@@ -36,6 +37,10 @@ function generateStaticAnalysis(answers: Record<string, string>): string {
 
 export async function POST(req: NextRequest) {
     try {
+        const supabase = await createClient();
+        const { data: { user } } = await supabase.auth.getUser();
+        if (!user) return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+
         const { answers } = await req.json();
 
         if (!answers || Object.keys(answers).length === 0) {
