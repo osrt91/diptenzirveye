@@ -83,7 +83,7 @@ async function StreakCalendarSection({ userId }: { userId: string }) {
 
   const calendarDays = [];
   const today = new Date();
-  for (let i = 97; i >= 0; i--) {
+  for (let i = 139; i >= 0; i--) {
     const d = new Date(today);
     d.setDate(d.getDate() - i);
     calendarDays.push(d.toISOString().slice(0, 10));
@@ -314,7 +314,7 @@ export default async function PanelDashboardPage() {
         </Suspense>
       </div>
 
-      <div className="grid gap-6 lg:grid-cols-2 items-start">
+      <div className="grid gap-6 lg:grid-cols-2">
         <section className="flex flex-col">
           <h2 className="font-display text-lg font-semibold mb-4 text-dz-black dark:text-dz-white">
             Günlük Görevler

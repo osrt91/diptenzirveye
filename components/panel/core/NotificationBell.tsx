@@ -121,7 +121,7 @@ export default function NotificationBell() {
               initial={{ opacity: 0, y: -10, scale: 0.95 }}
               animate={{ opacity: 1, y: 0, scale: 1 }}
               exit={{ opacity: 0, y: -10, scale: 0.95 }}
-              className="fixed right-2 sm:absolute sm:right-0 top-14 sm:top-12 z-50 w-[calc(100vw-1rem)] sm:w-80 max-w-sm max-h-[420px] rounded-2xl border border-dz-grey-200 dark:border-dz-grey-800 bg-dz-white dark:bg-dz-grey-900 shadow-2xl overflow-hidden"
+              className="fixed right-2 left-2 sm:left-auto sm:absolute sm:right-0 top-14 sm:top-12 z-50 sm:w-80 max-w-sm max-h-[420px] rounded-2xl border border-dz-grey-200 dark:border-dz-grey-800 bg-dz-white dark:bg-dz-grey-900 shadow-2xl overflow-hidden"
             >
               <div className="flex items-center justify-between px-4 py-3 border-b border-dz-grey-200 dark:border-dz-grey-800">
                 <h3 className="font-display font-bold text-sm text-dz-black dark:text-dz-white">
@@ -162,19 +162,19 @@ export default function NotificationBell() {
                         }
                         setOpen(false);
                       }}
-                      className={`w-full text-left px-4 py-3 border-b border-dz-grey-100 dark:border-dz-grey-800 hover:bg-dz-grey-50 dark:hover:bg-dz-grey-800/50 transition-colors overflow-hidden ${
+                      className={`w-full text-left px-4 py-3 border-b border-dz-grey-100 dark:border-dz-grey-800 hover:bg-dz-grey-50 dark:hover:bg-dz-grey-800/50 transition-colors ${
                         !notif.is_read ? "bg-dz-orange-500/5" : ""
                       }`}
                     >
-                      <div className="flex items-start gap-3 overflow-hidden">
+                      <div className="flex items-start gap-3">
                         <div className="mt-0.5 shrink-0">
                           {ICONS[notif.type] || ICONS.system}
                         </div>
-                        <div className="min-w-0 flex-1 overflow-hidden">
+                        <div className="min-w-0 flex-1">
                           <p className="text-sm font-bold text-dz-black dark:text-dz-white truncate">
                             {notif.title}
                           </p>
-                          <p className="text-xs text-dz-grey-500 line-clamp-2 mt-0.5 break-words">
+                          <p className="text-xs text-dz-grey-500 line-clamp-2 mt-0.5 break-words overflow-wrap-anywhere">
                             {notif.message}
                           </p>
                           <p className="text-[10px] text-dz-grey-400 mt-1">

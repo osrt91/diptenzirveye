@@ -25,7 +25,8 @@ export default function DashboardStreakCalendar({
 
   const today = new Date().toISOString().slice(0, 10);
   const activeDaysCount = days.filter(d => d.active).length;
-  const dayLabels = ["Pzt", "Sal", "Çar", "Per", "Cum", "Cmt", "Paz"];
+  const weekCount = weeks.length;
+  const dayLabels = ["P", "S", "Ç", "P", "C", "C", "P"];
 
   return (
     <div className="rounded-3xl border border-dz-grey-200 dark:border-dz-white/10 bg-dz-white dark:bg-background shadow-sm p-6">
@@ -35,7 +36,7 @@ export default function DashboardStreakCalendar({
             Aktivite Takvimi
           </h3>
           <p className="text-xs text-dz-grey-500 mt-1">
-            Son 14 hafta · <span className="text-dz-orange-500 font-bold">{activeDaysCount}</span> aktif gün
+            Son {weekCount} hafta · <span className="text-dz-orange-500 font-bold">{activeDaysCount}</span> aktif gün
           </p>
         </div>
         <div className="flex flex-col items-end gap-2">
@@ -53,34 +54,30 @@ export default function DashboardStreakCalendar({
       </div>
 
       <div className="overflow-x-auto -mx-2 px-2 pb-1">
-        <div className="flex gap-[3px] min-w-fit">
-          <div className="flex flex-col gap-[3px] mr-1 pt-0.5">
-            {dayLabels.map((label) => (
-              <div key={label} className="w-3 h-3 flex items-center">
-                <span className="text-[7px] font-bold text-dz-grey-400 leading-none">{label[0]}</span>
-              </div>
-            ))}
-          </div>
-          {weeks.map((week, wi) => (
-            <div key={wi} className="flex flex-col gap-[3px]">
-              {week.map((day, di) => {
-                const isToday = day.date === today;
-                return (
-                  <motion.div
-                    key={day.date}
-                    initial={{ scale: 0 }}
-                    animate={{ scale: 1 }}
-                    transition={{ delay: (wi * 7 + di) * 0.005 }}
-                    title={`${new Date(day.date).toLocaleDateString("tr-TR", { weekday: "long", day: "numeric", month: "long" })}${day.active ? " — Aktif" : ""}`}
-                    className={`w-3 h-3 rounded-[3px] transition-colors cursor-default ${day.active
-                        ? "bg-gradient-to-br from-dz-orange-400 to-dz-amber-500 shadow-sm shadow-dz-orange-500/20"
-                        : "bg-dz-grey-100 dark:bg-dz-white/5"
-                      } ${isToday ? "ring-1.5 ring-dz-orange-500 ring-offset-1 ring-offset-dz-white dark:ring-offset-[#0a0a0a]" : ""}`}
-                  />
-                );
-              })}
+        <div className="inline-grid grid-flow-col auto-rows-[1fr] gap-[3px] w-full" style={{ gridTemplateRows: "repeat(7, 1fr)", gridTemplateColumns: `auto repeat(${weekCount}, 1fr)` }}>
+          {dayLabels.map((label, i) => (
+            <div key={i} className="flex items-center justify-center">
+              <span className="text-[8px] font-bold text-dz-grey-400 leading-none">{label}</span>
             </div>
           ))}
+          {weeks.map((week, wi) =>
+            week.map((day, di) => {
+              const isToday = day.date === today;
+              return (
+                <motion.div
+                  key={day.date}
+                  initial={{ scale: 0 }}
+                  animate={{ scale: 1 }}
+                  transition={{ delay: (wi * 7 + di) * 0.003 }}
+                  title={`${new Date(day.date).toLocaleDateString("tr-TR", { weekday: "long", day: "numeric", month: "long" })}${day.active ? " — Aktif" : ""}`}
+                  className={`aspect-square rounded-[3px] transition-colors cursor-default min-w-[10px] max-w-[18px] w-full mx-auto ${day.active
+                      ? "bg-gradient-to-br from-dz-orange-400 to-dz-amber-500 shadow-sm shadow-dz-orange-500/20"
+                      : "bg-dz-grey-100 dark:bg-dz-white/5"
+                    } ${isToday ? "ring-1.5 ring-dz-orange-500 ring-offset-1 ring-offset-dz-white dark:ring-offset-[#0a0a0a]" : ""}`}
+                />
+              );
+            })
+          )}
         </div>
       </div>
 
@@ -94,7 +91,7 @@ export default function DashboardStreakCalendar({
           </div>
           <span>Çok</span>
         </div>
-        <div className="h-1.5 w-24 bg-dz-grey-200 dark:bg-dz-grey-800 rounded-full overflow-hidden">
+        <div className="h-1.5 flex-1 max-w-32 ml-4 bg-dz-grey-200 dark:bg-dz-grey-800 rounded-full overflow-hidden">
           <div
             className="h-full bg-gradient-to-r from-dz-orange-500 to-dz-amber-400 rounded-full transition-all duration-700"
             style={{ width: `${Math.round((activeDaysCount / Math.max(days.length, 1)) * 100)}%` }}
