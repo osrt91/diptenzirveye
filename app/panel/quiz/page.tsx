@@ -118,7 +118,7 @@ export default async function QuizPage() {
   if (!user) redirect("/giris");
 
   return (
-    <div className="space-y-6 max-w-3xl mx-auto">
+    <div className="space-y-6 max-w-4xl mx-auto">
       <div>
         <h1 className="font-display text-2xl font-bold text-dz-black dark:text-dz-white">
           AI Bilgi Testi

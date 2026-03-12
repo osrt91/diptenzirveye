@@ -36,7 +36,7 @@ export default async function CalismaKagitlariPage() {
   }
 
   return (
-    <div className="space-y-8">
+    <div className="space-y-6">
       <div>
         <h1 className="font-display text-2xl font-bold text-dz-black dark:text-dz-white">
           Performans Kalibrasyon Merkezi

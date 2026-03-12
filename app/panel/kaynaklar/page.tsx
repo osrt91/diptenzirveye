@@ -72,9 +72,9 @@ export default function KaynaklarPage() {
     : topTierTools.filter(t => t.category === selectedCategory);
 
   return (
-    <div className="space-y-8">
+    <div className="space-y-6">
       <div>
-        <h1 className="font-display text-3xl font-bold text-dz-black dark:text-dz-white">
+        <h1 className="font-display text-2xl font-bold text-dz-black dark:text-dz-white">
           Kaynaklar & Endüstri Platformları
         </h1>
         <p className="text-dz-grey-600 dark:text-dz-grey-400 mt-2">

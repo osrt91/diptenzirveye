@@ -41,10 +41,10 @@ export default function CoinShopPage() {
   }
 
   return (
-    <div className="space-y-8 max-w-5xl mx-auto">
+    <div className="space-y-6">
       <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
         <div>
-          <h1 className="font-display text-3xl font-black text-dz-black dark:text-dz-white">
+          <h1 className="font-display text-2xl font-bold text-dz-black dark:text-dz-white">
             DZ Coin Mağazası
           </h1>
           <p className="text-dz-grey-500 text-sm mt-1">Coinlerini harca, özel avantajlar kazan</p>

@@ -33,7 +33,7 @@ export default async function NotDefteriPage() {
   return (
     <div className="h-[calc(100vh-8rem)] min-h-[600px] flex flex-col">
       <div className="mb-6 flex-shrink-0">
-        <h1 className="font-display text-2xl md:text-3xl font-bold text-dz-black dark:text-dz-white flex items-center gap-3">
+        <h1 className="font-display text-2xl font-bold text-dz-black dark:text-dz-white flex items-center gap-3">
           Akıllı Not Defteri
           <span className="px-2.5 py-1 text-[10px] uppercase font-black tracking-widest bg-gradient-to-r from-dz-orange-500 to-amber-500 text-white rounded-md shadow-sm">AI Destekli</span>
         </h1>

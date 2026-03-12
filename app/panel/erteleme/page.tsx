@@ -78,7 +78,7 @@ async function StreakSection() {
 
 export default function ErtelemePlaniPage() {
   return (
-    <div className="space-y-6 max-w-4xl mx-auto">
+    <div className="space-y-6">
       <div>
         <h1 className="font-display text-2xl font-bold text-dz-black dark:text-dz-white">
           Eylem İvmesi (Action Momentum) Serisi

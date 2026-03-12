@@ -126,9 +126,9 @@ export default function MotivasyonPage() {
   }
 
   return (
-    <div className="space-y-6 max-w-7xl mx-auto">
+    <div className="space-y-6">
       <div className="text-center space-y-2">
-        <h1 className="font-display text-3xl font-black text-dz-black dark:text-dz-white">
+        <h1 className="font-display text-2xl font-bold text-dz-black dark:text-dz-white">
           Günlük Motivasyon
         </h1>
         <p className="text-dz-grey-500 font-medium">Her gün bir adım. 365 gün boyunca.</p>
