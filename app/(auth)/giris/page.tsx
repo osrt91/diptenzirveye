@@ -19,7 +19,7 @@ function LoginForm() {
           href="/"
           className="font-display text-2xl font-bold text-dz-black dark:text-dz-white"
         >
-          <span className="font-black">Dipten</span><span className="font-normal">Zirveye</span>
+          <span className="font-black">Dipten</span><span className="font-normal text-dz-orange-500">Zirveye</span>
         </Link>
         <p className="mt-2 text-sm text-dz-grey-600 dark:text-dz-grey-400">
           Hesabına giriş yap

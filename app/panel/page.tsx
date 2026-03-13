@@ -255,10 +255,6 @@ export default async function PanelDashboardPage() {
 
   return (
     <div className="space-y-6">
-      <h1 className="font-display text-2xl font-bold text-dz-black dark:text-dz-white">
-        Gösterge Paneli
-      </h1>
-
       <DashboardWelcome userName={userName} />
 
       <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
@@ -276,17 +272,6 @@ export default async function PanelDashboardPage() {
           <DashboardCoins />
         </Suspense>
       </div>
-
-      <Suspense
-        fallback={
-          <div className="rounded-2xl border border-dz-grey-200 dark:border-dz-grey-800 p-6 space-y-4">
-            <Skeleton className="h-5 w-48" />
-            <Skeleton className="h-20 w-full" />
-          </div>
-        }
-      >
-        <BookEcosystemSection userId={userId} />
-      </Suspense>
 
       <div className="grid gap-6 lg:grid-cols-2">
         <Suspense
@@ -311,18 +296,16 @@ export default async function PanelDashboardPage() {
         </Suspense>
       </div>
 
-      <div className="grid gap-6 lg:grid-cols-2">
-        <section className="flex flex-col">
+      <div className="grid gap-6 lg:grid-cols-2 items-start">
+        <section className="rounded-2xl border border-dz-grey-200 dark:border-dz-grey-800 bg-dz-white dark:bg-dz-grey-900 p-6">
           <h2 className="font-display text-lg font-semibold mb-4 text-dz-black dark:text-dz-white">
             Günlük Görevler
           </h2>
           <Suspense
             fallback={
-              <div className="rounded-xl border border-dz-grey-200 dark:border-dz-grey-800 p-5 flex-1">
-                <div className="animate-pulse space-y-3">
-                  <div className="h-10 rounded-lg bg-dz-grey-200 dark:bg-dz-grey-800" />
-                  <div className="h-8 w-3/4 rounded-lg bg-dz-grey-200 dark:bg-dz-grey-800" />
-                </div>
+              <div className="animate-pulse space-y-3">
+                <div className="h-10 rounded-lg bg-dz-grey-200 dark:bg-dz-grey-800" />
+                <div className="h-8 w-3/4 rounded-lg bg-dz-grey-200 dark:bg-dz-grey-800" />
               </div>
             }
           >
@@ -343,6 +326,17 @@ export default async function PanelDashboardPage() {
           </Suspense>
         </section>
       </div>
+
+      <Suspense
+        fallback={
+          <div className="rounded-2xl border border-dz-grey-200 dark:border-dz-grey-800 p-6 space-y-4">
+            <Skeleton className="h-5 w-48" />
+            <Skeleton className="h-20 w-full" />
+          </div>
+        }
+      >
+        <BookEcosystemSection userId={userId} />
+      </Suspense>
     </div>
   );
 }

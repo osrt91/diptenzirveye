@@ -23,7 +23,7 @@ export default function DZLogo({ size = "md", className = "" }: DZLogoProps) {
       transition={{ duration: 0.5 }}
     >
       <span className="font-black">Dipten</span>
-      <span className="font-normal">Zirveye</span>
+      <span className="font-normal text-dz-orange-500">Zirveye</span>
     </motion.span>
   );
 }

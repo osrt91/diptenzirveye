@@ -101,7 +101,7 @@ export default function Testimonials() {
             Dönüşümünü Başlatanların Hikayeleri
           </h2>
           <p className="text-dz-grey-600 dark:text-dz-grey-400 max-w-2xl mx-auto">
-            <span className="font-display"><span className="font-black">Dipten</span><span className="font-normal">Zirveye</span></span> ile hayatını değiştiren kullanıcıların gerçek deneyimleri.
+            <span className="font-display"><span className="font-black">Dipten</span><span className="font-normal text-dz-orange-500">Zirveye</span></span> ile hayatını değiştiren kullanıcıların gerçek deneyimleri.
           </p>
         </motion.div>
 

@@ -148,7 +148,7 @@ export default function PanelShell({
               className="font-display font-bold text-lg text-dz-black dark:text-dz-white"
               onClick={() => setSidebarOpen(false)}
             >
-              <span className="font-black">Dipten</span><span className="font-normal">Zirveye</span>
+              <span className="font-black">Dipten</span><span className="font-normal text-dz-orange-500">Zirveye</span>
             </Link>
             <div className="flex items-center gap-1">
               <NotificationBell />

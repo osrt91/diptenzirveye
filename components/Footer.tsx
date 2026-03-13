@@ -185,7 +185,7 @@ export default function Footer() {
       <div className="border-t border-dz-white/10 bg-dz-black pb-[env(safe-area-inset-bottom,0px)]">
         <div className="max-w-7xl mx-auto px-4 sm:px-8 py-6 flex flex-col md:flex-row items-center justify-between gap-4">
           <p className="text-sm text-dz-grey-600 font-medium text-center md:text-left">
-            © {new Date().getFullYear()} <span className="font-display"><span className="font-black">Dipten</span><span className="font-normal">Zirveye</span></span>. Tüm hakları saklıdır.
+            © {new Date().getFullYear()} <span className="font-display"><span className="font-black">Dipten</span><span className="font-normal text-dz-orange-500">Zirveye</span></span>. Tüm hakları saklıdır.
           </p>
           <div className="flex flex-wrap items-center justify-center gap-4 sm:gap-6 text-sm text-dz-grey-600 font-medium">
             <span>Türkiye&apos;de Tasarlandı 🇹🇷</span>
