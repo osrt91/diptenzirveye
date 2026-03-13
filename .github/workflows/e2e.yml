@@ -14,6 +14,9 @@ jobs:
       NEXT_PUBLIC_SUPABASE_URL: https://jynyoattfrbwndonerpz.supabase.co
       NEXT_PUBLIC_SUPABASE_ANON_KEY: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imp5bnlvYXR0ZnJid25kb25lcnB6Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzMyMzgwMzksImV4cCI6MjA4ODgxNDAzOX0.uNdHFdO3I7GetHjFTgl3TGvcFGRiAUcZKWNGsE4e01g
       NEXT_PUBLIC_SITE_URL: https://diptenzirveye.com
+      SUPABASE_SERVICE_ROLE_KEY: ${{ secrets.SUPABASE_SERVICE_ROLE_KEY }}
+      GOOGLE_API_KEY: fake-key-for-build
+      HAREKI_API_KEY: fake-key-for-build
       BASE_URL: http://localhost:3000
     steps:
       - uses: actions/checkout@v4
