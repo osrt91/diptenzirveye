@@ -1,23 +1,23 @@
 "use client";
 
 import { motion } from "framer-motion";
-import Image from "next/image";
 import Link from "next/link";
 import { ArrowRight, Brain, Bot, Filter, Hourglass, Banknote, PenTool, Settings, TrendingUp, Crown, Globe, Lock, FileText, Target, Zap } from "lucide-react";
+import BookCover from "@/components/BookCover";
 
-type BookStep = { n: string; verb: string; title: string; desc: string; icon: React.ReactNode; color: string; free?: boolean; pages: string; prompts: string; cover: string };
+type BookStep = { n: string; verb: string; title: string; desc: string; icon: React.ReactNode; color: string; free?: boolean; pages: string; prompts: string };
 
 const books: BookStep[] = [
-  { n: "01", verb: "Anlarsın", title: "AI Devrimini Anlamak", desc: "Yapay zekanın temellerini ve dünyayı nasıl değiştirdiğini kavramak.", icon: <Brain />, color: "from-dz-orange-600 to-dz-orange-900", free: true, pages: "85 Sayfa", prompts: "15+ Prompt", cover: "https://images.unsplash.com/photo-1620712943543-bcc4688e7485?q=80&w=600&auto=format&fit=crop" },
-  { n: "02", verb: "Konuşursun", title: "Prompt Mühendisliği", desc: "AI ile doğru iletişim kurma sanatını ustalıkla öğrenmek.", icon: <Bot />, color: "from-dz-grey-600 dark:from-dz-grey-800 to-dz-grey-800 dark:to-dz-black", pages: "110 Sayfa", prompts: "40+ Prompt", cover: "https://images.unsplash.com/photo-1677442136019-21780ecad995?q=80&w=600&auto=format&fit=crop" },
-  { n: "03", verb: "Seçersin", title: "AI Araçları Rehberi", desc: "Binlerce araç arasından sana en uygun olanları filtrelemek.", icon: <Filter />, color: "from-dz-orange-600 to-dz-orange-800", pages: "95 Sayfa", prompts: "Özel Araç Listesi", cover: "https://images.unsplash.com/photo-1550745165-9bc0b252726f?q=80&w=600&auto=format&fit=crop" },
-  { n: "04", verb: "Odaklanırsın", title: "Eylem İvmesi Serisi", desc: "Dikkat dağıtıcıları yenip derin çalışma (deep work) moduna geçmek.", icon: <Hourglass />, color: "from-dz-grey-700 dark:from-dz-grey-900 to-dz-grey-900 dark:to-dz-black", pages: "105 Sayfa", prompts: "20+ Prompt", cover: "https://images.unsplash.com/photo-1506784693919-ef06d93c28d2?q=80&w=600&auto=format&fit=crop" },
-  { n: "05", verb: "Kazanırsın", title: "AI ile İlk Gelirim", desc: "Öğrendiklerini paraya çevirmenin en pratik ve hızlı yolları.", icon: <Banknote />, color: "from-dz-orange-500/80 to-dz-orange-800", pages: "130 Sayfa", prompts: "50+ Prompt", cover: "https://images.unsplash.com/photo-1633158829585-23ba8f7c8caf?q=80&w=600&auto=format&fit=crop" },
-  { n: "06", verb: "Üretirsin", title: "İçerik İmparatorluğu", desc: "Durmadan, yorulmadan kaliteli dijital varlıklar üretmek.", icon: <PenTool />, color: "from-dz-grey-600 dark:from-dz-grey-800 to-dz-grey-800 dark:to-dz-black", pages: "150 Sayfa", prompts: "75+ Prompt", cover: "https://images.unsplash.com/photo-1499750310107-5fef28a66643?q=80&w=600&auto=format&fit=crop" },
-  { n: "07", verb: "Otomatize edersin", title: "Otomasyon Mimarı", desc: "Sen uyurken senin için çalışan sistemler inşa etmek.", icon: <Settings />, color: "from-dz-orange-600 to-dz-orange-900", pages: "125 Sayfa", prompts: "30+ Workflow", cover: "https://images.unsplash.com/photo-1518770660439-4636190af475?q=80&w=600&auto=format&fit=crop" },
-  { n: "08", verb: "Ölçeklersin", title: "AI ile Ölçek", desc: "Küçük başarıları devasa sistemlere dönüştürmek.", icon: <TrendingUp />, color: "from-dz-grey-600 dark:from-dz-grey-800 to-dz-grey-800 dark:to-dz-black", pages: "115 Sayfa", prompts: "45+ Prompt", cover: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=600&auto=format&fit=crop" },
-  { n: "09", verb: "Liderlik edersin", title: "AI Liderliği", desc: "Kendi alanında AI destekli otorite konumuna yükselmek.", icon: <Crown />, color: "from-dz-orange-500/80 to-dz-orange-800", pages: "140 Sayfa", prompts: "Vizyon & Strateji", cover: "https://images.unsplash.com/photo-1519389950473-47ba0277781c?q=80&w=600&auto=format&fit=crop" },
-  { n: "10", verb: "Çağı yönetirsin", title: "AI Çağının Mimarı", desc: "Artık bir tüketici değil, geleceği inşa eden bir üreticisin.", icon: <Globe />, color: "from-dz-grey-700 dark:from-dz-grey-900 to-dz-grey-900 dark:to-dz-black", pages: "160 Sayfa", prompts: "Master Framework", cover: "https://images.unsplash.com/photo-1451187580459-43490279c0fa?q=80&w=600&auto=format&fit=crop" },
+  { n: "01", verb: "Anlarsın", title: "AI Devrimini Anlamak", desc: "Yapay zekanın temellerini ve dünyayı nasıl değiştirdiğini kavramak.", icon: <Brain />, color: "from-dz-orange-600 to-dz-orange-900", free: true, pages: "85 Sayfa", prompts: "15+ Prompt" },
+  { n: "02", verb: "Konuşursun", title: "Prompt Mühendisliği", desc: "AI ile doğru iletişim kurma sanatını ustalıkla öğrenmek.", icon: <Bot />, color: "from-dz-grey-600 dark:from-dz-grey-800 to-dz-grey-800 dark:to-dz-black", pages: "110 Sayfa", prompts: "40+ Prompt" },
+  { n: "03", verb: "Seçersin", title: "AI Araçları Rehberi", desc: "Binlerce araç arasından sana en uygun olanları filtrelemek.", icon: <Filter />, color: "from-dz-orange-600 to-dz-orange-800", pages: "95 Sayfa", prompts: "Özel Araç Listesi" },
+  { n: "04", verb: "Odaklanırsın", title: "Eylem İvmesi Serisi", desc: "Dikkat dağıtıcıları yenip derin çalışma (deep work) moduna geçmek.", icon: <Hourglass />, color: "from-dz-grey-700 dark:from-dz-grey-900 to-dz-grey-900 dark:to-dz-black", pages: "105 Sayfa", prompts: "20+ Prompt" },
+  { n: "05", verb: "Kazanırsın", title: "AI ile İlk Gelirim", desc: "Öğrendiklerini paraya çevirmenin en pratik ve hızlı yolları.", icon: <Banknote />, color: "from-dz-orange-500/80 to-dz-orange-800", pages: "130 Sayfa", prompts: "50+ Prompt" },
+  { n: "06", verb: "Üretirsin", title: "İçerik İmparatorluğu", desc: "Durmadan, yorulmadan kaliteli dijital varlıklar üretmek.", icon: <PenTool />, color: "from-dz-grey-600 dark:from-dz-grey-800 to-dz-grey-800 dark:to-dz-black", pages: "150 Sayfa", prompts: "75+ Prompt" },
+  { n: "07", verb: "Otomatize edersin", title: "Otomasyon Mimarı", desc: "Sen uyurken senin için çalışan sistemler inşa etmek.", icon: <Settings />, color: "from-dz-orange-600 to-dz-orange-900", pages: "125 Sayfa", prompts: "30+ Workflow" },
+  { n: "08", verb: "Ölçeklersin", title: "AI ile Ölçek", desc: "Küçük başarıları devasa sistemlere dönüştürmek.", icon: <TrendingUp />, color: "from-dz-grey-600 dark:from-dz-grey-800 to-dz-grey-800 dark:to-dz-black", pages: "115 Sayfa", prompts: "45+ Prompt" },
+  { n: "09", verb: "Liderlik edersin", title: "AI Liderliği", desc: "Kendi alanında AI destekli otorite konumuna yükselmek.", icon: <Crown />, color: "from-dz-orange-500/80 to-dz-orange-800", pages: "140 Sayfa", prompts: "Vizyon & Strateji" },
+  { n: "10", verb: "Çağı yönetirsin", title: "AI Çağının Mimarı", desc: "Artık bir tüketici değil, geleceği inşa eden bir üreticisin.", icon: <Globe />, color: "from-dz-grey-700 dark:from-dz-grey-900 to-dz-grey-900 dark:to-dz-black", pages: "160 Sayfa", prompts: "Master Framework" },
 ];
 
 export default function BookRoadmap() {
@@ -88,14 +88,12 @@ export default function BookRoadmap() {
               <div className={`relative h-full rounded-2xl transition-transform duration-500 group-hover:-translate-y-2 ${!b.free ? 'opacity-90 grayscale-[10%] group-hover:grayscale-0' : ''}`}>
                 <div className="bg-dz-white dark:bg-dz-white/[0.03] backdrop-blur-xl border border-dz-grey-200 dark:border-dz-white/10 rounded-2xl flex flex-col z-10 overflow-hidden shadow-lg dark:shadow-[10px_10px_30px_rgba(0,0,0,0.4)] group-hover:shadow-2xl group-hover:border-dz-orange-300 dark:group-hover:border-dz-orange-500/30 transition-all duration-500">
 
-                  {/* Cover Image */}
+                  {/* Cover SVG */}
                   <div className="relative w-full h-[160px] overflow-hidden rounded-t-2xl shrink-0">
-                    <Image
-                      src={b.cover}
-                      alt={`${b.title} kitap kapağı görseli`}
-                      fill
-                      className="object-cover transition-transform duration-700 group-hover:scale-110"
-                      sizes="(max-width: 768px) 100vw, 300px"
+                    <BookCover
+                      number={b.n}
+                      title={b.title}
+                      className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-dz-white dark:from-[#0a0a0a] via-transparent to-transparent" />
                   </div>

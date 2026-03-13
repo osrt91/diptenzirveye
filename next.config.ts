@@ -17,10 +17,6 @@ const nextConfig: NextConfig = {
         hostname: "*.supabase.co",
         pathname: "/storage/v1/object/public/**",
       },
-      {
-        protocol: "https",
-        hostname: "images.unsplash.com",
-      },
     ],
   },
   experimental: {
@@ -55,7 +51,7 @@ const nextConfig: NextConfig = {
               "script-src 'self' 'unsafe-inline' 'unsafe-eval' https://www.googletagmanager.com https://www.clarity.ms https://connect.facebook.net https://analytics.tiktok.com https://www.google.com https://www.gstatic.com",
               "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com",
               "font-src 'self' https://fonts.gstatic.com",
-              "img-src 'self' data: blob: https://images.unsplash.com https://*.supabase.co https://www.facebook.com https://www.google.com https://www.gstatic.com",
+              "img-src 'self' data: blob: https://*.supabase.co https://www.facebook.com https://www.google.com https://www.gstatic.com",
               "connect-src 'self' https://*.supabase.co wss://*.supabase.co https://generativelanguage.googleapis.com https://www.google-analytics.com https://www.googletagmanager.com https://www.clarity.ms https://connect.facebook.net https://analytics.tiktok.com https://www.google.com",
               "frame-src https://www.google.com https://www.recaptcha.net",
               "frame-ancestors 'none'",

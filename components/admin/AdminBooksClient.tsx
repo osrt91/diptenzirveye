@@ -2,8 +2,9 @@
 
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Plus, Edit, Trash2, Save, X, BookOpen, Image } from "lucide-react";
+import { Plus, Edit, Trash2, Save, X, BookOpen } from "lucide-react";
 import { createClient } from "@/lib/supabase/client";
+import BookCover from "@/components/BookCover";
 
 type Book = {
     id: string;
@@ -212,25 +213,13 @@ export default function AdminBooksClient({
                         transition={{ delay: i * 0.03 }}
                         className="group relative rounded-2xl border border-dz-grey-200 dark:border-white/5 bg-white dark:bg-white/[0.02] overflow-hidden hover:border-dz-grey-300 dark:hover:border-white/10 transition-all"
                     >
-                        {/* Cover */}
-                        <div className="h-32 bg-gradient-to-br from-orange-500/20 to-amber-500/10 relative overflow-hidden">
-                            {book.cover_url ? (
-                                <img
-                                    src={book.cover_url}
-                                    alt={book.title}
-                                    className="w-full h-full object-cover"
-                                    width={280}
-                                    height={128}
-                                    loading="lazy"
-                                />
-                            ) : (
-                                <div className="flex items-center justify-center h-full">
-                                    <Image className="w-8 h-8 text-dz-grey-300 dark:text-white/10" />
-                                </div>
-                            )}
-                            <div className="absolute top-3 left-3 bg-black/60 text-white text-xs font-bold px-2 py-1 rounded-lg">
-                                #{book.sort_order}
-                            </div>
+                        {/* Cover SVG */}
+                        <div className="h-32 relative overflow-hidden">
+                            <BookCover
+                                number={String(book.sort_order).padStart(2, "0")}
+                                title={book.title}
+                                className="w-full h-full"
+                            />
                         </div>
 
                         <div className="p-4 space-y-2">

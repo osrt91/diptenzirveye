@@ -6,6 +6,7 @@ import { BookOpen, CheckCircle2, Lock } from "lucide-react";
 import { useState } from "react";
 import { useToast } from "@/components/ui/Toast";
 import PaywallModal from "@/components/panel/core/PaywallModal";
+import BookCover from "@/components/BookCover";
 
 type Book = {
   id: string;
@@ -14,15 +15,6 @@ type Book = {
   description: string | null;
   sort_order: number;
 };
-
-// Kitaplara özel geçici renk/gradient şablonları
-const coverGradients = [
-  "from-dz-orange-600 to-dz-orange-900",
-  "from-dz-grey-800 to-dz-black",
-  "from-dz-orange-500/80 to-dz-black",
-  "from-dz-grey-600 to-dz-black",
-  "from-dz-orange-600 to-dz-orange-800"
-];
 
 export default function KitapListesi({
   books,
@@ -67,9 +59,9 @@ export default function KitapListesi({
 
   return (
     <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 mt-8">
-      {books.map((book, index) => {
+      {books.map((book) => {
         const isStarted = userBookIds.includes(book.id);
-        const gradient = coverGradients[index % coverGradients.length];
+        const bookNumber = String(book.sort_order).padStart(2, "0");
         const progress = isStarted ? Math.floor(Math.random() * 60) + 10 : 0;
 
         return (
@@ -80,42 +72,28 @@ export default function KitapListesi({
             {/* 3D Kitap Yapısı */}
             <div className="relative h-[22rem] w-full transform-style-3d transition-transform duration-500 group-hover:-translate-y-2 group-hover:rotate-y-[-5deg] shadow-[-10px_10px_20px_rgba(0,0,0,0.2)] dark:shadow-[-10px_10px_30px_rgba(0,0,0,0.5)] rounded-r-xl rounded-l-md bg-dz-white dark:bg-dz-grey-900 flex flex-col z-10">
 
-              {/* Kitap Kapağı */}
-              <div className={`absolute inset-0 z-10 rounded-r-xl rounded-l-md bg-gradient-to-br ${gradient} p-6 flex flex-col justify-between overflow-hidden shadow-inner`}>
+              {/* Kitap Kapağı — SVG */}
+              <div className="absolute inset-0 z-10 rounded-r-xl rounded-l-md overflow-hidden">
+                <BookCover number={bookNumber} title={book.title} className="w-full h-full" />
 
-                {/* Gerçekçi Book Spine (Sırt) Hissiyatı */}
-                <div className="absolute left-0 top-0 bottom-0 w-8 bg-gradient-to-r from-black/40 via-black/10 to-transparent border-r border-white/10 mix-blend-overlay" />
-                <div className="absolute left-1.5 top-0 bottom-0 w-px bg-white/20" />
-                <div className="absolute left-6 top-0 bottom-0 w-px bg-black/20" />
+                {/* Spine shadow */}
+                <div className="absolute left-0 top-0 bottom-0 w-6 bg-gradient-to-r from-black/30 to-transparent pointer-events-none" />
 
-                {/* Kitap Kıvrım / Parlama Efekti */}
-                <div className="absolute inset-0 bg-gradient-to-tr from-white/0 via-white/10 to-white/0 opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none" />
-
-                {/* Yıpranmış / Vintage Doku (Noise) */}
-                <div className="absolute inset-0 opacity-[0.03] pointer-events-none" style={{ backgroundImage: 'url("data:image/svg+xml,%3Csvg viewBox=\'0 0 200 200\' xmlns=\'http://www.w3.org/2000/svg\'%3E%3Cfilter id=\'noiseFilter\'%3E%3CfeTurbulence type=\'fractalNoise\' baseFrequency=\'0.65\' numOctaves=\'3\' stitchTiles=\'stitch\'/%3E%3C/filter%3E%3Crect width=\'100%25\' height=\'100%25\' filter=\'url(%23noiseFilter)\'/%3E%3C/svg%3E")' }} />
-
-                <div className="relative z-20 flex justify-between items-start pl-4">
-                  <span className="text-white/80 font-mono text-xs font-black tracking-widest uppercase">VOL {book.sort_order}</span>
+                {/* Status badge */}
+                <div className="absolute top-4 right-4 z-20">
                   {isStarted ? (
-                    <span className="bg-dz-black/40 backdrop-blur-md px-2.5 py-1 rounded text-[10px] font-black tracking-widest text-white flex items-center gap-1.5 border border-white/20 shadow-lg">
-                      <BookOpen className="text-dz-orange-400" /> OKUNUYOR
+                    <span className="bg-dz-black/50 backdrop-blur-md px-2.5 py-1 rounded text-[10px] font-black tracking-widest text-white flex items-center gap-1.5 border border-white/20">
+                      <BookOpen className="w-3 h-3 text-dz-orange-400" /> OKUNUYOR
                     </span>
                   ) : (
-                    <span className="bg-dz-black/40 backdrop-blur-md px-2.5 py-1 rounded text-[10px] font-black tracking-widest text-white/50 flex items-center gap-1.5 border border-white/10">
-                      <Lock /> KİLİTLİ
+                    <span className="bg-dz-black/50 backdrop-blur-md px-2.5 py-1 rounded text-[10px] font-black tracking-widest text-white/50 flex items-center gap-1.5 border border-white/10">
+                      <Lock className="w-3 h-3" /> KİLİTLİ
                     </span>
                   )}
                 </div>
-
-                <div className="relative z-20 pl-4 mt-auto">
-                  <div className="w-8 h-1 bg-dz-orange-500 mb-4 rounded-full" />
-                  <h3 className="font-display font-black text-2xl text-white leading-tight drop-shadow-lg tracking-tight">
-                    {book.title}
-                  </h3>
-                </div>
               </div>
 
-              {/* Kitap Sayfaları Efekti (Sağ ve Alt Kenar) */}
+              {/* Kitap Sayfaları Efekti */}
               <div className="absolute -right-2 top-2 bottom-2 w-2 bg-gradient-to-b from-dz-grey-200 via-white to-dz-grey-300 dark:from-dz-grey-700 dark:via-dz-grey-500 dark:to-dz-grey-800 rounded-r-md border-y border-r border-dz-grey-300 dark:border-dz-grey-600 transform origin-left skew-y-12 z-0 hidden lg:block" />
             </div>
 
