@@ -5,17 +5,37 @@ const TOP = 5;
 
 const MEDALS = ["🥇", "🥈", "🥉"];
 
+type LeaderboardRow = {
+  rank: number;
+  display_name: string;
+  total_xp: number;
+  level: number;
+};
+
+const DEMO_USERS: LeaderboardRow[] = [
+  { rank: 1, display_name: "Ahmet K.", total_xp: 4_820, level: 48 },
+  { rank: 2, display_name: "Zeynep T.", total_xp: 3_650, level: 36 },
+  { rank: 3, display_name: "Emre D.", total_xp: 2_980, level: 29 },
+  { rank: 4, display_name: "Elif S.", total_xp: 2_340, level: 23 },
+  { rank: 5, display_name: "Burak M.", total_xp: 1_750, level: 17 },
+];
+
 export default async function LeaderboardBlock() {
   const supabase = getSupabase();
   if (!supabase) return null;
 
   const { data: rows } = await supabase.rpc("get_leaderboard", { lim: TOP });
-  const list = (rows ?? []) as {
-    rank: number;
-    display_name: string;
-    total_xp: number;
-    level: number;
-  }[];
+  const real = (rows ?? []) as LeaderboardRow[];
+
+  // Fill with demo users when real data is sparse
+  const list: LeaderboardRow[] = [];
+  for (let i = 0; i < TOP; i++) {
+    if (i < real.length && real[i].total_xp > 0) {
+      list.push({ ...real[i], rank: i + 1 });
+    } else {
+      list.push(DEMO_USERS[i]);
+    }
+  }
 
   return (
     <section className="py-20 md:py-28 px-4 relative overflow-hidden">

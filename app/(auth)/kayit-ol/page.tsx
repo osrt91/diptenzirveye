@@ -49,12 +49,14 @@ export default function SignupPage() {
         )}
         <div>
           <label htmlFor="name" className="mb-1 block text-sm font-medium">
-            Ad (isteğe bağlı)
+            Ad Soyad
           </label>
           <input
             id="name"
             name="name"
             type="text"
+            required
+            minLength={2}
             autoComplete="name"
             placeholder="Adın ve soyadın"
             className="w-full rounded-lg border border-dz-grey-200 bg-dz-grey-100 px-3 py-3 text-foreground dark:border-dz-grey-600 dark:bg-dz-grey-800"

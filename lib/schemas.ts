@@ -30,8 +30,8 @@ export const signUpSchema = z.object({
     .min(6, "Şifre en az 6 karakter olmalı."),
   name: z
     .string()
-    .max(100, "İsim en fazla 100 karakter olabilir.")
-    .optional(),
+    .min(2, "İsim en az 2 karakter olmalı.")
+    .max(100, "İsim en fazla 100 karakter olabilir."),
 });
 
 export type SignUpInput = z.infer<typeof signUpSchema>;

@@ -75,7 +75,7 @@ export async function signUpAction(_prev: SignUpState, formData: FormData): Prom
   const raw = {
     email: formData.get("email"),
     password: formData.get("password"),
-    name: String(formData.get("name") || "").trim() || undefined,
+    name: String(formData.get("name") || "").trim(),
   };
 
   const parsed = validateInput(signUpSchema, raw);
@@ -83,7 +83,7 @@ export async function signUpAction(_prev: SignUpState, formData: FormData): Prom
 
   const { email: rawEmail, password, name } = parsed.data;
   const email = sanitizeEmail(rawEmail);
-  const fullName = name ? sanitizeTextInput(name) : undefined;
+  const fullName = sanitizeTextInput(name);
 
   const supabase = await createClient();
   const { error } = await supabase.auth.signUp({
