@@ -2,48 +2,12 @@
 
 import { motion } from "framer-motion";
 import Link from "next/link";
-import { Check, Lock, Rocket, Crown, ArrowRight } from "lucide-react";
+import { Check, Lock, Rocket, Crown, ArrowRight, MessageCircle } from "lucide-react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
-import { Suspense, useState } from "react";
-import { useSearchParams } from "next/navigation";
-import PaytrCheckoutModal from "@/components/panel/core/PaytrCheckoutModal";
-
-function PaymentStatusToast() {
-    const searchParams = useSearchParams();
-    const paymentStatus = searchParams.get("status");
-
-    if (paymentStatus === "success") {
-        return (
-            <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                className="max-w-md mx-auto mt-8 p-4 rounded-xl bg-green-100 dark:bg-green-500/10 border border-green-300 dark:border-green-500/20 text-center"
-            >
-                <p className="text-sm font-bold text-green-700 dark:text-green-400">
-                    🎉 Ödeme başarılı! Premium erişiminiz aktif edildi.
-                </p>
-            </motion.div>
-        );
-    }
-    if (paymentStatus === "fail") {
-        return (
-            <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                className="max-w-md mx-auto mt-8 p-4 rounded-xl bg-red-100 dark:bg-red-500/10 border border-red-300 dark:border-red-500/20 text-center"
-            >
-                <p className="text-sm font-bold text-red-700 dark:text-red-400">
-                    Ödeme işlemi başarısız oldu. Tekrar deneyebilirsiniz.
-                </p>
-            </motion.div>
-        );
-    }
-    return null;
-}
+import { useState } from "react";
 
 export default function PricingPage() {
-    const [showCheckout, setShowCheckout] = useState(false);
     const [couponCode, setCouponCode] = useState("");
     const [couponResult, setCouponResult] = useState<{ valid: boolean; discount_percent: number; discounted_price: number } | null>(null);
     const [couponLoading, setCouponLoading] = useState(false);
@@ -115,9 +79,8 @@ export default function PricingPage() {
                 "3 Aylık Toplam: 2.999,97₺",
             ],
             notIncluded: [],
-            buttonText: "Masterclass'ı Başlat",
-            buttonLink: "/fiyatlar",
-            buttonAction: () => setShowCheckout(true),
+            buttonText: "Bilgi Al",
+            buttonLink: "/iletisim",
             buttonClass: "bg-dz-orange-500 text-white hover:bg-dz-orange-600 shadow-[0_0_20px_rgba(249,115,22,0.4)]",
             icon: <Crown className="w-5 h-5 text-dz-orange-500" />,
             popular: true,
@@ -207,7 +170,6 @@ export default function PricingPage() {
                             </div>
 
                             <div className="space-y-6 mb-8 flex-1">
-                                {/* Olanlar */}
                                 <ul className="space-y-3">
                                     {plan.features.map((f, j) => (
                                         <li key={j} className="flex items-start gap-3">
@@ -217,7 +179,6 @@ export default function PricingPage() {
                                     ))}
                                 </ul>
 
-                                {/* Olmayanlar (Çizik) */}
                                 {plan.notIncluded.length > 0 && (
                                     <ul className="space-y-3 border-t border-dz-grey-200 dark:border-dz-white/10 pt-6">
                                         {plan.notIncluded.map((f, j) => (
@@ -230,22 +191,13 @@ export default function PricingPage() {
                                 )}
                             </div>
 
-                            {plan.popular ? (
-                                <button
-                                    onClick={plan.buttonAction}
-                                    className={`w-full min-h-[44px] py-4 px-6 rounded-xl font-bold text-center transition-all duration-300 flex items-center justify-center gap-2 ${plan.buttonClass}`}
-                                >
-                                    {plan.buttonText}
-                                    <ArrowRight className="w-5 h-5 shrink-0" />
-                                </button>
-                            ) : (
-                                <Link
-                                    href={plan.buttonLink}
-                                    className={`w-full min-h-[44px] py-4 px-6 rounded-xl font-bold text-center transition-all duration-300 flex items-center justify-center gap-2 ${plan.buttonClass}`}
-                                >
-                                    {plan.buttonText}
-                                </Link>
-                            )}
+                            <Link
+                                href={plan.buttonLink}
+                                className={`w-full min-h-[44px] py-4 px-6 rounded-xl font-bold text-center transition-all duration-300 flex items-center justify-center gap-2 ${plan.buttonClass}`}
+                            >
+                                {plan.buttonText}
+                                {plan.popular ? <MessageCircle className="w-5 h-5 shrink-0" /> : <ArrowRight className="w-5 h-5 shrink-0" />}
+                            </Link>
                         </motion.div>
                     ))}
                 </div>
@@ -293,19 +245,7 @@ export default function PricingPage() {
                         )}
                     </div>
                 </motion.div>
-
-                {/* Payment Status Toast */}
-                <Suspense fallback={null}>
-                    <PaymentStatusToast />
-                </Suspense>
             </section>
-
-            <PaytrCheckoutModal
-                isOpen={showCheckout}
-                onClose={() => setShowCheckout(false)}
-                planId="masterclass-3ay"
-                planName="Zirve Masterclass (3 Aylık)"
-            />
 
             <Footer />
         </main>

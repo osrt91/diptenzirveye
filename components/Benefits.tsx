@@ -197,7 +197,7 @@ export default function Benefits() {
             <div className="w-10 h-10 rounded-full bg-dz-grey-100 dark:bg-dz-white/5 flex items-center justify-center">
               <CreditCard className="w-4 h-4 text-dz-grey-500" />
             </div>
-            <span className="text-sm font-medium text-dz-grey-500">PayTR ile<br />Güvenli Ödeme</span>
+            <span className="text-sm font-medium text-dz-grey-500">SSL ile<br />Güvenli Ödeme</span>
           </div>
         </motion.div>
 

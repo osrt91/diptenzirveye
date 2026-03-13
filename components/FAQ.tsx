@@ -77,7 +77,7 @@ const faqs: FAQItem[] = [
   },
   {
     q: "Ödeme yöntemleri nelerdir?",
-    a: "PayTR altyapısı ile kredi kartı, banka kartı ve havale/EFT ile ödeme yapabilirsin. Tüm ödemelerin SSL ile şifrelenmiş güvenli altyapıda gerçekleşir. İlk 7 gün koşulsuz iade garantisi vardır.",
+    a: "Kredi kartı, banka kartı ve havale/EFT ile ödeme yapabilirsin. Tüm ödemelerin SSL ile şifrelenmiş güvenli altyapıda gerçekleşir. İlk 7 gün koşulsuz iade garantisi vardır.",
     category: "odeme",
   },
   {

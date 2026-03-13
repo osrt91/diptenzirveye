@@ -108,7 +108,7 @@ export default function PaywallModal({ isOpen, onClose, title = "Premium İçeri
                                 </div>
 
                                 <p className="text-[10px] text-center text-dz-grey-400 dark:text-dz-grey-600 mt-6 md:mt-8 uppercase tracking-tighter">
-                                    3 Aylık Eğitim Programı • Sürekli Güncelleme • %100 Güvenli PayTR Altyapısı
+                                    3 Aylık Eğitim Programı • Sürekli Güncelleme • %100 Güvenli Ödeme
                                 </p>
                             </div>
                         </div>
