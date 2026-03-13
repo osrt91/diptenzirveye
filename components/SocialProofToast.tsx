@@ -2,7 +2,7 @@
 
 import { useState, useEffect, useCallback } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Users, X, Award, BookOpen, TrendingUp, Clock, Star, Zap } from "lucide-react";
+import { Users, X, Award, BookOpen, TrendingUp, Star, Zap, BarChart3 } from "lucide-react";
 
 const NAMES = [
   "Ahmet", "Mehmet", "Zeynep", "Elif", "Emre", "Selin", "Burak", "Kaan",
@@ -20,8 +20,9 @@ const CITIES = [
 ];
 
 const BOOKS = [
-  "Kitap 1", "Kitap 2", "Kitap 3", "Kitap 4", "Kitap 5",
-  "Kitap 6", "Kitap 7", "Kitap 8", "Kitap 9", "Kitap 10",
+  "AI Devrimini Anlamak", "Prompt Mühendisliği", "AI Araçları Rehberi",
+  "Ertelemeden Çıkış", "AI ile İlk Gelir", "İçerik İmparatorluğu",
+  "Otomasyon Mimari", "AI ile Ölçek", "AI Liderliği", "Zirve Protokolü",
 ];
 
 const BADGES = [
@@ -29,12 +30,14 @@ const BADGES = [
   "Zirve Avcısı", "Hafta Yıldızı", "Süper Öğrenci", "Liderlik Rozeti",
 ];
 
+const XP_AMOUNTS = [25, 50, 75, 100, 150, 200, 250, 300];
+
 type ToastMessage = {
-  type: "user_action" | "location" | "stat" | "urgency" | "badge" | "book";
+  type: "user_action" | "stat" | "badge" | "book" | "xp_gain" | "completion";
   text: string;
   subtext: string;
   initials: string;
-  icon: "users" | "award" | "book" | "trending" | "clock" | "star" | "zap";
+  icon: "users" | "award" | "book" | "trending" | "star" | "zap" | "chart";
 };
 
 function pick<T>(arr: T[]): T {
@@ -47,59 +50,60 @@ function randInt(min: number, max: number) {
 
 function generateMessage(): ToastMessage {
   const type = pick([
-    "user_action", "user_action", "user_action",
-    "location", "location",
-    "stat",
-    "urgency",
+    "xp_gain", "xp_gain", "xp_gain",
+    "completion", "completion",
+    "user_action", "user_action",
     "badge",
     "book",
+    "stat",
   ] as const);
 
   const name = pick(NAMES);
   const surname = pick(SURNAMES);
   const initials = name[0] + surname[0];
   const mins = randInt(1, 30);
-  const city = pick(CITIES);
 
   switch (type) {
+    case "xp_gain": {
+      const xp = pick(XP_AMOUNTS);
+      const variants = [
+        { text: `${name} ${surname} +${xp} XP kazandı`, sub: `${mins} dk önce` },
+        { text: `${name} ${surname} Seviye ${randInt(2, 15)}'e yükseldi!`, sub: "Az önce" },
+        { text: `${name} ${surname} ${randInt(3, 30)} günlük seri ile bonus XP`, sub: `${mins} dk önce` },
+        { text: `${name} ${surname} günlük görevi tamamladı (+${xp} XP)`, sub: "Şimdi" },
+      ];
+      const v = pick(variants);
+      return { type, text: v.text, subtext: v.sub, initials, icon: "zap" };
+    }
+    case "completion": {
+      const pct = randInt(40, 95);
+      const variants = [
+        { text: `Proje Planlayıcı bu hafta %${pct} doluluk`, sub: "Haftalık rapor" },
+        { text: `${randInt(10, 50)} öğrenci bu hafta kitap tamamladı`, sub: "Canlı" },
+        { text: `AI Koç bu hafta ${randInt(100, 500)} soru cevapladı`, sub: "Platform aktivitesi" },
+        { text: `Prompt Challenge %${pct} tamamlanma oranı`, sub: "Bu hafta" },
+      ];
+      const v = pick(variants);
+      return { type, text: v.text, subtext: v.sub, initials: "DZ", icon: "chart" };
+    }
     case "user_action": {
+      const city = pick(CITIES);
       const actions = [
         { text: `${name} ${surname} Zirve Masterclass'a katıldı`, sub: `${mins} dakika önce` },
-        { text: `${name} ${surname} bugün Premium üye oldu`, sub: "Az önce" },
-        { text: `${name} ${surname} akademiye kayıt oldu`, sub: `${mins} dk önce` },
-        { text: `${name} ${surname} teste başladı`, sub: `${mins} dakika önce` },
+        { text: `${city}'dan bir kullanıcı teste başladı`, sub: `${mins} dk önce` },
         { text: `${name} ${surname} eğitim planını oluşturdu`, sub: "Şimdi" },
       ];
       const a = pick(actions);
       return { type, text: a.text, subtext: a.sub, initials, icon: "users" };
     }
-    case "location":
-      return {
-        type,
-        text: `${city}'dan bir kullanıcı teste başladı`,
-        subtext: `${mins} dakika önce`,
-        initials: city[0] + city[1],
-        icon: "trending",
-      };
     case "stat": {
       const stats = [
         { text: `Son 24 saatte ${randInt(8, 25)} yeni üye katıldı`, sub: "Bugün" },
         { text: `Bu hafta ${randInt(40, 120)} test tamamlandı`, sub: "Haftalık rapor" },
-        { text: `${randInt(150, 500)}+ kullanıcı şu an aktif`, sub: "Canlı" },
-        { text: `Topluluk ${randInt(1, 5)}.${randInt(0, 9)}00 üyeye ulaştı!`, sub: "Yeni rekor" },
+        { text: `Toplam ${randInt(2, 8)}.${randInt(1, 9)}00+ XP kazanıldı bugün`, sub: "Canlı" },
       ];
       const s = pick(stats);
       return { type, text: s.text, subtext: s.sub, initials: "DZ", icon: "star" };
-    }
-    case "urgency": {
-      const remaining = randInt(3, 12);
-      const urgencies = [
-        { text: `Sınırlı kontenjan: Sadece ${remaining} koltuk kaldı!`, sub: "Acele edin" },
-        { text: `Kurucu üye indirimi sona yaklaşıyor`, sub: `Son ${randInt(2, 48)} saat` },
-        { text: `Premium üyelikte %${randInt(20, 40)} erken kayıt fırsatı`, sub: "Sınırlı süre" },
-      ];
-      const u = pick(urgencies);
-      return { type, text: u.text, subtext: u.sub, initials: "⏰", icon: "clock" };
     }
     case "badge": {
       const badge = pick(BADGES);
@@ -115,7 +119,7 @@ function generateMessage(): ToastMessage {
       const book = pick(BOOKS);
       return {
         type,
-        text: `${name} ${surname} ${book}'ü tamamladı`,
+        text: `${name} ${surname} "${book}" kitabını tamamladı`,
         subtext: `${mins} dakika önce · Rozet kazandı 🎉`,
         initials,
         icon: "book",
@@ -129,16 +133,16 @@ const ICON_MAP = {
   award: Award,
   book: BookOpen,
   trending: TrendingUp,
-  clock: Clock,
   star: Star,
   zap: Zap,
+  chart: BarChart3,
 };
 
 const ICON_COLORS: Record<ToastMessage["type"], string> = {
+  xp_gain: "from-yellow-500 to-amber-400",
+  completion: "from-cyan-500 to-blue-400",
   user_action: "from-dz-orange-500 to-dz-amber-400",
-  location: "from-blue-500 to-cyan-400",
   stat: "from-emerald-500 to-green-400",
-  urgency: "from-red-500 to-rose-400",
   badge: "from-purple-500 to-violet-400",
   book: "from-dz-orange-500 to-yellow-400",
 };
@@ -186,9 +190,7 @@ export default function SocialProofToast() {
             <div
               className={`w-10 h-10 rounded-full bg-gradient-to-br ${gradientClass} flex items-center justify-center shrink-0 text-white text-xs font-bold shadow-md`}
             >
-              {msg.type === "urgency" ? (
-                <span className="text-base">{msg.initials}</span>
-              ) : msg.type === "stat" ? (
+              {msg.type === "stat" || msg.type === "completion" ? (
                 <IconComponent className="w-4.5 h-4.5" />
               ) : (
                 <span className="text-[11px] font-semibold tracking-tight">{msg.initials}</span>

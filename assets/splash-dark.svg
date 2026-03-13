@@ -13,6 +13,6 @@
   <rect width="2732" height="2732" fill="url(#glow)"/>
   <rect x="1166" y="1066" width="400" height="400" rx="88" fill="url(#logoGrad)"/>
   <text x="1366" y="1310" text-anchor="middle" font-family="system-ui, -apple-system, sans-serif" font-size="200" font-weight="900" fill="#ffffff">DZ</text>
-  <text x="1366" y="1600" text-anchor="middle" font-family="system-ui, -apple-system, sans-serif" font-size="56" font-weight="700" fill="#ffffff" opacity="0.9">DiptenZirveye</text>
+  <text x="1366" y="1600" text-anchor="middle" font-family="system-ui, -apple-system, sans-serif" font-size="56" fill="#ffffff" opacity="0.9"><tspan font-weight="900">Dipten</tspan><tspan font-weight="400">Zirveye</tspan></text>
   <text x="1366" y="1670" text-anchor="middle" font-family="system-ui, -apple-system, sans-serif" font-size="32" font-weight="400" fill="#f97316" opacity="0.7">AI Ustal1k Serisi</text>
 </svg>

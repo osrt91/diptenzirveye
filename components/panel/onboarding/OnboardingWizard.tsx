@@ -179,7 +179,7 @@ export default function OnboardingWizard({
                     Hoşgeldin, Zirveci!
                   </h1>
                   <p className="text-sm text-dz-grey-500 leading-relaxed">
-                    Dipten<span className="text-dz-orange-500">Zirveye</span>&apos;de seni görmek harika! Kişisel gelişim
+                    <span className="font-display"><span className="font-black">Dipten</span><span className="font-normal">Zirveye</span></span>&apos;de seni görmek harika! Kişisel gelişim
                     yolculuğunda AI destekli bir rehberle ilerleyeceksin.
                   </p>
                 </div>

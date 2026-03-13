@@ -3,7 +3,7 @@ import { Outfit, DM_Sans, DM_Mono } from "next/font/google";
 export const outfit = Outfit({
   variable: "--font-outfit",
   subsets: ["latin", "latin-ext"],
-  weight: ["500", "600", "700", "800", "900"],
+  weight: ["400", "500", "600", "700", "800", "900"],
   display: "swap",
   preload: true,
 });

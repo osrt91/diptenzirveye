@@ -82,10 +82,9 @@ export default function AdminShell({
                 {/* Logo */}
                 <div className="p-5 border-b border-dz-grey-200 dark:border-white/5 flex items-center justify-between">
                     <div className="flex items-center gap-3">
-                        <DZLogo size="sm" />
                         <div>
-                            <h1 className="font-display font-bold text-dz-black dark:text-white text-sm tracking-tight">
-                                Dipten<span className="text-dz-orange-500">Zirveye</span>
+                            <h1 className="text-dz-black dark:text-white tracking-tight">
+                                <DZLogo size="sm" />
                             </h1>
                             <p className="text-[10px] text-dz-grey-500 dark:text-white/40 font-mono flex items-center gap-1">
                                 <Shield className="w-3 h-3" /> Admin Paneli

@@ -38,14 +38,14 @@ export default function Image() {
         <h1
           style={{
             fontSize: 64,
-            fontWeight: 900,
             color: "white",
             margin: 0,
             lineHeight: 1.1,
             textAlign: "center",
           }}
         >
-          DiptenZirveye
+          <span style={{ fontWeight: 900 }}>Dipten</span>
+          <span style={{ fontWeight: 400 }}>Zirveye</span>
         </h1>
 
         <p

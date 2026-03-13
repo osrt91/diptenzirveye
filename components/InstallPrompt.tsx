@@ -62,7 +62,7 @@ export default function InstallPrompt() {
                     </div>
                     <div className="flex-1 min-w-0">
                         <p className="font-bold text-sm text-dz-black dark:text-dz-white">Ana Ekrana Ekle</p>
-                        <p className="text-xs text-dz-grey-500 truncate">Dipten<span className="text-dz-orange-500">Zirveye</span>&apos;yi uygulama gibi kullan</p>
+                        <p className="text-xs text-dz-grey-500 truncate"><span className="font-display"><span className="font-black">Dipten</span><span className="font-normal">Zirveye</span></span>&apos;yi uygulama gibi kullan</p>
                     </div>
                     <button
                         onClick={handleInstall}

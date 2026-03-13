@@ -66,7 +66,7 @@ export default function Benefits() {
             viewport={{ once: true }}
             className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-dz-orange-500/30 bg-dz-orange-500/10 text-dz-orange-500 text-sm font-bold tracking-wide uppercase mb-6 shadow-[0_0_15px_rgba(249,115,22,0.15)]"
           >
-            Neden Dipten<span className="text-dz-orange-500">Zirveye</span>?
+            Neden <span className="font-black">Dipten</span><span className="font-normal">Zirveye</span>?
           </motion.div>
           <motion.h2
             initial={{ opacity: 0, y: 8 }}

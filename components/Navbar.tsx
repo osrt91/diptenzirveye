@@ -29,9 +29,8 @@ export default function Navbar() {
             <div className="max-w-7xl mx-auto flex items-center justify-between bg-dz-white/80 dark:bg-dz-black/80 backdrop-blur-xl border border-dz-grey-200 dark:border-dz-white/10 rounded-2xl px-5 py-3 shadow-lg shadow-dz-black/5 dark:shadow-dz-black/30">
 
                 {/* Logo */}
-                <Link href="/" className="font-display text-xl font-bold text-dz-black dark:text-dz-white tracking-tight flex items-center gap-1 min-w-0">
+                <Link href="/" className="flex items-center min-w-0 text-dz-black dark:text-dz-white">
                     <DZLogo size="sm" />
-                    Dipten<span className="text-dz-orange-500">Zirveye</span>
                 </Link>
 
                 {/* Desktop Nav */}

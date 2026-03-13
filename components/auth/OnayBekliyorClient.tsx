@@ -37,7 +37,7 @@ export default function OnayBekliyorClient() {
         href="/"
         className="font-display text-2xl font-bold text-dz-black dark:text-dz-white"
       >
-        Dipten<span className="text-dz-orange-500">Zirveye</span>
+        <span className="font-black">Dipten</span><span className="font-normal">Zirveye</span>
       </Link>
       <h1 className="font-display text-xl font-bold text-dz-black dark:text-dz-white">
         E-posta doğrulama gerekli

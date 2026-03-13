@@ -20,6 +20,7 @@ const PlannerShowcase = dynamic(() => import("@/components/PlannerShowcase"));
 const FAQ = dynamic(() => import("@/components/FAQ"));
 const FounderOffer = dynamic(() => import("@/components/FounderOffer"));
 const SocialProofToast = dynamic(() => import("@/components/SocialProofToast"));
+const ActivityTicker = dynamic(() => import("@/components/ActivityTicker"));
 const ScrollCTA = dynamic(() => import("@/components/ScrollCTA"));
 
 export const metadata: Metadata = {
@@ -103,6 +104,7 @@ export default function Home() {
       <GamificationShowcase />
       <Testimonials />
       <LeaderboardBlock />
+      <ActivityTicker />
       <EarningSection />
       <Certifications />
       <PlannerShowcase />

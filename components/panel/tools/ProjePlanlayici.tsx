@@ -469,7 +469,7 @@ export default function ProjePlanlayici() {
     if (sid === "welcome") return (
       <div className="text-center py-5">
         <div className="font-mono text-[10px] tracking-[.14em] uppercase text-dz-orange-500 border border-dz-orange-500/30 inline-block px-3.5 py-1 rounded-full mb-5">proje başlangıç & analiz rehberi · 2026</div>
-        <div className="text-4xl font-extrabold font-display text-dz-black dark:text-dz-white tracking-tighter leading-none mb-1">Dipten<span className="text-dz-orange-500">Zirveye</span><sup className="text-sm text-dz-orange-500">™</sup></div>
+        <div className="text-4xl font-display text-dz-black dark:text-dz-white tracking-tighter leading-none mb-1"><span className="font-black">Dipten</span><span className="font-normal">Zirveye</span><sup className="text-sm text-dz-grey-400">™</sup></div>
         <div className="font-mono text-[10px] tracking-[.16em] uppercase text-dz-grey-500 mb-7">sistematik proje planlama</div>
         <p className="text-[15px] text-dz-grey-600 dark:text-dz-grey-400 max-w-[480px] mx-auto mb-8 leading-relaxed font-sans">Yeni bir projeye mi başlıyorsun, yoksa mevcut projeni mi düzeltmek istiyorsun? Sana özel <strong>KULLAN / KULLANMA</strong> raporu çıkaralım.</p>
 
@@ -809,7 +809,7 @@ export default function ProjePlanlayici() {
       <div className="hidden md:flex w-56 bg-dz-grey-100 dark:bg-dz-grey-900 flex-col shrink-0 border-r border-dz-grey-200 dark:border-dz-grey-800">
         <div className="px-4 py-4 border-b border-dz-grey-200 dark:border-dz-grey-800">
           <div className="font-display text-sm font-bold tracking-wide text-dz-black dark:text-dz-white">
-            Dipten<span className="text-dz-orange-500">Zirveye</span><sup className="text-[8px] text-dz-orange-500">™</sup>
+            <span className="font-black">Dipten</span><span className="font-normal">Zirveye</span><sup className="text-[8px] text-dz-grey-400">™</sup>
           </div>
           <div className="font-mono text-[9px] tracking-widest uppercase text-dz-grey-500 mt-1">
             {a.mode === "existing" ? "proje analizi" : a.mode === "new" ? "yeni proje" : "proje planlayıcı"}
