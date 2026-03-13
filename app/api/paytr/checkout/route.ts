@@ -8,7 +8,7 @@ const PLANS: Record<string, { name: string; price: number }> = {
     "aylik": { name: "Aylık Erişim", price: 39000 },
 };
 
-const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || process.env.VERCEL_URL || "https://diptenzirveye.com";
+const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://diptenzirveye.com";
 
 export async function POST(req: NextRequest) {
     try {

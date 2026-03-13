@@ -39,13 +39,6 @@ yarn-error.log*
 .cursor/
 .vscode/
 
-# vercel
-.vercel
-
-# google oauth tokens & setup
-google-token.json
-setup-google.mjs
-
 # claude
 .claude/
 
@@ -66,5 +59,3 @@ next-env.d.ts
 
 # test results
 /test-results/
-
-.vercel

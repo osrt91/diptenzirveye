@@ -6,8 +6,8 @@ const CANONICAL_HOST = "diptenzirveye.com";
 export async function proxy(request: NextRequest) {
   const host = request.headers.get("host") || "";
 
-  // Redirect *.vercel.app and www to canonical domain
-  if (host.includes("vercel.app") || host.startsWith("www.")) {
+  // Redirect www to canonical domain
+  if (host.startsWith("www.")) {
     const url = new URL(request.url);
     url.hostname = CANONICAL_HOST;
     url.port = "";
